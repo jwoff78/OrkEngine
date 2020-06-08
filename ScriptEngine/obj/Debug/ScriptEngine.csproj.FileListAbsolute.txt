@@ -1,0 +1,32 @@
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\liblua53.dylib
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\x86\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\x64\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\x64\liblua53.so
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\ScriptEngine.exe.config
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\ScriptEngine.exe
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\ScriptEngine.pdb
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\KeraLua.dll
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\NLua.dll
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\bin\Debug\KeraLua.xml
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\obj\Debug\ScriptEngine.csproj.CoreCompileInputs.cache
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\obj\Debug\ScriptEngine.csproj.CopyComplete
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\obj\Debug\ScriptEngine.exe
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\obj\Debug\ScriptEngine.pdb
+C:\Users\djlw7\source\repos\JJGE Core\ScriptEngine\obj\Debug\ScriptEngine.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\ScriptEngine.exe.config
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\ScriptEngine.exe
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\ScriptEngine.pdb
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\KeraLua.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\NLua.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\obj\Debug\ScriptEngine.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\obj\Debug\ScriptEngine.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\obj\Debug\ScriptEngine.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\obj\Debug\ScriptEngine.exe
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\obj\Debug\ScriptEngine.pdb
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\liblua53.dylib
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\x86\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\x64\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\x64\liblua53.so
+C:\Users\User\Documents\GitHub\JarJarGameEngine\ScriptEngine\bin\Debug\KeraLua.xml

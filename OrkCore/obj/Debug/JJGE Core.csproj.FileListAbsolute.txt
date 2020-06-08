@@ -1,0 +1,77 @@
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\JJGE Core.dll.config
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\JJGE Core.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\JJGE Core.pdb
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\JJGE Core.dll.CodeAnalysisLog.xml
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\JJGE Core.dll.lastcodeanalysissucceeded
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\obj\Debug\JJGE Core.csprojAssemblyReference.cache
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\obj\Debug\JJGE Core.csproj.CoreCompileInputs.cache
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\obj\Debug\JJGE Core.csproj.CopyComplete
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\obj\Debug\JJGE Core.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\obj\Debug\JJGE Core.pdb
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\liblua53.dylib
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\liblua53.so
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\x86\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\x64\lua53.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\x64\liblua53.so
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\KeraLua.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\NLua.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\KeraLua.xml
+C:\Users\djlw7\source\repos\JJGE Core\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\obj\Debug\JJGE Core.csprojAssemblyReference.cache
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\obj\Debug\JJGE Core.csproj.CoreCompileInputs.cache
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\obj\Debug\JJGE Core.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\obj\Debug\JJGE Core.pdb
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\lua53.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\liblua53.dylib
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\liblua53.so
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\x86\lua53.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\x64\lua53.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\x64\liblua53.so
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\JJGE Core.dll.config
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\JJGE Core.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\JJGE Core.pdb
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\JJGE Core.dll.CodeAnalysisLog.xml
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\JJGE Core.dll.lastcodeanalysissucceeded
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\KeraLua.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\NLua.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\KeraLua.xml
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\OpenGL.pdb
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\OpenGL.dll.config
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\OpenGL.Platform.pdb
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\bin\Debug\Tao.FreeGlut.dll.config
+C:\Users\djlw7\OneDrive\Desktop\jjjjjj\JJGE Core\obj\Debug\JJGE Core.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\liblua53.dylib
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\liblua53.so
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\x86\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\x64\lua53.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\x64\liblua53.so
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\JJGE Core.dll.config
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\JJGE Core.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\JJGE Core.pdb
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\JJGE Core.dll.CodeAnalysisLog.xml
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\JJGE Core.dll.lastcodeanalysissucceeded
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\KeraLua.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\NLua.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\KeraLua.xml
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\OpenGL.pdb
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\OpenGL.dll.config
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\OpenGL.Platform.pdb
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\bin\Debug\Tao.FreeGlut.dll.config
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\obj\Debug\JJGE Core.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\obj\Debug\JJGE Core.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\obj\Debug\JJGE Core.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\obj\Debug\JJGE Core.dll
+C:\Users\User\Documents\GitHub\JarJarGameEngine\JJGE Core\obj\Debug\JJGE Core.pdb

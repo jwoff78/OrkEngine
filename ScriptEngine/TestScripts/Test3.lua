@@ -1,0 +1,1 @@
+﻿print("Which is kinda boring imo lol");
