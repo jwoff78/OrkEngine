@@ -15,18 +15,7 @@ namespace OrkCore.Interface
         private static int m_width = 1280, m_height = 720;
         private static ShaderProgram program;
 
-        private static VBO<Vector3> cube;
-        private static VBO<uint> cubeQuads;
-        private static VBO<Vector2> cubeUV;
-        private static VBO<Vector3> cubeNormals;
-        private static Texture CubeTex;
-
-        private static VBO<Vector3> particle;
-        private static VBO<Vector2> particleUV;
-        private static VBO<uint> particleQuads;
-        private static Texture particleTexture;
-
-        private static List<Particle> particles = new List<Particle>();
+        List<Renderable> Objects = new List<Renderable>();
 
         private static Random generator = new Random(Environment.TickCount);
         private static float theta = (float)Math.PI / 2, phi = (float)Math.PI / 2;
@@ -35,28 +24,14 @@ namespace OrkCore.Interface
         public static float angle;
         public static bool EnableLighting = true;
 
+        public static Func<object> update;
 
-        static float xOff = -1.5f;
-        static bool mode = true;
-
-        private class Particle
-        {
-            public float angle;
-            public float dist;
-            public Vector3 color;
-
-            public Particle(float Angle, float Distance, Vector3 Color)
-            {
-                this.angle = Angle;
-                this.dist = Distance;
-                this.color = Color;
-            }
-        }
-
-        public void CreateWindow(string title = "JarJarGE", int width = 1280, int height = 720)
+        public void CreateWindow(Func<object> Start, Func<object> Update, string title = "OrkGameEngine", int width = 1280, int height = 720)
         {
             m_width = width;
             m_height = height;
+
+            update = Update;
             // create an OpenGL window
             Glut.glutInit();
             Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_DEPTH | Glut.GLUT_RGBA);
@@ -81,47 +56,11 @@ namespace OrkCore.Interface
             program["view_matrix"].SetValue(Matrix4.LookAt(new Vector3(0,0,10), Vector3.Zero, Vector3.Up));
             program["light_direction"].SetValue(new Vector3(0,0,1));
 
-            CubeTex = new Texture(@"vroooom.png");
-
-            //Cube Setup
-            {
-                cube = new VBO<Vector3>(new Vector3[] {
-                    new Vector3(1, 1, -1), new Vector3(-1, 1, -1), new Vector3(-1, 1, 1), new Vector3(1, 1, 1),
-                    new Vector3(1, -1, 1), new Vector3(-1, -1, 1), new Vector3(-1, -1, -1), new Vector3(1, -1, -1),
-                    new Vector3(1, 1, 1), new Vector3(-1, 1, 1), new Vector3(-1, -1, 1), new Vector3(1, -1, 1),
-                    new Vector3(1, -1, -1), new Vector3(-1, -1, -1), new Vector3(-1, 1, -1), new Vector3(1, 1, -1),
-                    new Vector3(-1, 1, 1), new Vector3(-1, 1, -1), new Vector3(-1, -1, -1), new Vector3(-1, -1, 1),
-                    new Vector3(1, 1, -1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(1, -1, -1) });
-                cubeUV = new VBO<Vector2>(new Vector2[] {
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1),
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1),
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1),
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1),
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1),
-                    new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) });
-                cubeNormals = new VBO<Vector3>(new Vector3[] {
-                    new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0),
-                    new Vector3(0, -1, 0), new Vector3(0, -1, 0), new Vector3(0, -1, 0), new Vector3(0, -1, 0),
-                    new Vector3(0, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 1),
-                    new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1),
-                    new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), new Vector3(-1, 0, 0),
-                    new Vector3(1, 0, 0), new Vector3(1, 0, 0), new Vector3(1, 0, 0), new Vector3(1, 0, 0) });
-                cubeQuads = new VBO<uint>(new uint[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 }, BufferTarget.ElementArrayBuffer);
-            }
-
-            particle = new VBO<Vector3>(new Vector3[] { new Vector3(-1, -1, 0), new Vector3(1, -1, 0), new Vector3(1, 1, 0), new Vector3(-1, 1, 0) });
-            particleUV = new VBO<Vector2>(new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) });
-            particleQuads = new VBO<uint>(new uint[] { 0, 1, 2, 0, 2, 3 }, BufferTarget.ElementArrayBuffer);
-
-            // create 50 particles for this tutorial
-            int numparticles = 50;
-            for (int i = 0; i < numparticles; i++)
-            {
-                particles.Add(new Particle(0, (float)i / numparticles * 4f, new Vector3((float)generator.NextDouble(), (float)generator.NextDouble(), (float)generator.NextDouble())));
-            }
 
             watch = new System.Diagnostics.Stopwatch();
             watch.Start();
+
+            Start();
 
             Gl.ClearColor(0f,0f,0f,0f); //sets clear color to black
             Glut.glutMainLoop();
@@ -141,21 +80,18 @@ namespace OrkCore.Interface
             program["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(0.45f, (float)width / height, 0.1f, 1000f));
         }
 
-        private static void OnClose()
+        private void OnClose()
         {
-            cube.Dispose();
-            cubeUV.Dispose();
-            cubeQuads.Dispose();
-            CubeTex.Dispose();
-            cubeNormals.Dispose();
-            particle.Dispose();
-            particleUV.Dispose();
-            particleQuads.Dispose();
+            foreach (Renderable rend in Objects)
+            {
+                rend.DisposeVBOs();
+            }
+            Objects.Clear();
             program.DisposeChildren = true;
             program.Dispose();
         }
 
-        private static void OnRenderFrame()
+        private void OnRenderFrame()
         {
             watch.Stop();
             float deltaTime = watch.ElapsedMilliseconds / 1000f;
@@ -168,7 +104,7 @@ namespace OrkCore.Interface
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             program.Use();
-            Gl.BindTexture(CubeTex);
+            /*Gl.BindTexture(CubeTex);
 
             //cube
             program["model_matrix"].SetValue(Matrix4.CreateRotationY(angle / 2) * Matrix4.CreateRotationX(angle));
@@ -177,45 +113,30 @@ namespace OrkCore.Interface
             Gl.BindBufferToShaderAttribute(cubeUV, program, "vertexUV");
             Gl.BindBuffer(cubeQuads);
 
-            Gl.DrawElements(BeginMode.Quads, cubeQuads.Count, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            Gl.DrawElements(BeginMode.Quads, cubeQuads.Count, DrawElementsType.UnsignedInt, IntPtr.Zero);*/
 
-            /*for (int i = 0; i < particles.Count; i++)
+            foreach (Renderable rend in Objects)
             {
-                // set the position and color of this star
-                program["model_matrix"].SetValue(Matrix4.CreateTranslation(new Vector3(particles[i].dist, 0, 0)) * Matrix4.CreateRotationZ(particles[i].angle));
-                program["color"].SetValue(particles[i].color);
+                Gl.BindTexture(rend.texture);
 
-                Gl.BindBufferToShaderAttribute(particle, program, "vertexPosition");
-                Gl.BindBufferToShaderAttribute(particleUV, program, "vertexUV");
-                Gl.BindBuffer(particleQuads);
+                program["model_matrix"].SetValue(Matrix4.CreateRotationX(rend.rotation.x) * Matrix4.CreateRotationY(rend.rotation.y) * Matrix4.CreateRotationZ(rend.rotation.z) * Matrix4.CreateTranslation(rend.position));
+                Gl.BindBufferToShaderAttribute((VBO<Vector3>)rend.GetVBOs[0], program, "vertexPosition");
+                Gl.BindBufferToShaderAttribute((VBO<Vector3>)rend.GetVBOs[1], program, "vertexNormal");
+                Gl.BindBufferToShaderAttribute((VBO<Vector2>)rend.GetVBOs[2], program, "vertexUV");
+                Gl.BindBuffer((VBO<uint>)rend.GetVBOs[3]);
 
-                Gl.DrawElements(BeginMode.Triangles, particleQuads.Count, DrawElementsType.UnsignedInt, IntPtr.Zero);
-
-                // update the position of the star
-                particles[i].angle += (float)i / particles.Count * deltaTime * 2;
-                particles[i].dist -= 0.2f * deltaTime;
-
-                // if we've reached the center then move this star outwards and give it a new color
-                if (particles[i].dist < 0f)
-                {
-                    particles[i].dist += 5f;
-                    particles[i].color = new Vector3((float)generator.NextDouble(), (float)generator.NextDouble(), (float)generator.NextDouble());
-                }
-            }*/
+                Gl.DrawElements(rend.beginmode, rend.elements.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            }
 
             Glut.glutSwapBuffers();
-            //PosSwitcher();
+
+            update();
         }
 
-        static void PosSwitcher()
+        public void AddRenderable(Renderable obj)
         {
-            if (mode)
-                xOff += 0.01f;
-            else
-                xOff -= 0.01f;
-
-            if (xOff > 1.5f || xOff < -1.5f)
-                mode = !mode;
+            Objects.Add(obj);
+            Console.WriteLine("Added : " + obj.name);
         }
 
         public static string VertexShader =

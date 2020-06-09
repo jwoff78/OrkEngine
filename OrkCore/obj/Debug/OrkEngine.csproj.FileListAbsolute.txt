@@ -1,0 +1,27 @@
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\lua53.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\liblua53.dylib
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\liblua53.so
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\x86\lua53.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\x64\lua53.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\x64\liblua53.so
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\JJGE Core.dll.config
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\JJGE Core.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\JJGE Core.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\JJGE Core.dll.CodeAnalysisLog.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\JJGE Core.dll.lastcodeanalysissucceeded
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\KeraLua.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\NLua.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\KeraLua.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OpenGL.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OpenGL.dll.config
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OpenGL.Platform.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Tao.FreeGlut.dll.config
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\obj\Debug\OrkEngine.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\obj\Debug\OrkEngine.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\obj\Debug\OrkEngine.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\obj\Debug\JJGE Core.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\obj\Debug\JJGE Core.pdb
