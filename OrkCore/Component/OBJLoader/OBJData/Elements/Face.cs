@@ -8,7 +8,7 @@ namespace OrkCore.Component.OBJLoader
 {
     public class Face
     {
-        private readonly List<FaceVertex> _vertices = new List<FaceVertex>();
+        public readonly List<FaceVertex> _vertices = new List<FaceVertex>();
 
         public void AddVertex(FaceVertex vertex)
         {

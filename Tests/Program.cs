@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OrkCore.Interface;
 using System.IO;
-using JJGE_Core.Interface;
+using OrkCore.Interface;
 using OpenGL;
 using Vec3 = OpenGL.Vector3;
 
@@ -15,10 +15,11 @@ namespace Tests
     {
         GameWindow gameWindow = new GameWindow();
         Renderable vcube;
+        Renderable r;
 
         bool mode = true;
         float[] limits = {-1.5f, 1.5f};
-        int[] counter = {0, 20};
+        int[] counter = {0, 10};
         public static void Main(string[] args)
         {
             new Program();
@@ -30,15 +31,23 @@ namespace Tests
         public object Start()
         {
             Console.WriteLine("Start");
-            vcube = Renderable.Cube;
+            /*vcube = Renderable.Cube;
             vcube.texture = new Texture("vroooom.png");
             vcube.PrepareVBOs();
             vcube.rotation = new Vec3(0.5f, 0.5f, 0);
 
-            gameWindow.AddRenderable(vcube);
+            gameWindow.AddRenderable(vcube);*/
 
-            object Nudes = null;
-            return Nudes;
+            r = Renderable.LoadFromFile(@"vroooomcube2.obj");
+            r.PrepareVBOs();
+            r.texture = new Texture(@"Cube9_auv.png");
+
+            Console.WriteLine("ELEMENTS: " + r.elements.Length);
+            Console.WriteLine("UVS: " + r.uvs.Length);
+
+            gameWindow.AddRenderable(r);
+
+            return null;
         }
         public object Update()
         {
@@ -47,7 +56,10 @@ namespace Tests
             if (counter[0] > counter[1]) {
                 counter[0] = 0;
 
-                vcube.rotation.x += 0.05f;
+                r.rotation.x += 0.05f;
+                r.rotation.y += 0.025f;
+
+                /*vcube.rotation.x += 0.05f;
                 vcube.rotation.y += 0.025f;
 
                 if (mode)
@@ -56,7 +68,7 @@ namespace Tests
                     vcube.position.x += (limits[0] - vcube.position.x) / 3;
 
                 if (vcube.position.x > 1.45f || vcube.position.x < -1.45f)
-                    mode = !mode;
+                    mode = !mode;*/
             }
             return null;
         }

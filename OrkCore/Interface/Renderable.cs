@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenGL;
+using OrkCore.Component;
+using OrkCore.Component.OBJLoader;
+using Tex = OrkCore.Component.Texture;
+using Texture = OpenGL.Texture;
 
 namespace OrkCore.Interface
 {
@@ -71,7 +76,7 @@ namespace OrkCore.Interface
         public static Renderable Cube
         {
             get{
-                Renderable cube = new Renderable("VroooomCube");
+                Renderable cube = new Renderable("Cube");
                 cube.vertices = new Vector3[] {
                     new Vector3(1, 1, -1), new Vector3(-1, 1, -1), new Vector3(-1, 1, 1), new Vector3(1, 1, 1),
                     new Vector3(1, -1, 1), new Vector3(-1, -1, 1), new Vector3(-1, -1, -1), new Vector3(1, -1, -1),
@@ -97,6 +102,56 @@ namespace OrkCore.Interface
                 cube.beginmode = BeginMode.Quads;
                 return cube;
             }
+        }
+
+        public static Renderable LoadFromFile(string path)
+        {
+            var objLoaderFactory = new ObjLoaderFactory();
+            var objLoader = objLoaderFactory.Create();
+            var fileStream = new FileStream(path, FileMode.Open);
+            var result = objLoader.Load(fileStream);
+
+            Renderable rend = new Renderable(result.Groups.First().Name);
+
+            List<Vector3> verts = new List<Vector3>();
+            List<uint> elements = new List<uint>();
+            List<Vector3> normals = new List<Vector3>();
+            List<Vector2> uvs = new List<Vector2>();
+
+            foreach (Vertex v in result.Vertices)
+            {
+                verts.Add(new Vector3(v.X,v.Y,v.Z));
+            }
+            foreach (Normal n in result.Normals)
+            {
+                normals.Add(new Vector3(n.X,n.Y,n.Z));
+            }
+            foreach (Tex t in result.Textures)
+            {
+                uvs.Add(new Vector2(t.X,t.Y));
+                Console.WriteLine("UV: " + new Vector2(t.X, t.Y));
+            }
+
+            foreach (Group g in result.Groups)
+            {
+                //Console.WriteLine("GROUP: " + g.Name);
+                foreach (Face f in g.Faces)
+                {
+                    //Console.WriteLine("   └>  FACE WVC: " + f.Count);
+                    foreach (FaceVertex i in f._vertices)
+                    {
+                        //Console.WriteLine("       └>  VERT: " + i.VertexIndex);
+                        elements.Add((uint)i.VertexIndex - 1);
+                    }
+                }
+            }
+
+            rend.vertices = verts.ToArray();
+            rend.elements = elements.ToArray();
+            rend.normals = normals.ToArray();
+            rend.uvs = uvs.ToArray();
+
+            return rend;
         }
     }
 }

@@ -77,13 +77,10 @@ C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\x64\liblua53.so
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tests.exe.config
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tests.exe
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tests.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\JJGE Core.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\KeraLua.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\NLua.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tao.FreeGlut.dll
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\JJGE Core.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\JJGE Core.dll.config
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\KeraLua.xml
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.dll.config
@@ -93,3 +90,8 @@ C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.csproj.CoreCompil
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.exe
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.dll
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.Platform.dll
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.dll.config
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.Platform.pdb
