@@ -11,8 +11,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3BB4734D-41CA-4D8C-BE8A-4CFB281DDFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>JJGE_Core</RootNamespace>
-    <AssemblyName>JJGE Core</AssemblyName>
+    <RootNamespace>OrkCore</RootNamespace>
+    <AssemblyName>OrkEngine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -96,6 +96,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameObject.cs" />
+    <Compile Include="Interface\UI\Controls\Button.cs" />
+    <Compile Include="Interface\UI\Controls\CheckBox.cs" />
+    <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
+    <Compile Include="Interface\UI\Controls\Console.cs" />
+    <Compile Include="Interface\UI\Controls\Font.cs" />
+    <Compile Include="Interface\UI\Controls\ListBox.cs" />
+    <Compile Include="Interface\UI\Controls\Slider.cs" />
+    <Compile Include="Interface\UI\Controls\Text.cs" />
+    <Compile Include="Interface\UI\Controls\TextBox.cs" />
+    <Compile Include="Interface\UI\Controls\TextInput.cs" />
+    <Compile Include="Interface\UI\Core\Shader.cs" />
+    <Compile Include="Interface\UI\Core\UIContainer.cs" />
+    <Compile Include="Interface\UI\Core\UIElement.cs" />
+    <Compile Include="Interface\UI\Core\UserInterface.cs" />
     <Compile Include="IOrkCore.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
