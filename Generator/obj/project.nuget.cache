@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "YXevDg3VKNHrR4Lap1dAvo2SEotxCB9L3ow8KR0orOeuDw0leWqdUB8jrLlI+6pK4Z3OcPLWC8SGZpjo3G4Mag==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\djlw7\\OneDrive\\Desktop\\jargameneinge\\0.0.0.6pre\\Generator\\Generator.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\djlw7\\.nuget\\packages\\fsharp.core\\4.7.1\\fsharp.core.4.7.1.nupkg.sha512",
+    "C:\\Users\\djlw7\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

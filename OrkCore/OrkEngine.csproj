@@ -68,11 +68,11 @@
     </Reference>
     <Reference Include="OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\OpenGL.dll</HintPath>
+      <HintPath>..\..\..\jjjjjj\JJGE Core\bin\Debug\OpenGL.dll</HintPath>
     </Reference>
     <Reference Include="OpenGL.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\OpenGL.Platform.dll</HintPath>
+      <HintPath>..\..\..\jjjjjj\JJGE Core\bin\Debug\OpenGL.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
