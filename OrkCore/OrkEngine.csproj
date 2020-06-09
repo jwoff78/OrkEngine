@@ -141,6 +141,15 @@
     <Compile Include="Component\Texture.cs" />
     <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Geometry\BezierCurve.cs" />
+    <Compile Include="Geometry\BezierCurveCubic.cs" />
+    <Compile Include="Geometry\BezierCurveQuadric.cs" />
+    <Compile Include="Geometry\Box2.cs" />
+    <Compile Include="Geometry\Box2d.cs" />
+    <Compile Include="Geometry\Box2i.cs" />
+    <Compile Include="Geometry\Box3.cs" />
+    <Compile Include="Geometry\Box3d.cs" />
+    <Compile Include="Geometry\Box3i.cs" />
     <Compile Include="Interface\UI\Controls\Button.cs" />
     <Compile Include="Interface\UI\Controls\CheckBox.cs" />
     <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
