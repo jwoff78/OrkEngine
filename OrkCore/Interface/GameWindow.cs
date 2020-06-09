@@ -1,5 +1,4 @@
-﻿using JJGE_Core.Interface;
-using OpenGL;
+﻿using OpenGL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;

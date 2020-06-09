@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenGL;
 
-namespace JJGE_Core.Interface
+namespace OrkCore.Interface
 {
     public class Renderable
     {
