@@ -40,22 +40,22 @@ namespace OrkCore.Mathematics
         /// <summary>
         /// The red component of the color.
         /// </summary>
-        public float Red;
+        public float R;
 
         /// <summary>
         /// The green component of the color.
         /// </summary>
-        public float Green;
+        public float G;
 
         /// <summary>
         /// The blue component of the color.
         /// </summary>
-        public float Blue;
+        public float B;
 
         /// <summary>
         /// The alpha component of the color.
         /// </summary>
-        public float Alpha;
+        public float A;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
@@ -63,10 +63,10 @@ namespace OrkCore.Mathematics
         /// <param name="value">The value that will be assigned to all components.</param>
         public Color4(float value)
         {
-            Red = value;
-            Green = value;
-            Blue = value;
-            Alpha = value;
+            R = value;
+            G = value;
+            B = value;
+            A = value;
             //Alpha = Red = Green = Blue = value;
         }
 
@@ -78,10 +78,10 @@ namespace OrkCore.Mathematics
         /// <param name="blue">The blue component of the color.</param>
         public Color4(float red, float green, float blue)
         {
-            Alpha = 1.0f;
-            Red = red;
-            Green = green;
-            Blue = blue;
+            A = 1.0f;
+            R = red;
+            G = green;
+            B = blue;
         }
 
         /// <summary>
@@ -93,10 +93,10 @@ namespace OrkCore.Mathematics
         /// <param name="blue">The blue component of the color.</param>
         public Color4(float alpha, float red, float green, float blue)
         {
-            Alpha = alpha;
-            Red = red;
-            Green = green;
-            Blue = blue;
+            A = alpha;
+            R = red;
+            G = green;
+            B = blue;
         }
 
         /// <summary>
@@ -108,10 +108,10 @@ namespace OrkCore.Mathematics
         /// <param name="alpha">The alpha component of the new Color4 structure.</param>
         public Color4(byte red, byte green, byte blue, byte alpha)
         {
-            Red = red / (float)byte.MaxValue;
-            Green = green / (float)byte.MaxValue;
-            Blue = blue / (float)byte.MaxValue;
-            Alpha = alpha / (float)byte.MaxValue;
+            R = red / (float)byte.MaxValue;
+            G = green / (float)byte.MaxValue;
+            B = blue / (float)byte.MaxValue;
+            A = alpha / (float)byte.MaxValue;
         }
 
         /// <summary>
@@ -120,10 +120,10 @@ namespace OrkCore.Mathematics
         /// <param name="value">The red, green, blue, and alpha components of the color.</param>
         public Color4(Vector4 value)
         {
-            Red = value.X;
-            Green = value.Y;
-            Blue = value.Z;
-            Alpha = value.W;
+            R = value.X;
+            G = value.Y;
+            B = value.Z;
+            A = value.W;
         }
 
         /// <summary>
@@ -133,10 +133,10 @@ namespace OrkCore.Mathematics
         /// <param name="alpha">The alpha component of the color.</param>
         public Color4(Vector3 value, float alpha)
         {
-            Red = value.X;
-            Green = value.Y;
-            Blue = value.Z;
-            Alpha = alpha;
+            R = value.X;
+            G = value.Y;
+            B = value.Z;
+            A = alpha;
         }
 
         /// <summary>
@@ -145,10 +145,10 @@ namespace OrkCore.Mathematics
         /// <param name="argb">A packed integer containing all four color components.</param>
         public Color4(int argb)
         {
-            Alpha = ((argb >> 24) & 255) / 255.0f;
-            Red = ((argb >> 16) & 255) / 255.0f;
-            Green = ((argb >> 8) & 255) / 255.0f;
-            Blue = (argb & 255) / 255.0f;
+            A = ((argb >> 24) & 255) / 255.0f;
+            R = ((argb >> 16) & 255) / 255.0f;
+            G = ((argb >> 8) & 255) / 255.0f;
+            B = (argb & 255) / 255.0f;
         }
 
         /// <summary>
@@ -159,10 +159,10 @@ namespace OrkCore.Mathematics
         /// <param name="blue">The blue component of the color.</param>
         public Color4(int red, int green, int blue)
         {
-            Alpha = 1.0f;
-            Red = red / 255.0f;
-            Green = green / 255.0f;
-            Blue = blue / 255.0f;
+            A = 1.0f;
+            R = red / 255.0f;
+            G = green / 255.0f;
+            B = blue / 255.0f;
         }
 
         /// <summary>
@@ -174,10 +174,10 @@ namespace OrkCore.Mathematics
         /// <param name="blue">The blue component of the color.</param>
         public Color4(int alpha, int red, int green, int blue)
         {
-            Alpha = alpha / 255.0f;
-            Red = red / 255.0f;
-            Green = green / 255.0f;
-            Blue = blue / 255.0f;
+            A = alpha / 255.0f;
+            R = red / 255.0f;
+            G = green / 255.0f;
+            B = blue / 255.0f;
         }
 
         /// <summary>
@@ -193,12 +193,718 @@ namespace OrkCore.Mathematics
             if (values.Length != 4)
                 throw new ArgumentOutOfRangeException("values", "There must be four and only four input values for Color4.");
 
-            Alpha = values[0];
-            Red = values[1];
-            Green = values[2];
-            Blue = values[3];
+            A = values[0];
+            R = values[1];
+            G = values[2];
+            B = values[3];
         }
 
+        #region Color Defs
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 255, 255, 0).
+        /// </summary>
+        public static Color4 Transparent => new Color4(255, 255, 255, 0);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (240, 248, 255, 255).
+        /// </summary>
+        public static Color4 AliceBlue => new Color4(240, 248, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (250, 235, 215, 255).
+        /// </summary>
+        public static Color4 AntiqueWhite => new Color4(250, 235, 215, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 255, 255, 255).
+        /// </summary>
+        public static Color4 Aqua => new Color4(0, 255, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (127, 255, 212, 255).
+        /// </summary>
+        public static Color4 Aquamarine => new Color4(127, 255, 212, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (240, 255, 255, 255).
+        /// </summary>
+        public static Color4 Azure => new Color4(240, 255, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (245, 245, 220, 255).
+        /// </summary>
+        public static Color4 Beige => new Color4(245, 245, 220, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 228, 196, 255).
+        /// </summary>
+        public static Color4 Bisque => new Color4(255, 228, 196, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 0, 0, 255).
+        /// </summary>
+        public static Color4 Black => new Color4(0, 0, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 235, 205, 255).
+        /// </summary>
+        public static Color4 BlanchedAlmond => new Color4(255, 235, 205, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 0, 255, 255).
+        /// </summary>
+        public static Color4 Blue => new Color4(0, 0, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (138, 43, 226, 255).
+        /// </summary>
+        public static Color4 BlueViolet => new Color4(138, 43, 226, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (165, 42, 42, 255).
+        /// </summary>
+        public static Color4 Brown => new Color4(165, 42, 42, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (222, 184, 135, 255).
+        /// </summary>
+        public static Color4 BurlyWood => new Color4(222, 184, 135, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (95, 158, 160, 255).
+        /// </summary>
+        public static Color4 CadetBlue => new Color4(95, 158, 160, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (127, 255, 0, 255).
+        /// </summary>
+        public static Color4 Chartreuse => new Color4(127, 255, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (210, 105, 30, 255).
+        /// </summary>
+        public static Color4 Chocolate => new Color4(210, 105, 30, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 127, 80, 255).
+        /// </summary>
+        public static Color4 Coral => new Color4(255, 127, 80, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (100, 149, 237, 255).
+        /// </summary>
+        public static Color4 CornflowerBlue => new Color4(100, 149, 237, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 248, 220, 255).
+        /// </summary>
+        public static Color4 Cornsilk => new Color4(255, 248, 220, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (220, 20, 60, 255).
+        /// </summary>
+        public static Color4 Crimson => new Color4(220, 20, 60, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 255, 255, 255).
+        /// </summary>
+        public static Color4 Cyan => new Color4(0, 255, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 0, 139, 255).
+        /// </summary>
+        public static Color4 DarkBlue => new Color4(0, 0, 139, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 139, 139, 255).
+        /// </summary>
+        public static Color4 DarkCyan => new Color4(0, 139, 139, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (184, 134, 11, 255).
+        /// </summary>
+        public static Color4 DarkGoldenrod => new Color4(184, 134, 11, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (169, 169, 169, 255).
+        /// </summary>
+        public static Color4 DarkGray => new Color4(169, 169, 169, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 100, 0, 255).
+        /// </summary>
+        public static Color4 DarkGreen => new Color4(0, 100, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (189, 183, 107, 255).
+        /// </summary>
+        public static Color4 DarkKhaki => new Color4(189, 183, 107, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (139, 0, 139, 255).
+        /// </summary>
+        public static Color4 DarkMagenta => new Color4(139, 0, 139, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (85, 107, 47, 255).
+        /// </summary>
+        public static Color4 DarkOliveGreen => new Color4(85, 107, 47, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 140, 0, 255).
+        /// </summary>
+        public static Color4 DarkOrange => new Color4(255, 140, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (153, 50, 204, 255).
+        /// </summary>
+        public static Color4 DarkOrchid => new Color4(153, 50, 204, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (139, 0, 0, 255).
+        /// </summary>
+        public static Color4 DarkRed => new Color4(139, 0, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (233, 150, 122, 255).
+        /// </summary>
+        public static Color4 DarkSalmon => new Color4(233, 150, 122, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (143, 188, 139, 255).
+        /// </summary>
+        public static Color4 DarkSeaGreen => new Color4(143, 188, 139, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (72, 61, 139, 255).
+        /// </summary>
+        public static Color4 DarkSlateBlue => new Color4(72, 61, 139, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (47, 79, 79, 255).
+        /// </summary>
+        public static Color4 DarkSlateGray => new Color4(47, 79, 79, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 206, 209, 255).
+        /// </summary>
+        public static Color4 DarkTurquoise => new Color4(0, 206, 209, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (148, 0, 211, 255).
+        /// </summary>
+        public static Color4 DarkViolet => new Color4(148, 0, 211, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 20, 147, 255).
+        /// </summary>
+        public static Color4 DeepPink => new Color4(255, 20, 147, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 191, 255, 255).
+        /// </summary>
+        public static Color4 DeepSkyBlue => new Color4(0, 191, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (105, 105, 105, 255).
+        /// </summary>
+        public static Color4 DimGray => new Color4(105, 105, 105, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (30, 144, 255, 255).
+        /// </summary>
+        public static Color4 DodgerBlue => new Color4(30, 144, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (178, 34, 34, 255).
+        /// </summary>
+        public static Color4 Firebrick => new Color4(178, 34, 34, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 250, 240, 255).
+        /// </summary>
+        public static Color4 FloralWhite => new Color4(255, 250, 240, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (34, 139, 34, 255).
+        /// </summary>
+        public static Color4 ForestGreen => new Color4(34, 139, 34, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 0, 255, 255).
+        /// </summary>
+        public static Color4 Fuchsia => new Color4(255, 0, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (220, 220, 220, 255).
+        /// </summary>
+        public static Color4 Gainsboro => new Color4(220, 220, 220, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (248, 248, 255, 255).
+        /// </summary>
+        public static Color4 GhostWhite => new Color4(248, 248, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 215, 0, 255).
+        /// </summary>
+        public static Color4 Gold => new Color4(255, 215, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (218, 165, 32, 255).
+        /// </summary>
+        public static Color4 Goldenrod => new Color4(218, 165, 32, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (128, 128, 128, 255).
+        /// </summary>
+        public static Color4 Gray => new Color4(128, 128, 128, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 128, 0, 255).
+        /// </summary>
+        public static Color4 Green => new Color4(0, 128, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (173, 255, 47, 255).
+        /// </summary>
+        public static Color4 GreenYellow => new Color4(173, 255, 47, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (240, 255, 240, 255).
+        /// </summary>
+        public static Color4 Honeydew => new Color4(240, 255, 240, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 105, 180, 255).
+        /// </summary>
+        public static Color4 HotPink => new Color4(255, 105, 180, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (205, 92, 92, 255).
+        /// </summary>
+        public static Color4 IndianRed => new Color4(205, 92, 92, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (75, 0, 130, 255).
+        /// </summary>
+        public static Color4 Indigo => new Color4(75, 0, 130, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 255, 240, 255).
+        /// </summary>
+        public static Color4 Ivory => new Color4(255, 255, 240, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (240, 230, 140, 255).
+        /// </summary>
+        public static Color4 Khaki => new Color4(240, 230, 140, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (230, 230, 250, 255).
+        /// </summary>
+        public static Color4 Lavender => new Color4(230, 230, 250, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 240, 245, 255).
+        /// </summary>
+        public static Color4 LavenderBlush => new Color4(255, 240, 245, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (124, 252, 0, 255).
+        /// </summary>
+        public static Color4 LawnGreen => new Color4(124, 252, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 250, 205, 255).
+        /// </summary>
+        public static Color4 LemonChiffon => new Color4(255, 250, 205, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (173, 216, 230, 255).
+        /// </summary>
+        public static Color4 LightBlue => new Color4(173, 216, 230, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (240, 128, 128, 255).
+        /// </summary>
+        public static Color4 LightCoral => new Color4(240, 128, 128, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (224, 255, 255, 255).
+        /// </summary>
+        public static Color4 LightCyan => new Color4(224, 255, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (250, 250, 210, 255).
+        /// </summary>
+        public static Color4 LightGoldenrodYellow => new Color4(250, 250, 210, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (144, 238, 144, 255).
+        /// </summary>
+        public static Color4 LightGreen => new Color4(144, 238, 144, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (211, 211, 211, 255).
+        /// </summary>
+        public static Color4 LightGray => new Color4(211, 211, 211, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 182, 193, 255).
+        /// </summary>
+        public static Color4 LightPink => new Color4(255, 182, 193, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 160, 122, 255).
+        /// </summary>
+        public static Color4 LightSalmon => new Color4(255, 160, 122, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (32, 178, 170, 255).
+        /// </summary>
+        public static Color4 LightSeaGreen => new Color4(32, 178, 170, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (135, 206, 250, 255).
+        /// </summary>
+        public static Color4 LightSkyBlue => new Color4(135, 206, 250, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (119, 136, 153, 255).
+        /// </summary>
+        public static Color4 LightSlateGray => new Color4(119, 136, 153, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (176, 196, 222, 255).
+        /// </summary>
+        public static Color4 LightSteelBlue => new Color4(176, 196, 222, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 255, 224, 255).
+        /// </summary>
+        public static Color4 LightYellow => new Color4(255, 255, 224, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 255, 0, 255).
+        /// </summary>
+        public static Color4 Lime => new Color4(0, 255, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (50, 205, 50, 255).
+        /// </summary>
+        public static Color4 LimeGreen => new Color4(50, 205, 50, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (250, 240, 230, 255).
+        /// </summary>
+        public static Color4 Linen => new Color4(250, 240, 230, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 0, 255, 255).
+        /// </summary>
+        public static Color4 Magenta => new Color4(255, 0, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (128, 0, 0, 255).
+        /// </summary>
+        public static Color4 Maroon => new Color4(128, 0, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (102, 205, 170, 255).
+        /// </summary>
+        public static Color4 MediumAquamarine => new Color4(102, 205, 170, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 0, 205, 255).
+        /// </summary>
+        public static Color4 MediumBlue => new Color4(0, 0, 205, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (186, 85, 211, 255).
+        /// </summary>
+        public static Color4 MediumOrchid => new Color4(186, 85, 211, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (147, 112, 219, 255).
+        /// </summary>
+        public static Color4 MediumPurple => new Color4(147, 112, 219, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (60, 179, 113, 255).
+        /// </summary>
+        public static Color4 MediumSeaGreen => new Color4(60, 179, 113, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (123, 104, 238, 255).
+        /// </summary>
+        public static Color4 MediumSlateBlue => new Color4(123, 104, 238, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 250, 154, 255).
+        /// </summary>
+        public static Color4 MediumSpringGreen => new Color4(0, 250, 154, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (72, 209, 204, 255).
+        /// </summary>
+        public static Color4 MediumTurquoise => new Color4(72, 209, 204, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (199, 21, 133, 255).
+        /// </summary>
+        public static Color4 MediumVioletRed => new Color4(199, 21, 133, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (25, 25, 112, 255).
+        /// </summary>
+        public static Color4 MidnightBlue => new Color4(25, 25, 112, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (245, 255, 250, 255).
+        /// </summary>
+        public static Color4 MintCream => new Color4(245, 255, 250, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 228, 225, 255).
+        /// </summary>
+        public static Color4 MistyRose => new Color4(255, 228, 225, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 228, 181, 255).
+        /// </summary>
+        public static Color4 Moccasin => new Color4(255, 228, 181, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 222, 173, 255).
+        /// </summary>
+        public static Color4 NavajoWhite => new Color4(255, 222, 173, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 0, 128, 255).
+        /// </summary>
+        public static Color4 Navy => new Color4(0, 0, 128, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (253, 245, 230, 255).
+        /// </summary>
+        public static Color4 OldLace => new Color4(253, 245, 230, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (128, 128, 0, 255).
+        /// </summary>
+        public static Color4 Olive => new Color4(128, 128, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (107, 142, 35, 255).
+        /// </summary>
+        public static Color4 OliveDrab => new Color4(107, 142, 35, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 165, 0, 255).
+        /// </summary>
+        public static Color4 Orange => new Color4(255, 165, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 69, 0, 255).
+        /// </summary>
+        public static Color4 OrangeRed => new Color4(255, 69, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (218, 112, 214, 255).
+        /// </summary>
+        public static Color4 Orchid => new Color4(218, 112, 214, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (238, 232, 170, 255).
+        /// </summary>
+        public static Color4 PaleGoldenrod => new Color4(238, 232, 170, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (152, 251, 152, 255).
+        /// </summary>
+        public static Color4 PaleGreen => new Color4(152, 251, 152, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (175, 238, 238, 255).
+        /// </summary>
+        public static Color4 PaleTurquoise => new Color4(175, 238, 238, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (219, 112, 147, 255).
+        /// </summary>
+        public static Color4 PaleVioletRed => new Color4(219, 112, 147, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 239, 213, 255).
+        /// </summary>
+        public static Color4 PapayaWhip => new Color4(255, 239, 213, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 218, 185, 255).
+        /// </summary>
+        public static Color4 PeachPuff => new Color4(255, 218, 185, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (205, 133, 63, 255).
+        /// </summary>
+        public static Color4 Peru => new Color4(205, 133, 63, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 192, 203, 255).
+        /// </summary>
+        public static Color4 Pink => new Color4(255, 192, 203, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (221, 160, 221, 255).
+        /// </summary>
+        public static Color4 Plum => new Color4(221, 160, 221, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (176, 224, 230, 255).
+        /// </summary>
+        public static Color4 PowderBlue => new Color4(176, 224, 230, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (128, 0, 128, 255).
+        /// </summary>
+        public static Color4 Purple => new Color4(128, 0, 128, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 0, 0, 255).
+        /// </summary>
+        public static Color4 Red => new Color4(255, 0, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (188, 143, 143, 255).
+        /// </summary>
+        public static Color4 RosyBrown => new Color4(188, 143, 143, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (65, 105, 225, 255).
+        /// </summary>
+        public static Color4 RoyalBlue => new Color4(65, 105, 225, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (139, 69, 19, 255).
+        /// </summary>
+        public static Color4 SaddleBrown => new Color4(139, 69, 19, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (250, 128, 114, 255).
+        /// </summary>
+        public static Color4 Salmon => new Color4(250, 128, 114, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (244, 164, 96, 255).
+        /// </summary>
+        public static Color4 SandyBrown => new Color4(244, 164, 96, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (46, 139, 87, 255).
+        /// </summary>
+        public static Color4 SeaGreen => new Color4(46, 139, 87, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 245, 238, 255).
+        /// </summary>
+        public static Color4 SeaShell => new Color4(255, 245, 238, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (160, 82, 45, 255).
+        /// </summary>
+        public static Color4 Sienna => new Color4(160, 82, 45, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (192, 192, 192, 255).
+        /// </summary>
+        public static Color4 Silver => new Color4(192, 192, 192, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (135, 206, 235, 255).
+        /// </summary>
+        public static Color4 SkyBlue => new Color4(135, 206, 235, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (106, 90, 205, 255).
+        /// </summary>
+        public static Color4 SlateBlue => new Color4(106, 90, 205, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (112, 128, 144, 255).
+        /// </summary>
+        public static Color4 SlateGray => new Color4(112, 128, 144, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 250, 250, 255).
+        /// </summary>
+        public static Color4 Snow => new Color4(255, 250, 250, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 255, 127, 255).
+        /// </summary>
+        public static Color4 SpringGreen => new Color4(0, 255, 127, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (70, 130, 180, 255).
+        /// </summary>
+        public static Color4 SteelBlue => new Color4(70, 130, 180, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (210, 180, 140, 255).
+        /// </summary>
+        public static Color4 Tan => new Color4(210, 180, 140, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (0, 128, 128, 255).
+        /// </summary>
+        public static Color4 Teal => new Color4(0, 128, 128, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (216, 191, 216, 255).
+        /// </summary>
+        public static Color4 Thistle => new Color4(216, 191, 216, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 99, 71, 255).
+        /// </summary>
+        public static Color4 Tomato => new Color4(255, 99, 71, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (64, 224, 208, 255).
+        /// </summary>
+        public static Color4 Turquoise => new Color4(64, 224, 208, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (238, 130, 238, 255).
+        /// </summary>
+        public static Color4 Violet => new Color4(238, 130, 238, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (245, 222, 179, 255).
+        /// </summary>
+        public static Color4 Wheat => new Color4(245, 222, 179, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 255, 255, 255).
+        /// </summary>
+        public static Color4 White => new Color4(255, 255, 255, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (245, 245, 245, 255).
+        /// </summary>
+        public static Color4 WhiteSmoke => new Color4(245, 245, 245, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (255, 255, 0, 255).
+        /// </summary>
+        public static Color4 Yellow => new Color4(255, 255, 0, 255);
+
+        /// <summary>
+        /// Gets the system color with (R, G, B, A) = (154, 205, 50, 255).
+        /// </summary>
+        public static Color4 YellowGreen => new Color4(154, 205, 50, 255);
+        #endregion
         /// <summary>
         /// Gets or sets the component at the specified index.
         /// </summary>
@@ -212,10 +918,10 @@ namespace OrkCore.Mathematics
             {
                 switch (index)
                 {
-                    case 0: return Alpha;
-                    case 1: return Red;
-                    case 2: return Green;
-                    case 3: return Blue;
+                    case 0: return A;
+                    case 1: return R;
+                    case 2: return G;
+                    case 3: return B;
                 }
 
                 throw new ArgumentOutOfRangeException("index", "Indices for Color4 run from 0 to 3, inclusive.");
@@ -225,10 +931,10 @@ namespace OrkCore.Mathematics
             {
                 switch (index)
                 {
-                    case 0: Alpha = value; break;
-                    case 1: Red = value; break;
-                    case 2: Green = value; break;
-                    case 3: Blue = value; break;
+                    case 0: A = value; break;
+                    case 1: R = value; break;
+                    case 2: G = value; break;
+                    case 3: B = value; break;
                     default: throw new ArgumentOutOfRangeException("index", "Indices for Color4 run from 0 to 3, inclusive.");
                 }
             }
@@ -239,10 +945,10 @@ namespace OrkCore.Mathematics
         /// </summary>
         public void Negate()
         {
-            this.Alpha = -Alpha;
-            this.Red = -Red;
-            this.Green = -Green;
-            this.Blue = -Blue;
+            this.A = -A;
+            this.R = -R;
+            this.G = -G;
+            this.B = -B;
         }
 
         /// <summary>
@@ -251,10 +957,10 @@ namespace OrkCore.Mathematics
         /// <param name="scalar">The amount by which to scale.</param>
         public void Scale(float scalar)
         {
-            this.Alpha *= scalar;
-            this.Red *= scalar;
-            this.Green *= scalar;
-            this.Blue *= scalar;
+            this.A *= scalar;
+            this.R *= scalar;
+            this.G *= scalar;
+            this.B *= scalar;
         }
 
         /// <summary>
@@ -262,10 +968,10 @@ namespace OrkCore.Mathematics
         /// </summary>
         public void Invert()
         {
-            this.Alpha = 1.0f - Alpha;
-            this.Red = 1.0f - Red;
-            this.Green = 1.0f - Green;
-            this.Blue = 1.0f - Blue;
+            this.A = 1.0f - A;
+            this.R = 1.0f - R;
+            this.G = 1.0f - G;
+            this.B = 1.0f - B;
         }
 
         /// <summary>
@@ -274,9 +980,9 @@ namespace OrkCore.Mathematics
         /// <param name="contrast">The amount by which to adjust the contrast.</param>
         public void AdjustContrast(float contrast)
         {
-            this.Red = 0.5f + contrast * (Red - 0.5f);
-            this.Green = 0.5f + contrast * (Green - 0.5f);
-            this.Blue = 0.5f + contrast * (Blue - 0.5f);
+            this.R = 0.5f + contrast * (R - 0.5f);
+            this.G = 0.5f + contrast * (G - 0.5f);
+            this.B = 0.5f + contrast * (B - 0.5f);
         }
 
         /// <summary>
@@ -285,11 +991,11 @@ namespace OrkCore.Mathematics
         /// <param name="saturation">The amount by which to adjust the saturation.</param>
         public void AdjustSaturation(float saturation)
         {
-            float grey = Red * 0.2125f + Green * 0.7154f + Blue * 0.0721f;
+            float grey = R * 0.2125f + G * 0.7154f + B * 0.0721f;
 
-            this.Red = grey + saturation * (Red - grey);
-            this.Green = grey + saturation * (Green - grey);
-            this.Blue = grey + saturation * (Blue - grey);
+            this.R = grey + saturation * (R - grey);
+            this.G = grey + saturation * (G - grey);
+            this.B = grey + saturation * (B - grey);
         }
 
         /// <summary>
@@ -298,10 +1004,10 @@ namespace OrkCore.Mathematics
         /// <returns>A packed integer containing all four color components.</returns>
         public int ToArgb()
         {
-            uint a = ((uint)(Alpha * 255.0f) & 0xFF);
-            uint r = ((uint)(Red * 255.0f) & 0xFF);
-            uint g = ((uint)(Green * 255.0f) & 0xFF);
-            uint b = ((uint)(Blue * 255.0f) & 0xFF);
+            uint a = ((uint)(A * 255.0f) & 0xFF);
+            uint r = ((uint)(R * 255.0f) & 0xFF);
+            uint g = ((uint)(G * 255.0f) & 0xFF);
+            uint b = ((uint)(B * 255.0f) & 0xFF);
 
             uint value = b;
             value |= g << 8;
@@ -317,10 +1023,10 @@ namespace OrkCore.Mathematics
         /// <returns>A packed integer containing all four color components.</returns>
         public int ToRgba()
         {
-            uint a = ((uint)(Alpha * 255.0f) & 0xFF);
-            uint r = ((uint)(Red * 255.0f) & 0xFF);
-            uint g = ((uint)(Green * 255.0f) & 0xFF);
-            uint b = ((uint)(Blue * 255.0f) & 0xFF);
+            uint a = ((uint)(A * 255.0f) & 0xFF);
+            uint r = ((uint)(R * 255.0f) & 0xFF);
+            uint g = ((uint)(G * 255.0f) & 0xFF);
+            uint b = ((uint)(B * 255.0f) & 0xFF);
 
             uint value = a;
             value |= b << 8;
@@ -336,7 +1042,7 @@ namespace OrkCore.Mathematics
         /// <returns>A three component vector containing the red, green, and blue components of the color.</returns>
         public Vector3 ToVector3()
         {
-            return new Vector3(Red, Green, Blue);
+            return new Vector3(R, G, B);
         }
 
         /// <summary>
@@ -345,7 +1051,7 @@ namespace OrkCore.Mathematics
         /// <returns>A four component vector containing all four color components.</returns>
         public Vector4 ToVector4()
         {
-            return new Vector4(Red, Green, Blue, Alpha);
+            return new Vector4(R, G, B, A);
         }
 
         /// <summary>
@@ -354,7 +1060,7 @@ namespace OrkCore.Mathematics
         /// <returns>A four-element array containing the components of the color in ARGB order.</returns>
         public float[] ToArray()
         {
-            return new float[] { Alpha, Red, Green, Blue };
+            return new float[] { A, R, G, B };
         }
 
         /// <summary>
@@ -365,10 +1071,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, completes the sum of the two colors.</param>
         public static void Add(ref Color4 left, ref Color4 right, out Color4 result)
         {
-            result.Alpha = left.Alpha + right.Alpha;
-            result.Red = left.Red + right.Red;
-            result.Green = left.Green + right.Green;
-            result.Blue = left.Blue + right.Blue;
+            result.A = left.A + right.A;
+            result.R = left.R + right.R;
+            result.G = left.G + right.G;
+            result.B = left.B + right.B;
         }
 
         /// <summary>
@@ -379,7 +1085,7 @@ namespace OrkCore.Mathematics
         /// <returns>The sum of the two colors.</returns>
         public static Color4 Add(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha + right.Alpha, left.Red + right.Red, left.Green + right.Green, left.Blue + right.Blue);
+            return new Color4(left.A + right.A, left.R + right.R, left.G + right.G, left.B + right.B);
         }
 
         /// <summary>
@@ -390,10 +1096,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">WHen the method completes, contains the difference of the two colors.</param>
         public static void Subtract(ref Color4 left, ref Color4 right, out Color4 result)
         {
-            result.Alpha = left.Alpha - right.Alpha;
-            result.Red = left.Red - right.Red;
-            result.Green = left.Green - right.Green;
-            result.Blue = left.Blue - right.Blue;
+            result.A = left.A - right.A;
+            result.R = left.R - right.R;
+            result.G = left.G - right.G;
+            result.B = left.B - right.B;
         }
 
         /// <summary>
@@ -404,7 +1110,7 @@ namespace OrkCore.Mathematics
         /// <returns>The difference of the two colors.</returns>
         public static Color4 Subtract(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha - right.Alpha, left.Red - right.Red, left.Green - right.Green, left.Blue - right.Blue);
+            return new Color4(left.A - right.A, left.R - right.R, left.G - right.G, left.B - right.B);
         }
 
         /// <summary>
@@ -415,10 +1121,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the modulated color.</param>
         public static void Modulate(ref Color4 left, ref Color4 right, out Color4 result)
         {
-            result.Alpha = left.Alpha * right.Alpha;
-            result.Red = left.Red * right.Red;
-            result.Green = left.Green * right.Green;
-            result.Blue = left.Blue * right.Blue;
+            result.A = left.A * right.A;
+            result.R = left.R * right.R;
+            result.G = left.G * right.G;
+            result.B = left.B * right.B;
         }
 
         /// <summary>
@@ -429,7 +1135,7 @@ namespace OrkCore.Mathematics
         /// <returns>The modulated color.</returns>
         public static Color4 Modulate(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha * right.Alpha, left.Red * right.Red, left.Green * right.Green, left.Blue * right.Blue);
+            return new Color4(left.A * right.A, left.R * right.R, left.G * right.G, left.B * right.B);
         }
 
         /// <summary>
@@ -440,10 +1146,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the scaled color.</param>
         public static void Scale(ref Color4 value, float scalar, out Color4 result)
         {
-            result.Alpha = value.Alpha * scalar;
-            result.Red = value.Red * scalar;
-            result.Green = value.Green * scalar;
-            result.Blue = value.Blue * scalar;
+            result.A = value.A * scalar;
+            result.R = value.R * scalar;
+            result.G = value.G * scalar;
+            result.B = value.B * scalar;
         }
 
         /// <summary>
@@ -454,7 +1160,7 @@ namespace OrkCore.Mathematics
         /// <returns>The scaled color.</returns>
         public static Color4 Scale(Color4 value, float scalar)
         {
-            return new Color4(value.Alpha * scalar, value.Red * scalar, value.Green * scalar, value.Blue * scalar);
+            return new Color4(value.A * scalar, value.R * scalar, value.G * scalar, value.B * scalar);
         }
 
         /// <summary>
@@ -464,10 +1170,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the negated color.</param>
         public static void Negate(ref Color4 value, out Color4 result)
         {
-            result.Alpha = -value.Alpha;
-            result.Red = -value.Red;
-            result.Green = -value.Green;
-            result.Blue = -value.Blue;
+            result.A = -value.A;
+            result.R = -value.R;
+            result.G = -value.G;
+            result.B = -value.B;
         }
 
         /// <summary>
@@ -477,7 +1183,7 @@ namespace OrkCore.Mathematics
         /// <returns>The negated color.</returns>
         public static Color4 Negate(Color4 value)
         {
-            return new Color4(-value.Alpha, -value.Red, -value.Green, -value.Blue);
+            return new Color4(-value.A, -value.R, -value.G, -value.B);
         }
 
         /// <summary>
@@ -487,10 +1193,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the inverted color.</param>
         public static void Invert(ref Color4 value, out Color4 result)
         {
-            result.Alpha = 1.0f - value.Alpha;
-            result.Red = 1.0f - value.Red;
-            result.Green = 1.0f - value.Green;
-            result.Blue = 1.0f - value.Blue;
+            result.A = 1.0f - value.A;
+            result.R = 1.0f - value.R;
+            result.G = 1.0f - value.G;
+            result.B = 1.0f - value.B;
         }
 
         /// <summary>
@@ -500,7 +1206,7 @@ namespace OrkCore.Mathematics
         /// <returns>The inverted color.</returns>
         public static Color4 Invert(Color4 value)
         {
-            return new Color4(-value.Alpha, -value.Red, -value.Green, -value.Blue);
+            return new Color4(-value.A, -value.R, -value.G, -value.B);
         }
 
         /// <summary>
@@ -512,21 +1218,21 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the clamped value.</param>
         public static void Clamp(ref Color4 value, ref Color4 min, ref Color4 max, out Color4 result)
         {
-            float alpha = value.Alpha;
-            alpha = (alpha > max.Alpha) ? max.Alpha : alpha;
-            alpha = (alpha < min.Alpha) ? min.Alpha : alpha;
+            float alpha = value.A;
+            alpha = (alpha > max.A) ? max.A : alpha;
+            alpha = (alpha < min.A) ? min.A : alpha;
 
-            float red = value.Red;
-            red = (red > max.Red) ? max.Red : red;
-            red = (red < min.Red) ? min.Red : red;
+            float red = value.R;
+            red = (red > max.R) ? max.R : red;
+            red = (red < min.R) ? min.R : red;
 
-            float green = value.Green;
-            green = (green > max.Green) ? max.Green : green;
-            green = (green < min.Green) ? min.Green : green;
+            float green = value.G;
+            green = (green > max.G) ? max.G : green;
+            green = (green < min.G) ? min.G : green;
 
-            float blue = value.Blue;
-            blue = (blue > max.Blue) ? max.Blue : blue;
-            blue = (blue < min.Blue) ? min.Blue : blue;
+            float blue = value.B;
+            blue = (blue > max.B) ? max.B : blue;
+            blue = (blue < min.B) ? min.B : blue;
 
             result = new Color4(alpha, red, green, blue);
         }
@@ -559,10 +1265,10 @@ namespace OrkCore.Mathematics
         /// </remarks>
         public static void Lerp(ref Color4 start, ref Color4 end, float amount, out Color4 result)
         {
-            result.Alpha = start.Alpha + amount * (end.Alpha - start.Alpha);
-            result.Red = start.Red + amount * (end.Red - start.Red);
-            result.Green = start.Green + amount * (end.Green - start.Green);
-            result.Blue = start.Blue + amount * (end.Blue - start.Blue);
+            result.A = start.A + amount * (end.A - start.A);
+            result.R = start.R + amount * (end.R - start.R);
+            result.G = start.G + amount * (end.G - start.G);
+            result.B = start.B + amount * (end.B - start.B);
         }
 
         /// <summary>
@@ -580,10 +1286,10 @@ namespace OrkCore.Mathematics
         public static Color4 Lerp(Color4 start, Color4 end, float amount)
         {
             return new Color4(
-                start.Alpha + amount * (end.Alpha - start.Alpha),
-                start.Red + amount * (end.Red - start.Red),
-                start.Green + amount * (end.Green - start.Green),
-                start.Blue + amount * (end.Blue - start.Blue));
+                start.A + amount * (end.A - start.A),
+                start.R + amount * (end.R - start.R),
+                start.G + amount * (end.G - start.G),
+                start.B + amount * (end.B - start.B));
         }
 
         /// <summary>
@@ -598,10 +1304,10 @@ namespace OrkCore.Mathematics
             amount = (amount > 1.0f) ? 1.0f : ((amount < 0.0f) ? 0.0f : amount);
             amount = (amount * amount) * (3.0f - (2.0f * amount));
 
-            result.Alpha = start.Alpha + ((end.Alpha - start.Alpha) * amount);
-            result.Red = start.Red + ((end.Red - start.Red) * amount);
-            result.Green = start.Green + ((end.Green - start.Green) * amount);
-            result.Blue = start.Blue + ((end.Blue - start.Blue) * amount);
+            result.A = start.A + ((end.A - start.A) * amount);
+            result.R = start.R + ((end.R - start.R) * amount);
+            result.G = start.G + ((end.G - start.G) * amount);
+            result.B = start.B + ((end.B - start.B) * amount);
         }
 
         /// <summary>
@@ -617,10 +1323,10 @@ namespace OrkCore.Mathematics
             amount = (amount * amount) * (3.0f - (2.0f * amount));
 
             return new Color4(
-                start.Alpha + ((end.Alpha - start.Alpha) * amount),
-                start.Red + ((end.Red - start.Red) * amount),
-                start.Green + ((end.Green - start.Green) * amount),
-                start.Blue + ((end.Blue - start.Blue) * amount));
+                start.A + ((end.A - start.A) * amount),
+                start.R + ((end.R - start.R) * amount),
+                start.G + ((end.G - start.G) * amount),
+                start.B + ((end.B - start.B) * amount));
         }
 
         /// <summary>
@@ -631,10 +1337,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains an new color composed of the largest components of the source colorss.</param>
         public static void Max(ref Color4 left, ref Color4 right, out Color4 result)
         {
-            result.Alpha = (left.Alpha > right.Alpha) ? left.Alpha : right.Alpha;
-            result.Red = (left.Red > right.Red) ? left.Red : right.Red;
-            result.Green = (left.Green > right.Green) ? left.Green : right.Green;
-            result.Blue = (left.Blue > right.Blue) ? left.Blue : right.Blue;
+            result.A = (left.A > right.A) ? left.A : right.A;
+            result.R = (left.R > right.R) ? left.R : right.R;
+            result.G = (left.G > right.G) ? left.G : right.G;
+            result.B = (left.B > right.B) ? left.B : right.B;
         }
 
         /// <summary>
@@ -658,10 +1364,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains an new color composed of the smallest components of the source colors.</param>
         public static void Min(ref Color4 left, ref Color4 right, out Color4 result)
         {
-            result.Alpha = (left.Alpha < right.Alpha) ? left.Alpha : right.Alpha;
-            result.Red = (left.Red < right.Red) ? left.Red : right.Red;
-            result.Green = (left.Green < right.Green) ? left.Green : right.Green;
-            result.Blue = (left.Blue < right.Blue) ? left.Blue : right.Blue;
+            result.A = (left.A < right.A) ? left.A : right.A;
+            result.R = (left.R < right.R) ? left.R : right.R;
+            result.G = (left.G < right.G) ? left.G : right.G;
+            result.B = (left.B < right.B) ? left.B : right.B;
         }
 
         /// <summary>
@@ -685,10 +1391,10 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the adjusted color.</param>
         public static void AdjustContrast(ref Color4 value, float contrast, out Color4 result)
         {
-            result.Alpha = value.Alpha;
-            result.Red = 0.5f + contrast * (value.Red - 0.5f);
-            result.Green = 0.5f + contrast * (value.Green - 0.5f);
-            result.Blue = 0.5f + contrast * (value.Blue - 0.5f);
+            result.A = value.A;
+            result.R = 0.5f + contrast * (value.R - 0.5f);
+            result.G = 0.5f + contrast * (value.G - 0.5f);
+            result.B = 0.5f + contrast * (value.B - 0.5f);
         }
 
         /// <summary>
@@ -700,10 +1406,10 @@ namespace OrkCore.Mathematics
         public static Color4 AdjustContrast(Color4 value, float contrast)
         {
             return new Color4(
-                value.Alpha,
-                0.5f + contrast * (value.Red - 0.5f),
-                0.5f + contrast * (value.Green - 0.5f),
-                0.5f + contrast * (value.Blue - 0.5f));
+                value.A,
+                0.5f + contrast * (value.R - 0.5f),
+                0.5f + contrast * (value.G - 0.5f),
+                0.5f + contrast * (value.B - 0.5f));
         }
 
         /// <summary>
@@ -714,12 +1420,12 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the adjusted color.</param>
         public static void AdjustSaturation(ref Color4 value, float saturation, out Color4 result)
         {
-            float grey = value.Red * 0.2125f + value.Green * 0.7154f + value.Blue * 0.0721f;
+            float grey = value.R * 0.2125f + value.G * 0.7154f + value.B * 0.0721f;
 
-            result.Alpha = value.Alpha;
-            result.Red = grey + saturation * (value.Red - grey);
-            result.Green = grey + saturation * (value.Green - grey);
-            result.Blue = grey + saturation * (value.Blue - grey);
+            result.A = value.A;
+            result.R = grey + saturation * (value.R - grey);
+            result.G = grey + saturation * (value.G - grey);
+            result.B = grey + saturation * (value.B - grey);
         }
 
         /// <summary>
@@ -730,13 +1436,13 @@ namespace OrkCore.Mathematics
         /// <returns>The adjusted color.</returns>
         public static Color4 AdjustSaturation(Color4 value, float saturation)
         {
-            float grey = value.Red * 0.2125f + value.Green * 0.7154f + value.Blue * 0.0721f;
+            float grey = value.R * 0.2125f + value.G * 0.7154f + value.B * 0.0721f;
 
             return new Color4(
-                value.Alpha,
-                grey + saturation * (value.Red - grey),
-                grey + saturation * (value.Green - grey),
-                grey + saturation * (value.Blue - grey));
+                value.A,
+                grey + saturation * (value.R - grey),
+                grey + saturation * (value.G - grey),
+                grey + saturation * (value.B - grey));
         }
 
         /// <summary>
@@ -746,7 +1452,7 @@ namespace OrkCore.Mathematics
         /// <returns>The inverted color.</returns>
         public static Color4 operator ~(Color4 value)
         {
-            return new Color4(1.0f - value.Alpha, 1.0f - value.Red, 1.0f - value.Green, 1.0f - value.Blue);
+            return new Color4(1.0f - value.A, 1.0f - value.R, 1.0f - value.G, 1.0f - value.B);
         }
 
         /// <summary>
@@ -757,7 +1463,7 @@ namespace OrkCore.Mathematics
         /// <returns>The sum of the two colors.</returns>
         public static Color4 operator +(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha + right.Alpha, left.Red + right.Red, left.Green + right.Green, left.Blue + right.Blue);
+            return new Color4(left.A + right.A, left.R + right.R, left.G + right.G, left.B + right.B);
         }
 
         /// <summary>
@@ -778,7 +1484,7 @@ namespace OrkCore.Mathematics
         /// <returns>The difference of the two colors.</returns>
         public static Color4 operator -(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha - right.Alpha, left.Red - right.Red, left.Green - right.Green, left.Blue - right.Blue);
+            return new Color4(left.A - right.A, left.R - right.R, left.G - right.G, left.B - right.B);
         }
 
         /// <summary>
@@ -788,7 +1494,7 @@ namespace OrkCore.Mathematics
         /// <returns>A negated color.</returns>
         public static Color4 operator -(Color4 value)
         {
-            return new Color4(-value.Alpha, -value.Red, -value.Green, -value.Blue);
+            return new Color4(-value.A, -value.R, -value.G, -value.B);
         }
 
         /// <summary>
@@ -799,7 +1505,7 @@ namespace OrkCore.Mathematics
         /// <returns>The scaled color.</returns>
         public static Color4 operator *(float scalar, Color4 value)
         {
-            return new Color4(value.Alpha * scalar, value.Red * scalar, value.Green * scalar, value.Blue * scalar);
+            return new Color4(value.A * scalar, value.R * scalar, value.G * scalar, value.B * scalar);
         }
 
         /// <summary>
@@ -810,7 +1516,7 @@ namespace OrkCore.Mathematics
         /// <returns>The scaled color.</returns>
         public static Color4 operator *(Color4 value, float scalar)
         {
-            return new Color4(value.Alpha * scalar, value.Red * scalar, value.Green * scalar, value.Blue * scalar);
+            return new Color4(value.A * scalar, value.R * scalar, value.G * scalar, value.B * scalar);
         }
 
         /// <summary>
@@ -821,7 +1527,7 @@ namespace OrkCore.Mathematics
         /// <returns>The modulated color.</returns>
         public static Color4 operator *(Color4 left, Color4 right)
         {
-            return new Color4(left.Alpha * right.Alpha, left.Red * right.Red, left.Green * right.Green, left.Blue * right.Blue);
+            return new Color4(left.A * right.A, left.R * right.R, left.G * right.G, left.B * right.B);
         }
 
         /// <summary>
@@ -853,21 +1559,31 @@ namespace OrkCore.Mathematics
         /// <returns>The result of the conversion.</returns>
         public static explicit operator Color3(Color4 value)
         {
-            return new Color3(value.Red, value.Green, value.Blue);
+            return new Color3(value.R, value.G, value.B);
         }
 
+        /// <summary>
+        /// Converts the specified System.Drawing.Color to a Color4 structure.
+        /// </summary>
+        /// <param name="color">The System.Drawing.Color to convert.</param>
+        /// <returns>A new Color4 structure containing the converted components.</returns>
         public static implicit operator Color4(Color color)
         {
             return new Color4(color.R, color.G, color.B, color.A);
         }
 
+        /// <summary>
+        /// Converts the specified Color4 to a System.Drawing.Color structure.
+        /// </summary>
+        /// <param name="color">The Color4 to convert.</param>
+        /// <returns>A new System.Drawing.Color structure containing the converted components.</returns>
         public static explicit operator Color(Color4 color)
         {
             return Color.FromArgb(
-               (int)(color.Alpha * byte.MaxValue),
-               (int)(color.Red * byte.MaxValue),
-               (int)(color.Green * byte.MaxValue),
-               (int)(color.Blue * byte.MaxValue));
+               (int)(color.A * byte.MaxValue),
+               (int)(color.R * byte.MaxValue),
+               (int)(color.G * byte.MaxValue),
+               (int)(color.B * byte.MaxValue));
         }
 
         /// <summary>
@@ -877,17 +1593,18 @@ namespace OrkCore.Mathematics
         /// <returns>The result of the conversion.</returns>
         public static explicit operator Vector3(Color4 value)
         {
-            return new Vector3(value.Red, value.Green, value.Blue);
+            return new Vector3(value.R, value.G, value.B);
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Color4"/> to <see cref="global::OrkCore.Vector4"/>.
+        /// Returns this Color4 as a Vector4. The resulting struct will have XYZW mapped to RGBA, in that order.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector4(Color4 value)
+        /// <param name="color">The Color4 to convert.</param>
+        /// <returns>The Color4, converted into a Vector4.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator Vector4(Color4 color)
         {
-            return new Vector4(value.Red, value.Green, value.Blue, value.Alpha);
+            return Unsafe.As<Color4, Vector4>(ref color);
         }
 
         /// <summary>
@@ -928,7 +1645,7 @@ namespace OrkCore.Mathematics
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", Alpha, Red, Green, Blue);
+            return string.Format(CultureInfo.CurrentCulture, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", A, Red, Green, Blue);
         }
 
         /// <summary>
@@ -943,7 +1660,7 @@ namespace OrkCore.Mathematics
             if (format == null)
                 return ToString();
 
-            return string.Format(CultureInfo.CurrentCulture, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", Alpha.ToString(format, CultureInfo.CurrentCulture),
+            return string.Format(CultureInfo.CurrentCulture, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", A.ToString(format, CultureInfo.CurrentCulture),
                 Red.ToString(format, CultureInfo.CurrentCulture), Green.ToString(format, CultureInfo.CurrentCulture), Blue.ToString(format, CultureInfo.CurrentCulture));
         }
 
@@ -956,7 +1673,7 @@ namespace OrkCore.Mathematics
         /// </returns>
         public string ToString(IFormatProvider formatProvider)
         {
-            return string.Format(formatProvider, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", Alpha, Red, Green, Blue);
+            return string.Format(formatProvider, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", A, Red, Green, Blue);
         }
 
         /// <summary>
@@ -972,7 +1689,7 @@ namespace OrkCore.Mathematics
             if (format == null)
                 return ToString(formatProvider);
 
-            return string.Format(formatProvider, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", Alpha.ToString(format, formatProvider),
+            return string.Format(formatProvider, "Alpha:{0} Red:{1} Green:{2} Blue:{3}", A.ToString(format, formatProvider),
                 Red.ToString(format, formatProvider), Green.ToString(format, formatProvider), Blue.ToString(format, formatProvider));
         }
 
@@ -984,7 +1701,7 @@ namespace OrkCore.Mathematics
         /// </returns>
         public override int GetHashCode()
         {
-            return Alpha.GetHashCode() + Red.GetHashCode() + Green.GetHashCode() + Blue.GetHashCode();
+            return A.GetHashCode() + Red.GetHashCode() + Green.GetHashCode() + Blue.GetHashCode();
         }
 
         /// <summary>
@@ -996,7 +1713,7 @@ namespace OrkCore.Mathematics
         /// </returns>
         public bool Equals(Color4 other)
         {
-            return (Alpha == other.Alpha) && (Red == other.Red) && (Green == other.Green) && (Blue == other.Blue);
+            return (A == other.A) && (R == other.R) && (G == other.G) && (B == other.B);
         }
 
         /// <summary>
