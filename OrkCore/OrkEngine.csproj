@@ -140,6 +140,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
+    <Compile Include="Interface\Renderable.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
