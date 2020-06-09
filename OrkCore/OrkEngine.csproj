@@ -95,6 +95,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\Normal.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IObjLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IObjLoaderFactory.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\LoaderBase.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\LoadResult.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialLibraryLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialLibraryLoaderFacade.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialNullStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\ObjLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\ObjLoaderFactory.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\DataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IElementGroup.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IFaceGroup.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IGroupDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IMaterialLibrary.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\INormalDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\ITextureDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IVertexDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Elements\Face.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Elements\Group.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Material.cs" />
+    <Compile Include="Component\OBJLoader\StringExtensions.cs" />
+    <Compile Include="Component\OBJLoader\Type\FaceParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\GroupParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IFaceParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IGroupParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IMaterialLibraryParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\INormalParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\ITextureParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\ITypeParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IUseMaterialParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IVertexParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\MaterialLibraryParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\NormalParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\TextureParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
+    <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
+    <Compile Include="Component\Texture.cs" />
+    <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Interface\UI\Controls\Button.cs" />
     <Compile Include="Interface\UI\Controls\CheckBox.cs" />
@@ -180,6 +225,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
