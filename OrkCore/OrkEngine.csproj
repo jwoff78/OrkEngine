@@ -201,7 +201,12 @@
     <Compile Include="Mathematics\Util\Vector4Converter.cs" />
     <Compile Include="Vector\Vector2.cs" />
     <Compile Include="Vector\Vector2d.cs" />
+    <Compile Include="Vector\Vector2h.cs" />
+    <Compile Include="Vector\Vector2i.cs" />
     <Compile Include="Vector\Vector3.cs" />
+    <Compile Include="Vector\Vector3d.cs" />
+    <Compile Include="Vector\Vector3h.cs" />
+    <Compile Include="Vector\Vector3i.cs" />
     <Compile Include="Vector\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

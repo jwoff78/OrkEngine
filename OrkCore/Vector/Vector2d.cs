@@ -193,7 +193,6 @@ namespace OrkCore.Mathematics
         /// <param name="a">Left operand.</param>
         /// <param name="b">Right operand.</param>
         /// <returns>Result of operation.</returns>
-        [Pure]
         public static Vector2d Add(Vector2d a, Vector2d b)
         {
             Add(ref a, ref b, out a);
@@ -218,7 +217,6 @@ namespace OrkCore.Mathematics
         /// <param name="a">First operand.</param>
         /// <param name="b">Second operand.</param>
         /// <returns>Result of subtraction.</returns>
-        [Pure]
         public static Vector2d Subtract(Vector2d a, Vector2d b)
         {
             Subtract(ref a, ref b, out a);
@@ -243,7 +241,6 @@ namespace OrkCore.Mathematics
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        [Pure]
         public static Vector2d Multiply(Vector2d vector, double scale)
         {
             Multiply(ref vector, scale, out vector);
@@ -268,7 +265,6 @@ namespace OrkCore.Mathematics
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        [Pure]
         public static Vector2d Multiply(Vector2d vector, Vector2d scale)
         {
             Multiply(ref vector, ref scale, out vector);
@@ -293,7 +289,6 @@ namespace OrkCore.Mathematics
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        [Pure]
         public static Vector2d Divide(Vector2d vector, double scale)
         {
             Divide(ref vector, scale, out vector);
@@ -318,7 +313,6 @@ namespace OrkCore.Mathematics
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        [Pure]
         public static Vector2d Divide(Vector2d vector, Vector2d scale)
         {
             Divide(ref vector, ref scale, out vector);
@@ -343,7 +337,7 @@ namespace OrkCore.Mathematics
         /// <param name="a">First operand.</param>
         /// <param name="b">Second operand.</param>
         /// <returns>The component-wise minimum.</returns>
-        [Pure]
+
         public static Vector2d ComponentMin(Vector2d a, Vector2d b)
         {
             a.X = a.X < b.X ? a.X : b.X;
@@ -369,7 +363,6 @@ namespace OrkCore.Mathematics
         /// <param name="a">First operand.</param>
         /// <param name="b">Second operand.</param>
         /// <returns>The component-wise maximum.</returns>
-        [Pure]
         public static Vector2d ComponentMax(Vector2d a, Vector2d b)
         {
             a.X = a.X > b.X ? a.X : b.X;
@@ -396,7 +389,6 @@ namespace OrkCore.Mathematics
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
         /// <returns>The minimum Vector2d.</returns>
-        [Pure]
         public static Vector2d MagnitudeMin(Vector2d left, Vector2d right)
         {
             return left.LengthSquared < right.LengthSquared ? left : right;
@@ -421,7 +413,6 @@ namespace OrkCore.Mathematics
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
         /// <returns>The minimum Vector2d.</returns>
-        [Pure]
         public static Vector2d MagnitudeMax(Vector2d left, Vector2d right)
         {
             return left.LengthSquared >= right.LengthSquared ? left : right;
@@ -446,7 +437,6 @@ namespace OrkCore.Mathematics
         /// <param name="min">Minimum vector.</param>
         /// <param name="max">Maximum vector.</param>
         /// <returns>The clamped vector.</returns>
-        [Pure]
         public static Vector2d Clamp(Vector2d vec, Vector2d min, Vector2d max)
         {
             vec.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
@@ -473,7 +463,6 @@ namespace OrkCore.Mathematics
         /// <param name="vec1">The first vector.</param>
         /// <param name="vec2">The second vector.</param>
         /// <returns>The distance.</returns>
-        [Pure]
         public static double Distance(Vector2d vec1, Vector2d vec2)
         {
             Distance(ref vec1, ref vec2, out double result);
@@ -497,7 +486,6 @@ namespace OrkCore.Mathematics
         /// <param name="vec1">The first vector.</param>
         /// <param name="vec2">The second vector.</param>
         /// <returns>The squared distance.</returns>
-        [Pure]
         public static double DistanceSquared(Vector2d vec1, Vector2d vec2)
         {
             DistanceSquared(ref vec1, ref vec2, out double result);
@@ -520,7 +508,6 @@ namespace OrkCore.Mathematics
         /// </summary>
         /// <param name="vec">The input vector.</param>
         /// <returns>The normalized copy.</returns>
-        [Pure]
         public static Vector2d Normalize(Vector2d vec)
         {
             var scale = 1.0 / vec.Length;
@@ -546,7 +533,6 @@ namespace OrkCore.Mathematics
         /// </summary>
         /// <param name="vec">The input vector.</param>
         /// <returns>The normalized copy.</returns>
-        [Pure]
         public static Vector2d NormalizeFast(Vector2d vec)
         {
             var scale = MathHelper.InverseSqrtFast((vec.X * vec.X) + (vec.Y * vec.Y));
@@ -573,7 +559,6 @@ namespace OrkCore.Mathematics
         /// <param name="left">First operand.</param>
         /// <param name="right">Second operand.</param>
         /// <returns>The dot product of the two inputs.</returns>
-        [Pure]
         public static double Dot(Vector2d left, Vector2d right)
         {
             return (left.X * right.X) + (left.Y * right.Y);
@@ -597,7 +582,6 @@ namespace OrkCore.Mathematics
         /// <param name="b">Second input vector.</param>
         /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
         /// <returns>a when blend=0, b when blend=1, and a linear combination otherwise.</returns>
-        [Pure]
         public static Vector2d Lerp(Vector2d a, Vector2d b, double blend)
         {
             a.X = (blend * (b.X - a.X)) + a.X;
@@ -627,7 +611,6 @@ namespace OrkCore.Mathematics
         /// <param name="u">First Barycentric Coordinate.</param>
         /// <param name="v">Second Barycentric Coordinate.</param>
         /// <returns>a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise.</returns>
-        [Pure]
         public static Vector2d BaryCentric(Vector2d a, Vector2d b, Vector2d c, double u, double v)
         {
             BaryCentric(ref a, ref b, ref c, u, v, out var result);
@@ -675,7 +658,6 @@ namespace OrkCore.Mathematics
         /// <param name="vec">The vector to transform.</param>
         /// <param name="mat">The desired transformation.</param>
         /// <returns>The transformed vector.</returns>
-        [Pure]
         public static Vector2d Transform(Vector2d vec, Matrix2d mat)
         {
             Transform(ref vec, ref mat, out Vector2d result);
