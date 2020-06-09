@@ -179,6 +179,7 @@ namespace OrkCore.Interface
                     float ambient = 0.3;
                     float lighting = max(diffuse, ambient);
                     vec4 sample = texture2D(texture, uv);
+                    //vec4 sample = vec4(1,0,0,1);
                     fragment = vec4(lighting * sample.xyz, sample.a);
                 }
             ";
