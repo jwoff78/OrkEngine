@@ -209,6 +209,9 @@
     <Compile Include="Vector\Vector3i.cs" />
     <Compile Include="Vector\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vector\Vector4d.cs" />
+    <Compile Include="Vector\Vector4h.cs" />
+    <Compile Include="Vector\Vector4i.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
