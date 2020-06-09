@@ -45,7 +45,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -66,8 +65,13 @@
     <Reference Include="NLua, Version=1.4.32.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.32\lib\net45\NLua.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK, Version=3.2.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenTK.3.2\lib\net20\OpenTK.dll</HintPath>
+    <Reference Include="OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\OpenGL.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenGL.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\OpenGL.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -137,15 +141,6 @@
     <Compile Include="Component\Texture.cs" />
     <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
-    <Compile Include="Geometry\BezierCurve.cs" />
-    <Compile Include="Geometry\BezierCurveCubic.cs" />
-    <Compile Include="Geometry\BezierCurveQuadric.cs" />
-    <Compile Include="Geometry\Box2.cs" />
-    <Compile Include="Geometry\Box2d.cs" />
-    <Compile Include="Geometry\Box2i.cs" />
-    <Compile Include="Geometry\Box3.cs" />
-    <Compile Include="Geometry\Box3d.cs" />
-    <Compile Include="Geometry\Box3i.cs" />
     <Compile Include="Interface\UI\Controls\Button.cs" />
     <Compile Include="Interface\UI\Controls\CheckBox.cs" />
     <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
@@ -163,27 +158,6 @@
     <Compile Include="IOrkCore.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
-    <Compile Include="Mathematics\Half.cs" />
-    <Compile Include="Mathematics\Quaternion.cs" />
-    <Compile Include="Mathematics\Quaterniond.cs" />
-    <Compile Include="Matrix\Matrix2.cs" />
-    <Compile Include="Matrix\Matrix2d.cs" />
-    <Compile Include="Matrix\Matrix2x3.cs" />
-    <Compile Include="Matrix\Matrix2x3d.cs" />
-    <Compile Include="Matrix\Matrix2x4.cs" />
-    <Compile Include="Matrix\Matrix2x4d.cs" />
-    <Compile Include="Matrix\Matrix3.cs" />
-    <Compile Include="Matrix\Matrix3d.cs" />
-    <Compile Include="Matrix\Matrix3x2.cs" />
-    <Compile Include="Matrix\Matrix3x2d.cs" />
-    <Compile Include="Matrix\Matrix3x4.cs" />
-    <Compile Include="Matrix\Matrix3x4d.cs" />
-    <Compile Include="Matrix\Matrix4.cs" />
-    <Compile Include="Matrix\Matrix4d.cs" />
-    <Compile Include="Matrix\Matrix4x2.cs" />
-    <Compile Include="Matrix\Matrix4x2d.cs" />
-    <Compile Include="Matrix\Matrix4x3.cs" />
-    <Compile Include="Matrix\Matrix4x3d.cs" />
     <Compile Include="OrkCore.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
     <Compile Include="Mathematics\BoundingFrustum.cs" />
@@ -193,10 +167,15 @@
     <Compile Include="Mathematics\Color4.cs" />
     <Compile Include="Mathematics\Enums.cs" />
     <Compile Include="Mathematics\Gjk.cs" />
+    <Compile Include="Mathematics\Half.cs" />
+    <Compile Include="Mathematics\Half2.cs" />
+    <Compile Include="Mathematics\Half3.cs" />
+    <Compile Include="Mathematics\Half4.cs" />
     <Compile Include="Mathematics\HalfUtilities.cs" />
     <Compile Include="Mathematics\MathHelper.cs" />
     <Compile Include="Mathematics\Matrix.cs" />
     <Compile Include="Mathematics\Plane.cs" />
+    <Compile Include="Mathematics\Quaternion.cs" />
     <Compile Include="Mathematics\Ray.cs" />
     <Compile Include="Mathematics\Utilities.cs" />
     <Compile Include="Mathematics\Util\BaseConverter.cs" />
@@ -210,19 +189,10 @@
     <Compile Include="Mathematics\Util\Vector2Converter.cs" />
     <Compile Include="Mathematics\Util\Vector3Converter.cs" />
     <Compile Include="Mathematics\Util\Vector4Converter.cs" />
-    <Compile Include="Vector\Vector2.cs" />
-    <Compile Include="Vector\Vector2d.cs" />
-    <Compile Include="Vector\Vector2h.cs" />
-    <Compile Include="Vector\Vector2i.cs" />
-    <Compile Include="Vector\Vector3.cs" />
-    <Compile Include="Vector\Vector3d.cs" />
-    <Compile Include="Vector\Vector3h.cs" />
-    <Compile Include="Vector\Vector3i.cs" />
+    <Compile Include="Mathematics\Vector2.cs" />
+    <Compile Include="Mathematics\Vector3.cs" />
+    <Compile Include="Mathematics\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vector\Vector4.cs" />
-    <Compile Include="Vector\Vector4d.cs" />
-    <Compile Include="Vector\Vector4h.cs" />
-    <Compile Include="Vector\Vector4i.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
@@ -230,7 +200,6 @@
     </None>
     <None Include="App.config" />
     <Compile Include="Interface\Renderable.cs" />
-    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

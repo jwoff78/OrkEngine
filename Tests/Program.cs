@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OrkCore.Interface;
 using System.IO;
-using JJGE_Core.Interface;
+using OrkCore.Interface;
 using OpenGL;
 using Vec3 = OpenGL.Vector3;
 
@@ -18,7 +18,7 @@ namespace Tests
 
         bool mode = true;
         float[] limits = {-1.5f, 1.5f};
-        int[] counter = {0, 20};
+        int[] counter = {0, 10};
         public static void Main(string[] args)
         {
             new Program();
