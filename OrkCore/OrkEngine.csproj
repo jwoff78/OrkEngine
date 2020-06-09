@@ -45,6 +45,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -198,9 +199,10 @@
     <Compile Include="Mathematics\Util\Vector2Converter.cs" />
     <Compile Include="Mathematics\Util\Vector3Converter.cs" />
     <Compile Include="Mathematics\Util\Vector4Converter.cs" />
-    <Compile Include="Mathematics\Vector2.cs" />
-    <Compile Include="Mathematics\Vector3.cs" />
-    <Compile Include="Mathematics\Vector4.cs" />
+    <Compile Include="Vector\Vector2.cs" />
+    <Compile Include="Vector\Vector2d.cs" />
+    <Compile Include="Vector\Vector3.cs" />
+    <Compile Include="Vector\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
