@@ -19,10 +19,15 @@ namespace OrkCore.Component
         public float Y { get; private set; }
         public float Z { get; private set; }
 
-        //TODO FIX EQUALS #1
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            if (!(obj is Normal normal))
+                return false;
+
+            return this.X == normal.X &&
+                   this.Y == normal.Y &&
+                   this.Z == normal.Z;
+                   
         }
 
         public override int GetHashCode()
@@ -38,11 +43,17 @@ namespace OrkCore.Component
         public static bool operator !=(Normal left, Normal right)
         {
             return !(left == right);
+            
         }
 
         public bool Equals(Normal other)
         {
-            throw new NotImplementedException();
+            if (!(other is Normal normal))
+                return false;
+
+            return this.X == normal.X &&
+                   this.Y == normal.Y &&
+                   this.Z == normal.Z;
         }
     }
 }

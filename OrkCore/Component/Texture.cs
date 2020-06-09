@@ -17,10 +17,13 @@ namespace OrkCore.Component
         public float X { get; private set; }
         public float Y { get; private set; }
 
-        ////TODO FIX EQUALS #2
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            if (!(obj is Texture texture))
+                return false;
+
+            return this.X == texture.X &&
+                   this.Y == texture.Y;
         }
 
         public override int GetHashCode()
@@ -40,7 +43,11 @@ namespace OrkCore.Component
 
         public bool Equals(Texture other)
         {
-            throw new NotImplementedException();
+            if (!(other is Texture texture))
+                return false;
+
+            return this.X == texture.X &&
+                   this.Y == texture.Y;
         }
     }
 }

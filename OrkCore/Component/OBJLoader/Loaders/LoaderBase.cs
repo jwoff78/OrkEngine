@@ -39,10 +39,15 @@ namespace OrkCore.Component.OBJLoader
 
         protected abstract void ParseLine(string keyword, string data);
 
-        //TODO Fix Disposing #1
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool dispose)
+        {
+            _lineStreamReader.Dispose();
         }
     }
 }

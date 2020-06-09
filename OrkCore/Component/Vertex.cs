@@ -19,10 +19,14 @@ namespace OrkCore.Component
         public float Y { get; private set; }
         public float Z { get; private set; }
 
-        ////TODO FIX EQUALS #3
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            if (!(obj is Vertex vertex))
+                return false;
+
+            return this.X == vertex.X &&
+                   this.Y == vertex.Y &&
+                   this.Z == vertex.Z;
         }
 
         public override int GetHashCode()
@@ -42,7 +46,12 @@ namespace OrkCore.Component
 
         public bool Equals(Vertex other)
         {
-            throw new NotImplementedException();
+            if (!(other is Vertex vertex))
+                return false;
+
+            return this.X == vertex.X &&
+                   this.Y == vertex.Y &&
+                   this.Z == vertex.Z;
         }
     }
 }

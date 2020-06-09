@@ -40,8 +40,13 @@ namespace OrkCore.Component.OBJLoader
         public int NormalIndex { get; set; }
 
         public override bool Equals(object obj)
-        {//TODO idefk
-            return (bool)obj;
+        {
+            if (!(obj is FaceVertex faceVertex))
+                return false;
+
+            return this.VertexIndex == faceVertex.VertexIndex &&
+                   this.TextureIndex == faceVertex.TextureIndex &&
+                   this.NormalIndex == faceVertex.NormalIndex;
         }
 
         public override int GetHashCode()
@@ -61,7 +66,12 @@ namespace OrkCore.Component.OBJLoader
 
         public bool Equals(FaceVertex other)
         {
-            throw new NotImplementedException();
+            if (!(other is FaceVertex faceVertex))
+                return false;
+
+            return this.VertexIndex == faceVertex.VertexIndex &&
+                   this.TextureIndex == faceVertex.TextureIndex &&
+                   this.NormalIndex == faceVertex.NormalIndex;
         }
     }
 }
