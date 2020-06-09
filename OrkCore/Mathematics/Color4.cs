@@ -1,5 +1,6 @@
 ﻿/*
 * Copyright (c) 2007-2010 SlimDX Group
+* Copyright (c) 2006-2008 the Open Toolkit Library, except where noted
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +22,11 @@
 */
 
 using System;
+using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Diagnostics.Contracts;
 
 namespace OrkCore.Mathematics
 {
@@ -60,7 +63,11 @@ namespace OrkCore.Mathematics
         /// <param name="value">The value that will be assigned to all components.</param>
         public Color4(float value)
         {
-            Alpha = Red = Green = Blue = value;
+            Red = value;
+            Green = value;
+            Blue = value;
+            Alpha = value;
+            //Alpha = Red = Green = Blue = value;
         }
 
         /// <summary>
@@ -90,6 +97,21 @@ namespace OrkCore.Mathematics
             Red = red;
             Green = green;
             Blue = blue;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Color4"/> struct.
+        /// </summary>
+        /// <param name="red">The red component of the new Color4 structure.</param>
+        /// <param name="green">The green component of the new Color4 structure.</param>
+        /// <param name="blue">The blue component of the new Color4 structure.</param>
+        /// <param name="alpha">The alpha component of the new Color4 structure.</param>
+        public Color4(byte red, byte green, byte blue, byte alpha)
+        {
+            Red = red / (float)byte.MaxValue;
+            Green = green / (float)byte.MaxValue;
+            Blue = blue / (float)byte.MaxValue;
+            Alpha = alpha / (float)byte.MaxValue;
         }
 
         /// <summary>
@@ -832,6 +854,20 @@ namespace OrkCore.Mathematics
         public static explicit operator Color3(Color4 value)
         {
             return new Color3(value.Red, value.Green, value.Blue);
+        }
+
+        public static implicit operator Color4(Color color)
+        {
+            return new Color4(color.R, color.G, color.B, color.A);
+        }
+
+        public static explicit operator Color(Color4 color)
+        {
+            return Color.FromArgb(
+               (int)(color.Alpha * byte.MaxValue),
+               (int)(color.Red * byte.MaxValue),
+               (int)(color.Green * byte.MaxValue),
+               (int)(color.Blue * byte.MaxValue));
         }
 
         /// <summary>
