@@ -11,8 +11,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3BB4734D-41CA-4D8C-BE8A-4CFB281DDFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>JJGE_Core</RootNamespace>
-    <AssemblyName>JJGE Core</AssemblyName>
+    <RootNamespace>OrkCore</RootNamespace>
+    <AssemblyName>OrkEngine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,6 +45,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -95,7 +96,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\Normal.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IObjLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\IObjLoaderFactory.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\LoaderBase.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\LoadResult.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialLibraryLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialLibraryLoaderFacade.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialNullStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\MaterialStreamProvider.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\ObjLoader.cs" />
+    <Compile Include="Component\OBJLoader\Loaders\ObjLoaderFactory.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\DataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IElementGroup.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IFaceGroup.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IGroupDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IMaterialLibrary.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\INormalDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\ITextureDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\DataStore\IVertexDataStore.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Elements\Face.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Elements\Group.cs" />
+    <Compile Include="Component\OBJLoader\OBJData\Material.cs" />
+    <Compile Include="Component\OBJLoader\StringExtensions.cs" />
+    <Compile Include="Component\OBJLoader\Type\FaceParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\GroupParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IFaceParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IGroupParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IMaterialLibraryParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\INormalParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\ITextureParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\ITypeParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IUseMaterialParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\Interface\IVertexParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\MaterialLibraryParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\NormalParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\TextureParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
+    <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
+    <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
+    <Compile Include="Component\Texture.cs" />
+    <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Interface\UI\Controls\Button.cs" />
+    <Compile Include="Interface\UI\Controls\CheckBox.cs" />
+    <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
+    <Compile Include="Interface\UI\Controls\Console.cs" />
+    <Compile Include="Interface\UI\Controls\Font.cs" />
+    <Compile Include="Interface\UI\Controls\ListBox.cs" />
+    <Compile Include="Interface\UI\Controls\Slider.cs" />
+    <Compile Include="Interface\UI\Controls\Text.cs" />
+    <Compile Include="Interface\UI\Controls\TextBox.cs" />
+    <Compile Include="Interface\UI\Controls\TextInput.cs" />
+    <Compile Include="Interface\UI\Core\Shader.cs" />
+    <Compile Include="Interface\UI\Core\UIContainer.cs" />
+    <Compile Include="Interface\UI\Core\UIElement.cs" />
+    <Compile Include="Interface\UI\Core\UserInterface.cs" />
     <Compile Include="IOrkCore.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
@@ -134,12 +194,92 @@
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderEngine\Math\BezierCurve.cs" />
+    <Compile Include="RenderEngine\Math\BezierCurveCubic.cs" />
+    <Compile Include="RenderEngine\Math\BezierCurveQuadric.cs" />
+    <Compile Include="RenderEngine\Math\Box2.cs" />
+    <Compile Include="RenderEngine\Math\Functions.cs" />
+    <Compile Include="RenderEngine\Math\Half.cs" />
+    <Compile Include="RenderEngine\Math\MathHelper.cs" />
+    <Compile Include="RenderEngine\Math\Matrix3d.cs" />
+    <Compile Include="RenderEngine\Math\Matrix4.cs" />
+    <Compile Include="RenderEngine\Math\Matrix4d.cs" />
+    <Compile Include="RenderEngine\Math\Point.cs" />
+    <Compile Include="RenderEngine\Math\Quaternion.cs" />
+    <Compile Include="RenderEngine\Math\Quaterniond.cs" />
+    <Compile Include="RenderEngine\Math\Rectangle.cs" />
+    <Compile Include="RenderEngine\Math\Size.cs" />
+    <Compile Include="RenderEngine\Math\Vector2.cs" />
+    <Compile Include="RenderEngine\Math\Vector2d.cs" />
+    <Compile Include="RenderEngine\Math\Vector2h.cs" />
+    <Compile Include="RenderEngine\Math\Vector3.cs" />
+    <Compile Include="RenderEngine\Math\Vector3d.cs" />
+    <Compile Include="RenderEngine\Math\Vector3h.cs" />
+    <Compile Include="RenderEngine\Math\Vector4.cs" />
+    <Compile Include="RenderEngine\Math\Vector4d.cs" />
+    <Compile Include="RenderEngine\Math\Vector4h.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioCapture.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioContext.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioContextException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceEnumerator.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceErrorChecker.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioValueException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\Alc\Alc.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\Alc\AlcEnums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\AL.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\ALEnums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtension.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtensionEnums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtensionPresets.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\XRamExtension.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\AutoGeneratedAttribute.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\BindingsBase.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\BlittableValueType.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\ContextHandle.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\Color4.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Core.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Delegates.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Enums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\ErrorHelper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\ES.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Helper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Core.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Delegates.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Enums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\ErrorHelper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\ES.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Helper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Core.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Delegates.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Enums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\ErrorHelper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\ES.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Helper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsBindingsBase.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsContextException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsContextMissingException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsErrorException.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsExceptions.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\ErrorHelper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GL.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLCore.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLDelegates.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLEnums.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLHelper.cs" />
+    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\SDL2_GraphicsContext.cs" />
+    <Compile Include="RenderEngine\SDL2\SDL2.cs" />
+    <Compile Include="RenderEngine\SDL2\SDL2_image.cs" />
+    <Compile Include="RenderEngine\SDL2\SDL2_mixer.cs" />
+    <Compile Include="RenderEngine\SDL2\SDL2_ttf.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
+    <Compile Include="Interface\Renderable.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +305,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
