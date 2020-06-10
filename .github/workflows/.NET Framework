@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: .NET Framework
+
+on: [push]
+
+
+jobs:
+  build:
+   
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.2.108
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+      - name: And then we test it
+        run: dotnet test --verbosity normal
