@@ -19,9 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- */
+*/
 #endregion
 
+using OrkEngine.Rendering;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -29,69 +30,31 @@ using System.Xml.Serialization;
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkEngine.Rendering
+namespace OrkCore.Mathematics
 {
-    /// <summary>Represents a 4D vector using four double-precision floating-point numbers.</summary>
+    /// <summary>
+    /// Represents a 3D vector using three double-precision floating-point numbers.
+    /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector4d : IEquatable<Vector4d>
+    public struct Vector3d : IEquatable<Vector3d>
     {
         #region Fields
 
         /// <summary>
-        /// The X component of the Vector4d.
+        /// The X component of the Vector3.
         /// </summary>
         public double X;
 
         /// <summary>
-        /// The Y component of the Vector4d.
+        /// The Y component of the Vector3.
         /// </summary>
         public double Y;
 
         /// <summary>
-        /// The Z component of the Vector4d.
+        /// The Z component of the Vector3.
         /// </summary>
         public double Z;
-
-        /// <summary>
-        /// The W component of the Vector4d.
-        /// </summary>
-        public double W;
-
-        /// <summary>
-        /// Defines a unit-length Vector4d that points towards the X-axis.
-        /// </summary>
-        public static Vector4d UnitX = new Vector4d(1, 0, 0, 0);
-
-        /// <summary>
-        /// Defines a unit-length Vector4d that points towards the Y-axis.
-        /// </summary>
-        public static Vector4d UnitY = new Vector4d(0, 1, 0, 0);
-
-        /// <summary>
-        /// Defines a unit-length Vector4d that points towards the Z-axis.
-        /// </summary>
-        public static Vector4d UnitZ = new Vector4d(0, 0, 1, 0);
-
-        /// <summary>
-        /// Defines a unit-length Vector4d that points towards the W-axis.
-        /// </summary>
-        public static Vector4d UnitW = new Vector4d(0, 0, 0, 1);
-
-        /// <summary>
-        /// Defines a zero-length Vector4d.
-        /// </summary>
-        public static Vector4d Zero = new Vector4d(0, 0, 0, 0);
-
-        /// <summary>
-        /// Defines an instance with all components set to 1.
-        /// </summary>
-        public static readonly Vector4d One = new Vector4d(1, 1, 1, 1);
-
-        /// <summary>
-        /// Defines the size of the Vector4d struct in bytes.
-        /// </summary>
-        public static readonly int SizeInBytes = Marshal.SizeOf(new Vector4d());
 
         #endregion
 
@@ -101,79 +64,59 @@ namespace OrkEngine.Rendering
         /// Constructs a new instance.
         /// </summary>
         /// <param name="value">The value that will initialize this instance.</param>
-        public Vector4d(double value)
+        public Vector3d(double value)
         {
             X = value;
             Y = value;
             Z = value;
-            W = value;
         }
 
         /// <summary>
-        /// Constructs a new Vector4d.
+        /// Constructs a new Vector3.
         /// </summary>
-        /// <param name="x">The x component of the Vector4d.</param>
-        /// <param name="y">The y component of the Vector4d.</param>
-        /// <param name="z">The z component of the Vector4d.</param>
-        /// <param name="w">The w component of the Vector4d.</param>
-        public Vector4d(double x, double y, double z, double w)
+        /// <param name="x">The x component of the Vector3.</param>
+        /// <param name="y">The y component of the Vector3.</param>
+        /// <param name="z">The z component of the Vector3.</param>
+        public Vector3d(double x, double y, double z)
         {
             X = x;
             Y = y;
             Z = z;
-            W = w;
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the given Vector2d.
+        /// Constructs a new instance from the given Vector2d.
         /// </summary>
         /// <param name="v">The Vector2d to copy components from.</param>
-        public Vector4d(Vector2d v)
+        public Vector3d(Vector2d v)
         {
             X = v.X;
             Y = v.Y;
             Z = 0.0f;
-            W = 0.0f;
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the given Vector3d.
-        /// The w component is initialized to 0.
+        /// Constructs a new instance from the given Vector3d.
         /// </summary>
         /// <param name="v">The Vector3d to copy components from.</param>
-        /// <remarks><seealso cref="Vector4d(Vector3d, double)"/></remarks>
-        public Vector4d(Vector3d v)
+        public Vector3d(Vector3d v)
         {
             X = v.X;
             Y = v.Y;
             Z = v.Z;
-            W = 0.0f;
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the specified Vector3d and w component.
-        /// </summary>
-        /// <param name="v">The Vector3d to copy components from.</param>
-        /// <param name="w">The w component of the new Vector4.</param>
-        public Vector4d(Vector3d v, double w)
-        {
-            X = v.X;
-            Y = v.Y;
-            Z = v.Z;
-            W = w;
-        }
-
-        /// <summary>
-        /// Constructs a new Vector4d from the given Vector4d.
+        /// Constructs a new instance from the given Vector4d.
         /// </summary>
         /// <param name="v">The Vector4d to copy components from.</param>
-        public Vector4d(Vector4d v)
+        public Vector3d(Vector4d v)
         {
             X = v.X;
             Y = v.Y;
             Z = v.Z;
-            W = v.W;
         }
+
 
         #endregion
 
@@ -186,24 +129,22 @@ namespace OrkEngine.Rendering
         /// <summary>Add the Vector passed as parameter to this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [Obsolete("Use static Add() method instead.")]
-        public void Add(Vector4d right)
+        public void Add(Vector3d right)
         {
             this.X += right.X;
             this.Y += right.Y;
             this.Z += right.Z;
-            this.W += right.W;
         }
 
         /// <summary>Add the Vector passed as parameter to this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Add() method instead.")]
-        public void Add(ref Vector4d right)
+        public void Add(ref Vector3d right)
         {
             this.X += right.X;
             this.Y += right.Y;
             this.Z += right.Z;
-            this.W += right.W;
         }
 
         #endregion public void Add()
@@ -213,24 +154,22 @@ namespace OrkEngine.Rendering
         /// <summary>Subtract the Vector passed as parameter from this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [Obsolete("Use static Subtract() method instead.")]
-        public void Sub(Vector4d right)
+        public void Sub(Vector3d right)
         {
             this.X -= right.X;
             this.Y -= right.Y;
             this.Z -= right.Z;
-            this.W -= right.W;
         }
 
         /// <summary>Subtract the Vector passed as parameter from this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Subtract() method instead.")]
-        public void Sub(ref Vector4d right)
+        public void Sub(ref Vector3d right)
         {
             this.X -= right.X;
             this.Y -= right.Y;
             this.Z -= right.Z;
-            this.W -= right.W;
         }
 
         #endregion public void Sub()
@@ -245,7 +184,6 @@ namespace OrkEngine.Rendering
             this.X *= f;
             this.Y *= f;
             this.Z *= f;
-            this.W *= f;
         }
 
         #endregion public void Mult()
@@ -261,7 +199,6 @@ namespace OrkEngine.Rendering
             this.X *= mult;
             this.Y *= mult;
             this.Z *= mult;
-            this.W *= mult;
         }
 
         #endregion public void Div()
@@ -277,7 +214,7 @@ namespace OrkEngine.Rendering
         {
             get
             {
-                return System.Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
+                return System.Math.Sqrt(X * X + Y * Y + Z * Z);
             }
         }
 
@@ -298,7 +235,7 @@ namespace OrkEngine.Rendering
         {
             get
             {
-                return 1.0 / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
+                return 1.0 / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
             }
         }
 
@@ -314,11 +251,12 @@ namespace OrkEngine.Rendering
         /// for comparisons.
         /// </remarks>
         /// <see cref="Length"/>
+        /// <seealso cref="LengthFast"/>
         public double LengthSquared
         {
             get
             {
-                return X * X + Y * Y + Z * Z + W * W;
+                return X * X + Y * Y + Z * Z;
             }
         }
 
@@ -327,7 +265,7 @@ namespace OrkEngine.Rendering
         #region public void Normalize()
 
         /// <summary>
-        /// Scales the Vector4d to unit length.
+        /// Scales the Vector3d to unit length.
         /// </summary>
         public void Normalize()
         {
@@ -335,7 +273,6 @@ namespace OrkEngine.Rendering
             X *= scale;
             Y *= scale;
             Z *= scale;
-            W *= scale;
         }
 
         #endregion
@@ -343,15 +280,14 @@ namespace OrkEngine.Rendering
         #region public void NormalizeFast()
 
         /// <summary>
-        /// Scales the Vector4d to approximately unit length.
+        /// Scales the Vector3d to approximately unit length.
         /// </summary>
         public void NormalizeFast()
         {
-            double scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
+            double scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
             X *= scale;
             Y *= scale;
             Z *= scale;
-            W *= scale;
         }
 
         #endregion
@@ -359,42 +295,38 @@ namespace OrkEngine.Rendering
         #region public void Scale()
 
         /// <summary>
-        /// Scales the current Vector4d by the given amounts.
+        /// Scales the current Vector3d by the given amounts.
         /// </summary>
         /// <param name="sx">The scale of the X component.</param>
         /// <param name="sy">The scale of the Y component.</param>
         /// <param name="sz">The scale of the Z component.</param>
-        /// <param name="sw">The scale of the Z component.</param>
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(double sx, double sy, double sz, double sw)
+        public void Scale(double sx, double sy, double sz)
         {
             this.X = X * sx;
             this.Y = Y * sy;
             this.Z = Z * sz;
-            this.W = W * sw;
         }
 
         /// <summary>Scales this instance by the given parameter.</summary>
         /// <param name="scale">The scaling of the individual components.</param>
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(Vector4d scale)
+        public void Scale(Vector3d scale)
         {
             this.X *= scale.X;
             this.Y *= scale.Y;
             this.Z *= scale.Z;
-            this.W *= scale.W;
         }
 
         /// <summary>Scales this instance by the given parameter.</summary>
         /// <param name="scale">The scaling of the individual components.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(ref Vector4d scale)
+        public void Scale(ref Vector3d scale)
         {
             this.X *= scale.X;
             this.Y *= scale.Y;
             this.Z *= scale.Z;
-            this.W *= scale.W;
         }
 
         #endregion public void Scale()
@@ -402,6 +334,40 @@ namespace OrkEngine.Rendering
         #endregion
 
         #region Static
+
+        #region Fields
+
+        /// <summary>
+        /// Defines a unit-length Vector3d that points towards the X-axis.
+        /// </summary>
+        public static readonly Vector3d UnitX = new Vector3d(1, 0, 0);
+
+        /// <summary>
+        /// Defines a unit-length Vector3d that points towards the Y-axis.
+        /// </summary>
+        public static readonly Vector3d UnitY = new Vector3d(0, 1, 0);
+
+        /// <summary>
+        /// /// Defines a unit-length Vector3d that points towards the Z-axis.
+        /// </summary>
+        public static readonly Vector3d UnitZ = new Vector3d(0, 0, 1);
+
+        /// <summary>
+        /// Defines a zero-length Vector3.
+        /// </summary>
+        public static readonly Vector3d Zero = new Vector3d(0, 0, 0);
+
+        /// <summary>
+        /// Defines an instance with all components set to 1.
+        /// </summary>
+        public static readonly Vector3d One = new Vector3d(1, 1, 1);
+
+        /// <summary>
+        /// Defines the size of the Vector3d struct in bytes.
+        /// </summary>
+        public static readonly int SizeInBytes = Marshal.SizeOf(new Vector3d());
+
+        #endregion
 
         #region Obsolete
 
@@ -414,12 +380,11 @@ namespace OrkEngine.Rendering
         /// <param name="b">Second operand</param>
         /// <returns>Result of subtraction</returns>
         [Obsolete("Use static Subtract() method instead.")]
-        public static Vector4d Sub(Vector4d a, Vector4d b)
+        public static Vector3d Sub(Vector3d a, Vector3d b)
         {
             a.X -= b.X;
             a.Y -= b.Y;
             a.Z -= b.Z;
-            a.W -= b.W;
             return a;
         }
 
@@ -430,12 +395,11 @@ namespace OrkEngine.Rendering
         /// <param name="b">Second operand</param>
         /// <param name="result">Result of subtraction</param>
         [Obsolete("Use static Subtract() method instead.")]
-        public static void Sub(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Sub(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
             result.X = a.X - b.X;
             result.Y = a.Y - b.Y;
             result.Z = a.Z - b.Z;
-            result.W = a.W - b.W;
         }
 
         #endregion
@@ -449,12 +413,11 @@ namespace OrkEngine.Rendering
         /// <param name="f">Scalar operand</param>
         /// <returns>Result of the multiplication</returns>
         [Obsolete("Use static Multiply() method instead.")]
-        public static Vector4d Mult(Vector4d a, double f)
+        public static Vector3d Mult(Vector3d a, double f)
         {
             a.X *= f;
             a.Y *= f;
             a.Z *= f;
-            a.W *= f;
             return a;
         }
 
@@ -465,12 +428,11 @@ namespace OrkEngine.Rendering
         /// <param name="f">Scalar operand</param>
         /// <param name="result">Result of the multiplication</param>
         [Obsolete("Use static Multiply() method instead.")]
-        public static void Mult(ref Vector4d a, double f, out Vector4d result)
+        public static void Mult(ref Vector3d a, double f, out Vector3d result)
         {
             result.X = a.X * f;
             result.Y = a.Y * f;
             result.Z = a.Z * f;
-            result.W = a.W * f;
         }
 
         #endregion
@@ -484,13 +446,12 @@ namespace OrkEngine.Rendering
         /// <param name="f">Scalar operand</param>
         /// <returns>Result of the division</returns>
         [Obsolete("Use static Divide() method instead.")]
-        public static Vector4d Div(Vector4d a, double f)
+        public static Vector3d Div(Vector3d a, double f)
         {
             double mult = 1.0 / f;
             a.X *= mult;
             a.Y *= mult;
             a.Z *= mult;
-            a.W *= mult;
             return a;
         }
 
@@ -501,13 +462,12 @@ namespace OrkEngine.Rendering
         /// <param name="f">Scalar operand</param>
         /// <param name="result">Result of the division</param>
         [Obsolete("Use static Divide() method instead.")]
-        public static void Div(ref Vector4d a, double f, out Vector4d result)
+        public static void Div(ref Vector3d a, double f, out Vector3d result)
         {
             double mult = 1.0 / f;
             result.X = a.X * mult;
             result.Y = a.Y * mult;
             result.Z = a.Z * mult;
-            result.W = a.W * mult;
         }
 
         #endregion
@@ -522,7 +482,7 @@ namespace OrkEngine.Rendering
         /// <param name="a">Left operand.</param>
         /// <param name="b">Right operand.</param>
         /// <returns>Result of operation.</returns>
-        public static Vector4d Add(Vector4d a, Vector4d b)
+        public static Vector3d Add(Vector3d a, Vector3d b)
         {
             Add(ref a, ref b, out a);
             return a;
@@ -534,9 +494,9 @@ namespace OrkEngine.Rendering
         /// <param name="a">Left operand.</param>
         /// <param name="b">Right operand.</param>
         /// <param name="result">Result of operation.</param>
-        public static void Add(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Add(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
-            result = new Vector4d(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.W + b.W);
+            result = new Vector3d(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         }
 
         #endregion
@@ -549,7 +509,7 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>Result of subtraction</returns>
-        public static Vector4d Subtract(Vector4d a, Vector4d b)
+        public static Vector3d Subtract(Vector3d a, Vector3d b)
         {
             Subtract(ref a, ref b, out a);
             return a;
@@ -561,9 +521,9 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">Result of subtraction</param>
-        public static void Subtract(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Subtract(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
-            result = new Vector4d(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
+            result = new Vector3d(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
 
         #endregion
@@ -576,7 +536,7 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Multiply(Vector4d vector, double scale)
+        public static Vector3d Multiply(Vector3d vector, double scale)
         {
             Multiply(ref vector, scale, out vector);
             return vector;
@@ -588,9 +548,9 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Multiply(ref Vector4d vector, double scale, out Vector4d result)
+        public static void Multiply(ref Vector3d vector, double scale, out Vector3d result)
         {
-            result = new Vector4d(vector.X * scale, vector.Y * scale, vector.Z * scale, vector.W * scale);
+            result = new Vector3d(vector.X * scale, vector.Y * scale, vector.Z * scale);
         }
 
         /// <summary>
@@ -599,7 +559,7 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Multiply(Vector4d vector, Vector4d scale)
+        public static Vector3d Multiply(Vector3d vector, Vector3d scale)
         {
             Multiply(ref vector, ref scale, out vector);
             return vector;
@@ -611,9 +571,9 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Multiply(ref Vector4d vector, ref Vector4d scale, out Vector4d result)
+        public static void Multiply(ref Vector3d vector, ref Vector3d scale, out Vector3d result)
         {
-            result = new Vector4d(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z, vector.W * scale.W);
+            result = new Vector3d(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z);
         }
 
         #endregion
@@ -626,7 +586,7 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Divide(Vector4d vector, double scale)
+        public static Vector3d Divide(Vector3d vector, double scale)
         {
             Divide(ref vector, scale, out vector);
             return vector;
@@ -638,7 +598,7 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Divide(ref Vector4d vector, double scale, out Vector4d result)
+        public static void Divide(ref Vector3d vector, double scale, out Vector3d result)
         {
             Multiply(ref vector, 1 / scale, out result);
         }
@@ -649,7 +609,7 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Divide(Vector4d vector, Vector4d scale)
+        public static Vector3d Divide(Vector3d vector, Vector3d scale)
         {
             Divide(ref vector, ref scale, out vector);
             return vector;
@@ -661,14 +621,14 @@ namespace OrkEngine.Rendering
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Divide(ref Vector4d vector, ref Vector4d scale, out Vector4d result)
+        public static void Divide(ref Vector3d vector, ref Vector3d scale, out Vector3d result)
         {
-            result = new Vector4d(vector.X / scale.X, vector.Y / scale.Y, vector.Z / scale.Z, vector.W / scale.W);
+            result = new Vector3d(vector.X / scale.X, vector.Y / scale.Y, vector.Z / scale.Z);
         }
 
         #endregion
 
-        #region Min
+        #region ComponentMin
 
         /// <summary>
         /// Calculate the component-wise minimum of two vectors
@@ -676,12 +636,11 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>The component-wise minimum</returns>
-        public static Vector4d Min(Vector4d a, Vector4d b)
+        public static Vector3d ComponentMin(Vector3d a, Vector3d b)
         {
             a.X = a.X < b.X ? a.X : b.X;
             a.Y = a.Y < b.Y ? a.Y : b.Y;
             a.Z = a.Z < b.Z ? a.Z : b.Z;
-            a.W = a.W < b.W ? a.W : b.W;
             return a;
         }
 
@@ -691,17 +650,16 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">The component-wise minimum</param>
-        public static void Min(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void ComponentMin(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
             result.X = a.X < b.X ? a.X : b.X;
             result.Y = a.Y < b.Y ? a.Y : b.Y;
             result.Z = a.Z < b.Z ? a.Z : b.Z;
-            result.W = a.W < b.W ? a.W : b.W;
         }
 
         #endregion
 
-        #region Max
+        #region ComponentMax
 
         /// <summary>
         /// Calculate the component-wise maximum of two vectors
@@ -709,12 +667,11 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>The component-wise maximum</returns>
-        public static Vector4d Max(Vector4d a, Vector4d b)
+        public static Vector3d ComponentMax(Vector3d a, Vector3d b)
         {
             a.X = a.X > b.X ? a.X : b.X;
             a.Y = a.Y > b.Y ? a.Y : b.Y;
             a.Z = a.Z > b.Z ? a.Z : b.Z;
-            a.W = a.W > b.W ? a.W : b.W;
             return a;
         }
 
@@ -724,12 +681,41 @@ namespace OrkEngine.Rendering
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">The component-wise maximum</param>
-        public static void Max(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void ComponentMax(ref Vector3d a, ref Vector3d b, out Vector3d result)
         {
             result.X = a.X > b.X ? a.X : b.X;
             result.Y = a.Y > b.Y ? a.Y : b.Y;
             result.Z = a.Z > b.Z ? a.Z : b.Z;
-            result.W = a.W > b.W ? a.W : b.W;
+        }
+
+        #endregion
+
+        #region Min
+
+        /// <summary>
+        /// Returns the Vector3d with the minimum magnitude
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>The minimum Vector3</returns>
+        public static Vector3d Min(Vector3d left, Vector3d right)
+        {
+            return left.LengthSquared < right.LengthSquared ? left : right;
+        }
+
+        #endregion
+
+        #region Max
+
+        /// <summary>
+        /// Returns the Vector3d with the minimum magnitude
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>The minimum Vector3</returns>
+        public static Vector3d Max(Vector3d left, Vector3d right)
+        {
+            return left.LengthSquared >= right.LengthSquared ? left : right;
         }
 
         #endregion
@@ -743,12 +729,11 @@ namespace OrkEngine.Rendering
         /// <param name="min">Minimum vector</param>
         /// <param name="max">Maximum vector</param>
         /// <returns>The clamped vector</returns>
-        public static Vector4d Clamp(Vector4d vec, Vector4d min, Vector4d max)
+        public static Vector3d Clamp(Vector3d vec, Vector3d min, Vector3d max)
         {
             vec.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
             vec.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
-            vec.Z = vec.X < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
-            vec.W = vec.Y < min.W ? min.W : vec.W > max.W ? max.W : vec.W;
+            vec.Z = vec.Z < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
             return vec;
         }
 
@@ -759,12 +744,11 @@ namespace OrkEngine.Rendering
         /// <param name="min">Minimum vector</param>
         /// <param name="max">Maximum vector</param>
         /// <param name="result">The clamped vector</param>
-        public static void Clamp(ref Vector4d vec, ref Vector4d min, ref Vector4d max, out Vector4d result)
+        public static void Clamp(ref Vector3d vec, ref Vector3d min, ref Vector3d max, out Vector3d result)
         {
             result.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
             result.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
-            result.Z = vec.X < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
-            result.W = vec.Y < min.W ? min.W : vec.W > max.W ? max.W : vec.W;
+            result.Z = vec.Z < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
         }
 
         #endregion
@@ -776,13 +760,12 @@ namespace OrkEngine.Rendering
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <returns>The normalized vector</returns>
-        public static Vector4d Normalize(Vector4d vec)
+        public static Vector3d Normalize(Vector3d vec)
         {
             double scale = 1.0 / vec.Length;
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
-            vec.W *= scale;
             return vec;
         }
 
@@ -791,13 +774,12 @@ namespace OrkEngine.Rendering
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <param name="result">The normalized vector</param>
-        public static void Normalize(ref Vector4d vec, out Vector4d result)
+        public static void Normalize(ref Vector3d vec, out Vector3d result)
         {
             double scale = 1.0 / vec.Length;
             result.X = vec.X * scale;
             result.Y = vec.Y * scale;
             result.Z = vec.Z * scale;
-            result.W = vec.W * scale;
         }
 
         #endregion
@@ -809,13 +791,12 @@ namespace OrkEngine.Rendering
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <returns>The normalized vector</returns>
-        public static Vector4d NormalizeFast(Vector4d vec)
+        public static Vector3d NormalizeFast(Vector3d vec)
         {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
+            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
-            vec.W *= scale;
             return vec;
         }
 
@@ -824,13 +805,12 @@ namespace OrkEngine.Rendering
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <param name="result">The normalized vector</param>
-        public static void NormalizeFast(ref Vector4d vec, out Vector4d result)
+        public static void NormalizeFast(ref Vector3d vec, out Vector3d result)
         {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
+            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
             result.X = vec.X * scale;
             result.Y = vec.Y * scale;
             result.Z = vec.Z * scale;
-            result.W = vec.W * scale;
         }
 
         #endregion
@@ -838,25 +818,56 @@ namespace OrkEngine.Rendering
         #region Dot
 
         /// <summary>
-        /// Calculate the dot product of two vectors
+        /// Calculate the dot (scalar) product of two vectors
         /// </summary>
         /// <param name="left">First operand</param>
         /// <param name="right">Second operand</param>
         /// <returns>The dot product of the two inputs</returns>
-        public static double Dot(Vector4d left, Vector4d right)
+        public static double Dot(Vector3d left, Vector3d right)
         {
-            return left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
+            return left.X * right.X + left.Y * right.Y + left.Z * right.Z;
         }
 
         /// <summary>
-        /// Calculate the dot product of two vectors
+        /// Calculate the dot (scalar) product of two vectors
         /// </summary>
         /// <param name="left">First operand</param>
         /// <param name="right">Second operand</param>
         /// <param name="result">The dot product of the two inputs</param>
-        public static void Dot(ref Vector4d left, ref Vector4d right, out double result)
+        public static void Dot(ref Vector3d left, ref Vector3d right, out double result)
         {
-            result = left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
+            result = left.X * right.X + left.Y * right.Y + left.Z * right.Z;
+        }
+
+        #endregion
+
+        #region Cross
+
+        /// <summary>
+        /// Caclulate the cross (vector) product of two vectors
+        /// </summary>
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <returns>The cross product of the two inputs</returns>
+        public static Vector3d Cross(Vector3d left, Vector3d right)
+        {
+            Vector3d result;
+            Cross(ref left, ref right, out result);
+            return result;
+        }
+
+        /// <summary>
+        /// Caclulate the cross (vector) product of two vectors
+        /// </summary>
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <returns>The cross product of the two inputs</returns>
+        /// <param name="result">The cross product of the two inputs</param>
+        public static void Cross(ref Vector3d left, ref Vector3d right, out Vector3d result)
+        {
+            result = new Vector3d(left.Y * right.Z - left.Z * right.Y,
+                left.Z * right.X - left.X * right.Z,
+                left.X * right.Y - left.Y * right.X);
         }
 
         #endregion
@@ -870,12 +881,11 @@ namespace OrkEngine.Rendering
         /// <param name="b">Second input vector</param>
         /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
         /// <returns>a when blend=0, b when blend=1, and a linear combination otherwise</returns>
-        public static Vector4d Lerp(Vector4d a, Vector4d b, double blend)
+        public static Vector3d Lerp(Vector3d a, Vector3d b, double blend)
         {
             a.X = blend * (b.X - a.X) + a.X;
             a.Y = blend * (b.Y - a.Y) + a.Y;
             a.Z = blend * (b.Z - a.Z) + a.Z;
-            a.W = blend * (b.W - a.W) + a.W;
             return a;
         }
 
@@ -886,12 +896,11 @@ namespace OrkEngine.Rendering
         /// <param name="b">Second input vector</param>
         /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
         /// <param name="result">a when blend=0, b when blend=1, and a linear combination otherwise</param>
-        public static void Lerp(ref Vector4d a, ref Vector4d b, double blend, out Vector4d result)
+        public static void Lerp(ref Vector3d a, ref Vector3d b, double blend, out Vector3d result)
         {
             result.X = blend * (b.X - a.X) + a.X;
             result.Y = blend * (b.Y - a.Y) + a.Y;
             result.Z = blend * (b.Z - a.Z) + a.Z;
-            result.W = blend * (b.W - a.W) + a.W;
         }
 
         #endregion
@@ -907,7 +916,7 @@ namespace OrkEngine.Rendering
         /// <param name="u">First Barycentric Coordinate</param>
         /// <param name="v">Second Barycentric Coordinate</param>
         /// <returns>a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</returns>
-        public static Vector4d BaryCentric(Vector4d a, Vector4d b, Vector4d c, double u, double v)
+        public static Vector3d BaryCentric(Vector3d a, Vector3d b, Vector3d c, double u, double v)
         {
             return a + u * (b - a) + v * (c - a);
         }
@@ -919,11 +928,11 @@ namespace OrkEngine.Rendering
         /// <param name="u">First Barycentric Coordinate.</param>
         /// <param name="v">Second Barycentric Coordinate.</param>
         /// <param name="result">Output Vector. a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</param>
-        public static void BaryCentric(ref Vector4d a, ref Vector4d b, ref Vector4d c, double u, double v, out Vector4d result)
+        public static void BaryCentric(ref Vector3d a, ref Vector3d b, ref Vector3d c, double u, double v, out Vector3d result)
         {
             result = a; // copy
 
-            Vector4d temp = b; // copy
+            Vector3d temp = b; // copy
             Subtract(ref temp, ref a, out temp);
             Multiply(ref temp, u, out temp);
             Add(ref result, ref temp, out result);
@@ -938,13 +947,149 @@ namespace OrkEngine.Rendering
 
         #region Transform
 
+        /// <summary>Transform a direction vector by the given Matrix
+        /// Assumes the matrix has a bottom row of (0,0,0,1), that is the translation part is ignored.
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3d TransformVector(Vector3d vec, Matrix4d mat)
+        {
+            return new Vector3d(
+                Vector3d.Dot(vec, new Vector3d(mat.Column0)),
+                Vector3d.Dot(vec, new Vector3d(mat.Column1)),
+                Vector3d.Dot(vec, new Vector3d(mat.Column2)));
+        }
+
+        /// <summary>Transform a direction vector by the given Matrix
+        /// Assumes the matrix has a bottom row of (0,0,0,1), that is the translation part is ignored.
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed vector</param>
+        public static void TransformVector(ref Vector3d vec, ref Matrix4d mat, out Vector3d result)
+        {
+            result.X = vec.X * mat.Row0.X +
+                       vec.Y * mat.Row1.X +
+                       vec.Z * mat.Row2.X;
+
+            result.Y = vec.X * mat.Row0.Y +
+                       vec.Y * mat.Row1.Y +
+                       vec.Z * mat.Row2.Y;
+
+            result.Z = vec.X * mat.Row0.Z +
+                       vec.Y * mat.Row1.Z +
+                       vec.Z * mat.Row2.Z;
+        }
+
+        /// <summary>Transform a Normal by the given Matrix</summary>
+        /// <remarks>
+        /// This calculates the inverse of the given matrix, use TransformNormalInverse if you
+        /// already have the inverse to avoid this extra calculation
+        /// </remarks>
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed normal</returns>
+        public static Vector3d TransformNormal(Vector3d norm, Matrix4d mat)
+        {
+            mat.Invert();
+            return TransformNormalInverse(norm, mat);
+        }
+
+        /// <summary>Transform a Normal by the given Matrix</summary>
+        /// <remarks>
+        /// This calculates the inverse of the given matrix, use TransformNormalInverse if you
+        /// already have the inverse to avoid this extra calculation
+        /// </remarks>
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed normal</param>
+        public static void TransformNormal(ref Vector3d norm, ref Matrix4d mat, out Vector3d result)
+        {
+            Matrix4d Inverse = Matrix4d.Invert(mat);
+            Vector3d.TransformNormalInverse(ref norm, ref Inverse, out result);
+        }
+
+        /// <summary>Transform a Normal by the (transpose of the) given Matrix</summary>
+        /// <remarks>
+        /// This version doesn't calculate the inverse matrix.
+        /// Use this version if you already have the inverse of the desired transform to hand
+        /// </remarks>
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="invMat">The inverse of the desired transformation</param>
+        /// <returns>The transformed normal</returns>
+        public static Vector3d TransformNormalInverse(Vector3d norm, Matrix4d invMat)
+        {
+            return new Vector3d(
+                Vector3d.Dot(norm, new Vector3d(invMat.Row0)),
+                Vector3d.Dot(norm, new Vector3d(invMat.Row1)),
+                Vector3d.Dot(norm, new Vector3d(invMat.Row2)));
+        }
+
+        /// <summary>Transform a Normal by the (transpose of the) given Matrix</summary>
+        /// <remarks>
+        /// This version doesn't calculate the inverse matrix.
+        /// Use this version if you already have the inverse of the desired transform to hand
+        /// </remarks>
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="invMat">The inverse of the desired transformation</param>
+        /// <param name="result">The transformed normal</param>
+        public static void TransformNormalInverse(ref Vector3d norm, ref Matrix4d invMat, out Vector3d result)
+        {
+            result.X = norm.X * invMat.Row0.X +
+                       norm.Y * invMat.Row0.Y +
+                       norm.Z * invMat.Row0.Z;
+
+            result.Y = norm.X * invMat.Row1.X +
+                       norm.Y * invMat.Row1.Y +
+                       norm.Z * invMat.Row1.Z;
+
+            result.Z = norm.X * invMat.Row2.X +
+                       norm.Y * invMat.Row2.Y +
+                       norm.Z * invMat.Row2.Z;
+        }
+
+        /// <summary>Transform a Position by the given Matrix</summary>
+        /// <param name="pos">The position to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed position</returns>
+        public static Vector3d TransformPosition(Vector3d pos, Matrix4d mat)
+        {
+            return new Vector3d(
+                Vector3d.Dot(pos, new Vector3d(mat.Column0)) + mat.Row3.X,
+                Vector3d.Dot(pos, new Vector3d(mat.Column1)) + mat.Row3.Y,
+                Vector3d.Dot(pos, new Vector3d(mat.Column2)) + mat.Row3.Z);
+        }
+
+        /// <summary>Transform a Position by the given Matrix</summary>
+        /// <param name="pos">The position to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed position</param>
+        public static void TransformPosition(ref Vector3d pos, ref Matrix4d mat, out Vector3d result)
+        {
+            result.X = pos.X * mat.Row0.X +
+                       pos.Y * mat.Row1.X +
+                       pos.Z * mat.Row2.X +
+                       mat.Row3.X;
+
+            result.Y = pos.X * mat.Row0.Y +
+                       pos.Y * mat.Row1.Y +
+                       pos.Z * mat.Row2.Y +
+                       mat.Row3.Y;
+
+            result.Z = pos.X * mat.Row0.Z +
+                       pos.Y * mat.Row1.Z +
+                       pos.Z * mat.Row2.Z +
+                       mat.Row3.Z;
+        }
+
         /// <summary>Transform a Vector by the given Matrix</summary>
         /// <param name="vec">The vector to transform</param>
         /// <param name="mat">The desired transformation</param>
         /// <returns>The transformed vector</returns>
-        public static Vector4d Transform(Vector4d vec, Matrix4d mat)
+        public static Vector3d Transform(Vector3d vec, Matrix4d mat)
         {
-            Vector4d result;
+            Vector3d result;
             Transform(ref vec, ref mat, out result);
             return result;
         }
@@ -953,13 +1098,11 @@ namespace OrkEngine.Rendering
         /// <param name="vec">The vector to transform</param>
         /// <param name="mat">The desired transformation</param>
         /// <param name="result">The transformed vector</param>
-        public static void Transform(ref Vector4d vec, ref Matrix4d mat, out Vector4d result)
+        public static void Transform(ref Vector3d vec, ref Matrix4d mat, out Vector3d result)
         {
-            result = new Vector4d(
-                vec.X * mat.Row0.X + vec.Y * mat.Row1.X + vec.Z * mat.Row2.X + vec.W * mat.Row3.X,
-                vec.X * mat.Row0.Y + vec.Y * mat.Row1.Y + vec.Z * mat.Row2.Y + vec.W * mat.Row3.Y,
-                vec.X * mat.Row0.Z + vec.Y * mat.Row1.Z + vec.Z * mat.Row2.Z + vec.W * mat.Row3.Z,
-                vec.X * mat.Row0.W + vec.Y * mat.Row1.W + vec.Z * mat.Row2.W + vec.W * mat.Row3.W);
+            Vector4d v4 = new Vector4d(vec.X, vec.Y, vec.Z, 1.0);
+            Vector4d.Transform(ref v4, ref mat, out v4);
+            result = v4.Xyz;
         }
 
         /// <summary>
@@ -968,9 +1111,9 @@ namespace OrkEngine.Rendering
         /// <param name="vec">The vector to transform.</param>
         /// <param name="quat">The quaternion to rotate the vector by.</param>
         /// <returns>The result of the operation.</returns>
-        public static Vector4d Transform(Vector4d vec, Quaterniond quat)
+        public static Vector3d Transform(Vector3d vec, Quaterniond quat)
         {
-            Vector4d result;
+            Vector3d result;
             Transform(ref vec, ref quat, out result);
             return result;
         }
@@ -981,14 +1124,71 @@ namespace OrkEngine.Rendering
         /// <param name="vec">The vector to transform.</param>
         /// <param name="quat">The quaternion to rotate the vector by.</param>
         /// <param name="result">The result of the operation.</param>
-        public static void Transform(ref Vector4d vec, ref Quaterniond quat, out Vector4d result)
+        public static void Transform(ref Vector3d vec, ref Quaterniond quat, out Vector3d result)
         {
-            Quaterniond v = new Quaterniond(vec.X, vec.Y, vec.Z, vec.W), i, t;
-            Quaterniond.Invert(ref quat, out i);
-            Quaterniond.Multiply(ref quat, ref v, out t);
-            Quaterniond.Multiply(ref t, ref i, out v);
+            // Since vec.W == 0, we can optimize quat * vec * quat^-1 as follows:
+            // vec + 2.0 * cross(quat.xyz, cross(quat.xyz, vec) + quat.w * vec)
+            Vector3d xyz = quat.Xyz, temp, temp2;
+            Vector3d.Cross(ref xyz, ref vec, out temp);
+            Vector3d.Multiply(ref vec, quat.W, out temp2);
+            Vector3d.Add(ref temp, ref temp2, out temp);
+            Vector3d.Cross(ref xyz, ref temp, out temp);
+            Vector3d.Multiply(ref temp, 2, out temp);
+            Vector3d.Add(ref vec, ref temp, out result);
+        }
 
-            result = new Vector4d(v.X, v.Y, v.Z, v.W);
+        /// <summary>
+        /// Transform a Vector3d by the given Matrix, and project the resulting Vector4 back to a Vector3
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3d TransformPerspective(Vector3d vec, Matrix4d mat)
+        {
+            Vector3d result;
+            TransformPerspective(ref vec, ref mat, out result);
+            return result;
+        }
+
+        /// <summary>Transform a Vector3d by the given Matrix, and project the resulting Vector4d back to a Vector3d</summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed vector</param>
+        public static void TransformPerspective(ref Vector3d vec, ref Matrix4d mat, out Vector3d result)
+        {
+            Vector4d v = new Vector4d(vec, 1);
+            Vector4d.Transform(ref v, ref mat, out v);
+            result.X = v.X / v.W;
+            result.Y = v.Y / v.W;
+            result.Z = v.Z / v.W;
+        }
+
+        #endregion
+
+        #region CalculateAngle
+
+        /// <summary>
+        /// Calculates the angle (in radians) between two vectors.
+        /// </summary>
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <returns>Angle (in radians) between the vectors.</returns>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static double CalculateAngle(Vector3d first, Vector3d second)
+        {
+            return System.Math.Acos((Vector3d.Dot(first, second)) / (first.Length * second.Length));
+        }
+
+        /// <summary>Calculates the angle (in radians) between two vectors.</summary>
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <param name="result">Angle (in radians) between the vectors.</param>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static void CalculateAngle(ref Vector3d first, ref Vector3d second, out double result)
+        {
+            double temp;
+            Vector3d.Dot(ref first, ref second, out temp);
+            result = System.Math.Acos(temp / (first.Length * second.Length));
         }
 
         #endregion
@@ -1003,12 +1203,6 @@ namespace OrkEngine.Rendering
         [XmlIgnore]
         public Vector2d Xy { get { return new Vector2d(X, Y); } set { X = value.X; Y = value.Y; } }
 
-        /// <summary>
-        /// Gets or sets an OrkEngine.Rendering.Vector3d with the X, Y and Z components of this instance.
-        /// </summary>
-        [XmlIgnore]
-        public Vector3d Xyz { get { return new Vector3d(X, Y, Z); } set { X = value.X; Y = value.Y; Z = value.Z; } }
-
         #endregion
 
         #region Operators
@@ -1019,12 +1213,11 @@ namespace OrkEngine.Rendering
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator +(Vector4d left, Vector4d right)
+        public static Vector3d operator +(Vector3d left, Vector3d right)
         {
             left.X += right.X;
             left.Y += right.Y;
             left.Z += right.Z;
-            left.W += right.W;
             return left;
         }
 
@@ -1034,12 +1227,11 @@ namespace OrkEngine.Rendering
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator -(Vector4d left, Vector4d right)
+        public static Vector3d operator -(Vector3d left, Vector3d right)
         {
             left.X -= right.X;
             left.Y -= right.Y;
             left.Z -= right.Z;
-            left.W -= right.W;
             return left;
         }
 
@@ -1048,12 +1240,11 @@ namespace OrkEngine.Rendering
         /// </summary>
         /// <param name="vec">The instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator -(Vector4d vec)
+        public static Vector3d operator -(Vector3d vec)
         {
             vec.X = -vec.X;
             vec.Y = -vec.Y;
             vec.Z = -vec.Z;
-            vec.W = -vec.W;
             return vec;
         }
 
@@ -1063,12 +1254,11 @@ namespace OrkEngine.Rendering
         /// <param name="vec">The instance.</param>
         /// <param name="scale">The scalar.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator *(Vector4d vec, double scale)
+        public static Vector3d operator *(Vector3d vec, double scale)
         {
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
-            vec.W *= scale;
             return vec;
         }
 
@@ -1078,12 +1268,11 @@ namespace OrkEngine.Rendering
         /// <param name="scale">The scalar.</param>
         /// <param name="vec">The instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator *(double scale, Vector4d vec)
+        public static Vector3d operator *(double scale, Vector3d vec)
         {
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
-            vec.W *= scale;
             return vec;
         }
 
@@ -1093,13 +1282,12 @@ namespace OrkEngine.Rendering
         /// <param name="vec">The instance.</param>
         /// <param name="scale">The scalar.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator /(Vector4d vec, double scale)
+        public static Vector3d operator /(Vector3d vec, double scale)
         {
             double mult = 1 / scale;
             vec.X *= mult;
             vec.Y *= mult;
             vec.Z *= mult;
-            vec.W *= mult;
             return vec;
         }
 
@@ -1109,7 +1297,7 @@ namespace OrkEngine.Rendering
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>True, if left equals right; false otherwise.</returns>
-        public static bool operator ==(Vector4d left, Vector4d right)
+        public static bool operator ==(Vector3d left, Vector3d right)
         {
             return left.Equals(right);
         }
@@ -1120,49 +1308,25 @@ namespace OrkEngine.Rendering
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>True, if left does not equa lright; false otherwise.</returns>
-        public static bool operator !=(Vector4d left, Vector4d right)
+        public static bool operator !=(Vector3d left, Vector3d right)
         {
             return !left.Equals(right);
         }
 
-        /// <summary>
-        /// Returns a pointer to the first element of the specified instance.
-        /// </summary>
-        /// <param name="v">The instance.</param>
-        /// <returns>A pointer to the first element of v.</returns>
-        [CLSCompliant(false)]
-        unsafe public static explicit operator double*(Vector4d v)
+        /// <summary>Converts OrkEngine.Rendering.Vector3 to OrkEngine.Rendering.Vector3d.</summary>
+        /// <param name="v3">The Vector3 to convert.</param>
+        /// <returns>The resulting Vector3d.</returns>
+        public static explicit operator Vector3d(Vector3 v3)
         {
-            return &v.X;
+            return new Vector3d(v3.X, v3.Y, v3.Z);
         }
 
-        /// <summary>
-        /// Returns a pointer to the first element of the specified instance.
-        /// </summary>
-        /// <param name="v">The instance.</param>
-        /// <returns>A pointer to the first element of v.</returns>
-        public static explicit operator IntPtr(Vector4d v)
+        /// <summary>Converts OrkEngine.Rendering.Vector3d to OrkEngine.Rendering.Vector3.</summary>
+        /// <param name="v3d">The Vector3d to convert.</param>
+        /// <returns>The resulting Vector3.</returns>
+        public static explicit operator Vector3(Vector3d v3d)
         {
-            unsafe
-            {
-                return (IntPtr)(&v.X);
-            }
-        }
-
-        /// <summary>Converts OrkEngine.Rendering.Vector4 to OrkEngine.Rendering.Vector4d.</summary>
-        /// <param name="v4">The Vector4 to convert.</param>
-        /// <returns>The resulting Vector4d.</returns>
-        public static explicit operator Vector4d(Vector4 v4)
-        {
-            return new Vector4d(v4.X, v4.Y, v4.Z, v4.W);
-        }
-
-        /// <summary>Converts OrkEngine.Rendering.Vector4d to OrkEngine.Rendering.Vector4.</summary>
-        /// <param name="v4d">The Vector4d to convert.</param>
-        /// <returns>The resulting Vector4.</returns>
-        public static explicit operator Vector4(Vector4d v4d)
-        {
-            return new Vector4((float)v4d.X, (float)v4d.Y, (float)v4d.Z, (float)v4d.W);
+            return new Vector3((float)v3d.X, (float)v3d.Y, (float)v3d.Z);
         }
 
         #endregion
@@ -1172,12 +1336,12 @@ namespace OrkEngine.Rendering
         #region public override string ToString()
 
         /// <summary>
-        /// Returns a System.String that represents the current Vector4d.
+        /// Returns a System.String that represents the current Vector3.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("({0}, {1}, {2}, {3})", X, Y, Z, W);
+            return String.Format("({0}, {1}, {2})", X, Y, Z);
         }
 
         #endregion
@@ -1190,7 +1354,7 @@ namespace OrkEngine.Rendering
         /// <returns>A System.Int32 containing the unique hashcode for this instance.</returns>
         public override int GetHashCode()
         {
-            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode() ^ W.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
         }
 
         #endregion
@@ -1204,10 +1368,10 @@ namespace OrkEngine.Rendering
         /// <returns>True if the instances are equal; false otherwise.</returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is Vector4d))
+            if (!(obj is Vector3d))
                 return false;
 
-            return this.Equals((Vector4d)obj);
+            return this.Equals((Vector3d)obj);
         }
 
         #endregion
@@ -1216,18 +1380,17 @@ namespace OrkEngine.Rendering
 
         #endregion
 
-        #region IEquatable<Vector4d> Members
+        #region IEquatable<Vector3> Members
 
         /// <summary>Indicates whether the current vector is equal to another vector.</summary>
         /// <param name="other">A vector to compare with this vector.</param>
         /// <returns>true if the current vector is equal to the vector parameter; otherwise, false.</returns>
-        public bool Equals(Vector4d other)
+        public bool Equals(Vector3d other)
         {
             return
                 X == other.X &&
                 Y == other.Y &&
-                Z == other.Z &&
-                W == other.W;
+                Z == other.Z;
         }
 
         #endregion

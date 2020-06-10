@@ -61,7 +61,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrkEngine.Rendering
+namespace OrkCore.Mathematics
 {
     /// <summary>
     /// Represents a cubic bezier curve with two anchor and two control points.

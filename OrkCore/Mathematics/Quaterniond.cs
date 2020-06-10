@@ -26,11 +26,12 @@ using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using OrkCore.Mathematics;
 
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkEngine.Rendering
+namespace OrkCore.Mathematics
 {
     /// <summary>
     /// Represents a double-precision Quaternion.

@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkEngine.Rendering
+namespace OrkCore.Mathematics
 {
 
     /// <summary>2-component Vector of the Half type. Occupies 4 Byte total.</summary>

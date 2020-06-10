@@ -25,7 +25,7 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 
-namespace OrkEngine.Rendering
+namespace OrkCore.Mathematics
 {
     /// <summary>
     /// Represents a 4x4 Matrix
