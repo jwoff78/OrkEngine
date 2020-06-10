@@ -22,7 +22,15 @@ namespace OrkEngine.Interface
             winHeight = h;
             Title = title;
 
+            Console.WriteLine("Hello, Mother Fucker");
+
             SDL.SDL_Init(SDL.SDL_INIT_VIDEO);
+
+            var window = SDL.SDL_CreateWindow(Title, SDL.SDL_WINDOWPOS_CENTERED, SDL.SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL.SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
+
+            SDL.SDL_Delay(5000);
+            SDL.SDL_DestroyWindow(window);
+
             SDL.SDL_Quit();
         }
     }

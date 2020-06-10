@@ -21,7 +21,8 @@ namespace Tests
         int[] counter = {0, 10};
         public static void Main(string[] args)
         {
-            new Program();
+            //Console.WriteLine("Hello, world");
+            //new Program();
         }
         public Program()
         {
