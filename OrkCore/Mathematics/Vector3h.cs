@@ -31,7 +31,7 @@ using System.Xml.Serialization;
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// 3-component Vector of the Half type. Occupies 6 Byte total.

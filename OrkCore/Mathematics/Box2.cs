@@ -61,8 +61,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
-
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Defines a 2d box (rectangle).

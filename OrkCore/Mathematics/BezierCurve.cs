@@ -59,9 +59,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml.Serialization;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a bezier curve with as many points as you want.
@@ -235,8 +234,6 @@ namespace OrkCore.Mathematics
         {
             return BezierCurve.CalculatePoint(points, t, 0.0f);
         }
-
-  
 
         /// <summary>
         /// Calculates the point on the given bezier curve with the specified t parameter.

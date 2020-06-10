@@ -22,11 +22,10 @@ SOFTWARE.
  */
 #endregion
 
-using OrkEngine.Rendering;
 using System;
 using System.Runtime.InteropServices;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a 4x4 Matrix with double-precision components.

@@ -12,12 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Contains mathematical functions for the OrkEngine.Rendering.Math toolkit.
     /// </summary>
-    [Obsolete("Use OrkCore.Mathematics.MathHelper instead.")]
+    [Obsolete("Use OrkEngine.Rendering.MathHelper instead.")]
     public static class Functions
     {
         #region NextPowerOfTwo

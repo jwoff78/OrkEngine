@@ -1,37 +1,26 @@
-﻿/*
-* Copyright (c) 2007-2010 SlimDX Group
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
+﻿#region --- License ---
+/* Licensed under the MIT/X11 license.
+ * Copyright (c) 2006-2008 the OrkEngine.Rendering Team.
+ * This notice may not be removed from any source distribution.
+ * See license.txt for licensing detailed licensing details.
+ * 
+ * Contributions by Andy Gill, James Talton and Georg Wächter.
+ */
+#endregion
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
-    /// Contains mathmeatical methods and constants that extend the System.Math class.
+    /// Contains common mathematical functions and constants.
     /// </summary>
     public static class MathHelper
     {
+        #region Fields
+
         /// <summary>
         /// Defines the value of Pi as a <see cref="System.Single"/>.
         /// </summary>
@@ -82,6 +71,11 @@ namespace OrkCore.Mathematics
         /// </summary>
         public const float Log2E = 1.442695041f;
 
+        #endregion
+
+        #region Public Members
+
+        #region NextPowerOfTwo
 
         /// <summary>
         /// Returns the next power of two that is larger than the specified number.
@@ -127,6 +121,10 @@ namespace OrkCore.Mathematics
             return System.Math.Pow(2, System.Math.Ceiling(System.Math.Log((double)n, 2)));
         }
 
+        #endregion
+
+        #region Factorial
+
         /// <summary>Calculates the factorial of a given natural number.
         /// </summary>
         /// <param name="n">The number.</param>
@@ -141,6 +139,10 @@ namespace OrkCore.Mathematics
             return result;
         }
 
+        #endregion
+
+        #region BinomialCoefficient
+
         /// <summary>
         /// Calculates the binomial coefficient <paramref name="n"/> above <paramref name="k"/>.
         /// </summary>
@@ -152,25 +154,9 @@ namespace OrkCore.Mathematics
             return Factorial(n) / (Factorial(k) * Factorial(n - k));
         }
 
-        /// <summary>
-        /// Converts degrees to radians.
-        /// </summary>
-        /// <param name="degree">The value to convert.</param>
-        /// <returns>The converted value.</returns>
-        public static float DegreesToRadians(float degree)
-        {
-            return degree * (Pi / 180.0f);
-        }
+        #endregion
 
-        /// <summary>
-        /// Converts radians to degrees.
-        /// </summary>
-        /// <param name="radian">The value to convert.</param>
-        /// <returns>The converted value.</returns>
-        public static float RadiansToDegrees(float radian)
-        {
-            return radian * (180.0f / Pi);
-        }
+        #region InverseSqrtFast
 
         /// <summary>
         /// Returns an approximation of the inverse square root of left number.
@@ -195,7 +181,6 @@ namespace OrkCore.Mathematics
                 return x;
             }
         }
-
 
         /// <summary>
         /// Returns an approximation of the inverse square root of left number.
@@ -225,6 +210,58 @@ namespace OrkCore.Mathematics
 #endif
         }
 
+        #endregion
+
+        #region DegreesToRadians
+
+        /// <summary>
+        /// Convert degrees to radians
+        /// </summary>
+        /// <param name="degrees">An angle in degrees</param>
+        /// <returns>The angle expressed in radians</returns>
+        public static float DegreesToRadians(float degrees)
+        {
+            const float degToRad = (float)System.Math.PI / 180.0f;
+            return degrees * degToRad;
+        }
+
+        /// <summary>
+        /// Convert radians to degrees
+        /// </summary>
+        /// <param name="radians">An angle in radians</param>
+        /// <returns>The angle expressed in degrees</returns>
+        public static float RadiansToDegrees(float radians)
+        {
+            const float radToDeg = 180.0f / (float)System.Math.PI;
+            return radians * radToDeg;
+        }
+
+        /// <summary>
+        /// Convert degrees to radians
+        /// </summary>
+        /// <param name="degrees">An angle in degrees</param>
+        /// <returns>The angle expressed in radians</returns>
+        public static double DegreesToRadians(double degrees)
+        {
+            const double degToRad = System.Math.PI / 180.0;
+            return degrees * degToRad;
+        }
+
+        /// <summary>
+        /// Convert radians to degrees
+        /// </summary>
+        /// <param name="radians">An angle in radians</param>
+        /// <returns>The angle expressed in degrees</returns>
+        public static double RadiansToDegrees(double radians)
+        {
+            const double radToDeg = 180.0 / System.Math.PI;
+            return radians * radToDeg;
+        }
+
+        #endregion
+
+        #region Swap
+
         /// <summary>
         /// Swaps two double values.
         /// </summary>
@@ -248,5 +285,9 @@ namespace OrkCore.Mathematics
             a = b;
             b = temp;
         }
+
+        #endregion
+
+        #endregion
     }
 }

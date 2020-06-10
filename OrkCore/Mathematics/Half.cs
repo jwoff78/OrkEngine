@@ -61,7 +61,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
 
     /// <summary>
@@ -80,7 +80,7 @@ namespace OrkCore.Mathematics
     {
         #region Internal Field
 
-        Int16 bits;
+        UInt16 bits;
 
         #endregion Internal Field
 
@@ -154,7 +154,7 @@ namespace OrkCore.Mathematics
         #region Single -> Half
 
         /// <summary>Ported from OpenEXR's IlmBase 1.0.1</summary>
-        private Int16 SingleToHalf(Int32 si32)
+        private UInt16 SingleToHalf(Int32 si32)
         {
             // Our floating point number, F, is represented by the bit pattern in integer i.
             // Disassemble that bit pattern into the sign, S, the exponent, E, and the significand, M.
@@ -176,7 +176,7 @@ namespace OrkCore.Mathematics
                     //
                     // We convert F to a half zero with the same sign as F.
 
-                    return (Int16)sign;
+                    return (UInt16)sign;
                 }
 
                 // E is between -10 and 0. F is a normalized float whose magnitude is less than Half.MinNormalizedValue.
@@ -200,7 +200,7 @@ namespace OrkCore.Mathematics
 
                 // Assemble the half from S, E (==zero) and M.
 
-                return (Int16)(sign | mantissa);
+                return (UInt16)(sign | mantissa);
             }
             else if (exponent == 0xff - (127 - 15))
             {
@@ -208,7 +208,7 @@ namespace OrkCore.Mathematics
                 {
                     // F is an infinity; convert F to a half infinity with the same sign as F.
 
-                    return (Int16)(sign | 0x7c00);
+                    return (UInt16)(sign | 0x7c00);
                 }
                 else
                 {
@@ -217,7 +217,7 @@ namespace OrkCore.Mathematics
                     // into an infinity, so we have to set at least one bit in the significand.
 
                     mantissa >>= 13;
-                    return (Int16)(sign | 0x7c00 | mantissa | ((mantissa == 0) ? 1 : 0));
+                    return (UInt16)(sign | 0x7c00 | mantissa | ((mantissa == 0) ? 1 : 0));
                 }
             }
             else
@@ -239,7 +239,7 @@ namespace OrkCore.Mathematics
 
                 // Assemble the half from S, E and M.
 
-                return (Int16)(sign | (exponent << 10) | (mantissa >> 13));
+                return (UInt16)(sign | (exponent << 10) | (mantissa >> 13));
             }
         }
 
@@ -260,7 +260,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>Ported from OpenEXR's IlmBase 1.0.1</summary>
-        private Int32 HalfToFloat(Int16 ui16)
+        private Int32 HalfToFloat(UInt16 ui16)
         {
 
             Int32 sign = (ui16 >> 15) & 0x00000001;
@@ -403,7 +403,7 @@ namespace OrkCore.Mathematics
         /// <param name="context"></param>
         public Half(SerializationInfo info, StreamingContext context)
         {
-            this.bits = (short)(ushort)info.GetValue("bits", typeof(ushort));
+            this.bits = (ushort)info.GetValue("bits", typeof(ushort));
         }
 
         /// <summary>Used by ISerialize to serialize the object.</summary>
@@ -422,7 +422,7 @@ namespace OrkCore.Mathematics
         /// <param name="bin">A BinaryReader instance associated with an open Stream.</param>
         public void FromBinaryStream(BinaryReader bin)
         {
-            this.bits = bin.ReadInt16();
+            this.bits = bin.ReadUInt16();
 
         }
 
@@ -579,7 +579,7 @@ namespace OrkCore.Mathematics
         public static Half FromBytes(byte[] value, int startIndex)
         {
             Half h;
-            h.bits = BitConverter.ToInt16(value, startIndex);
+            h.bits = BitConverter.ToUInt16(value, startIndex);
             return h;
         }
 

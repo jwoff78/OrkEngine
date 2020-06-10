@@ -61,12 +61,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrkCore.Mathematics
-{ 
+namespace OrkEngine.Mathematics
+{
     /// <summary>
     /// Represents a quadric bezier curve with two anchor and one control point.
     /// </summary>
-[Serializable]
+    [Serializable]
     public struct BezierCurveQuadric
     {
         #region Fields

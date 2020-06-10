@@ -22,7 +22,6 @@ SOFTWARE.
 */
 #endregion
 
-using OrkEngine.Rendering;
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
@@ -30,7 +29,7 @@ using System.Xml.Serialization;
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a 3D vector using three double-precision floating-point numbers.

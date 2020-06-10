@@ -25,7 +25,7 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     // Todo: Remove this warning when the code goes public.
     #pragma warning disable 3019

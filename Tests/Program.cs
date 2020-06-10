@@ -26,7 +26,7 @@ namespace Tests
         }
         public Program()
         {
-            gameWindow.CreateWindow(Start, Update);
+            
         }
         public object Start()
         {

@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 // flibit Added This!!!
 #pragma warning disable 3021
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>Represents a 2D vector using two double-precision floating-point numbers.</summary>
     [Serializable]

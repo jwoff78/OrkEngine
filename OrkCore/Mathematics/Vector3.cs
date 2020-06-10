@@ -1,90 +1,71 @@
-﻿/*
-* Copyright (c) 2007-2010 SlimDX Group
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
+#region --- License ---
+/*
+Copyright (c) 2006 - 2008 The Open Toolkit library.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+#endregion
 
 using System;
-using System.Globalization;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace OrkCore.Mathematics
+// flibit Added This!!!
+#pragma warning disable 3021
+
+namespace OrkEngine.Mathematics
 {
     /// <summary>
-    /// Represents a three dimensional mathematical vector.
+    /// Represents a 3D vector using three single-precision floating-point numbers.
     /// </summary>
+    /// <remarks>
+    /// The Vector3 structure is suitable for interoperation with unmanaged code requiring three consecutive floats.
+    /// </remarks>
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    [TypeConverter(typeof(global::OrkCore.Mathematics.Util.Vector3Converter))]
-    public struct Vector3 : IEquatable<Vector3>, IFormattable
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vector3 : IEquatable<Vector3>
     {
-        /// <summary>
-        /// The size of the <see cref="global::OrkCore.Vector3"/> type, in bytes.
-        /// </summary>
-        public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Vector3));
+        #region Fields
 
         /// <summary>
-        /// A <see cref="global::OrkCore.Vector3"/> with all of its components set to zero.
-        /// </summary>
-        public static readonly Vector3 Zero = new Vector3();
-
-        /// <summary>
-        /// The X unit <see cref="global::OrkCore.Vector3"/> (1, 0, 0).
-        /// </summary>
-        public static readonly Vector3 UnitX = new Vector3(1.0f, 0.0f, 0.0f);
-
-        /// <summary>
-        /// The Y unit <see cref="global::OrkCore.Vector3"/> (0, 1, 0).
-        /// </summary>
-        public static readonly Vector3 UnitY = new Vector3(0.0f, 1.0f, 0.0f);
-
-        /// <summary>
-        /// The Z unit <see cref="global::OrkCore.Vector3"/> (0, 0, 1).
-        /// </summary>
-        public static readonly Vector3 UnitZ = new Vector3(0.0f, 0.0f, 1.0f);
-
-        /// <summary>
-        /// A <see cref="global::OrkCore.Vector3"/> with all of its components set to one.
-        /// </summary>
-        public static readonly Vector3 One = new Vector3(1.0f, 1.0f, 1.0f);
-
-        /// <summary>
-        /// The X component of the vector.
+        /// The X component of the Vector3.
         /// </summary>
         public float X;
 
         /// <summary>
-        /// The Y component of the vector.
+        /// The Y component of the Vector3.
         /// </summary>
         public float Y;
 
         /// <summary>
-        /// The Z component of the vector.
+        /// The Z component of the Vector3.
         /// </summary>
         public float Z;
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector3"/> struct.
+        /// Constructs a new instance.
         /// </summary>
-        /// <param name="value">The value that will be assigned to all components.</param>
+        /// <param name="value">The value that will initialize this instance.</param>
         public Vector3(float value)
         {
             X = value;
@@ -93,11 +74,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector3"/> struct.
+        /// Constructs a new Vector3.
         /// </summary>
-        /// <param name="x">Initial value for the X component of the vector.</param>
-        /// <param name="y">Initial value for the Y component of the vector.</param>
-        /// <param name="z">Initial value for the Z component of the vector.</param>
+        /// <param name="x">The x component of the Vector3.</param>
+        /// <param name="y">The y component of the Vector3.</param>
+        /// <param name="z">The z component of the Vector3.</param>
         public Vector3(float x, float y, float z)
         {
             X = x;
@@ -106,628 +87,547 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector3"/> struct.
+        /// Constructs a new Vector3 from the given Vector2.
         /// </summary>
-        /// <param name="value">A vector containing the values with which to initialize the X and Y components.</param>
-        /// <param name="z">Initial value for the Z component of the vector.</param>
-        public Vector3(Vector2 value, float z)
+        /// <param name="v">The Vector2 to copy components from.</param>
+        public Vector3(Vector2 v)
         {
-            X = value.X;
-            Y = value.Y;
-            Z = z;
+            X = v.X;
+            Y = v.Y;
+            Z = 0.0f;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector3"/> struct.
+        /// Constructs a new Vector3 from the given Vector3.
         /// </summary>
-        /// <param name="values">The values to assign to the X, Y, and Z components of the vector. This must be an array with three elements.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="values"/> contains more or less than three elements.</exception>
-        public Vector3(float[] values)
+        /// <param name="v">The Vector3 to copy components from.</param>
+        public Vector3(Vector3 v)
         {
-            if (values == null)
-                throw new ArgumentNullException("values");
-            if (values.Length != 3)
-                throw new ArgumentOutOfRangeException("values", "There must be three and only three input values for Vector3.");
-
-            X = values[0];
-            Y = values[1];
-            Z = values[2];
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
         }
 
         /// <summary>
-        ///  Moves a point current in a straight line towards a target point.
+        /// Constructs a new Vector3 from the given Vector4.
         /// </summary>
-        /// <param name="current">The current point that your at</param>
-        /// <param name="target">The target point your moving towards</param>
-        /// <param name="maxDistance">The max distance to move</param>
-        /// <returns>returns the translation of moving towards your point</returns>
-        public Vector3 GoTowards(Vector3 current, Vector3 target, float maxDistance)
+        /// <param name="v">The Vector4 to copy components from.</param>
+        public Vector3(Vector4 v)
         {
-            float TowardsVector_X = target.X - current.X;
-            float TowardsVector_Y = target.Y - current.Y;
-            float TowardsVector_Z = target.Z - current.Z;
-
-            float SqDistance = TowardsVector_X * TowardsVector_X + TowardsVector_Y * TowardsVector_Y + TowardsVector_Z * TowardsVector_Z;
-
-            if (SqDistance == 0 || (maxDistance >= 0 && SqDistance <= maxDistance * maxDistance))
-                return target;
-            float distance = (float)Math.Sqrt(SqDistance);
-
-            return new Vector3(
-                current.X + TowardsVector_X / distance * maxDistance,
-                current.Y + TowardsVector_Y / distance * maxDistance,
-                current.Z + TowardsVector_Z / distance * maxDistance);
-        }
-
-        /// <summary>
-        /// Gets a value indicting whether this instance is normalized.
-        /// </summary>
-        public bool IsNormalized
-        {
-            get { return Math.Abs((X * X) + (Y * Y) + (Z * Z) - 1f) < Utilities.ZeroTolerance; }
-        }
-
-
-        #region Normalize
-
-        /// <summary>
-        /// Scale a vector to unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <returns>The normalized vector</returns>
-        public static Vector3 Normalize(Vector3 vec)
-        {
-            float scale = 1.0f / vec.Length;
-            vec.X *= scale;
-            vec.Y *= scale;
-            vec.Z *= scale;
-            return vec;
-        }
-
-        /// <summary>
-        /// Scale a vector to unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <param name="result">The normalized vector</param>
-        public static void Normalize(ref Vector3 vec, out Vector3 result)
-        {
-            float scale = 1.0f / vec.Length;
-            result.X = vec.X * scale;
-            result.Y = vec.Y * scale;
-            result.Z = vec.Z * scale;
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
         }
 
         #endregion
 
-        #region NormalizeFast
+        #region Public Members
 
-        /// <summary>
-        /// Scale a vector to approximately unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <returns>The normalized vector</returns>
-        public static Vector3 NormalizeFast(Vector3 vec)
+        #region Instance
+
+        #region public void Add()
+
+        /// <summary>Add the Vector passed as parameter to this instance.</summary>
+        /// <param name="right">Right operand. This parameter is only read from.</param>
+        [Obsolete("Use static Add() method instead.")]
+        public void Add(Vector3 right)
         {
-            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-            vec.X *= scale;
-            vec.Y *= scale;
-            vec.Z *= scale;
-            return vec;
+            this.X += right.X;
+            this.Y += right.Y;
+            this.Z += right.Z;
         }
 
-        /// <summary>
-        /// Scale a vector to approximately unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <param name="result">The normalized vector</param>
-        public static void NormalizeFast(ref Vector3 vec, out Vector3 result)
+        /// <summary>Add the Vector passed as parameter to this instance.</summary>
+        /// <param name="right">Right operand. This parameter is only read from.</param>
+        [CLSCompliant(false)]
+        [Obsolete("Use static Add() method instead.")]
+        public void Add(ref Vector3 right)
         {
-            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-            result.X = vec.X * scale;
-            result.Y = vec.Y * scale;
-            result.Z = vec.Z * scale;
+            this.X += right.X;
+            this.Y += right.Y;
+            this.Z += right.Z;
         }
 
-        #endregion
+        #endregion public void Add()
+
+        #region public void Sub()
+
+        /// <summary>Subtract the Vector passed as parameter from this instance.</summary>
+        /// <param name="right">Right operand. This parameter is only read from.</param>
+        [Obsolete("Use static Subtract() method instead.")]
+        public void Sub(Vector3 right)
+        {
+            this.X -= right.X;
+            this.Y -= right.Y;
+            this.Z -= right.Z;
+        }
+
+        /// <summary>Subtract the Vector passed as parameter from this instance.</summary>
+        /// <param name="right">Right operand. This parameter is only read from.</param>
+        [CLSCompliant(false)]
+        [Obsolete("Use static Subtract() method instead.")]
+        public void Sub(ref Vector3 right)
+        {
+            this.X -= right.X;
+            this.Y -= right.Y;
+            this.Z -= right.Z;
+        }
+
+        #endregion public void Sub()
+
+        #region public void Mult()
+
+        /// <summary>Multiply this instance by a scalar.</summary>
+        /// <param name="f">Scalar operand.</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Mult(float f)
+        {
+            this.X *= f;
+            this.Y *= f;
+            this.Z *= f;
+        }
+
+        #endregion public void Mult()
+
+        #region public void Div()
+
+        /// <summary>Divide this instance by a scalar.</summary>
+        /// <param name="f">Scalar operand.</param>
+        [Obsolete("Use static Divide() method instead.")]
+        public void Div(float f)
+        {
+            float mult = 1.0f / f;
+            this.X *= mult;
+            this.Y *= mult;
+            this.Z *= mult;
+        }
+
+        #endregion public void Div()
+
+        #region public float Length
 
         /// <summary>
-        /// Calculates the length of the vector.
+        /// Gets the length (magnitude) of the vector.
         /// </summary>
-        /// <remarks>
-        /// <see cref="OrkCore.Vector3.LengthSquared"/> may be preferred when only the relative length is needed
-        /// and speed is of the essence.
-        /// </remarks>
+        /// <see cref="LengthFast"/>
+        /// <seealso cref="LengthSquared"/>
         public float Length
-        {
-            get { return (float)Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
-        }
-
-        #region CalculateAngle
-
-        /// <summary>
-        /// Calculates the angle (in radians) between two vectors.
-        /// </summary>
-        /// <param name="first">The first vector.</param>
-        /// <param name="second">The second vector.</param>
-        /// <returns>Angle (in radians) between the vectors.</returns>
-        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
-        public static float CalculateAngle(Vector3 first, Vector3 second)
-        {
-            return (float)System.Math.Acos((Vector3.Dot(first, second)) / (first.Length * second.Length));
-        }
-
-        /// <summary>Calculates the angle (in radians) between two vectors.</summary>
-        /// <param name="first">The first vector.</param>
-        /// <param name="second">The second vector.</param>
-        /// <param name="result">Angle (in radians) between the vectors.</param>
-        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
-        public static void CalculateAngle(ref Vector3 first, ref Vector3 second, out float result)
-        {
-            float temp;
-            Vector3.Dot(ref first, ref second, out temp);
-            result = (float)System.Math.Acos(temp / (first.Length * second.Length));
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Calculates the squared length of the vector.
-        /// </summary>
-        /// <remarks>
-        /// This property may be preferred to <see cref="OrkCore.Vector3.Length"/> when only a relative length is needed
-        /// and speed is of the essence.
-        /// </remarks>
-        public float LengthSquared
-        {
-            get { return (X * X) + (Y * Y) + (Z * Z); }
-        }
-
-        /// <summary>
-        /// Gets or sets the component at the specified index.
-        /// </summary>
-        /// <value>The value of the X, Y, or Z component, depending on the index.</value>
-        /// <param name="index">The index of the component to access. Use 0 for the X component, 1 for the Y component, and 2 for the Z component.</param>
-        /// <returns>The value of the component at the specified index.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when the <paramref name="index"/> is out of the range [0, 2].</exception>
-        public float this[int index]
         {
             get
             {
-                switch (index)
-                {
-                    case 0: return X;
-                    case 1: return Y;
-                    case 2: return Z;
-                }
-
-                throw new ArgumentOutOfRangeException("index", "Indices for Vector3 run from 0 to 2, inclusive.");
-            }
-
-            set
-            {
-                switch (index)
-                {
-                    case 0: X = value; break;
-                    case 1: Y = value; break;
-                    case 2: Z = value; break;
-                    default: throw new ArgumentOutOfRangeException("index", "Indices for Vector3 run from 0 to 2, inclusive.");
-                }
+                return (float)System.Math.Sqrt(X * X + Y * Y + Z * Z);
             }
         }
 
+        #endregion
+
+        #region public float LengthFast
+
         /// <summary>
-        /// Converts the vector into a unit vector.
+        /// Gets an approximation of the vector length (magnitude).
+        /// </summary>
+        /// <remarks>
+        /// This property uses an approximation of the square root function to calculate vector magnitude, with
+        /// an upper error bound of 0.001.
+        /// </remarks>
+        /// <see cref="Length"/>
+        /// <seealso cref="LengthSquared"/>
+        public float LengthFast
+        {
+            get
+            {
+                return 1.0f / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
+            }
+        }
+
+        #endregion
+
+        #region public float LengthSquared
+
+        /// <summary>
+        /// Gets the square of the vector length (magnitude).
+        /// </summary>
+        /// <remarks>
+        /// This property avoids the costly square root operation required by the Length property. This makes it more suitable
+        /// for comparisons.
+        /// </remarks>
+        /// <see cref="Length"/>
+        /// <seealso cref="LengthFast"/>
+        public float LengthSquared
+        {
+            get
+            {
+                return X * X + Y * Y + Z * Z;
+            }
+        }
+
+        #endregion
+
+        #region public void Normalize()
+
+        /// <summary>
+        /// Scales the Vector3 to unit length.
         /// </summary>
         public void Normalize()
         {
-            float length = Length;
-            if (length > Utilities.ZeroTolerance)
-            {
-                float inv = 1.0f / length;
-                X *= inv;
-                Y *= inv;
-                Z *= inv;
-            }
+            float scale = 1.0f / this.Length;
+            X *= scale;
+            Y *= scale;
+            Z *= scale;
         }
 
-        /// <summary>
-        /// Reverses the direction of a given vector.
-        /// </summary>
-        public void Negate()
-        {
-            X = -X;
-            Y = -Y;
-            Z = -Z;
-        }
-
-        /// <summary>
-        /// Takes the absolute value of each component.
-        /// </summary>
-        public void Abs()
-        {
-            this.X = Math.Abs(X);
-            this.Y = Math.Abs(Y);
-            this.Z = Math.Abs(Z);
-        }
-
-        /// <summary>
-        /// Creates an array containing the elements of the vector.
-        /// </summary>
-        /// <returns>A three-element array containing the components of the vector.</returns>
-        public float[] ToArray()
-        {
-            return new float[] { X, Y, Z };
-        }
-
-        #region Transcendentals
-        /// <summary>
-        /// Takes the square root of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the square root of.</param>
-        /// <param name="result">When the method completes, contains a vector that is the square root of the input vector.</param>
-        public static void Sqrt(ref Vector3 value, out Vector3 result)
-        {
-            result.X = (float)Math.Sqrt(value.X);
-            result.Y = (float)Math.Sqrt(value.Y);
-            result.Z = (float)Math.Sqrt(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the square root of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the square root of.</param>
-        /// <returns>A vector that is the square root of the input vector.</returns>
-        public static Vector3 Sqrt(Vector3 value)
-        {
-            Vector3 temp;
-            Sqrt(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes the reciprocal of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the reciprocal of.</param>
-        /// <param name="result">When the method completes, contains a vector that is the reciprocal of the input vector.</param>
-        public static void Reciprocal(ref Vector3 value, out Vector3 result)
-        {
-            result.X = 1.0f / value.X;
-            result.Y = 1.0f / value.Y;
-            result.Z = 1.0f / value.Z;
-        }
-
-        /// <summary>
-        /// Takes the reciprocal of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the reciprocal of.</param>
-        /// <returns>A vector that is the reciprocal of the input vector.</returns>
-        public static Vector3 Reciprocal(Vector3 value)
-        {
-            Vector3 temp;
-            Reciprocal(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes the square root of each component in the vector and than takes the reciprocal of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the square root and recpirocal of.</param>
-        /// <param name="result">When the method completes, contains a vector that is the square root and reciprocal of the input vector.</param>
-        public static void ReciprocalSqrt(ref Vector3 value, out Vector3 result)
-        {
-            result.X = 1.0f / (float)Math.Sqrt(value.X);
-            result.Y = 1.0f / (float)Math.Sqrt(value.Y);
-            result.Z = 1.0f / (float)Math.Sqrt(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the square root of each component in the vector and than takes the reciprocal of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the square root and recpirocal of.</param>
-        /// <returns>A vector that is the square root and reciprocal of the input vector.</returns>
-        public static Vector3 ReciprocalSqrt(Vector3 value)
-        {
-            Vector3 temp;
-            ReciprocalSqrt(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes e raised to the component in the vector.
-        /// </summary>
-        /// <param name="value">The value to take e raised to each component of.</param>
-        /// <param name="result">When the method completes, contains a vector that has e raised to each of the components in the input vector.</param>
-        public static void Exp(ref Vector3 value, out Vector3 result)
-        {
-            result.X = (float)Math.Exp(value.X);
-            result.Y = (float)Math.Exp(value.Y);
-            result.Z = (float)Math.Exp(value.Z);
-        }
-
-        /// <summary>
-        /// Takes e raised to the component in the vector.
-        /// </summary>
-        /// <param name="value">The value to take e raised to each component of.</param>
-        /// <returns>A vector that has e raised to each of the components in the input vector.</returns>
-        public static Vector3 Exp(Vector3 value)
-        {
-            Vector3 temp;
-            Exp(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes the sine and than the cosine of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the sine and cosine of.</param>
-        /// <param name="sinResult">When the method completes, contains the sine of each component in the input vector.</param>
-        /// <param name="cosResult">When the method completes, contains the cpsome pf each component in the input vector.</param>
-        public static void SinCos(ref Vector3 value, out Vector3 sinResult, out Vector3 cosResult)
-        {
-            sinResult.X = (float)Math.Sin(value.X);
-            sinResult.Y = (float)Math.Sin(value.Y);
-            sinResult.Z = (float)Math.Sin(value.Z);
-
-            cosResult.X = (float)Math.Cos(value.X);
-            cosResult.Y = (float)Math.Cos(value.Y);
-            cosResult.Z = (float)Math.Cos(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the sine of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the sine of.</param>
-        /// <param name="result">When the method completes, a vector that contains the sine of each component in the input vector.</param>
-        public static void Sin(ref Vector3 value, out Vector3 result)
-        {
-            result.X = (float)Math.Sin(value.X);
-            result.Y = (float)Math.Sin(value.Y);
-            result.Z = (float)Math.Sin(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the sine of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the sine of.</param>
-        /// <returns>A vector that contains the sine of each component in the input vector.</returns>
-        public static Vector3 Sin(Vector3 value)
-        {
-            Vector3 temp;
-            Sin(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes the cosine of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the cosine of.</param>
-        /// <param name="result">When the method completes, contains a vector that contains the cosine of each component in the input vector.</param>
-        public static void Cos(ref Vector3 value, out Vector3 result)
-        {
-            result.X = (float)Math.Cos(value.X);
-            result.Y = (float)Math.Cos(value.Y);
-            result.Z = (float)Math.Cos(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the cosine of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the cosine of.</param>
-        /// <returns>A vector that contains the cosine of each component in the input vector.</returns>
-        public static Vector3 Cos(Vector3 value)
-        {
-            Vector3 temp;
-            Cos(ref value, out temp);
-            return temp;
-        }
-
-        /// <summary>
-        /// Takes the tangent of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the tangent of.</param>
-        /// <param name="result">When the method completes, contains a vector that contains the tangent of each component in the input vector.</param>
-        public static void Tan(ref Vector3 value, out Vector3 result)
-        {
-            result.X = (float)Math.Tan(value.X);
-            result.Y = (float)Math.Tan(value.Y);
-            result.Z = (float)Math.Tan(value.Z);
-        }
-
-        /// <summary>
-        /// Takes the tangent of each component in the vector.
-        /// </summary>
-        /// <param name="value">The vector to take the tangent of.</param>
-        /// <returns>A vector that contains the tangent of each component in the input vector.</returns>
-        public static Vector3 Tan(Vector3 value)
-        {
-            Vector3 temp;
-            Tan(ref value, out temp);
-            return temp;
-        }
         #endregion
 
+        #region public void NormalizeFast()
+
         /// <summary>
-        /// Adds two vectors.
+        /// Scales the Vector3 to approximately unit length.
         /// </summary>
-        /// <param name="left">The first vector to add.</param>
-        /// <param name="right">The second vector to add.</param>
-        /// <param name="result">When the method completes, contains the sum of the two vectors.</param>
-        public static void Add(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public void NormalizeFast()
         {
-            result = new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            float scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
+            X *= scale;
+            Y *= scale;
+            Z *= scale;
         }
+
+        #endregion
+
+        #region public void Scale()
+
+        /// <summary>
+        /// Scales the current Vector3 by the given amounts.
+        /// </summary>
+        /// <param name="sx">The scale of the X component.</param>
+        /// <param name="sy">The scale of the Y component.</param>
+        /// <param name="sz">The scale of the Z component.</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(float sx, float sy, float sz)
+        {
+            this.X = X * sx;
+            this.Y = Y * sy;
+            this.Z = Z * sz;
+        }
+
+        /// <summary>Scales this instance by the given parameter.</summary>
+        /// <param name="scale">The scaling of the individual components.</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(Vector3 scale)
+        {
+            this.X *= scale.X;
+            this.Y *= scale.Y;
+            this.Z *= scale.Z;
+        }
+
+        /// <summary>Scales this instance by the given parameter.</summary>
+        /// <param name="scale">The scaling of the individual components.</param>
+        [CLSCompliant(false)]
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(ref Vector3 scale)
+        {
+            this.X *= scale.X;
+            this.Y *= scale.Y;
+            this.Z *= scale.Z;
+        }
+
+        #endregion public void Scale()
+
+        #endregion
+
+        #region Static
+
+        #region Fields
+
+        /// <summary>
+        /// Defines a unit-length Vector3 that points towards the X-axis.
+        /// </summary>
+        public static readonly Vector3 UnitX = new Vector3(1, 0, 0);
+
+        /// <summary>
+        /// Defines a unit-length Vector3 that points towards the Y-axis.
+        /// </summary>
+        public static readonly Vector3 UnitY = new Vector3(0, 1, 0);
+
+        /// <summary>
+        /// /// Defines a unit-length Vector3 that points towards the Z-axis.
+        /// </summary>
+        public static readonly Vector3 UnitZ = new Vector3(0, 0, 1);
+
+        /// <summary>
+        /// Defines a zero-length Vector3.
+        /// </summary>
+        public static readonly Vector3 Zero = new Vector3(0, 0, 0);
+
+        /// <summary>
+        /// Defines an instance with all components set to 1.
+        /// </summary>
+        public static readonly Vector3 One = new Vector3(1, 1, 1);
+
+        /// <summary>
+        /// Defines the size of the Vector3 struct in bytes.
+        /// </summary>
+        public static readonly int SizeInBytes = Marshal.SizeOf(new Vector3());
+
+        #endregion
+
+        #region Obsolete
+
+        #region Sub
+
+        /// <summary>
+        /// Subtract one Vector from another
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <returns>Result of subtraction</returns>
+        [Obsolete("Use static Subtract() method instead.")]
+        public static Vector3 Sub(Vector3 a, Vector3 b)
+        {
+            a.X -= b.X;
+            a.Y -= b.Y;
+            a.Z -= b.Z;
+            return a;
+        }
+
+        /// <summary>
+        /// Subtract one Vector from another
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <param name="result">Result of subtraction</param>
+        [Obsolete("Use static Subtract() method instead.")]
+        public static void Sub(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result.X = a.X - b.X;
+            result.Y = a.Y - b.Y;
+            result.Z = a.Z - b.Z;
+        }
+
+        #endregion
+
+        #region Mult
+
+        /// <summary>
+        /// Multiply a vector and a scalar
+        /// </summary>
+        /// <param name="a">Vector operand</param>
+        /// <param name="f">Scalar operand</param>
+        /// <returns>Result of the multiplication</returns>
+        [Obsolete("Use static Multiply() method instead.")]
+        public static Vector3 Mult(Vector3 a, float f)
+        {
+            a.X *= f;
+            a.Y *= f;
+            a.Z *= f;
+            return a;
+        }
+
+        /// <summary>
+        /// Multiply a vector and a scalar
+        /// </summary>
+        /// <param name="a">Vector operand</param>
+        /// <param name="f">Scalar operand</param>
+        /// <param name="result">Result of the multiplication</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public static void Mult(ref Vector3 a, float f, out Vector3 result)
+        {
+            result.X = a.X * f;
+            result.Y = a.Y * f;
+            result.Z = a.Z * f;
+        }
+
+        #endregion
+
+        #region Div
+
+        /// <summary>
+        /// Divide a vector by a scalar
+        /// </summary>
+        /// <param name="a">Vector operand</param>
+        /// <param name="f">Scalar operand</param>
+        /// <returns>Result of the division</returns>
+        [Obsolete("Use static Divide() method instead.")]
+        public static Vector3 Div(Vector3 a, float f)
+        {
+            float mult = 1.0f / f;
+            a.X *= mult;
+            a.Y *= mult;
+            a.Z *= mult;
+            return a;
+        }
+
+        /// <summary>
+        /// Divide a vector by a scalar
+        /// </summary>
+        /// <param name="a">Vector operand</param>
+        /// <param name="f">Scalar operand</param>
+        /// <param name="result">Result of the division</param>
+        [Obsolete("Use static Divide() method instead.")]
+        public static void Div(ref Vector3 a, float f, out Vector3 result)
+        {
+            float mult = 1.0f / f;
+            result.X = a.X * mult;
+            result.Y = a.Y * mult;
+            result.Z = a.Z * mult;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Add
 
         /// <summary>
         /// Adds two vectors.
         /// </summary>
-        /// <param name="left">The first vector to add.</param>
-        /// <param name="right">The second vector to add.</param>
-        /// <returns>The sum of the two vectors.</returns>
-        public static Vector3 Add(Vector3 left, Vector3 right)
+        /// <param name="a">Left operand.</param>
+        /// <param name="b">Right operand.</param>
+        /// <returns>Result of operation.</returns>
+        public static Vector3 Add(Vector3 a, Vector3 b)
         {
-            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            Add(ref a, ref b, out a);
+            return a;
         }
 
         /// <summary>
-        /// Subtracts two vectors.
+        /// Adds two vectors.
         /// </summary>
-        /// <param name="left">The first vector to subtract.</param>
-        /// <param name="right">The second vector to subtract.</param>
-        /// <param name="result">When the method completes, contains the difference of the two vectors.</param>
-        public static void Subtract(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        /// <param name="a">Left operand.</param>
+        /// <param name="b">Right operand.</param>
+        /// <param name="result">Result of operation.</param>
+        public static void Add(ref Vector3 a, ref Vector3 b, out Vector3 result)
         {
-            result = new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            result = new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
+
+        #endregion
+
+        #region Subtract
+
+        /// <summary>
+        /// Subtract one Vector from another
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <returns>Result of subtraction</returns>
+        public static Vector3 Subtract(Vector3 a, Vector3 b)
+        {
+            Subtract(ref a, ref b, out a);
+            return a;
         }
 
         /// <summary>
-        /// Subtracts two vectors.
+        /// Subtract one Vector from another
         /// </summary>
-        /// <param name="left">The first vector to subtract.</param>
-        /// <param name="right">The second vector to subtract.</param>
-        /// <returns>The difference of the two vectors.</returns>
-        public static Vector3 Subtract(Vector3 left, Vector3 right)
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <param name="result">Result of subtraction</param>
+        public static void Subtract(ref Vector3 a, ref Vector3 b, out Vector3 result)
         {
-            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            result = new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+        }
+
+        #endregion
+
+        #region Multiply
+
+        /// <summary>
+        /// Multiplies a vector by a scalar.
+        /// </summary>
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <returns>Result of the operation.</returns>
+        public static Vector3 Multiply(Vector3 vector, float scale)
+        {
+            Multiply(ref vector, scale, out vector);
+            return vector;
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Multiplies a vector by a scalar.
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <param name="result">When the method completes, contains the scaled vector.</param>
-        public static void Multiply(ref Vector3 value, float scalar, out Vector3 result)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <param name="result">Result of the operation.</param>
+        public static void Multiply(ref Vector3 vector, float scale, out Vector3 result)
         {
-            result = new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            result = new Vector3(vector.X * scale, vector.Y * scale, vector.Z * scale);
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Multiplies a vector by the components a vector (scale).
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <returns>The scaled vector.</returns>
-        public static Vector3 Multiply(Vector3 value, float scalar)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <returns>Result of the operation.</returns>
+        public static Vector3 Multiply(Vector3 vector, Vector3 scale)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            Multiply(ref vector, ref scale, out vector);
+            return vector;
         }
 
         /// <summary>
-        /// Modulates a vector with another by performing component-wise multiplication.
+        /// Multiplies a vector by the components of a vector (scale).
         /// </summary>
-        /// <param name="left">The first vector to modulate.</param>
-        /// <param name="right">The second vector to modulate.</param>
-        /// <param name="result">When the method completes, contains the modulated vector.</param>
-        public static void Modulate(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <param name="result">Result of the operation.</param>
+        public static void Multiply(ref Vector3 vector, ref Vector3 scale, out Vector3 result)
         {
-            result = new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            result = new Vector3(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z);
+        }
+
+        #endregion
+
+        #region Divide
+
+        /// <summary>
+        /// Divides a vector by a scalar.
+        /// </summary>
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <returns>Result of the operation.</returns>
+        public static Vector3 Divide(Vector3 vector, float scale)
+        {
+            Divide(ref vector, scale, out vector);
+            return vector;
         }
 
         /// <summary>
-        /// Modulates a vector with another by performing component-wise multiplication.
+        /// Divides a vector by a scalar.
         /// </summary>
-        /// <param name="left">The first vector to modulate.</param>
-        /// <param name="right">The second vector to modulate.</param>
-        /// <returns>The modulated vector.</returns>
-        public static Vector3 Modulate(Vector3 left, Vector3 right)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <param name="result">Result of the operation.</param>
+        public static void Divide(ref Vector3 vector, float scale, out Vector3 result)
         {
-            return new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            Multiply(ref vector, 1 / scale, out result);
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Divides a vector by the components of a vector (scale).
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <param name="result">When the method completes, contains the scaled vector.</param>
-        public static void Divide(ref Vector3 value, float scalar, out Vector3 result)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <returns>Result of the operation.</returns>
+        public static Vector3 Divide(Vector3 vector, Vector3 scale)
         {
-            result = new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            Divide(ref vector, ref scale, out vector);
+            return vector;
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Divide a vector by the components of a vector (scale).
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <returns>The scaled vector.</returns>
-        public static Vector3 Divide(Vector3 value, float scalar)
+        /// <param name="vector">Left operand.</param>
+        /// <param name="scale">Right operand.</param>
+        /// <param name="result">Result of the operation.</param>
+        public static void Divide(ref Vector3 vector, ref Vector3 scale, out Vector3 result)
         {
-            return new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            result = new Vector3(vector.X / scale.X, vector.Y / scale.Y, vector.Z / scale.Z);
         }
 
-        /// <summary>
-        /// Reverses the direction of a given vector.
-        /// </summary>
-        /// <param name="value">The vector to negate.</param>
-        /// <param name="result">When the method completes, contains a vector facing in the opposite direction.</param>
-        public static void Negate(ref Vector3 value, out Vector3 result)
-        {
-            result = new Vector3(-value.X, -value.Y, -value.Z);
-        }
-
-        /// <summary>
-        /// Reverses the direction of a given vector.
-        /// </summary>
-        /// <param name="value">The vector to negate.</param>
-        /// <returns>A vector facing in the opposite direction.</returns>
-        public static Vector3 Negate(Vector3 value)
-        {
-            return new Vector3(-value.X, -value.Y, -value.Z);
-        }
-
-        /// <summary>
-        /// Takes the absolute value of each component.
-        /// </summary>
-        /// <param name="value">The vector to take the absolute value of.</param>
-        /// <param name="result">When the method completes, contains a vector that has all positive components.</param>
-        public static void Abs(ref Vector3 value, out Vector3 result)
-        {
-            result = new Vector3(Math.Abs(value.X), Math.Abs(value.Y), Math.Abs(value.Z));
-        }
-
-        /// <summary>
-        /// Takes the absolute value of each component.
-        /// </summary>
-        /// <param name="value">The vector to take the absolute value of.</param>
-        /// <returns>A vector that has all positive components.</returns>
-        public static Vector3 Abs(Vector3 value)
-        {
-            return new Vector3(Math.Abs(value.X), Math.Abs(value.Y), Math.Abs(value.Z));
-        }
-
-        /// <summary>
-        /// Returns a <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
-        /// </summary>
-        /// <param name="value1">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
-        /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
-        /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
-        /// <param name="result">When the method completes, contains the 3D Cartesian coordinates of the specified point.</param>
-        public static void Barycentric(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, float amount1, float amount2, out Vector3 result)
-        {
-            result = new Vector3((value1.X + (amount1 * (value2.X - value1.X))) + (amount2 * (value3.X - value1.X)),
-                (value1.Y + (amount1 * (value2.Y - value1.Y))) + (amount2 * (value3.Y - value1.Y)),
-                (value1.Z + (amount1 * (value2.Z - value1.Z))) + (amount2 * (value3.Z - value1.Z)));
-        }
-
-        /// <summary>
-        /// Returns a <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
-        /// </summary>
-        /// <param name="value1">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
-        /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
-        /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
-        /// <returns>A new <see cref="global::OrkCore.Vector3"/> containing the 3D Cartesian coordinates of the specified point.</returns>
-        public static Vector3 Barycentric(Vector3 value1, Vector3 value2, Vector3 value3, float amount1, float amount2)
-        {
-            Vector3 result;
-            Barycentric(ref value1, ref value2, ref value3, amount1, amount2, out result);
-            return result;
-        }
+        #endregion
 
         #region ComponentMin
 
@@ -791,64 +691,165 @@ namespace OrkCore.Mathematics
 
         #endregion
 
+        #region Min
+
         /// <summary>
-        /// Restricts a value to be within a specified range.
+        /// Returns the Vector3 with the minimum magnitude
         /// </summary>
-        /// <param name="value">The value to clamp.</param>
-        /// <param name="min">The minimum value.</param>
-        /// <param name="max">The maximum value.</param>
-        /// <param name="result">When the method completes, contains the clamped value.</param>
-        public static void Clamp(ref Vector3 value, ref Vector3 min, ref Vector3 max, out Vector3 result)
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>The minimum Vector3</returns>
+        public static Vector3 Min(Vector3 left, Vector3 right)
         {
-            float x = value.X;
-            x = (x > max.X) ? max.X : x;
-            x = (x < min.X) ? min.X : x;
+            return left.LengthSquared < right.LengthSquared ? left : right;
+        }
 
-            float y = value.Y;
-            y = (y > max.Y) ? max.Y : y;
-            y = (y < min.Y) ? min.Y : y;
+        #endregion
 
-            float z = value.Z;
-            z = (z > max.Z) ? max.Z : z;
-            z = (z < min.Z) ? min.Z : z;
+        #region Max
 
-            result = new Vector3(x, y, z);
+        /// <summary>
+        /// Returns the Vector3 with the minimum magnitude
+        /// </summary>
+        /// <param name="left">Left operand</param>
+        /// <param name="right">Right operand</param>
+        /// <returns>The minimum Vector3</returns>
+        public static Vector3 Max(Vector3 left, Vector3 right)
+        {
+            return left.LengthSquared >= right.LengthSquared ? left : right;
+        }
+
+        #endregion
+
+        #region Clamp
+
+        /// <summary>
+        /// Clamp a vector to the given minimum and maximum vectors
+        /// </summary>
+        /// <param name="vec">Input vector</param>
+        /// <param name="min">Minimum vector</param>
+        /// <param name="max">Maximum vector</param>
+        /// <returns>The clamped vector</returns>
+        public static Vector3 Clamp(Vector3 vec, Vector3 min, Vector3 max)
+        {
+            vec.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
+            vec.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
+            vec.Z = vec.Z < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
+            return vec;
         }
 
         /// <summary>
-        /// Restricts a value to be within a specified range.
+        /// Clamp a vector to the given minimum and maximum vectors
         /// </summary>
-        /// <param name="value">The value to clamp.</param>
-        /// <param name="min">The minimum value.</param>
-        /// <param name="max">The maximum value.</param>
-        /// <returns>The clamped value.</returns>
-        public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
+        /// <param name="vec">Input vector</param>
+        /// <param name="min">Minimum vector</param>
+        /// <param name="max">Maximum vector</param>
+        /// <param name="result">The clamped vector</param>
+        public static void Clamp(ref Vector3 vec, ref Vector3 min, ref Vector3 max, out Vector3 result)
         {
-            Vector3 result;
-            Clamp(ref value, ref min, ref max, out result);
-            return result;
+            result.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
+            result.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
+            result.Z = vec.Z < min.Z ? min.Z : vec.Z > max.Z ? max.Z : vec.Z;
+        }
+
+        #endregion
+
+        #region Normalize
+
+        /// <summary>
+        /// Scale a vector to unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <returns>The normalized vector</returns>
+        public static Vector3 Normalize(Vector3 vec)
+        {
+            float scale = 1.0f / vec.Length;
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
         }
 
         /// <summary>
-        /// Calculates the cross product of two vectors.
+        /// Scale a vector to unit length
         /// </summary>
-        /// <param name="left">First source vector.</param>
-        /// <param name="right">Second source vector.</param>
-        /// <param name="result">When the method completes, contains the cross product of the two vectors.</param>
-        public static void Cross(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        /// <param name="vec">The input vector</param>
+        /// <param name="result">The normalized vector</param>
+        public static void Normalize(ref Vector3 vec, out Vector3 result)
         {
-            result = new Vector3(
-                (left.Y * right.Z) - (left.Z * right.Y),
-                (left.Z * right.X) - (left.X * right.Z),
-                (left.X * right.Y) - (left.Y * right.X));
+            float scale = 1.0f / vec.Length;
+            result.X = vec.X * scale;
+            result.Y = vec.Y * scale;
+            result.Z = vec.Z * scale;
+        }
+
+        #endregion
+
+        #region NormalizeFast
+
+        /// <summary>
+        /// Scale a vector to approximately unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <returns>The normalized vector</returns>
+        public static Vector3 NormalizeFast(Vector3 vec)
+        {
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
         }
 
         /// <summary>
-        /// Calculates the cross product of two vectors.
+        /// Scale a vector to approximately unit length
         /// </summary>
-        /// <param name="left">First source vector.</param>
-        /// <param name="right">Second source vector.</param>
-        /// <returns>The cross product of the two vectors.</returns>
+        /// <param name="vec">The input vector</param>
+        /// <param name="result">The normalized vector</param>
+        public static void NormalizeFast(ref Vector3 vec, out Vector3 result)
+        {
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
+            result.X = vec.X * scale;
+            result.Y = vec.Y * scale;
+            result.Z = vec.Z * scale;
+        }
+
+        #endregion
+
+        #region Dot
+
+        /// <summary>
+        /// Calculate the dot (scalar) product of two vectors
+        /// </summary>
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <returns>The dot product of the two inputs</returns>
+        public static float Dot(Vector3 left, Vector3 right)
+        {
+            return left.X * right.X + left.Y * right.Y + left.Z * right.Z;
+        }
+
+        /// <summary>
+        /// Calculate the dot (scalar) product of two vectors
+        /// </summary>
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <param name="result">The dot product of the two inputs</param>
+        public static void Dot(ref Vector3 left, ref Vector3 right, out float result)
+        {
+            result = left.X * right.X + left.Y * right.Y + left.Z * right.Z;
+        }
+
+        #endregion
+
+        #region Cross
+
+        /// <summary>
+        /// Caclulate the cross (vector) product of two vectors
+        /// </summary>
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <returns>The cross product of the two inputs</returns>
         public static Vector3 Cross(Vector3 left, Vector3 right)
         {
             Vector3 result;
@@ -857,636 +858,344 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Calculates the tripple cross product of three vectors.
+        /// Caclulate the cross (vector) product of two vectors
         /// </summary>
-        /// <param name="value1">First source vector.</param>
-        /// <param name="value2">Second source vector.</param>
-        /// <param name="value3">Third source vector.</param>
-        /// <param name="result">When the method completes, contains the tripple cross product of the three vectors.</param>
-        public static void TripleProduct(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, out float result)
+        /// <param name="left">First operand</param>
+        /// <param name="right">Second operand</param>
+        /// <returns>The cross product of the two inputs</returns>
+        /// <param name="result">The cross product of the two inputs</param>
+        public static void Cross(ref Vector3 left, ref Vector3 right, out Vector3 result)
         {
-            Vector3 temp;
-            Vector3.Cross(ref value2, ref value3, out temp);
-            Vector3.Dot(ref value1, ref temp, out result);
+            result = new Vector3(left.Y * right.Z - left.Z * right.Y,
+                left.Z * right.X - left.X * right.Z,
+                left.X * right.Y - left.Y * right.X);
+        }
+
+        #endregion
+
+        #region Lerp
+
+        /// <summary>
+        /// Returns a new Vector that is the linear blend of the 2 given Vectors
+        /// </summary>
+        /// <param name="a">First input vector</param>
+        /// <param name="b">Second input vector</param>
+        /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
+        /// <returns>a when blend=0, b when blend=1, and a linear combination otherwise</returns>
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float blend)
+        {
+            a.X = blend * (b.X - a.X) + a.X;
+            a.Y = blend * (b.Y - a.Y) + a.Y;
+            a.Z = blend * (b.Z - a.Z) + a.Z;
+            return a;
         }
 
         /// <summary>
-        /// Calculates the tripple cross product of three vectors.
+        /// Returns a new Vector that is the linear blend of the 2 given Vectors
         /// </summary>
-        /// <param name="value1">First source vector.</param>
-        /// <param name="value2">Second source vector.</param>
-        /// <param name="value3">Third source vector.</param>
-        /// <returns>The tripple cross product of the three vectors.</returns>
-        public static float TripleProduct(Vector3 value1, Vector3 value2, Vector3 value3)
+        /// <param name="a">First input vector</param>
+        /// <param name="b">Second input vector</param>
+        /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
+        /// <param name="result">a when blend=0, b when blend=1, and a linear combination otherwise</param>
+        public static void Lerp(ref Vector3 a, ref Vector3 b, float blend, out Vector3 result)
         {
-            float result;
-            TripleProduct(ref value1, ref value2, ref value3, out result);
-            return result;
+            result.X = blend * (b.X - a.X) + a.X;
+            result.Y = blend * (b.Y - a.Y) + a.Y;
+            result.Z = blend * (b.Z - a.Z) + a.Z;
         }
 
+        #endregion
+
+        #region Barycentric
+
         /// <summary>
-        /// Calculates the distance between two vectors.
+        /// Interpolate 3 Vectors using Barycentric coordinates
         /// </summary>
-        /// <param name="value1">The first vector.</param>
-        /// <param name="value2">The second vector.</param>
-        /// <param name="result">When the method completes, contains the distance between the two vectors.</param>
+        /// <param name="a">First input Vector</param>
+        /// <param name="b">Second input Vector</param>
+        /// <param name="c">Third input Vector</param>
+        /// <param name="u">First Barycentric Coordinate</param>
+        /// <param name="v">Second Barycentric Coordinate</param>
+        /// <returns>a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</returns>
+        public static Vector3 BaryCentric(Vector3 a, Vector3 b, Vector3 c, float u, float v)
+        {
+            return a + u * (b - a) + v * (c - a);
+        }
+
+        /// <summary>Interpolate 3 Vectors using Barycentric coordinates</summary>
+        /// <param name="a">First input Vector.</param>
+        /// <param name="b">Second input Vector.</param>
+        /// <param name="c">Third input Vector.</param>
+        /// <param name="u">First Barycentric Coordinate.</param>
+        /// <param name="v">Second Barycentric Coordinate.</param>
+        /// <param name="result">Output Vector. a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</param>
+        public static void BaryCentric(ref Vector3 a, ref Vector3 b, ref Vector3 c, float u, float v, out Vector3 result)
+        {
+            result = a; // copy
+
+            Vector3 temp = b; // copy
+            Subtract(ref temp, ref a, out temp);
+            Multiply(ref temp, u, out temp);
+            Add(ref result, ref temp, out result);
+
+            temp = c; // copy
+            Subtract(ref temp, ref a, out temp);
+            Multiply(ref temp, v, out temp);
+            Add(ref result, ref temp, out result);
+        }
+
+        #endregion
+
+        #region Transform
+
+        /// <summary>Transform a direction vector by the given Matrix
+        /// Assumes the matrix has a bottom row of (0,0,0,1), that is the translation part is ignored.
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3 TransformVector(Vector3 vec, Matrix4 mat)
+        {
+            Vector3 v;
+            v.X = Vector3.Dot(vec, new Vector3(mat.Column0));
+            v.Y = Vector3.Dot(vec, new Vector3(mat.Column1));
+            v.Z = Vector3.Dot(vec, new Vector3(mat.Column2));
+            return v;
+        }
+
+        /// <summary>Transform a direction vector by the given Matrix
+        /// Assumes the matrix has a bottom row of (0,0,0,1), that is the translation part is ignored.
+        /// </summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed vector</param>
+        public static void TransformVector(ref Vector3 vec, ref Matrix4 mat, out Vector3 result)
+        {
+            result.X = vec.X * mat.Row0.X +
+                       vec.Y * mat.Row1.X +
+                       vec.Z * mat.Row2.X;
+
+            result.Y = vec.X * mat.Row0.Y +
+                       vec.Y * mat.Row1.Y +
+                       vec.Z * mat.Row2.Y;
+
+            result.Z = vec.X * mat.Row0.Z +
+                       vec.Y * mat.Row1.Z +
+                       vec.Z * mat.Row2.Z;
+        }
+
+        /// <summary>Transform a Normal by the given Matrix</summary>
         /// <remarks>
-        /// <see cref="OrkCore.Vector3.DistanceSquared(ref Vector3, ref Vector3, out float)"/> may be preferred when only the relative distance is needed
-        /// and speed is of the essence.
+        /// This calculates the inverse of the given matrix, use TransformNormalInverse if you
+        /// already have the inverse to avoid this extra calculation
         /// </remarks>
-        public static void Distance(ref Vector3 value1, ref Vector3 value2, out float result)
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed normal</returns>
+        public static Vector3 TransformNormal(Vector3 norm, Matrix4 mat)
         {
-            float x = value1.X - value2.X;
-            float y = value1.Y - value2.Y;
-            float z = value1.Z - value2.Z;
-
-            result = (float)Math.Sqrt((x * x) + (y * y) + (z * z));
+            mat.Invert();
+            return TransformNormalInverse(norm, mat);
         }
 
-        /// <summary>
-        /// Calculates the distance between two vectors.
-        /// </summary>
-        /// <param name="value1">The first vector.</param>
-        /// <param name="value2">The second vector.</param>
-        /// <returns>The distance between the two vectors.</returns>
+        /// <summary>Transform a Normal by the given Matrix</summary>
         /// <remarks>
-        /// <see cref="OrkCore.Vector3.DistanceSquared(Vector3, Vector3)"/> may be preferred when only the relative distance is needed
-        /// and speed is of the essence.
+        /// This calculates the inverse of the given matrix, use TransformNormalInverse if you
+        /// already have the inverse to avoid this extra calculation
         /// </remarks>
-        public static float Distance(Vector3 value1, Vector3 value2)
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed normal</param>
+        public static void TransformNormal(ref Vector3 norm, ref Matrix4 mat, out Vector3 result)
         {
-            float x = value1.X - value2.X;
-            float y = value1.Y - value2.Y;
-            float z = value1.Z - value2.Z;
-
-            return (float)Math.Sqrt((x * x) + (y * y) + (z * z));
+            Matrix4 Inverse = Matrix4.Invert(mat);
+            Vector3.TransformNormalInverse(ref norm, ref Inverse, out result);
         }
 
-        /// <summary>
-        /// Calculates the squared distance between two vectors.
-        /// </summary>
-        /// <param name="value1">The first vector.</param>
-        /// <param name="value2">The second vector.</param>
-        /// <param name="result">When the method completes, contains the squared distance between the two vectors.</param>
-        /// <remarks>Distance squared is the value before taking the square root. 
-        /// Distance squared can often be used in place of distance if relative comparisons are being made. 
-        /// For example, consider three points A, B, and C. To determine whether B or C is further from A, 
-        /// compare the distance between A and B to the distance between A and C. Calculating the two distances 
-        /// involves two square roots, which are computationally expensive. However, using distance squared 
-        /// provides the same information and avoids calculating two square roots.
-        /// </remarks>
-        public static void DistanceSquared(ref Vector3 value1, ref Vector3 value2, out float result)
-        {
-            float x = value1.X - value2.X;
-            float y = value1.Y - value2.Y;
-            float z = value1.Z - value2.Z;
-
-            result = (x * x) + (y * y) + (z * z);
-        }
-
-        /// <summary>
-        /// Calculates the squared distance between two vectors.
-        /// </summary>
-        /// <param name="value1">The first vector.</param>
-        /// <param name="value2">The second vector.</param>
-        /// <returns>The squared distance between the two vectors.</returns>
-        /// <remarks>Distance squared is the value before taking the square root. 
-        /// Distance squared can often be used in place of distance if relative comparisons are being made. 
-        /// For example, consider three points A, B, and C. To determine whether B or C is further from A, 
-        /// compare the distance between A and B to the distance between A and C. Calculating the two distances 
-        /// involves two square roots, which are computationally expensive. However, using distance squared 
-        /// provides the same information and avoids calculating two square roots.
-        /// </remarks>
-        public static float DistanceSquared(Vector3 value1, Vector3 value2)
-        {
-            float x = value1.X - value2.X;
-            float y = value1.Y - value2.Y;
-            float z = value1.Z - value2.Z;
-
-            return (x * x) + (y * y) + (z * z);
-        }
-
-        /// <summary>
-        /// Calculates the dot product of two vectors.
-        /// </summary>
-        /// <param name="left">First source vector.</param>
-        /// <param name="right">Second source vector.</param>
-        /// <param name="result">When the method completes, contains the dot product of the two vectors.</param>
-        public static void Dot(ref Vector3 left, ref Vector3 right, out float result)
-        {
-            result = (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
-        }
-
-        /// <summary>
-        /// Calculates the dot product of two vectors.
-        /// </summary>
-        /// <param name="left">First source vector.</param>
-        /// <param name="right">Second source vector.</param>
-        /// <returns>The dot product of the two vectors.</returns>
-        public static float Dot(Vector3 left, Vector3 right)
-        {
-            return (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
-        }
-
-        /// <summary>
-        /// Performs a linear interpolation between two vectors.
-        /// </summary>
-        /// <param name="start">Start vector.</param>
-        /// <param name="end">End vector.</param>
-        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
-        /// <param name="result">When the method completes, contains the linear interpolation of the two vectors.</param>
+        /// <summary>Transform a Normal by the (transpose of the) given Matrix</summary>
         /// <remarks>
-        /// This method performs the linear interpolation based on the following formula.
-        /// <code>start + (end - start) * amount</code>
-        /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
+        /// This version doesn't calculate the inverse matrix.
+        /// Use this version if you already have the inverse of the desired transform to hand
         /// </remarks>
-        public static void Lerp(ref Vector3 start, ref Vector3 end, float amount, out Vector3 result)
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="invMat">The inverse of the desired transformation</param>
+        /// <returns>The transformed normal</returns>
+        public static Vector3 TransformNormalInverse(Vector3 norm, Matrix4 invMat)
         {
-            result.X = start.X + ((end.X - start.X) * amount);
-            result.Y = start.Y + ((end.Y - start.Y) * amount);
-            result.Z = start.Z + ((end.Z - start.Z) * amount);
+            Vector3 n;
+            n.X = Vector3.Dot(norm, new Vector3(invMat.Row0));
+            n.Y = Vector3.Dot(norm, new Vector3(invMat.Row1));
+            n.Z = Vector3.Dot(norm, new Vector3(invMat.Row2));
+            return n;
         }
 
-        /// <summary>
-        /// Performs a linear interpolation between two vectors.
-        /// </summary>
-        /// <param name="start">Start vector.</param>
-        /// <param name="end">End vector.</param>
-        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
-        /// <returns>The linear interpolation of the two vectors.</returns>
+        /// <summary>Transform a Normal by the (transpose of the) given Matrix</summary>
         /// <remarks>
-        /// This method performs the linear interpolation based on the following formula.
-        /// <code>start + (end - start) * amount</code>
-        /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
+        /// This version doesn't calculate the inverse matrix.
+        /// Use this version if you already have the inverse of the desired transform to hand
         /// </remarks>
-        public static Vector3 Lerp(Vector3 start, Vector3 end, float amount)
+        /// <param name="norm">The normal to transform</param>
+        /// <param name="invMat">The inverse of the desired transformation</param>
+        /// <param name="result">The transformed normal</param>
+        public static void TransformNormalInverse(ref Vector3 norm, ref Matrix4 invMat, out Vector3 result)
+        {
+            result.X = norm.X * invMat.Row0.X +
+                       norm.Y * invMat.Row0.Y +
+                       norm.Z * invMat.Row0.Z;
+
+            result.Y = norm.X * invMat.Row1.X +
+                       norm.Y * invMat.Row1.Y +
+                       norm.Z * invMat.Row1.Z;
+
+            result.Z = norm.X * invMat.Row2.X +
+                       norm.Y * invMat.Row2.Y +
+                       norm.Z * invMat.Row2.Z;
+        }
+
+        /// <summary>Transform a Position by the given Matrix</summary>
+        /// <param name="pos">The position to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed position</returns>
+        public static Vector3 TransformPosition(Vector3 pos, Matrix4 mat)
+        {
+            Vector3 p;
+            p.X = Vector3.Dot(pos, new Vector3(mat.Column0)) + mat.Row3.X;
+            p.Y = Vector3.Dot(pos, new Vector3(mat.Column1)) + mat.Row3.Y;
+            p.Z = Vector3.Dot(pos, new Vector3(mat.Column2)) + mat.Row3.Z;
+            return p;
+        }
+
+        /// <summary>Transform a Position by the given Matrix</summary>
+        /// <param name="pos">The position to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed position</param>
+        public static void TransformPosition(ref Vector3 pos, ref Matrix4 mat, out Vector3 result)
+        {
+            result.X = pos.X * mat.Row0.X +
+                       pos.Y * mat.Row1.X +
+                       pos.Z * mat.Row2.X +
+                       mat.Row3.X;
+
+            result.Y = pos.X * mat.Row0.Y +
+                       pos.Y * mat.Row1.Y +
+                       pos.Z * mat.Row2.Y +
+                       mat.Row3.Y;
+
+            result.Z = pos.X * mat.Row0.Z +
+                       pos.Y * mat.Row1.Z +
+                       pos.Z * mat.Row2.Z +
+                       mat.Row3.Z;
+        }
+
+        /// <summary>Transform a Vector by the given Matrix</summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3 Transform(Vector3 vec, Matrix4 mat)
         {
             Vector3 result;
-            Lerp(ref start, ref end, amount, out result);
+            Transform(ref vec, ref mat, out result);
+            return result;
+        }
+
+        /// <summary>Transform a Vector by the given Matrix</summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed vector</param>
+        public static void Transform(ref Vector3 vec, ref Matrix4 mat, out Vector3 result)
+        {
+            Vector4 v4 = new Vector4(vec.X, vec.Y, vec.Z, 1.0f);
+            Vector4.Transform(ref v4, ref mat, out v4);
+            result = v4.Xyz;
+        }
+
+        /// <summary>
+        /// Transforms a vector by a quaternion rotation.
+        /// </summary>
+        /// <param name="vec">The vector to transform.</param>
+        /// <param name="quat">The quaternion to rotate the vector by.</param>
+        /// <returns>The result of the operation.</returns>
+        public static Vector3 Transform(Vector3 vec, Quaternion quat)
+        {
+            Vector3 result;
+            Transform(ref vec, ref quat, out result);
             return result;
         }
 
         /// <summary>
-        /// Performs a cubic interpolation between two vectors.
+        /// Transforms a vector by a quaternion rotation.
         /// </summary>
-        /// <param name="start">Start vector.</param>
-        /// <param name="end">End vector.</param>
-        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
-        /// <param name="result">When the method completes, contains the cubic interpolation of the two vectors.</param>
-        public static void SmoothStep(ref Vector3 start, ref Vector3 end, float amount, out Vector3 result)
+        /// <param name="vec">The vector to transform.</param>
+        /// <param name="quat">The quaternion to rotate the vector by.</param>
+        /// <param name="result">The result of the operation.</param>
+        public static void Transform(ref Vector3 vec, ref Quaternion quat, out Vector3 result)
         {
-            amount = (amount > 1.0f) ? 1.0f : ((amount < 0.0f) ? 0.0f : amount);
-            amount = (amount * amount) * (3.0f - (2.0f * amount));
-
-            result.X = start.X + ((end.X - start.X) * amount);
-            result.Y = start.Y + ((end.Y - start.Y) * amount);
-            result.Z = start.Z + ((end.Z - start.Z) * amount);
+            // Since vec.W == 0, we can optimize quat * vec * quat^-1 as follows:
+            // vec + 2.0 * cross(quat.xyz, cross(quat.xyz, vec) + quat.w * vec)
+            Vector3 xyz = quat.Xyz, temp, temp2;
+            Vector3.Cross(ref xyz, ref vec, out temp);
+            Vector3.Multiply(ref vec, quat.W, out temp2);
+            Vector3.Add(ref temp, ref temp2, out temp);
+            Vector3.Cross(ref xyz, ref temp, out temp);
+            Vector3.Multiply(ref temp, 2, out temp);
+            Vector3.Add(ref vec, ref temp, out result);
         }
 
-        /// <summary>
-        /// Performs a cubic interpolation between two vectors.
-        /// </summary>
-        /// <param name="start">Start vector.</param>
-        /// <param name="end">End vector.</param>
-        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
-        /// <returns>The cubic interpolation of the two vectors.</returns>
-        public static Vector3 SmoothStep(Vector3 start, Vector3 end, float amount)
+        /// <summary>Transform a Vector3 by the given Matrix, and project the resulting Vector4 back to a Vector3</summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <returns>The transformed vector</returns>
+        public static Vector3 TransformPerspective(Vector3 vec, Matrix4 mat)
         {
             Vector3 result;
-            SmoothStep(ref start, ref end, amount, out result);
+            TransformPerspective(ref vec, ref mat, out result);
             return result;
         }
 
-        /// <summary>
-        /// Performs a Hermite spline interpolation.
-        /// </summary>
-        /// <param name="value1">First source position vector.</param>
-        /// <param name="tangent1">First source tangent vector.</param>
-        /// <param name="value2">Second source position vector.</param>
-        /// <param name="tangent2">Second source tangent vector.</param>
-        /// <param name="amount">Weighting factor.</param>
-        /// <param name="result">When the method completes, contains the result of the Hermite spline interpolation.</param>
-        public static void Hermite(ref Vector3 value1, ref Vector3 tangent1, ref Vector3 value2, ref Vector3 tangent2, float amount, out Vector3 result)
+        /// <summary>Transform a Vector3 by the given Matrix, and project the resulting Vector4 back to a Vector3</summary>
+        /// <param name="vec">The vector to transform</param>
+        /// <param name="mat">The desired transformation</param>
+        /// <param name="result">The transformed vector</param>
+        public static void TransformPerspective(ref Vector3 vec, ref Matrix4 mat, out Vector3 result)
         {
-            float squared = amount * amount;
-            float cubed = amount * squared;
-            float part1 = ((2.0f * cubed) - (3.0f * squared)) + 1.0f;
-            float part2 = (-2.0f * cubed) + (3.0f * squared);
-            float part3 = (cubed - (2.0f * squared)) + amount;
-            float part4 = cubed - squared;
-
-            result.X = (((value1.X * part1) + (value2.X * part2)) + (tangent1.X * part3)) + (tangent2.X * part4);
-            result.Y = (((value1.Y * part1) + (value2.Y * part2)) + (tangent1.Y * part3)) + (tangent2.Y * part4);
-            result.Z = (((value1.Z * part1) + (value2.Z * part2)) + (tangent1.Z * part3)) + (tangent2.Z * part4);
+            Vector4 v = new Vector4(vec, 1);
+            Vector4.Transform(ref v, ref mat, out v);
+            result.X = v.X / v.W;
+            result.Y = v.Y / v.W;
+            result.Z = v.Z / v.W;
         }
 
-        /// <summary>
-        /// Performs a Hermite spline interpolation.
-        /// </summary>
-        /// <param name="value1">First source position vector.</param>
-        /// <param name="tangent1">First source tangent vector.</param>
-        /// <param name="value2">Second source position vector.</param>
-        /// <param name="tangent2">Second source tangent vector.</param>
-        /// <param name="amount">Weighting factor.</param>
-        /// <returns>The result of the Hermite spline interpolation.</returns>
-        public static Vector3 Hermite(Vector3 value1, Vector3 tangent1, Vector3 value2, Vector3 tangent2, float amount)
-        {
-            Vector3 result;
-            Hermite(ref value1, ref tangent1, ref value2, ref tangent2, amount, out result);
-            return result;
-        }
+        #endregion
+
+        #region CalculateAngle
 
         /// <summary>
-        /// Performs a Catmull-Rom interpolation using the specified positions.
+        /// Calculates the angle (in radians) between two vectors.
         /// </summary>
-        /// <param name="value1">The first position in the interpolation.</param>
-        /// <param name="value2">The second position in the interpolation.</param>
-        /// <param name="value3">The third position in the interpolation.</param>
-        /// <param name="value4">The fourth position in the interpolation.</param>
-        /// <param name="amount">Weighting factor.</param>
-        /// <param name="result">When the method completes, contains the result of the Catmull-Rom interpolation.</param>
-        public static void CatmullRom(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, ref Vector3 value4, float amount, out Vector3 result)
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <returns>Angle (in radians) between the vectors.</returns>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static float CalculateAngle(Vector3 first, Vector3 second)
         {
-            float squared = amount * amount;
-            float cubed = amount * squared;
-
-            result.X = 0.5f * ((((2.0f * value2.X) + ((-value1.X + value3.X) * amount)) +
-                (((((2.0f * value1.X) - (5.0f * value2.X)) + (4.0f * value3.X)) - value4.X) * squared)) +
-                ((((-value1.X + (3.0f * value2.X)) - (3.0f * value3.X)) + value4.X) * cubed));
-
-            result.Y = 0.5f * ((((2.0f * value2.Y) + ((-value1.Y + value3.Y) * amount)) +
-                (((((2.0f * value1.Y) - (5.0f * value2.Y)) + (4.0f * value3.Y)) - value4.Y) * squared)) +
-                ((((-value1.Y + (3.0f * value2.Y)) - (3.0f * value3.Y)) + value4.Y) * cubed));
-
-            result.Z = 0.5f * ((((2.0f * value2.Z) + ((-value1.Z + value3.Z) * amount)) +
-                (((((2.0f * value1.Z) - (5.0f * value2.Z)) + (4.0f * value3.Z)) - value4.Z) * squared)) +
-                ((((-value1.Z + (3.0f * value2.Z)) - (3.0f * value3.Z)) + value4.Z) * cubed));
+            return (float)System.Math.Acos((Vector3.Dot(first, second)) / (first.Length * second.Length));
         }
 
-        /// <summary>
-        /// Performs a Catmull-Rom interpolation using the specified positions.
-        /// </summary>
-        /// <param name="value1">The first position in the interpolation.</param>
-        /// <param name="value2">The second position in the interpolation.</param>
-        /// <param name="value3">The third position in the interpolation.</param>
-        /// <param name="value4">The fourth position in the interpolation.</param>
-        /// <param name="amount">Weighting factor.</param>
-        /// <returns>A vector that is the result of the Catmull-Rom interpolation.</returns>
-        public static Vector3 CatmullRom(Vector3 value1, Vector3 value2, Vector3 value3, Vector3 value4, float amount)
+        /// <summary>Calculates the angle (in radians) between two vectors.</summary>
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <param name="result">Angle (in radians) between the vectors.</param>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static void CalculateAngle(ref Vector3 first, ref Vector3 second, out float result)
         {
-            Vector3 result;
-            CatmullRom(ref value1, ref value2, ref value3, ref value4, amount, out result);
-            return result;
+            float temp;
+            Vector3.Dot(ref first, ref second, out temp);
+            result = (float)System.Math.Acos(temp / (first.Length * second.Length));
         }
 
-        /// <summary>
-        /// Returns a vector containing the largest components of the specified vectors.
-        /// </summary>
-        /// <param name="value1">The first source vector.</param>
-        /// <param name="value2">The second source vector.</param>
-        /// <param name="result">When the method completes, contains an new vector composed of the largest components of the source vectors.</param>
-        public static void Max(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
-        {
-            result.X = (value1.X > value2.X) ? value1.X : value2.X;
-            result.Y = (value1.Y > value2.Y) ? value1.Y : value2.Y;
-            result.Z = (value1.Z > value2.Z) ? value1.Z : value2.Z;
-        }
+        #endregion
 
-        /// <summary>
-        /// Returns a vector containing the largest components of the specified vectors.
-        /// </summary>
-        /// <param name="value1">The first source vector.</param>
-        /// <param name="value2">The second source vector.</param>
-        /// <returns>A vector containing the largest components of the source vectors.</returns>
-        public static Vector3 Max(Vector3 value1, Vector3 value2)
-        {
-            Vector3 result;
-            Max(ref value1, ref value2, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Returns a vector containing the smallest components of the specified vectors.
-        /// </summary>
-        /// <param name="value1">The first source vector.</param>
-        /// <param name="value2">The second source vector.</param>
-        /// <param name="result">When the method completes, contains an new vector composed of the smallest components of the source vectors.</param>
-        public static void Min(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
-        {
-            result.X = (value1.X < value2.X) ? value1.X : value2.X;
-            result.Y = (value1.Y < value2.Y) ? value1.Y : value2.Y;
-            result.Z = (value1.Z < value2.Z) ? value1.Z : value2.Z;
-        }
-
-        /// <summary>
-        /// Returns a vector containing the smallest components of the specified vectors.
-        /// </summary>
-        /// <param name="value1">The first source vector.</param>
-        /// <param name="value2">The second source vector.</param>
-        /// <returns>A vector containing the smallest components of the source vectors.</returns>
-        public static Vector3 Min(Vector3 value1, Vector3 value2)
-        {
-            Vector3 result;
-            Min(ref value1, ref value2, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Projects a 3D vector from object space into screen space. 
-        /// </summary>
-        /// <param name="vector">The vector to project.</param>
-        /// <param name="x">The X position of the viewport.</param>
-        /// <param name="y">The Y position of the viewport.</param>
-        /// <param name="width">The width of the viewport.</param>
-        /// <param name="height">The height of the viewport.</param>
-        /// <param name="minZ">The minimum depth of the viewport.</param>
-        /// <param name="maxZ">The maximum depth of the viewport.</param>
-        /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
-        /// <param name="result">When the method completes, contains the vector in screen space.</param>
-        public static void Project(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix worldViewProjection, out Vector3 result)
-        {
-            Vector3 v = new Vector3();
-            TransformCoordinate(ref vector, ref worldViewProjection, out v);
-
-            result = new Vector3(((1.0f + v.X) * 0.5f * width) + x, ((1.0f - v.Y) * 0.5f * height) + y, (v.Z * (maxZ - minZ)) + minZ);
-        }
-
-        /// <summary>
-        /// Projects a 3D vector from object space into screen space. 
-        /// </summary>
-        /// <param name="vector">The vector to project.</param>
-        /// <param name="x">The X position of the viewport.</param>
-        /// <param name="y">The Y position of the viewport.</param>
-        /// <param name="width">The width of the viewport.</param>
-        /// <param name="height">The height of the viewport.</param>
-        /// <param name="minZ">The minimum depth of the viewport.</param>
-        /// <param name="maxZ">The maximum depth of the viewport.</param>
-        /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
-        /// <returns>The vector in screen space.</returns>
-        public static Vector3 Project(Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, Matrix worldViewProjection)
-        {
-            Vector3 result;
-            Project(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Projects a 3D vector from screen space into object space. 
-        /// </summary>
-        /// <param name="vector">The vector to project.</param>
-        /// <param name="x">The X position of the viewport.</param>
-        /// <param name="y">The Y position of the viewport.</param>
-        /// <param name="width">The width of the viewport.</param>
-        /// <param name="height">The height of the viewport.</param>
-        /// <param name="minZ">The minimum depth of the viewport.</param>
-        /// <param name="maxZ">The maximum depth of the viewport.</param>
-        /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
-        /// <param name="result">When the method completes, contains the vector in object space.</param>
-        public static void Unproject(ref Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, ref Matrix worldViewProjection, out Vector3 result)
-        {
-            Vector3 v = new Vector3();
-            Matrix matrix = new Matrix();
-            Matrix.Invert(ref worldViewProjection, out matrix);
-
-            v.X = (((vector.X - x) / width) * 2.0f) - 1.0f;
-            v.Y = -((((vector.Y - y) / height) * 2.0f) - 1.0f);
-            v.Z = (vector.Z - minZ) / (maxZ - minZ);
-
-            TransformCoordinate(ref v, ref matrix, out result);
-        }
-
-        /// <summary>
-        /// Projects a 3D vector from screen space into object space. 
-        /// </summary>
-        /// <param name="vector">The vector to project.</param>
-        /// <param name="x">The X position of the viewport.</param>
-        /// <param name="y">The Y position of the viewport.</param>
-        /// <param name="width">The width of the viewport.</param>
-        /// <param name="height">The height of the viewport.</param>
-        /// <param name="minZ">The minimum depth of the viewport.</param>
-        /// <param name="maxZ">The maximum depth of the viewport.</param>
-        /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
-        /// <returns>The vector in object space.</returns>
-        public static Vector3 Unproject(Vector3 vector, float x, float y, float width, float height, float minZ, float maxZ, Matrix worldViewProjection)
-        {
-            Vector3 result;
-            Unproject(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Returns the reflection of a vector off a surface that has the specified normal. 
-        /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="normal">Normal of the surface.</param>
-        /// <param name="result">When the method completes, contains the reflected vector.</param>
-        /// <remarks>Reflect only gives the direction of a reflection off a surface, it does not determine 
-        /// whether the original vector was close enough to the surface to hit it.</remarks>
-        public static void Reflect(ref Vector3 vector, ref Vector3 normal, out Vector3 result)
-        {
-            float dot = (vector.X * normal.X) + (vector.Y * normal.Y) + (vector.Z * normal.Z);
-
-            result.X = vector.X - ((2.0f * dot) * normal.X);
-            result.Y = vector.Y - ((2.0f * dot) * normal.Y);
-            result.Z = vector.Z - ((2.0f * dot) * normal.Z);
-        }
-
-        /// <summary>
-        /// Returns the reflection of a vector off a surface that has the specified normal. 
-        /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="normal">Normal of the surface.</param>
-        /// <returns>The reflected vector.</returns>
-        /// <remarks>Reflect only gives the direction of a reflection off a surface, it does not determine 
-        /// whether the original vector was close enough to the surface to hit it.</remarks>
-        public static Vector3 Reflect(Vector3 vector, Vector3 normal)
-        {
-            Vector3 result;
-            Reflect(ref vector, ref normal, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Returns the fraction of a vector off a surface that has the specified normal and index.
-        /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="normal">Normal of the surface.</param>
-        /// <param name="index">Index of refraction.</param>
-        /// <param name="result">When the method completes, contains the refracted vector.</param>
-        public static void Refract(ref Vector3 vector, ref Vector3 normal, float index, out Vector3 result)
-        {
-            float cos1;
-            Dot(ref vector, ref normal, out cos1);
-
-            float radicand = 1.0f - (index * index) * (1.0f - (cos1 * cos1));
-
-            if (radicand < 0.0f)
-            {
-                result = Vector3.Zero;
-            }
-            else
-            {
-                float cos2 = (float)Math.Sqrt(radicand);
-                result = (index * vector) + ((cos2 - index * cos1) * normal);
-            }
-        }
-
-        /// <summary>
-        /// Returns the fraction of a vector off a surface that has the specified normal and index.
-        /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="normal">Normal of the surface.</param>
-        /// <param name="index">Index of refraction.</param>
-        /// <returns>The refracted vector.</returns>
-        public static Vector3 Refract(Vector3 vector, Vector3 normal, float index)
-        {
-            Vector3 result;
-            Refract(ref vector, ref normal, index, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Orthogonalizes a list of vectors.
-        /// </summary>
-        /// <param name="destination">The list of orthogonalized vectors.</param>
-        /// <param name="source">The list of vectors to orthogonalize.</param>
-        /// <remarks>
-        /// <para>Orthogonalization is the process of making all vectors orthogonal to each other. This
-        /// means that any given vector in the list will be orthogonal to any other given vector in the
-        /// list.</para>
-        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting vectors
-        /// tend to be numerically unstable. The numeric stability decreases according to the vectors
-        /// position in the list so that the first vector is the most stable and the last vector is the
-        /// least stable.</para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Orthogonalize(Vector3[] destination, params Vector3[] source)
-        {
-            //Uses the modified Gram-Schmidt process.
-            //q1 = m1
-            //q2 = m2 - ((q1 ⋅ m2) / (q1 ⋅ q1)) * q1
-            //q3 = m3 - ((q1 ⋅ m3) / (q1 ⋅ q1)) * q1 - ((q2 ⋅ m3) / (q2 ⋅ q2)) * q2
-            //q4 = m4 - ((q1 ⋅ m4) / (q1 ⋅ q1)) * q1 - ((q2 ⋅ m4) / (q2 ⋅ q2)) * q2 - ((q3 ⋅ m4) / (q3 ⋅ q3)) * q3
-            //q5 = ...
-
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                Vector3 newvector = source[i];
-
-                for (int r = 0; r < i; ++r)
-                {
-                    newvector -= (Vector3.Dot(destination[r], newvector) / Vector3.Dot(destination[r], destination[r])) * destination[r];
-                }
-
-                destination[i] = newvector;
-            }
-        }
-
-        /// <summary>
-        /// Orthonormalizes a list of vectors.
-        /// </summary>
-        /// <param name="destination">The list of orthonormalized vectors.</param>
-        /// <param name="source">The list of vectors to orthonormalize.</param>
-        /// <remarks>
-        /// <para>Orthonormalization is the process of making all vectors orthogonal to each
-        /// other and making all vectors of unit length. This means that any given vector will
-        /// be orthogonal to any other given vector in the list.</para>
-        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting vectors
-        /// tend to be numerically unstable. The numeric stability decreases according to the vectors
-        /// position in the list so that the first vector is the most stable and the last vector is the
-        /// least stable.</para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Orthonormalize(Vector3[] destination, params Vector3[] source)
-        {
-            //Uses the modified Gram-Schmidt process.
-            //Because we are making unit vectors, we can optimize the math for orthogonalization
-            //and simplify the projection operation to remove the division.
-            //q1 = m1 / |m1|
-            //q2 = (m2 - (q1 ⋅ m2) * q1) / |m2 - (q1 ⋅ m2) * q1|
-            //q3 = (m3 - (q1 ⋅ m3) * q1 - (q2 ⋅ m3) * q2) / |m3 - (q1 ⋅ m3) * q1 - (q2 ⋅ m3) * q2|
-            //q4 = (m4 - (q1 ⋅ m4) * q1 - (q2 ⋅ m4) * q2 - (q3 ⋅ m4) * q3) / |m4 - (q1 ⋅ m4) * q1 - (q2 ⋅ m4) * q2 - (q3 ⋅ m4) * q3|
-            //q5 = ...
-
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                Vector3 newvector = source[i];
-
-                for (int r = 0; r < i; ++r)
-                {
-                    newvector -= Vector3.Dot(destination[r], newvector) * destination[r];
-                }
-
-                newvector.Normalize();
-                destination[i] = newvector;
-            }
-        }
-
-        /// <summary>
-        /// Transforms a 3D vector by the given <see cref="global::OrkCore.Quaternion"/> rotation.
-        /// </summary>
-        /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkCore.Vector4"/>.</param>
-        public static void Transform(ref Vector3 vector, ref Quaternion rotation, out Vector3 result)
-        {
-            float x = rotation.X + rotation.X;
-            float y = rotation.Y + rotation.Y;
-            float z = rotation.Z + rotation.Z;
-            float wx = rotation.W * x;
-            float wy = rotation.W * y;
-            float wz = rotation.W * z;
-            float xx = rotation.X * x;
-            float xy = rotation.X * y;
-            float xz = rotation.X * z;
-            float yy = rotation.Y * y;
-            float yz = rotation.Y * z;
-            float zz = rotation.Z * z;
-
-            float num1 = ((1.0f - yy) - zz);
-            float num2 = (xy - wz);
-            float num3 = (xz + wy);
-            float num4 = (xy + wz);
-            float num5 = ((1.0f - xx) - zz);
-            float num6 = (yz - wx);
-            float num7 = (xz - wy);
-            float num8 = (yz + wx);
-            float num9 = ((1.0f - xx) - yy);
-
-            result = new Vector3(
-                ((vector.X * num1) + (vector.Y * num2)) + (vector.Z * num3),
-                ((vector.X * num4) + (vector.Y * num5)) + (vector.Z * num6),
-                ((vector.X * num7) + (vector.Y * num8)) + (vector.Z * num9));
-        }
-
-        /// <summary>
-        /// Transforms a 3D vector by the given <see cref="global::OrkCore.Quaternion"/> rotation.
-        /// </summary>
-        /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
-        /// <returns>The transformed <see cref="global::OrkCore.Vector4"/>.</returns>
-        public static Vector3 Transform(Vector3 vector, Quaternion rotation)
-        {
-            Vector3 result;
-            Transform(ref vector, ref rotation, out result);
-            return result;
-        }
+        #endregion
 
         #region Swizzle
 
@@ -1498,547 +1207,181 @@ namespace OrkCore.Mathematics
 
         #endregion
 
-        /// <summary>
-        /// Transforms an array of vectors by the given <see cref="global::OrkCore.Quaternion"/> rotation.
-        /// </summary>
-        /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
-        /// <param name="destination">The array for which the transformed vectors are stored.
-        /// This array may be the same array as <paramref name="source"/>.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Transform(Vector3[] source, ref Quaternion rotation, Vector3[] destination)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            float x = rotation.X + rotation.X;
-            float y = rotation.Y + rotation.Y;
-            float z = rotation.Z + rotation.Z;
-            float wx = rotation.W * x;
-            float wy = rotation.W * y;
-            float wz = rotation.W * z;
-            float xx = rotation.X * x;
-            float xy = rotation.X * y;
-            float xz = rotation.X * z;
-            float yy = rotation.Y * y;
-            float yz = rotation.Y * z;
-            float zz = rotation.Z * z;
-
-            float num1 = ((1.0f - yy) - zz);
-            float num2 = (xy - wz);
-            float num3 = (xz + wy);
-            float num4 = (xy + wz);
-            float num5 = ((1.0f - xx) - zz);
-            float num6 = (yz - wx);
-            float num7 = (xz - wy);
-            float num8 = (yz + wx);
-            float num9 = ((1.0f - xx) - yy);
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                destination[i] = new Vector3(
-                    ((source[i].X * num1) + (source[i].Y * num2)) + (source[i].Z * num3),
-                    ((source[i].X * num4) + (source[i].Y * num5)) + (source[i].Z * num6),
-                    ((source[i].X * num7) + (source[i].Y * num8)) + (source[i].Z * num9));
-            }
-        }
+        #region Operators
 
         /// <summary>
-        /// Transforms a 3D vector by the given <see cref="global::OrkCore.Matrix"/>.
+        /// Adds two instances.
         /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkCore.Vector4"/>.</param>
-        public static void Transform(ref Vector3 vector, ref Matrix transform, out Vector4 result)
-        {
-            result = new Vector4(
-                (vector.X * transform.M11) + (vector.Y * transform.M21) + (vector.Z * transform.M31) + transform.M41,
-                (vector.X * transform.M12) + (vector.Y * transform.M22) + (vector.Z * transform.M32) + transform.M42,
-                (vector.X * transform.M13) + (vector.Y * transform.M23) + (vector.Z * transform.M33) + transform.M43,
-                (vector.X * transform.M14) + (vector.Y * transform.M24) + (vector.Z * transform.M34) + transform.M44);
-        }
-
-        /// <summary>
-        /// Transforms a 3D vector by the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <returns>The transformed <see cref="global::OrkCore.Vector4"/>.</returns>
-        public static Vector4 Transform(Vector3 vector, Matrix transform)
-        {
-            Vector4 result;
-            Transform(ref vector, ref transform, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Transforms an array of 3D vectors by the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="destination">The array for which the transformed vectors are stored.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Transform(Vector3[] source, ref Matrix transform, Vector4[] destination)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                Transform(ref source[i], ref transform, out destination[i]);
-            }
-        }
-
-        /// <summary>
-        /// Performs a coordinate transformation using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="coordinate">The coordinate vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="result">When the method completes, contains the transformed coordinates.</param>
-        /// <remarks>
-        /// A coordinate transform performs the transformation with the assumption that the w component
-        /// is one. The four dimensional vector obtained from the transformation operation has each
-        /// component in the vector divided by the w component. This forces the wcomponent to be one and
-        /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
-        /// with coordinates as the w component can safely be ignored.
-        /// </remarks>
-        public static void TransformCoordinate(ref Vector3 coordinate, ref Matrix transform, out Vector3 result)
-        {
-            Vector4 vector = new Vector4();
-            vector.X = (coordinate.X * transform.M11) + (coordinate.Y * transform.M21) + (coordinate.Z * transform.M31) + transform.M41;
-            vector.Y = (coordinate.X * transform.M12) + (coordinate.Y * transform.M22) + (coordinate.Z * transform.M32) + transform.M42;
-            vector.Z = (coordinate.X * transform.M13) + (coordinate.Y * transform.M23) + (coordinate.Z * transform.M33) + transform.M43;
-            vector.W = 1f / ((coordinate.X * transform.M14) + (coordinate.Y * transform.M24) + (coordinate.Z * transform.M34) + transform.M44);
-
-            result = new Vector3(vector.X * vector.W, vector.Y * vector.W, vector.Z * vector.W);
-        }
-
-        /// <summary>
-        /// Performs a coordinate transformation using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="coordinate">The coordinate vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <returns>The transformed coordinates.</returns>
-        /// <remarks>
-        /// A coordinate transform performs the transformation with the assumption that the w component
-        /// is one. The four dimensional vector obtained from the transformation operation has each
-        /// component in the vector divided by the w component. This forces the wcomponent to be one and
-        /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
-        /// with coordinates as the w component can safely be ignored.
-        /// </remarks>
-        public static Vector3 TransformCoordinate(Vector3 coordinate, Matrix transform)
-        {
-            Vector3 result;
-            TransformCoordinate(ref coordinate, ref transform, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Performs a coordinate transformation on an array of vectors using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="source">The array of coordinate vectors to trasnform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="destination">The array for which the transformed vectors are stored.
-        /// This array may be the same array as <paramref name="source"/>.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        /// <remarks>
-        /// A coordinate transform performs the transformation with the assumption that the w component
-        /// is one. The four dimensional vector obtained from the transformation operation has each
-        /// component in the vector divided by the w component. This forces the wcomponent to be one and
-        /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
-        /// with coordinates as the w component can safely be ignored.
-        /// </remarks>
-        public static void TransformCoordinate(Vector3[] source, ref Matrix transform, Vector3[] destination)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                TransformCoordinate(ref source[i], ref transform, out destination[i]);
-            }
-        }
-
-        /// <summary>
-        /// Performs a normal transformation using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="normal">The normal vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="result">When the method completes, contains the transformed normal.</param>
-        /// <remarks>
-        /// A normal transform performs the transformation with the assumption that the w component
-        /// is zero. This causes the fourth row and fourth collumn of the matrix to be unused. The
-        /// end result is a vector that is not translated, but all other transformation properties
-        /// apply. This is often prefered for normal vectors as normals purely represent direction
-        /// rather than location because normal vectors should not be translated.
-        /// </remarks>
-        public static void TransformNormal(ref Vector3 normal, ref Matrix transform, out Vector3 result)
-        {
-            result = new Vector3(
-                (normal.X * transform.M11) + (normal.Y * transform.M21) + (normal.Z * transform.M31),
-                (normal.X * transform.M12) + (normal.Y * transform.M22) + (normal.Z * transform.M32),
-                (normal.X * transform.M13) + (normal.Y * transform.M23) + (normal.Z * transform.M33));
-        }
-
-        /// <summary>
-        /// Performs a normal transformation using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="normal">The normal vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <returns>The transformed normal.</returns>
-        /// <remarks>
-        /// A normal transform performs the transformation with the assumption that the w component
-        /// is zero. This causes the fourth row and fourth collumn of the matrix to be unused. The
-        /// end result is a vector that is not translated, but all other transformation properties
-        /// apply. This is often prefered for normal vectors as normals purely represent direction
-        /// rather than location because normal vectors should not be translated.
-        /// </remarks>
-        public static Vector3 TransformNormal(Vector3 normal, Matrix transform)
-        {
-            Vector3 result;
-            TransformNormal(ref normal, ref transform, out result);
-            return result;
-        }
-
-        /// <summary>
-        /// Performs a normal transformation on an array of vectors using the given <see cref="global::OrkCore.Matrix"/>.
-        /// </summary>
-        /// <param name="source">The array of normal vectors to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="destination">The array for which the transformed vectors are stored.
-        /// This array may be the same array as <paramref name="source"/>.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        /// <remarks>
-        /// A normal transform performs the transformation with the assumption that the w component
-        /// is zero. This causes the fourth row and fourth collumn of the matrix to be unused. The
-        /// end result is a vector that is not translated, but all other transformation properties
-        /// apply. This is often prefered for normal vectors as normals purely represent direction
-        /// rather than location because normal vectors should not be translated.
-        /// </remarks>
-        public static void TransformNormal(Vector3[] source, ref Matrix transform, Vector3[] destination)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-            if (destination == null)
-                throw new ArgumentNullException("destination");
-            if (destination.Length < source.Length)
-                throw new ArgumentOutOfRangeException("destination", "The destination array must be of same length or larger length than the source array.");
-
-            for (int i = 0; i < source.Length; ++i)
-            {
-                TransformNormal(ref source[i], ref transform, out destination[i]);
-            }
-        }
-
-        /// <summary>
-        /// Adds two vectors.
-        /// </summary>
-        /// <param name="left">The first vector to add.</param>
-        /// <param name="right">The second vector to add.</param>
-        /// <returns>The sum of the two vectors.</returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns>The result of the calculation.</returns>
         public static Vector3 operator +(Vector3 left, Vector3 right)
         {
-            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            left.X += right.X;
+            left.Y += right.Y;
+            left.Z += right.Z;
+            return left;
         }
 
         /// <summary>
-        /// Assert a vector (return it unchanged).
+        /// Subtracts two instances.
         /// </summary>
-        /// <param name="value">The vector to assert (unchange).</param>
-        /// <returns>The asserted (unchanged) vector.</returns>
-        public static Vector3 operator +(Vector3 value)
-        {
-            return value;
-        }
-
-        /// <summary>
-        /// Subtracts two vectors.
-        /// </summary>
-        /// <param name="left">The first vector to subtract.</param>
-        /// <param name="right">The second vector to subtract.</param>
-        /// <returns>The difference of the two vectors.</returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns>The result of the calculation.</returns>
         public static Vector3 operator -(Vector3 left, Vector3 right)
         {
-            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            left.X -= right.X;
+            left.Y -= right.Y;
+            left.Z -= right.Z;
+            return left;
         }
 
         /// <summary>
-        /// Reverses the direction of a given vector.
+        /// Negates an instance.
         /// </summary>
-        /// <param name="value">The vector to negate.</param>
-        /// <returns>A vector facing in the opposite direction.</returns>
-        public static Vector3 operator -(Vector3 value)
+        /// <param name="vec">The instance.</param>
+        /// <returns>The result of the calculation.</returns>
+        public static Vector3 operator -(Vector3 vec)
         {
-            return new Vector3(-value.X, -value.Y, -value.Z);
+            vec.X = -vec.X;
+            vec.Y = -vec.Y;
+            vec.Z = -vec.Z;
+            return vec;
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Multiplies an instance by a scalar.
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <returns>The scaled vector.</returns>
-        public static Vector3 operator *(float scalar, Vector3 value)
+        /// <param name="vec">The instance.</param>
+        /// <param name="scale">The scalar.</param>
+        /// <returns>The result of the calculation.</returns>
+        public static Vector3 operator *(Vector3 vec, float scale)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Multiplies an instance by a scalar.
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <returns>The scaled vector.</returns>
-        public static Vector3 operator *(Vector3 value, float scalar)
+        /// <param name="scale">The scalar.</param>
+        /// <param name="vec">The instance.</param>
+        /// <returns>The result of the calculation.</returns>
+        public static Vector3 operator *(float scale, Vector3 vec)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
         }
 
         /// <summary>
-        /// Scales a vector by the given value.
+        /// Divides an instance by a scalar.
         /// </summary>
-        /// <param name="value">The vector to scale.</param>
-        /// <param name="scalar">The amount by which to scale the vector.</param>
-        /// <returns>The scaled vector.</returns>
-        public static Vector3 operator /(Vector3 value, float scalar)
+        /// <param name="vec">The instance.</param>
+        /// <param name="scale">The scalar.</param>
+        /// <returns>The result of the calculation.</returns>
+        public static Vector3 operator /(Vector3 vec, float scale)
         {
-            return new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            float mult = 1.0f / scale;
+            vec.X *= mult;
+            vec.Y *= mult;
+            vec.Z *= mult;
+            return vec;
         }
 
         /// <summary>
-        /// Tests for equality between two objects.
+        /// Compares two instances for equality.
         /// </summary>
-        /// <param name="left">The first value to compare.</param>
-        /// <param name="right">The second value to compare.</param>
-        /// <returns><c>true</c> if <paramref name="left"/> has the same value as <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns>True, if left equals right; false otherwise.</returns>
         public static bool operator ==(Vector3 left, Vector3 right)
         {
             return left.Equals(right);
         }
 
         /// <summary>
-        /// Tests for inequality between two objects.
+        /// Compares two instances for inequality.
         /// </summary>
-        /// <param name="left">The first value to compare.</param>
-        /// <param name="right">The second value to compare.</param>
-        /// <returns><c>true</c> if <paramref name="left"/> has a different value than <paramref name="right"/>; otherwise, <c>false</c>.</returns>
+        /// <param name="left">The first instance.</param>
+        /// <param name="right">The second instance.</param>
+        /// <returns>True, if left does not equa lright; false otherwise.</returns>
         public static bool operator !=(Vector3 left, Vector3 right)
         {
             return !left.Equals(right);
         }
 
-        /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector3"/> to <see cref="global::OrkCore.Vector2"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector2(Vector3 value)
-        {
-            return new Vector2(value.X, value.Y);
-        }
+        #endregion
+
+        #region Overrides
+
+        #region public override string ToString()
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector3"/> to <see cref="global::OrkCore.Vector4"/>.
+        /// Returns a System.String that represents the current Vector3.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector4(Vector3 value)
-        {
-            return new Vector4(value, 0.0f);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
-        /// </returns>
+        /// <returns></returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2}", X, Y, Z);
+            return String.Format("({0}, {1}, {2})", X, Y, Z);
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
-        /// </summary>
-        /// <param name="format">The format.</param>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
-        /// </returns>
-        public string ToString(string format)
-        {
-            if (format == null)
-                return ToString();
+        #endregion
 
-            return string.Format(CultureInfo.CurrentCulture, "X:{0} Y:{1} Z:{2}", X.ToString(format, CultureInfo.CurrentCulture), 
-                Y.ToString(format, CultureInfo.CurrentCulture), Z.ToString(format, CultureInfo.CurrentCulture));
-        }
+        #region public override int GetHashCode()
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns the hashcode for this instance.
         /// </summary>
-        /// <param name="formatProvider">The format provider.</param>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
-        /// </returns>
-        public string ToString(IFormatProvider formatProvider)
-        {
-            return string.Format(formatProvider, "X:{0} Y:{1} Z:{2}", X, Y, Z);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
-        /// </summary>
-        /// <param name="format">The format.</param>
-        /// <param name="formatProvider">The format provider.</param>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
-        /// </returns>
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (format == null)
-                return ToString(formatProvider);
-
-            return string.Format(formatProvider, "X:{0} Y:{1} Z:{2}", X.ToString(format, formatProvider),
-                Y.ToString(format, formatProvider), Z.ToString(format, formatProvider));
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
+        /// <returns>A System.Int32 containing the unique hashcode for this instance.</returns>
         public override int GetHashCode()
         {
-            return X.GetHashCode() + Y.GetHashCode() + Z.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector3"/> is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Vector3"/> to compare with this instance.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public bool Equals(Vector3 other)
-        {
-            return (this.X == other.X) && (this.Y == other.Y) && (this.Z == other.Z);
-        }
+        #endregion
+
+        #region public override bool Equals(object obj)
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector3"/> is equal to this instance.
+        /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Vector3"/> to compare with this instance.</param>
-        /// <param name="epsilon">The amount of error allowed.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public bool Equals(Vector3 other, float epsilon)
-        {
-            return ((float)Math.Abs(other.X - X) < epsilon &&
-                (float)Math.Abs(other.Y - Y) < epsilon &&
-                (float)Math.Abs(other.Z - Z) < epsilon);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <param name="obj">The object to compare to.</param>
+        /// <returns>True if the instances are equal; false otherwise.</returns>
         public override bool Equals(object obj)
         {
-            if (obj == null)
+            if (!(obj is Vector3))
                 return false;
 
-            if (obj.GetType() != GetType())
-                return false;
-
-            return Equals((Vector3)obj);
+            return this.Equals((Vector3)obj);
         }
 
-#if SlimDX1xInterop
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector3"/> to <see cref="SlimDX.Vector3"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static implicit operator SlimDX.Vector3(Vector3 value)
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region IEquatable<Vector3> Members
+
+        /// <summary>Indicates whether the current vector is equal to another vector.</summary>
+        /// <param name="other">A vector to compare with this vector.</param>
+        /// <returns>true if the current vector is equal to the vector parameter; otherwise, false.</returns>
+        public bool Equals(Vector3 other)
         {
-            return new SlimDX.Vector3(value.X, value.Y, value.Z);
+            return
+                X == other.X &&
+                Y == other.Y &&
+                Z == other.Z;
         }
 
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.Vector3"/> to <see cref="JJGECore.Vector3"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static implicit operator Vector3(SlimDX.Vector3 value)
-        {
-            return new Vector3(value.X, value.Y, value.Z);
-        }
-#endif
-
-#if WPFInterop
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector3"/> to <see cref="System.Windows.Media.Media3D.Vector3D"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static implicit operator System.Windows.Media.Media3D.Vector3D(Vector3 value)
-        {
-            return new System.Windows.Media.Media3D.Vector3D(value.X, value.Y, value.Z);
-        }
-
-        /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Windows.Media.Media3D.Vector3D"/> to <see cref="JJGECore.Vector3"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector3(System.Windows.Media.Media3D.Vector3D value)
-        {
-            return new Vector3((float)value.X, (float)value.Y, (float)value.Z);
-        }
-#endif
-
-#if XnaInterop
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector3"/> to <see cref="Microsoft.Xna.Framework.Vector3"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static implicit operator Microsoft.Xna.Framework.Vector3(Vector3 value)
-        {
-            return new Microsoft.Xna.Framework.Vector3(value.X, value.Y, value.Z);
-        }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Vector3"/> to <see cref="JJGECore.Vector3"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The result of the conversion.</returns>
-        public static implicit operator Vector3(Microsoft.Xna.Framework.Vector3 value)
-        {
-            return new Vector3(value.X, value.Y, value.Z);
-        }
-#endif
+        #endregion
     }
 }
+
+// flibit Added This!!!
+#pragma warning restore 3021

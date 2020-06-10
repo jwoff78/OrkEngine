@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
 #if NO_SYSDRAWING
     /// <summary>
