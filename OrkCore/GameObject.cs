@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 
 
-namespace OrkCore
+namespace OrkEngine
 {
     public class GameObject
     {

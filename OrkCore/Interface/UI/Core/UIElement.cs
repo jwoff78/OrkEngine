@@ -4,7 +4,7 @@ using System.Collections;
 using OpenGL;
 using OpenGL.Platform;
 
-namespace OrkCore.Interface.UI.Core
+namespace OrkEngine.Interface.UI.Core
 {
     public interface IMouseInput
     {

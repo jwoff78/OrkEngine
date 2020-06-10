@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 /* We have lots of padding fields, which we want private */
 #pragma warning disable 0169
 
-namespace SDL2
+namespace OrkEngine.Rendering
 {
 	public static class SDL
 	{

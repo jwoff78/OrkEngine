@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrkCore
+namespace OrkEngine
 {
     public class IOrkCore : IDisposable
     {

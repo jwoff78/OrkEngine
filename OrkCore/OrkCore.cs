@@ -1,4 +1,4 @@
-﻿namespace OrkCore
+﻿namespace OrkEngine
 {
     public class OrkCore : IOrkCore
     {

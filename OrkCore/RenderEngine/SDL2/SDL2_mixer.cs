@@ -31,7 +31,7 @@ using System;
 using System.Runtime.InteropServices;
 #endregion
 
-namespace SDL2
+namespace OrkEngine.Rendering
 {
 	public static class SDL_mixer
 	{

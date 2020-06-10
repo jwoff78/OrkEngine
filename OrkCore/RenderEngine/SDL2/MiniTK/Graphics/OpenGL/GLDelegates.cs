@@ -30,7 +30,7 @@ namespace OrkEngine.Rendering.Graphics.OpenGL
     using System;
     using System.Text;
     using System.Runtime.InteropServices;
-    using OrkCore.Mathematics;
+    using OrkEngine.Mathematics;
     #pragma warning disable 0649
     #pragma warning disable 3019
     #pragma warning disable 1591

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OrkCore.Interface;
+using OrkEngine.Interface;
 using System.IO;
-using OrkCore.Interface;
 using OpenGL;
 using Vec3 = OpenGL.Vector3;
 
@@ -45,7 +44,7 @@ namespace Tests
             Console.WriteLine("ELEMENTS: " + r.elements.Length);
             Console.WriteLine("UVS: " + r.uvs.Length);
 
-            gameWindow.AddRenderable(r);
+            //gameWindow.AddRenderable(r);
 
             return null;
         }

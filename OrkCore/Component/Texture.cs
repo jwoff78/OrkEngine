@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkCore.Component
+namespace OrkEngine.Component
 {
     public struct Texture : IEquatable<Texture>
     {

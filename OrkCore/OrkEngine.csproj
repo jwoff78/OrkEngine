@@ -11,7 +11,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3BB4734D-41CA-4D8C-BE8A-4CFB281DDFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>OrkCore</RootNamespace>
+    <RootNamespace>OrkEngine</RootNamespace>
     <AssemblyName>OrkEngine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -162,17 +162,6 @@
     <Compile Include="OrkCore.cs" />
     <Compile Include="Mathematics\MathHelper.cs" />
     <Compile Include="Mathematics\Quaternion.cs" />
-    <Compile Include="Mathematics\Util\BaseConverter.cs" />
-    <Compile Include="Mathematics\Util\FieldPropertyDescriptor.cs" />
-    <Compile Include="Mathematics\Util\Half2Converter.cs" />
-    <Compile Include="Mathematics\Util\Half3Converter.cs" />
-    <Compile Include="Mathematics\Util\Half4Converter.cs" />
-    <Compile Include="Mathematics\Util\HalfConverter.cs" />
-    <Compile Include="Mathematics\Util\MatrixConverter.cs" />
-    <Compile Include="Mathematics\Util\QuaternionConverter.cs" />
-    <Compile Include="Mathematics\Util\Vector2Converter.cs" />
-    <Compile Include="Mathematics\Util\Vector3Converter.cs" />
-    <Compile Include="Mathematics\Util\Vector4Converter.cs" />
     <Compile Include="Mathematics\Vector2.cs" />
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />

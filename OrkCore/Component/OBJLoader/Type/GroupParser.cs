@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkCore.Component.OBJLoader
+namespace OrkEngine.Component.OBJLoader
 {
     public class GroupParser : TypeParserBase, IGroupParser
     {

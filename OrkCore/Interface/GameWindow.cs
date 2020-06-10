@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SDL2;
 
-namespace OrkCore.Interface
+namespace OrkEngine.Interface
 {
     public class GameWindow
     {
