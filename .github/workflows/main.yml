@@ -17,6 +17,6 @@ jobs:
         with:
           dotnet-version: 2.2.108
       - name: Build with dotnet
-        run: dotnet build --configuration Release -unsafe
+        run: dotnet build -unsafe --configuration Release 
       - name: And then we test it
         run: dotnet test --verbosity normal
