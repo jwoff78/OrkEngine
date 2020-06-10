@@ -24,6 +24,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace OrkCore.Mathematics
 {
@@ -116,6 +117,23 @@ namespace OrkCore.Mathematics
             Z = z;
             W = w;
         }
+
+        #region Swizzle
+
+        /// <summary>
+        /// Gets or sets an OrkEngine.Rendering.Vector2 with the X and Y components of this instance.
+        /// </summary>
+        [XmlIgnore]
+        public Vector2 Xy { get { return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
+
+        /// <summary>
+        /// Gets or sets an OrkEngine.Rendering.Vector3 with the X, Y and Z components of this instance.
+        /// </summary>
+        [XmlIgnore]
+        public Vector3 Xyz { get { return new Vector3(X, Y, Z); } set { X = value.X; Y = value.Y; Z = value.Z; } }
+
+        #endregion
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.

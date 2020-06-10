@@ -90,6 +90,12 @@ namespace OrkCore.Mathematics
             X = x;
             Y = y;
         }
+        
+        public Vector2(Vector2 value)
+        {
+            X = value.X;
+            Y = value.Y;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="global::OrkCore.Vector2"/> struct.
@@ -153,6 +159,23 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
+        /// Gets an approximation of the vector length (magnitude).
+        /// </summary>
+        /// <remarks>
+        /// This property uses an approximation of the square root function to calculate vector magnitude, with
+        /// an upper error bound of 0.001.
+        /// </remarks>
+        /// <see cref="Length"/>
+        /// <seealso cref="LengthSquared"/>
+        public float LengthFast
+        {
+            get
+            {
+                return 1.0f / MathHelper.InverseSqrtFast(X * X + Y * Y);
+            }
+        }
+
+        /// <summary>
         /// Calculates the squared length of the vector.
         /// </summary>
         /// <remarks>
@@ -162,6 +185,59 @@ namespace OrkCore.Mathematics
         public float LengthSquared
         {
             get { return (X * X) + (Y * Y); }
+        }
+
+        /// <summary>
+        /// Gets the perpendicular vector on the right side of this vector.
+        /// </summary>
+        public Vector2 PerpendicularRight
+        {
+            get
+            {
+                return new Vector2(Y, -X);
+            }
+        }
+
+        /// <summary>
+        /// Gets the perpendicular vector on the left side of this vector.
+        /// </summary>
+        public Vector2 PerpendicularLeft
+        {
+            get
+            {
+                return new Vector2(-Y, X);
+            }
+        }
+
+        /// <summary>
+        /// Scales the current Vector2 by the given amounts.
+        /// </summary>
+        /// <param name="sx">The scale of the X component.</param>
+        /// <param name="sy">The scale of the Y component.</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(float sx, float sy)
+        {
+            this.X = X * sx;
+            this.Y = Y * sy;
+        }
+
+        /// <summary>Scales this instance by the given parameter.</summary>
+        /// <param name="scale">The scaling of the individual components.</param>
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(Vector2 scale)
+        {
+            this.X *= scale.X;
+            this.Y *= scale.Y;
+        }
+
+        /// <summary>Scales this instance by the given parameter.</summary>
+        /// <param name="scale">The scaling of the individual components.</param>
+        [CLSCompliant(false)]
+        [Obsolete("Use static Multiply() method instead.")]
+        public void Scale(ref Vector2 scale)
+        {
+            this.X *= scale.X;
+            this.Y *= scale.Y;
         }
 
         /// <summary>
@@ -207,6 +283,17 @@ namespace OrkCore.Mathematics
                 X *= inv;
                 Y *= inv;
             }
+        }
+
+        
+        /// <summary>
+        /// Scales the Vector2 to approximately unit length.
+        /// </summary>
+        public void NormalizeFast()
+        {
+            float scale = MathHelper.InverseSqrtFast(X * X + Y * Y);
+            X *= scale;
+            Y *= scale;
         }
 
         /// <summary>

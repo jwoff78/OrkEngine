@@ -24,6 +24,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace OrkCore.Mathematics
 {
@@ -167,6 +168,69 @@ namespace OrkCore.Mathematics
             get { return Math.Abs((X * X) + (Y * Y) + (Z * Z) - 1f) < Utilities.ZeroTolerance; }
         }
 
+
+        #region Normalize
+
+        /// <summary>
+        /// Scale a vector to unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <returns>The normalized vector</returns>
+        public static Vector3 Normalize(Vector3 vec)
+        {
+            float scale = 1.0f / vec.Length;
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
+        }
+
+        /// <summary>
+        /// Scale a vector to unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <param name="result">The normalized vector</param>
+        public static void Normalize(ref Vector3 vec, out Vector3 result)
+        {
+            float scale = 1.0f / vec.Length;
+            result.X = vec.X * scale;
+            result.Y = vec.Y * scale;
+            result.Z = vec.Z * scale;
+        }
+
+        #endregion
+
+        #region NormalizeFast
+
+        /// <summary>
+        /// Scale a vector to approximately unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <returns>The normalized vector</returns>
+        public static Vector3 NormalizeFast(Vector3 vec)
+        {
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
+            vec.X *= scale;
+            vec.Y *= scale;
+            vec.Z *= scale;
+            return vec;
+        }
+
+        /// <summary>
+        /// Scale a vector to approximately unit length
+        /// </summary>
+        /// <param name="vec">The input vector</param>
+        /// <param name="result">The normalized vector</param>
+        public static void NormalizeFast(ref Vector3 vec, out Vector3 result)
+        {
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
+            result.X = vec.X * scale;
+            result.Y = vec.Y * scale;
+            result.Z = vec.Z * scale;
+        }
+
+        #endregion
+
         /// <summary>
         /// Calculates the length of the vector.
         /// </summary>
@@ -178,6 +242,34 @@ namespace OrkCore.Mathematics
         {
             get { return (float)Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
         }
+
+        #region CalculateAngle
+
+        /// <summary>
+        /// Calculates the angle (in radians) between two vectors.
+        /// </summary>
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <returns>Angle (in radians) between the vectors.</returns>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static float CalculateAngle(Vector3 first, Vector3 second)
+        {
+            return (float)System.Math.Acos((Vector3.Dot(first, second)) / (first.Length * second.Length));
+        }
+
+        /// <summary>Calculates the angle (in radians) between two vectors.</summary>
+        /// <param name="first">The first vector.</param>
+        /// <param name="second">The second vector.</param>
+        /// <param name="result">Angle (in radians) between the vectors.</param>
+        /// <remarks>Note that the returned angle is never bigger than the constant Pi.</remarks>
+        public static void CalculateAngle(ref Vector3 first, ref Vector3 second, out float result)
+        {
+            float temp;
+            Vector3.Dot(ref first, ref second, out temp);
+            result = (float)System.Math.Acos(temp / (first.Length * second.Length));
+        }
+
+        #endregion
 
         /// <summary>
         /// Calculates the squared length of the vector.
@@ -637,6 +729,68 @@ namespace OrkCore.Mathematics
             return result;
         }
 
+        #region ComponentMin
+
+        /// <summary>
+        /// Calculate the component-wise minimum of two vectors
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <returns>The component-wise minimum</returns>
+        public static Vector3 ComponentMin(Vector3 a, Vector3 b)
+        {
+            a.X = a.X < b.X ? a.X : b.X;
+            a.Y = a.Y < b.Y ? a.Y : b.Y;
+            a.Z = a.Z < b.Z ? a.Z : b.Z;
+            return a;
+        }
+
+        /// <summary>
+        /// Calculate the component-wise minimum of two vectors
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <param name="result">The component-wise minimum</param>
+        public static void ComponentMin(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result.X = a.X < b.X ? a.X : b.X;
+            result.Y = a.Y < b.Y ? a.Y : b.Y;
+            result.Z = a.Z < b.Z ? a.Z : b.Z;
+        }
+
+        #endregion
+
+        #region ComponentMax
+
+        /// <summary>
+        /// Calculate the component-wise maximum of two vectors
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <returns>The component-wise maximum</returns>
+        public static Vector3 ComponentMax(Vector3 a, Vector3 b)
+        {
+            a.X = a.X > b.X ? a.X : b.X;
+            a.Y = a.Y > b.Y ? a.Y : b.Y;
+            a.Z = a.Z > b.Z ? a.Z : b.Z;
+            return a;
+        }
+
+        /// <summary>
+        /// Calculate the component-wise maximum of two vectors
+        /// </summary>
+        /// <param name="a">First operand</param>
+        /// <param name="b">Second operand</param>
+        /// <param name="result">The component-wise maximum</param>
+        public static void ComponentMax(ref Vector3 a, ref Vector3 b, out Vector3 result)
+        {
+            result.X = a.X > b.X ? a.X : b.X;
+            result.Y = a.Y > b.Y ? a.Y : b.Y;
+            result.Z = a.Z > b.Z ? a.Z : b.Z;
+        }
+
+        #endregion
+
         /// <summary>
         /// Restricts a value to be within a specified range.
         /// </summary>
@@ -832,28 +986,6 @@ namespace OrkCore.Mathematics
         public static float Dot(Vector3 left, Vector3 right)
         {
             return (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
-        }
-
-        /// <summary>
-        /// Converts the vector into a unit vector.
-        /// </summary>
-        /// <param name="value">The vector to normalize.</param>
-        /// <param name="result">When the method completes, contains the normalized vector.</param>
-        public static void Normalize(ref Vector3 value, out Vector3 result)
-        {
-            result = value;
-            result.Normalize();
-        }
-
-        /// <summary>
-        /// Converts the vector into a unit vector.
-        /// </summary>
-        /// <param name="value">The vector to normalize.</param>
-        /// <returns>The normalized vector.</returns>
-        public static Vector3 Normalize(Vector3 value)
-        {
-            value.Normalize();
-            return value;
         }
 
         /// <summary>
@@ -1355,6 +1487,16 @@ namespace OrkCore.Mathematics
             Transform(ref vector, ref rotation, out result);
             return result;
         }
+
+        #region Swizzle
+
+        /// <summary>
+        /// Gets or sets an OrkEngine.Rendering.Vector2 with the X and Y components of this instance.
+        /// </summary>
+        [XmlIgnore]
+        public Vector2 Xy { get { return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
+
+        #endregion
 
         /// <summary>
         /// Transforms an array of vectors by the given <see cref="global::OrkCore.Quaternion"/> rotation.
