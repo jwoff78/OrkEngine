@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkCore.Interface.UI.Core
+namespace OrkEngine.Interface.UI.Core
 {
     internal static class Shaders
     {

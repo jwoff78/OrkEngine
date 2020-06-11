@@ -1,17 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3BB4734D-41CA-4D8C-BE8A-4CFB281DDFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>OrkCore</RootNamespace>
+    <RootNamespace>OrkEngine</RootNamespace>
     <AssemblyName>OrkEngine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,7 +40,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,8 +56,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeraLua, Version=1.0.29.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\KeraLua.1.0.29\lib\net45\KeraLua.dll</HintPath>
+    <Reference Include="KeraLua, Version=1.2.1.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\KeraLua.1.2.1\lib\net45\KeraLua.dll</HintPath>
     </Reference>
     <Reference Include="NLua, Version=1.4.32.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.32\lib\net45\NLua.dll</HintPath>
@@ -73,6 +69,12 @@
     <Reference Include="OpenGL.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\OpenGL.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.2.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.2\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -142,6 +144,7 @@
     <Compile Include="Component\Texture.cs" />
     <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Graphics\Game.cs" />
     <Compile Include="Interface\UI\Controls\Button.cs" />
     <Compile Include="Interface\UI\Controls\CheckBox.cs" />
     <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
@@ -159,13 +162,23 @@
     <Compile Include="IOrkCore.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
-    <Compile Include="OrkCore.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
     <Compile Include="Mathematics\BoundingFrustum.cs" />
     <Compile Include="Mathematics\BoundingSphere.cs" />
     <Compile Include="Mathematics\Collision.cs" />
     <Compile Include="Mathematics\Color3.cs" />
     <Compile Include="Mathematics\Color4.cs" />
+    <Compile Include="Mathematics\Design\BaseConverter.cs" />
+    <Compile Include="Mathematics\Design\FieldPropertyDescriptor.cs" />
+    <Compile Include="Mathematics\Design\Half2Converter.cs" />
+    <Compile Include="Mathematics\Design\Half3Converter.cs" />
+    <Compile Include="Mathematics\Design\Half4Converter.cs" />
+    <Compile Include="Mathematics\Design\HalfConverter.cs" />
+    <Compile Include="Mathematics\Design\MatrixConverter.cs" />
+    <Compile Include="Mathematics\Design\QuaternionConverter.cs" />
+    <Compile Include="Mathematics\Design\Vector2Converter.cs" />
+    <Compile Include="Mathematics\Design\Vector3Converter.cs" />
+    <Compile Include="Mathematics\Design\Vector4Converter.cs" />
     <Compile Include="Mathematics\Enums.cs" />
     <Compile Include="Mathematics\Gjk.cs" />
     <Compile Include="Mathematics\Half.cs" />
@@ -179,100 +192,11 @@
     <Compile Include="Mathematics\Quaternion.cs" />
     <Compile Include="Mathematics\Ray.cs" />
     <Compile Include="Mathematics\Utilities.cs" />
-    <Compile Include="Mathematics\Util\BaseConverter.cs" />
-    <Compile Include="Mathematics\Util\FieldPropertyDescriptor.cs" />
-    <Compile Include="Mathematics\Util\Half2Converter.cs" />
-    <Compile Include="Mathematics\Util\Half3Converter.cs" />
-    <Compile Include="Mathematics\Util\Half4Converter.cs" />
-    <Compile Include="Mathematics\Util\HalfConverter.cs" />
-    <Compile Include="Mathematics\Util\MatrixConverter.cs" />
-    <Compile Include="Mathematics\Util\QuaternionConverter.cs" />
-    <Compile Include="Mathematics\Util\Vector2Converter.cs" />
-    <Compile Include="Mathematics\Util\Vector3Converter.cs" />
-    <Compile Include="Mathematics\Util\Vector4Converter.cs" />
     <Compile Include="Mathematics\Vector2.cs" />
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />
+    <Compile Include="OrkCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderEngine\Math\BezierCurve.cs" />
-    <Compile Include="RenderEngine\Math\BezierCurveCubic.cs" />
-    <Compile Include="RenderEngine\Math\BezierCurveQuadric.cs" />
-    <Compile Include="RenderEngine\Math\Box2.cs" />
-    <Compile Include="RenderEngine\Math\Functions.cs" />
-    <Compile Include="RenderEngine\Math\Half.cs" />
-    <Compile Include="RenderEngine\Math\MathHelper.cs" />
-    <Compile Include="RenderEngine\Math\Matrix3d.cs" />
-    <Compile Include="RenderEngine\Math\Matrix4.cs" />
-    <Compile Include="RenderEngine\Math\Matrix4d.cs" />
-    <Compile Include="RenderEngine\Math\Point.cs" />
-    <Compile Include="RenderEngine\Math\Quaternion.cs" />
-    <Compile Include="RenderEngine\Math\Quaterniond.cs" />
-    <Compile Include="RenderEngine\Math\Rectangle.cs" />
-    <Compile Include="RenderEngine\Math\Size.cs" />
-    <Compile Include="RenderEngine\Math\Vector2.cs" />
-    <Compile Include="RenderEngine\Math\Vector2d.cs" />
-    <Compile Include="RenderEngine\Math\Vector2h.cs" />
-    <Compile Include="RenderEngine\Math\Vector3.cs" />
-    <Compile Include="RenderEngine\Math\Vector3d.cs" />
-    <Compile Include="RenderEngine\Math\Vector3h.cs" />
-    <Compile Include="RenderEngine\Math\Vector4.cs" />
-    <Compile Include="RenderEngine\Math\Vector4d.cs" />
-    <Compile Include="RenderEngine\Math\Vector4h.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioCapture.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioContext.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioContextException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceEnumerator.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceErrorChecker.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioDeviceException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\AudioValueException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\Alc\Alc.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\Alc\AlcEnums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\AL.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\ALEnums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtension.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtensionEnums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\EffectsExtensionPresets.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Audio\OpenAL\AL\XRamExtension.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\AutoGeneratedAttribute.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\BindingsBase.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\BlittableValueType.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\ContextHandle.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\Color4.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Core.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Delegates.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Enums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\ErrorHelper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\ES.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES10\Helper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Core.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Delegates.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Enums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\ErrorHelper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\ES.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES11\Helper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Core.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Delegates.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Enums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\ErrorHelper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\ES.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\ES20\Helper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsBindingsBase.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsContextException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsContextMissingException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsErrorException.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\GraphicsExceptions.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\ErrorHelper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GL.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLCore.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLDelegates.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLEnums.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\OpenGL\GLHelper.cs" />
-    <Compile Include="RenderEngine\SDL2\MiniTK\Graphics\SDL2_GraphicsContext.cs" />
-    <Compile Include="RenderEngine\SDL2\SDL2.cs" />
-    <Compile Include="RenderEngine\SDL2\SDL2_image.cs" />
-    <Compile Include="RenderEngine\SDL2\SDL2_mixer.cs" />
-    <Compile Include="RenderEngine\SDL2\SDL2_ttf.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
@@ -280,6 +204,8 @@
     </None>
     <None Include="App.config" />
     <Compile Include="Interface\Renderable.cs" />
+    <None Include="Common.ruleset" />
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -294,29 +220,13 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Humanizer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\KeraLua.1.2.1\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.2.1\build\net45\KeraLua.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
-    <Error Condition="!Exists('..\packages\KeraLua.1.0.29\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.29\build\net45\KeraLua.targets'))" />
+    <Error Condition="!Exists('..\packages\KeraLua.1.2.1\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.2.1\build\net45\KeraLua.targets'))" />
   </Target>
-  <Import Project="..\packages\KeraLua.1.0.29\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.29\build\net45\KeraLua.targets')" />
 </Project>

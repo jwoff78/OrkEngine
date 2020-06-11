@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2007-2010 JJGECore Group
+* Copyright (c) 2007-2010 SlimMath Group
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Defines a three component vector, using half precision floating point coordinates.
@@ -53,7 +53,7 @@ namespace OrkCore.Mathematics
         public Half Z;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:JJGECore.Half3"/> structure.
+        /// Initializes a new instance of the <see cref="T:SlimMath.Half3"/> structure.
         /// </summary>
         /// <param name="x">The X component.</param>
         /// <param name="y">The Y component.</param>
@@ -66,7 +66,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:JJGECore.Half3"/> structure.
+        /// Initializes a new instance of the <see cref="T:SlimMath.Half3"/> structure.
         /// </summary>
         /// <param name="value">The value to set for the X, Y, and Z components.</param>
         public Half3(Half value)
@@ -77,7 +77,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:JJGECore.Half3"/> structure.
+        /// Initializes a new instance of the <see cref="T:SlimMath.Half3"/> structure.
         /// </summary>
         /// <param name="x">The X component.</param>
         /// <param name="y">The Y component.</param>
@@ -90,7 +90,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:JJGECore.Half3"/> structure.
+        /// Initializes a new instance of the <see cref="T:SlimMath.Half3"/> structure.
         /// </summary>
         /// <param name="value">The value to set for the X, Y, and Z components.</param>
         public Half3(float value)
@@ -99,7 +99,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Half3"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Half3"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the X, Y, and Z components of the vector. This must be an array with three elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -150,7 +150,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="T:JJGECore.Vector3"/> to <see cref="T:JJGECore.Half3"/>.
+        /// Performs an explicit conversion from <see cref="T:SlimMath.Vector3"/> to <see cref="T:SlimMath.Half3"/>.
         /// </summary>
         /// <param name="value">The value to be converted.</param>
         /// <returns>The converted value.</returns>
@@ -160,7 +160,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="T:JJGECore.Half3"/> to <see cref="T:JJGECore.Vector3"/>.
+        /// Performs an implicit conversion from <see cref="T:SlimMath.Half3"/> to <see cref="T:SlimMath.Vector3"/>.
         /// </summary>
         /// <param name="value">The value to be converted.</param>
         /// <returns>The converted value.</returns>

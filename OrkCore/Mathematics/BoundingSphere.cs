@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a bounding sphere in three dimensional space.
@@ -45,7 +45,7 @@ namespace OrkCore.Mathematics
         public float Radius;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.BoundingBox"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.BoundingBox"/> struct.
         /// </summary>
         /// <param name="center">The center of the sphere.</param>
         /// <param name="radius">The radius of the sphere.</param>
@@ -56,7 +56,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.BoundingBox"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.BoundingBox"/> struct.
         /// </summary>
         /// <param name="centerX">The x-coordinate for the center of the sphere.</param>
         /// <param name="centerY">The y-coordinate for the center of the sphere.</param>
@@ -69,7 +69,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -80,7 +80,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -92,11 +92,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Ray ray, out Vector3 point)
         {
@@ -104,7 +104,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -126,7 +126,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -136,7 +136,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -168,7 +168,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the current objects contains a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether the current objects contains a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>The type of containment the two objects have.</returns>
@@ -178,7 +178,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the current objects contains a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether the current objects contains a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>The type of containment the two objects have.</returns>
@@ -188,10 +188,10 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Translates and scales this instance by a <see cref="global::OrkCore.Matrix"/>.
+        /// Translates and scales this instance by a <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
-        /// <param name="matrix">The <see cref="global::OrkCore.Matrix"/> to transform this instance by.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkCore.BoundingSphere"/>.</param>
+        /// <param name="matrix">The <see cref="OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.BoundingSphere"/>.</param>
         /// <remarks>
         /// The result of this operation is undefined if the matrix contains any transformations other than
         /// translation, rotation, and uniform scaling.
@@ -203,17 +203,17 @@ namespace OrkCore.Mathematics
             float row1 = (matrix.M11 * matrix.M11) + (matrix.M12 * matrix.M12) + (matrix.M13 * matrix.M13);
             float row2 = (matrix.M21 * matrix.M21) + (matrix.M22 * matrix.M22) + (matrix.M23 * matrix.M23);
             float row3 = (matrix.M31 * matrix.M31) + (matrix.M32 * matrix.M32) + (matrix.M33 * matrix.M33);
-            float num = System.Math.Max(row1, System.Math.Max(row2, row3));
+            float num = Math.Max(row1, Math.Max(row2, row3));
 
-            result.Radius = Radius * (float)System.Math.Sqrt(num);
+            result.Radius = Radius * (float)Math.Sqrt(num);
 
         }
 
         /// <summary>
-        /// Translates and scales this instance by a <see cref="global::OrkCore.Matrix"/>.
+        /// Translates and scales this instance by a <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
-        /// <param name="matrix">The <see cref="global::OrkCore.Matrix"/> to transform this instance by.</param>
-        /// <returns>The transformed <see cref="global::OrkCore.BoundingSphere"/>.</returns>
+        /// <param name="matrix">The <see cref="OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
+        /// <returns>The transformed <see cref="OrkEngine.Mathematics.BoundingSphere"/>.</returns>
         /// <remarks>
         /// The result of this operation is undefined if the matrix contains any transformations other than
         /// translation, rotation, and uniform scaling.
@@ -248,7 +248,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> that fully contains the given points.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
         /// </summary>
         /// <param name="points">The points that will be contained by the sphere.</param>
         /// <param name="result">When the method completes, contains the newly constructed bounding sphere.</param>
@@ -278,7 +278,7 @@ namespace OrkCore.Mathematics
             }
 
             //Find the real distance from the DistanceSquared.
-            radius = (float)System.Math.Sqrt(radius);
+            radius = (float)Math.Sqrt(radius);
 
             //Construct the sphere.
             result.Center = center;
@@ -286,7 +286,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> that fully contains the given points.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
         /// </summary>
         /// <param name="points">The points that will be contained by the sphere.</param>
         /// <returns>The newly constructed bounding sphere.</returns>
@@ -298,7 +298,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> from a given box.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> from a given box.
         /// </summary>
         /// <param name="box">The box that will designate the extents of the sphere.</param>
         /// <param name="result">When the method completes, the newly constructed bounding sphere.</param>
@@ -310,12 +310,12 @@ namespace OrkCore.Mathematics
             float y = box.Minimum.Y - box.Maximum.Y;
             float z = box.Minimum.Z - box.Maximum.Z;
 
-            float distance = (float)(System.Math.Sqrt((x * x) + (y * y) + (z * z)));
+            float distance = (float)(Math.Sqrt((x * x) + (y * y) + (z * z)));
             result.Radius = distance * 0.5f;
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> from a given box.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> from a given box.
         /// </summary>
         /// <param name="box">The box that will designate the extents of the sphere.</param>
         /// <returns>The newly constructed bounding sphere.</returns>
@@ -327,7 +327,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
         /// </summary>
         /// <param name="value1">The first sphere to merge.</param>
         /// <param name="value2">The second sphere to merge.</param>
@@ -356,15 +356,15 @@ namespace OrkCore.Mathematics
             }
 
             Vector3 vector = difference * (1.0f / length);
-            float min = System.Math.Min(-radius, length - radius2);
-            float max = (System.Math.Max(radius, length + radius2) - min) * 0.5f;
+            float min = Math.Min(-radius, length - radius2);
+            float max = (Math.Max(radius, length + radius2) - min) * 0.5f;
 
             result.Center = value1.Center + vector * (max + min);
             result.Radius = max;
         }
 
         /// <summary>
-        /// Constructs a <see cref="global::OrkCore.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
+        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
         /// </summary>
         /// <param name="value1">The first sphere to merge.</param>
         /// <param name="value2">The second sphere to merge.</param>
@@ -466,11 +466,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="value">The <see cref="global::OrkCore.Vector4"/> to compare with this instance.</param>
+        /// <param name="value">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(BoundingSphere value)
         {
@@ -497,7 +497,7 @@ namespace OrkCore.Mathematics
 
 #if SlimDX1xInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.BoundingSphere"/> to <see cref="SlimDX.BoundingSphere"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.BoundingSphere"/> to <see cref="SlimDX.BoundingSphere"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -507,7 +507,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.BoundingSphere"/> to <see cref="JJGECore.BoundingSphere"/>.
+        /// Performs an implicit conversion from <see cref="SlimDX.BoundingSphere"/> to <see cref="SlimMath.BoundingSphere"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -519,7 +519,7 @@ namespace OrkCore.Mathematics
 
 #if XnaInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.BoundingSphere"/> to <see cref="Microsoft.Xna.Framework.BoundingSphere"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.BoundingSphere"/> to <see cref="Microsoft.Xna.Framework.BoundingSphere"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -529,7 +529,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.BoundingSphere"/> to <see cref="JJGECore.BoundingSphere"/>.
+        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.BoundingSphere"/> to <see cref="SlimMath.BoundingSphere"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>

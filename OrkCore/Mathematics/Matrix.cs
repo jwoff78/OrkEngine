@@ -27,28 +27,28 @@ using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a 4x4 mathematical matrix.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    [TypeConverter(typeof(Util.MatrixConverter))]
+    [TypeConverter(typeof(OrkEngine.Mathematics.Design.MatrixConverter))]
     public struct Matrix : IEquatable<Matrix>, IFormattable
     {
         /// <summary>
-        /// The size of the <see cref="global::OrkCore.Matrix"/> type, in bytes.
+        /// The size of the <see cref="OrkEngine.Mathematics.Matrix"/> type, in bytes.
         /// </summary>
         public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Matrix));
 
         /// <summary>
-        /// A <see cref="global::OrkCore.Matrix"/> with all of its components set to zero.
+        /// A <see cref="OrkEngine.Mathematics.Matrix"/> with all of its components set to zero.
         /// </summary>
         public static readonly Matrix Zero = new Matrix();
 
         /// <summary>
-        /// The identity <see cref="global::OrkCore.Matrix"/>.
+        /// The identity <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         public static readonly Matrix Identity = new Matrix() { M11 = 1.0f, M22 = 1.0f, M33 = 1.0f, M44 = 1.0f };
 
@@ -133,7 +133,7 @@ namespace OrkCore.Mathematics
         public float M44;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Matrix(float value)
@@ -145,7 +145,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="M11">The value to assign at row 1 column 1 of the matrix.</param>
         /// <param name="M12">The value to assign at row 1 column 2 of the matrix.</param>
@@ -175,7 +175,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the components of the matrix. This must be an array with sixteen elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -567,14 +567,14 @@ namespace OrkCore.Mathematics
             translation.Z = this.M43;
 
             //Scaling is the length of the rows.
-            scale.X = (float)System.Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
-            scale.Y = (float)System.Math.Sqrt((M21 * M21) + (M22 * M22) + (M23 * M23));
-            scale.Z = (float)System.Math.Sqrt((M31 * M31) + (M32 * M32) + (M33 * M33));
+            scale.X = (float)Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
+            scale.Y = (float)Math.Sqrt((M21 * M21) + (M22 * M22) + (M23 * M23));
+            scale.Z = (float)Math.Sqrt((M31 * M31) + (M32 * M32) + (M33 * M33));
 
             //If any of the scaling factors are zero, than the rotation matrix can not exist.
-            if (System.Math.Abs(scale.X) < Utilities.ZeroTolerance ||
-                System.Math.Abs(scale.Y) < Utilities.ZeroTolerance ||
-                System.Math.Abs(scale.Z) < Utilities.ZeroTolerance)
+            if (Math.Abs(scale.X) < Utilities.ZeroTolerance ||
+                Math.Abs(scale.Y) < Utilities.ZeroTolerance ||
+                Math.Abs(scale.Z) < Utilities.ZeroTolerance)
             {
                 rotation = Quaternion.Identity;
                 return false;
@@ -1168,7 +1168,7 @@ namespace OrkCore.Mathematics
             float d14 = value.M21 * b3 + value.M22 * -b1 + value.M23 * b0;
 
             float det = value.M11 * d11 - value.M12 * d12 + value.M13 * d13 - value.M14 * d14;
-            if (System.Math.Abs(det) <= Utilities.ZeroTolerance)
+            if (Math.Abs(det) <= Utilities.ZeroTolerance)
             {
                 result = Matrix.Zero;
                 return;
@@ -1372,7 +1372,7 @@ namespace OrkCore.Mathematics
 
                 int i = r;
 
-                while (System.Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
+                while (Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
                 {
                     i++;
 
@@ -1454,7 +1454,7 @@ namespace OrkCore.Mathematics
 
                 int i = r;
 
-                while (System.Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
+                while (Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
                 {
                     i++;
 
@@ -1532,7 +1532,7 @@ namespace OrkCore.Mathematics
 
                 int i = r;
 
-                while (System.Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
+                while (Math.Abs(result[i, lead]) < Utilities.ZeroTolerance)
                 {
                     i++;
 
@@ -1727,7 +1727,7 @@ namespace OrkCore.Mathematics
             if (lengthsq < Utilities.ZeroTolerance)
                 difference = -cameraForwardVector;
             else
-                difference *= (float)(1.0 / System.Math.Sqrt(lengthsq));
+                difference *= (float)(1.0 / Math.Sqrt(lengthsq));
 
             Vector3.Cross(ref cameraUpVector, ref difference, out crossed);
             crossed.Normalize();
@@ -2057,7 +2057,7 @@ namespace OrkCore.Mathematics
         /// <param name="result">When the method completes, contains the created projection matrix.</param>
         public static void PerspectiveFovLH(float fov, float aspect, float znear, float zfar, out Matrix result)
         {
-            float yScale = (float)(1.0 / System.Math.Tan(fov * 0.5f));
+            float yScale = (float)(1.0 / Math.Tan(fov * 0.5f));
             float xScale = yScale / aspect;
 
             float halfWidth = znear / xScale;
@@ -3007,11 +3007,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Matrix"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Matrix"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Matrix other)
         {
@@ -3037,12 +3037,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Matrix"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Matrix"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
         /// <param name="epsilon">The amount of error allowed.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Matrix other, float epsilon)
         {
@@ -3087,7 +3087,7 @@ namespace OrkCore.Mathematics
 
 #if SlimDX1xInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Matrix"/> to <see cref="SlimDX.Matrix"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Matrix"/> to <see cref="SlimDX.Matrix"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -3103,7 +3103,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.Matrix"/> to <see cref="JJGECore.Matrix"/>.
+        /// Performs an implicit conversion from <see cref="SlimDX.Matrix"/> to <see cref="SlimMath.Matrix"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -3121,7 +3121,7 @@ namespace OrkCore.Mathematics
 
 #if WPFInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Matrix"/> to <see cref="System.Windows.Media.Media3D.Matrix3D"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Matrix"/> to <see cref="System.Windows.Media.Media3D.Matrix3D"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -3137,7 +3137,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Windows.Media.Media3D.Matrix3D"/> to <see cref="JJGECore.Matrix"/>.
+        /// Performs an explicit conversion from <see cref="System.Windows.Media.Media3D.Matrix3D"/> to <see cref="SlimMath.Matrix"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -3155,7 +3155,7 @@ namespace OrkCore.Mathematics
 
 #if XnaInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Matrix"/> to <see cref="Microsoft.Xna.Framework.Matrix"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Matrix"/> to <see cref="Microsoft.Xna.Framework.Matrix"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -3171,7 +3171,7 @@ namespace OrkCore.Mathematics
         }
 
                 /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Matrix"/> to <see cref="JJGECore.Matrix"/>.
+        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Matrix"/> to <see cref="SlimMath.Matrix"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>

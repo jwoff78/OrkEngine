@@ -26,7 +26,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /*
      * This class is organized so that the least complex objects come first so that the least
@@ -81,7 +81,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the closest point between a <see cref="global::OrkCore.Plane"/> and a point.
+        /// Determines the closest point between a <see cref="OrkEngine.Mathematics.Plane"/> and a point.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="point">The point to test.</param>
@@ -179,7 +179,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the closest point between a <see cref="global::OrkCore.BoundingBox"/> and a point.
+        /// Determines the closest point between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a point.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="point">The point to test.</param>
@@ -195,12 +195,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the closest point between a <see cref="global::OrkCore.BoundingSphere"/> and a point.
+        /// Determines the closest point between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a point.
         /// </summary>
         /// <param name="sphere"></param>
         /// <param name="point">The point to test.</param>
         /// <param name="result">When the method completes, contains the closest point between the two objects;
-        /// or, if the point is directly in the center of the sphere, contains <see cref="OrkCore.Vector3.Zero"/>.</param>
+        /// or, if the point is directly in the center of the sphere, contains <see cref="OrkEngine.Mathematics.Vector3.Zero"/>.</param>
         public static void ClosestPointOnSphereToPoint(ref BoundingSphere sphere, ref Vector3 point, out Vector3 result)
         {
             //Source: Jorgy343
@@ -219,12 +219,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the closest point between a <see cref="global::OrkCore.BoundingSphere"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines the closest point between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere1">The first sphere to test.</param>
         /// <param name="sphere2">The second sphere to test.</param>
         /// <param name="result">When the method completes, contains the closest point between the two objects;
-        /// or, if the point is directly in the center of the sphere, contains <see cref="OrkCore.Vector3.Zero"/>.</param>
+        /// or, if the point is directly in the center of the sphere, contains <see cref="OrkEngine.Mathematics.Vector3.Zero"/>.</param>
         /// <remarks>
         /// If the two spheres are overlapping, but not directly ontop of each other, the closest point
         /// is the 'closest' point of intersection. This can also be considered is the deepest point of
@@ -248,7 +248,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the distance between a <see cref="global::OrkCore.Plane"/> and a point.
+        /// Determines the distance between a <see cref="OrkEngine.Mathematics.Plane"/> and a point.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="point">The point to test.</param>
@@ -264,7 +264,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines the distance between a <see cref="global::OrkCore.BoundingBox"/> and a point.
+        /// Determines the distance between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a point.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="point">The point to test.</param>
@@ -291,11 +291,11 @@ namespace OrkCore.Mathematics
             if (point.Z > box.Maximum.Z)
                 distance += (point.Z - box.Maximum.Z) * (point.Z - box.Maximum.Z);
 
-            return (float)System.Math.Sqrt(distance);
+            return (float)Math.Sqrt(distance);
         }
 
         /// <summary>
-        /// Determines the distance between a <see cref="global::OrkCore.BoundingBox"/> and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines the distance between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box1">The first box to test.</param>
         /// <param name="box2">The second box to test.</param>
@@ -340,11 +340,11 @@ namespace OrkCore.Mathematics
                 distance += delta * delta;
             }
 
-            return (float)System.Math.Sqrt(distance);
+            return (float)Math.Sqrt(distance);
         }
 
         /// <summary>
-        /// Determines the distance between a <see cref="global::OrkCore.BoundingSphere"/> and a point.
+        /// Determines the distance between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a point.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="point">The point to test.</param>
@@ -358,11 +358,11 @@ namespace OrkCore.Mathematics
             Vector3.Distance(ref sphere.Center, ref point, out distance);
             distance -= sphere.Radius;
 
-            return System.Math.Max(distance, 0f);
+            return Math.Max(distance, 0f);
         }
 
         /// <summary>
-        /// Determines the distance between a <see cref="global::OrkCore.BoundingSphere"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines the distance between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere1">The first sphere to test.</param>
         /// <param name="sphere2">The second sphere to test.</param>
@@ -376,11 +376,11 @@ namespace OrkCore.Mathematics
             Vector3.Distance(ref sphere1.Center, ref sphere2.Center, out distance);
             distance -= sphere1.Radius + sphere2.Radius;
 
-            return System.Math.Max(distance, 0f);
+            return Math.Max(distance, 0f);
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a point.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a point.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="point">The point to test.</param>
@@ -410,12 +410,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray1">The first ray to test.</param>
         /// <param name="ray2">The second ray to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersect.</returns>
         /// <remarks>
         /// This method performs a ray vs ray intersection test based on the following formula
@@ -438,12 +438,12 @@ namespace OrkCore.Mathematics
             float denominator = cross.Length;
             
             //Lines are parallel.
-            if (System.Math.Abs(denominator) < Utilities.ZeroTolerance)
+            if (Math.Abs(denominator) < Utilities.ZeroTolerance)
             {
                 //Lines are parallel and on top of each other.
-                if (System.Math.Abs(ray2.Position.X - ray1.Position.X) < Utilities.ZeroTolerance &&
-                    System.Math.Abs(ray2.Position.Y - ray1.Position.Y) < Utilities.ZeroTolerance &&
-                    System.Math.Abs(ray2.Position.Z - ray1.Position.Z) < Utilities.ZeroTolerance)
+                if (Math.Abs(ray2.Position.X - ray1.Position.X) < Utilities.ZeroTolerance &&
+                    Math.Abs(ray2.Position.Y - ray1.Position.Y) < Utilities.ZeroTolerance &&
+                    Math.Abs(ray2.Position.Z - ray1.Position.Z) < Utilities.ZeroTolerance)
                 {
                     point = Vector3.Zero;
                     return true;
@@ -495,9 +495,9 @@ namespace OrkCore.Mathematics
             Vector3 point2 = ray2.Position + (t * ray2.Direction);
 
             //If the points are not equal, no intersection has occured.
-            if (System.Math.Abs(point2.X - point1.X) > Utilities.ZeroTolerance ||
-                System.Math.Abs(point2.Y - point1.Y) > Utilities.ZeroTolerance ||
-                System.Math.Abs(point2.Z - point1.Z) > Utilities.ZeroTolerance)
+            if (Math.Abs(point2.X - point1.X) > Utilities.ZeroTolerance ||
+                Math.Abs(point2.Y - point1.Y) > Utilities.ZeroTolerance ||
+                Math.Abs(point2.Z - point1.Z) > Utilities.ZeroTolerance)
             {
                 point = Vector3.Zero;
                 return false;
@@ -508,7 +508,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="plane">The plane to test.</param>
@@ -523,7 +523,7 @@ namespace OrkCore.Mathematics
             float direction;
             Vector3.Dot(ref plane.Normal, ref ray.Direction, out direction);
 
-            if (System.Math.Abs(direction) < Utilities.ZeroTolerance)
+            if (Math.Abs(direction) < Utilities.ZeroTolerance)
             {
                 distance = 0f;
                 return false;
@@ -548,12 +548,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="plane">The plane to test</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public static bool RayIntersectsPlane(ref Ray ray, ref Plane plane, out Vector3 point)
         {
@@ -572,7 +572,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a triangle.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a triangle.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -679,14 +679,14 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a triangle.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a triangle.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
         /// <param name="vertex2">The second vertex of the triagnle to test.</param>
         /// <param name="vertex3">The third vertex of the triangle to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public static bool RayIntersectsTriangle(ref Ray ray, ref Vector3 vertex1, ref Vector3 vertex2, ref Vector3 vertex3, out Vector3 point)
         {
@@ -702,7 +702,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="box">The box to test.</param>
@@ -717,7 +717,7 @@ namespace OrkCore.Mathematics
             distance = 0f;
             float tmax = float.MaxValue;
 
-            if (System.Math.Abs(ray.Direction.X) < Utilities.ZeroTolerance)
+            if (Math.Abs(ray.Direction.X) < Utilities.ZeroTolerance)
             {
                 if (ray.Position.X < box.Minimum.X || ray.Position.X > box.Maximum.X)
                 {
@@ -738,8 +738,8 @@ namespace OrkCore.Mathematics
                     t2 = temp;
                 }
 
-                distance = System.Math.Max(t1, distance);
-                tmax = System.Math.Min(t2, tmax);
+                distance = Math.Max(t1, distance);
+                tmax = Math.Min(t2, tmax);
 
                 if (distance > tmax)
                 {
@@ -748,7 +748,7 @@ namespace OrkCore.Mathematics
                 }
             }
 
-            if (System.Math.Abs(ray.Direction.Y) < Utilities.ZeroTolerance)
+            if (Math.Abs(ray.Direction.Y) < Utilities.ZeroTolerance)
             {
                 if (ray.Position.Y < box.Minimum.Y || ray.Position.Y > box.Maximum.Y)
                 {
@@ -769,8 +769,8 @@ namespace OrkCore.Mathematics
                     t2 = temp;
                 }
 
-                distance = System.Math.Max(t1, distance);
-                tmax = System.Math.Min(t2, tmax);
+                distance = Math.Max(t1, distance);
+                tmax = Math.Min(t2, tmax);
 
                 if (distance > tmax)
                 {
@@ -779,7 +779,7 @@ namespace OrkCore.Mathematics
                 }
             }
 
-            if (System.Math.Abs(ray.Direction.Z) < Utilities.ZeroTolerance)
+            if (Math.Abs(ray.Direction.Z) < Utilities.ZeroTolerance)
             {
                 if (ray.Position.Z < box.Minimum.Z || ray.Position.Z > box.Maximum.Z)
                 {
@@ -800,8 +800,8 @@ namespace OrkCore.Mathematics
                     t2 = temp;
                 }
 
-                distance = System.Math.Max(t1, distance);
-                tmax = System.Math.Min(t2, tmax);
+                distance = Math.Max(t1, distance);
+                tmax = Math.Min(t2, tmax);
 
                 if (distance > tmax)
                 {
@@ -814,12 +814,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="box">The box to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public static bool RayIntersectsBox(ref Ray ray, ref BoundingBox box, out Vector3 point)
         {
@@ -835,7 +835,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="sphere">The sphere to test.</param>
@@ -896,7 +896,7 @@ namespace OrkCore.Mathematics
                 return false;
             }
 
-            distance = -b - (float)System.Math.Sqrt(discriminant);
+            distance = -b - (float)Math.Sqrt(discriminant);
 
             if (distance < 0f)
                 distance = 0f;
@@ -905,12 +905,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.BoundingSphere"/>. 
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>. 
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         /// <remarks>
         /// <para>
@@ -958,12 +958,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.BoundingSphere"/>. 
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>. 
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <param name="normal">When the method completes, contains the normal vector on the
         /// sphere at the point of intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -1016,16 +1016,16 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Ray"/> and a <see cref="global::OrkCore.BoundingSphere"/>. 
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Ray"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>. 
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="entrancePoint">When the method completes, contains the closest point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <param name="entranceNormal">When the method completes, contains the normal vector on the
         /// sphere at the point of closest intersection.</param>
         /// <param name="exitPoint">When the method completes, contains the farthest point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <param name="exitNormal">Whent he method completes, contains the normal vector on the
         /// sphere at the point of farthest intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -1089,7 +1089,7 @@ namespace OrkCore.Mathematics
                 return false;
             }
 
-            float discriminantSquared = (float)System.Math.Sqrt(discriminant);
+            float discriminantSquared = (float)Math.Sqrt(discriminant);
             float distance1 = -b - discriminantSquared;
             float distance2 = -b + discriminantSquared;
 
@@ -1114,7 +1114,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a point.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a point.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="point">The point to test.</param>
@@ -1135,7 +1135,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane1">The first plane to test.</param>
         /// <param name="plane2">The second plane to test.</param>
@@ -1150,19 +1150,19 @@ namespace OrkCore.Mathematics
             float denominator;
             Vector3.Dot(ref direction, ref direction, out denominator);
 
-            if (System.Math.Abs(denominator) < Utilities.ZeroTolerance)
+            if (Math.Abs(denominator) < Utilities.ZeroTolerance)
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane1">The first plane to test.</param>
         /// <param name="plane2">The second plane to test.</param>
         /// <param name="line">When the method completes, contains the line of intersection
-        /// as a <see cref="global::OrkCore.Ray"/>, or a zero ray if there was no intersection.</param>
+        /// as a <see cref="OrkEngine.Mathematics.Ray"/>, or a zero ray if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         /// <remarks>
         /// Although a ray is set to have an origin, the ray returned by this method is really
@@ -1185,7 +1185,7 @@ namespace OrkCore.Mathematics
             //We assume the planes are normalized, therefore the denominator
             //only serves as a parallel and coincident check. Otherwise we need
             //to deivide the point by the denominator.
-            if (System.Math.Abs(denominator) < Utilities.ZeroTolerance)
+            if (Math.Abs(denominator) < Utilities.ZeroTolerance)
             {
                 line = new Ray();
                 return false;
@@ -1203,7 +1203,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a triangle.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a triangle.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -1229,7 +1229,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="box">The box to test.</param>
@@ -1264,7 +1264,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.Plane"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.Plane"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="sphere">The sphere to test.</param>
@@ -1290,7 +1290,7 @@ namespace OrkCore.Mathematics
         //THIS IMPLEMENTATION IS INCOMPLETE!
         //NEEDS TO BE COMPLETED SOON
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.BoundingBox"/> and a triangle.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a triangle.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -1324,9 +1324,9 @@ namespace OrkCore.Mathematics
             //Test axis a00
             p0 = vertex1.Z * vertex2.Y - vertex1.Y * vertex2.Z;
             p2 = vertex3.Z * (vertex2.Y - vertex1.Y) - vertex3.Z * (vertex2.Z - vertex1.Z);
-            r = e1 * System.Math.Abs(f0.Z) + e2 * System.Math.Abs(f0.Y);
+            r = e1 * Math.Abs(f0.Z) + e2 * Math.Abs(f0.Y);
 
-            if (System.Math.Max(-System.Math.Max(p0, p2), System.Math.Min(p0, p2)) > r)
+            if (Math.Max(-Math.Max(p0, p2), Math.Min(p0, p2)) > r)
                 return false; //Axis is a separating axis
 
             //Repeat similar tests for remaining axes a01..a22
@@ -1335,15 +1335,15 @@ namespace OrkCore.Mathematics
             //Test the three axes corresponding to the face normals of AABB b (category 1).
             //Exit if...
             // ... [-e0, e0] and [Math.Min(vertex1.X,vertex2.X,vertex3.X), Math.Max(vertex1.X,vertex2.X,vertex3.X)] do not overlap
-            if (System.Math.Max(System.Math.Max(vertex1.X, vertex2.X), vertex3.X) < -e0 || System.Math.Min(System.Math.Min(vertex1.X, vertex2.X), vertex3.X) > e0)
+            if (Math.Max(Math.Max(vertex1.X, vertex2.X), vertex3.X) < -e0 || Math.Min(Math.Min(vertex1.X, vertex2.X), vertex3.X) > e0)
                 return false;
 
             // ... [-e1, e1] and [Math.Min(vertex1.Y,vertex2.Y,vertex3.Y), Math.Max(vertex1.Y,vertex2.Y,vertex3.Y)] do not overlap
-            if (System.Math.Max(System.Math.Max(vertex1.Y, vertex2.Y), vertex3.Y) < -e1 || System.Math.Min(System.Math.Min(vertex1.Y, vertex2.Y), vertex3.Y) > e1)
+            if (Math.Max(Math.Max(vertex1.Y, vertex2.Y), vertex3.Y) < -e1 || Math.Min(Math.Min(vertex1.Y, vertex2.Y), vertex3.Y) > e1)
                 return false;
 
             // ... [-e2, e2] and [Math.Min(vertex1.Z,vertex2.Z,vertex3.Z), Math.Max(vertex1.Z,vertex2.Z,vertex3.Z)] do not overlap
-            if (System.Math.Max(System.Math.Max(vertex1.Z, vertex2.Z), vertex3.Z) < -e2 || System.Math.Min(System.Math.Min(vertex1.Z, vertex2.Z), vertex3.Z) > e2)
+            if (Math.Max(Math.Max(vertex1.Z, vertex2.Z), vertex3.Z) < -e2 || Math.Min(Math.Min(vertex1.Z, vertex2.Z), vertex3.Z) > e2)
                 return false;
 
             //Test separating axis corresponding to triangle face normal (category 2)
@@ -1355,7 +1355,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.BoundingBox"/> and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box1">The first box to test.</param>
         /// <param name="box2">The second box to test.</param>
@@ -1375,7 +1375,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.BoundingBox"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.BoundingBox"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="sphere">The sphere to test.</param>
@@ -1393,7 +1393,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.BoundingSphere"/> and a triangle.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a triangle.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -1416,7 +1416,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether there is an intersection between a <see cref="global::OrkCore.BoundingSphere"/> and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether there is an intersection between a <see cref="OrkEngine.Mathematics.BoundingSphere"/> and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere1">First sphere to test.</param>
         /// <param name="sphere2">Second sphere to test.</param>
@@ -1428,7 +1428,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingBox"/> contains a point.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingBox"/> contains a point.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="point">The point to test.</param>
@@ -1446,7 +1446,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingBox"/> contains a triangle.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingBox"/> contains a triangle.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -1469,7 +1469,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingBox"/> contains a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingBox"/> contains a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box1">The first box to test.</param>
         /// <param name="box2">The second box to test.</param>
@@ -1496,7 +1496,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingBox"/> contains a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingBox"/> contains a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="sphere">The sphere to test.</param>
@@ -1521,7 +1521,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingSphere"/> contains a point.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingSphere"/> contains a point.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="point">The point to test.</param>
@@ -1535,7 +1535,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingSphere"/> contains a triangle.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingSphere"/> contains a triangle.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="vertex1">The first vertex of the triangle to test.</param>
@@ -1561,7 +1561,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingSphere"/> contains a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingSphere"/> contains a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="box">The box to test.</param>
@@ -1634,7 +1634,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether a <see cref="global::OrkCore.BoundingSphere"/> contains a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines whether a <see cref="OrkEngine.Mathematics.BoundingSphere"/> contains a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere1">The first sphere to test.</param>
         /// <param name="sphere2">The second sphere to test.</param>
@@ -1675,7 +1675,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Generates a supporting point from a specific <see cref="global::OrkCore.BoundingBox"/>.
+        /// Generates a supporting point from a specific <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to generate the supporting point for.</param>
         /// <param name="direction">The direction for which to build the supporting point.</param>
@@ -1688,7 +1688,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Generates a supporting point from a specific <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Generates a supporting point from a specific <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to generate the supporting point for.</param>
         /// <param name="direction">The direction for which to build the supporting point.</param>

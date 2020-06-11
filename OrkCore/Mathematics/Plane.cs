@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a plane in three dimensional space.
@@ -45,7 +45,7 @@ namespace OrkCore.Mathematics
         public float D;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Plane(float value)
@@ -54,7 +54,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="a">The X component of the normal.</param>
         /// <param name="b">The Y component of the normal.</param>
@@ -69,7 +69,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="value">The normal of the plane.</param>
         /// <param name="d">The distance of the plane along its normal from the origin</param>
@@ -80,7 +80,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="point">Any point that lies along the plane.</param>
         /// <param name="normal">The normal of the plane.</param>
@@ -91,7 +91,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="point1">First point of a triangle defining the plane.</param>
         /// <param name="point2">Second point of a triangle defining the plane.</param>
@@ -116,7 +116,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Plane"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Plane"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the A, B, C, and D components of the plane. This must be an array with four elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -202,7 +202,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -213,7 +213,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -225,11 +225,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Ray ray, out Vector3 point)
         {
@@ -237,7 +237,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -247,11 +247,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="line">When the method completes, contains the line of intersection
-        /// as a <see cref="global::OrkCore.Ray"/>, or a zero ray if there was no intersection.</param>
+        /// as a <see cref="OrkEngine.Mathematics.Ray"/>, or a zero ray if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Plane plane, out Ray line)
         {
@@ -271,7 +271,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -281,7 +281,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -716,11 +716,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="value">The <see cref="global::OrkCore.Vector4"/> to compare with this instance.</param>
+        /// <param name="value">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Plane value)
         {
@@ -747,7 +747,7 @@ namespace OrkCore.Mathematics
 
 #if SlimDX1xInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Plane"/> to <see cref="SlimDX.Plane"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Plane"/> to <see cref="SlimDX.Plane"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -757,7 +757,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.Plane"/> to <see cref="JJGECore.Plane"/>.
+        /// Performs an implicit conversion from <see cref="SlimDX.Plane"/> to <see cref="SlimMath.Plane"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -769,7 +769,7 @@ namespace OrkCore.Mathematics
 
 #if XnaInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Plane"/> to <see cref="Microsoft.Xna.Framework.Plane"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Plane"/> to <see cref="Microsoft.Xna.Framework.Plane"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -779,7 +779,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Plane"/> to <see cref="JJGECore.Plane"/>.
+        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Plane"/> to <see cref="SlimMath.Plane"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>

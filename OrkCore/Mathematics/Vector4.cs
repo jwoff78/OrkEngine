@@ -25,48 +25,48 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a four dimensional mathematical vector.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    [TypeConverter(typeof(global::OrkCore.Mathematics.Util.Vector4Converter))]
+    [TypeConverter(typeof(OrkEngine.Mathematics.Design.Vector4Converter))]
     public struct Vector4 : IEquatable<Vector4>, IFormattable
     {
         /// <summary>
-        /// The size of the <see cref="global::OrkCore.Vector4"/> type, in bytes.
+        /// The size of the <see cref="OrkEngine.Mathematics.Vector4"/> type, in bytes.
         /// </summary>
         public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Vector4));
 
         /// <summary>
-        /// A <see cref="global::OrkCore.Vector4"/> with all of its components set to zero.
+        /// A <see cref="OrkEngine.Mathematics.Vector4"/> with all of its components set to zero.
         /// </summary>
         public static readonly Vector4 Zero = new Vector4();
 
         /// <summary>
-        /// The X unit <see cref="global::OrkCore.Vector4"/> (1, 0, 0, 0).
+        /// The X unit <see cref="OrkEngine.Mathematics.Vector4"/> (1, 0, 0, 0).
         /// </summary>
         public static readonly Vector4 UnitX = new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
 
         /// <summary>
-        /// The Y unit <see cref="global::OrkCore.Vector4"/> (0, 1, 0, 0).
+        /// The Y unit <see cref="OrkEngine.Mathematics.Vector4"/> (0, 1, 0, 0).
         /// </summary>
         public static readonly Vector4 UnitY = new Vector4(0.0f, 1.0f, 0.0f, 0.0f);
 
         /// <summary>
-        /// The Z unit <see cref="global::OrkCore.Vector4"/> (0, 0, 1, 0).
+        /// The Z unit <see cref="OrkEngine.Mathematics.Vector4"/> (0, 0, 1, 0).
         /// </summary>
         public static readonly Vector4 UnitZ = new Vector4(0.0f, 0.0f, 1.0f, 0.0f);
 
         /// <summary>
-        /// The W unit <see cref="global::OrkCore.Vector4"/> (0, 0, 0, 1).
+        /// The W unit <see cref="OrkEngine.Mathematics.Vector4"/> (0, 0, 0, 1).
         /// </summary>
         public static readonly Vector4 UnitW = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
 
         /// <summary>
-        /// A <see cref="global::OrkCore.Vector4"/> with all of its components set to one.
+        /// A <see cref="OrkEngine.Mathematics.Vector4"/> with all of its components set to one.
         /// </summary>
         public static readonly Vector4 One = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -91,7 +91,7 @@ namespace OrkCore.Mathematics
         public float W;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector4"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Vector4(float value)
@@ -103,7 +103,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector4"/> struct.
         /// </summary>
         /// <param name="x">Initial value for the X component of the vector.</param>
         /// <param name="y">Initial value for the Y component of the vector.</param>
@@ -118,7 +118,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector4"/> struct.
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X, Y, and Z components.</param>
         /// <param name="w">Initial value for the W component of the vector.</param>
@@ -131,7 +131,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector4"/> struct.
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X and Y components.</param>
         /// <param name="z">Initial value for the Z component of the vector.</param>
@@ -145,7 +145,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Vector4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector4"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the X, Y, Z, and W components of the vector. This must be an array with four elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -164,39 +164,6 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        ///  Moves a point current in a straight line towards a target point.
-        /// </summary>
-        /// <param name="current">The current point that your at</param>
-        /// <param name="target">The target point your moving towards</param>
-        /// <param name="maxDistance">The max distance to move</param>
-        /// <returns>returns the translation of moving towards your point</returns>
-        public Vector4 GoTowards(Vector4 current, Vector4 target, float maxDistance)
-        {
-            float TowardsVector_X = target.X - current.X;
-            float TowardsVector_Y = target.Y - current.Y;
-            float TowardsVector_Z = target.Z - current.Z;
-            float TowardsVector_W = target.W - current.W;
-
-            float SqDistance = (
-                TowardsVector_X * TowardsVector_X +
-                TowardsVector_Y * TowardsVector_Y +
-                TowardsVector_Z * TowardsVector_Z +
-                TowardsVector_W * TowardsVector_W);
-
-            if (SqDistance == 0 || (maxDistance >= 0 && SqDistance <= maxDistance * maxDistance))
-                return target;
-
-            float distance = (float)Math.Sqrt(SqDistance);
-
-            return new Vector4(
-                current.X + TowardsVector_X / distance * maxDistance,
-                current.Y + TowardsVector_Y / distance * maxDistance,
-                current.Z + TowardsVector_Z / distance * maxDistance,
-                current.W + TowardsVector_W / distance * maxDistance);
-
-        }
-
-        /// <summary>
         /// Gets a value indicting whether this instance is normalized.
         /// </summary>
         public bool IsNormalized
@@ -208,7 +175,7 @@ namespace OrkCore.Mathematics
         /// Calculates the length of the vector.
         /// </summary>
         /// <remarks>
-        /// <see cref="OrkCore.Vector4.LengthSquared"/> may be preferred when only the relative length is needed
+        /// <see cref="OrkEngine.Mathematics.Vector4.LengthSquared"/> may be preferred when only the relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public float Length
@@ -220,7 +187,7 @@ namespace OrkCore.Mathematics
         /// Calculates the squared length of the vector.
         /// </summary>
         /// <remarks>
-        /// This property may be preferred to <see cref="OrkCore.Vector4.Length"/> when only a relative length is needed
+        /// This property may be preferred to <see cref="OrkEngine.Mathematics.Vector4.Length"/> when only a relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public float LengthSquared
@@ -657,11 +624,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 4D triangle.
+        /// Returns a <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 4D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
         /// <param name="result">When the method completes, contains the 4D Cartesian coordinates of the specified point.</param>
@@ -675,14 +642,14 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 4D triangle.
+        /// Returns a <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 4D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
-        /// <returns>A new <see cref="global::OrkCore.Vector4"/> containing the 4D Cartesian coordinates of the specified point.</returns>
+        /// <returns>A new <see cref="OrkEngine.Mathematics.Vector4"/> containing the 4D Cartesian coordinates of the specified point.</returns>
         public static Vector4 Barycentric(Vector4 value1, Vector4 value2, Vector4 value3, float amount1, float amount2)
         {
             Vector4 result;
@@ -739,7 +706,7 @@ namespace OrkCore.Mathematics
         /// <param name="value2">The second vector.</param>
         /// <param name="result">When the method completes, contains the distance between the two vectors.</param>
         /// <remarks>
-        /// <see cref="OrkCore.Vector4.DistanceSquared(ref Vector4, ref Vector4, out float)"/> may be preferred when only the relative distance is needed
+        /// <see cref="OrkEngine.Mathematics.Vector4.DistanceSquared(ref Vector4, ref Vector4, out float)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
         public static void Distance(ref Vector4 value1, ref Vector4 value2, out float result)
@@ -759,7 +726,7 @@ namespace OrkCore.Mathematics
         /// <param name="value2">The second vector.</param>
         /// <returns>The distance between the two vectors.</returns>
         /// <remarks>
-        /// <see cref="OrkCore.Vector4.DistanceSquared(Vector4, Vector4)"/> may be preferred when only the relative distance is needed
+        /// <see cref="OrkEngine.Mathematics.Vector4.DistanceSquared(Vector4, Vector4)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
         public static float Distance(Vector4 value1, Vector4 value2)
@@ -1170,11 +1137,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 4D vector by the given <see cref="global::OrkCore.Quaternion"/> rotation.
+        /// Transforms a 4D vector by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkCore.Vector4"/>.</param>
+        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</param>
         public static void Transform(ref Vector4 vector, ref Quaternion rotation, out Vector4 result)
         {
             float x = rotation.X + rotation.X;
@@ -1208,11 +1175,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 4D vector by the given <see cref="global::OrkCore.Quaternion"/> rotation.
+        /// Transforms a 4D vector by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
-        /// <returns>The transformed <see cref="global::OrkCore.Vector4"/>.</returns>
+        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
+        /// <returns>The transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</returns>
         public static Vector4 Transform(Vector4 vector, Quaternion rotation)
         {
             Vector4 result;
@@ -1221,10 +1188,10 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms an array of vectors by the given <see cref="global::OrkCore.Quaternion"/> rotation.
+        /// Transforms an array of vectors by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="rotation">The <see cref="global::OrkCore.Quaternion"/> rotation to apply.</param>
+        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
@@ -1272,11 +1239,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 4D vector by the given <see cref="global::OrkCore.Matrix"/>.
+        /// Transforms a 4D vector by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkCore.Vector4"/>.</param>
+        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</param>
         public static void Transform(ref Vector4 vector, ref Matrix transform, out Vector4 result)
         {
             result = new Vector4(
@@ -1287,11 +1254,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 4D vector by the given <see cref="global::OrkCore.Matrix"/>.
+        /// Transforms a 4D vector by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
-        /// <returns>The transformed <see cref="global::OrkCore.Vector4"/>.</returns>
+        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <returns>The transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</returns>
         public static Vector4 Transform(Vector4 vector, Matrix transform)
         {
             Vector4 result;
@@ -1300,10 +1267,10 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Transforms an array of 4D vectors by the given <see cref="global::OrkCore.Matrix"/>.
+        /// Transforms an array of 4D vectors by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="transform">The transformation <see cref="global::OrkCore.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
@@ -1421,7 +1388,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector4"/> to <see cref="global::OrkCore.Vector2"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector4"/> to <see cref="OrkEngine.Mathematics.Vector2"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1431,7 +1398,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector4"/> to <see cref="global::OrkCore.Vector3"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector4"/> to <see cref="OrkEngine.Mathematics.Vector3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1508,11 +1475,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Vector4"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Vector4 other)
         {
@@ -1520,12 +1487,12 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Vector4"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <param name="epsilon">The amount of error allowed.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Vector4 other, float epsilon)
         {
@@ -1555,7 +1522,7 @@ namespace OrkCore.Mathematics
 
 #if SlimDX1xInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector4"/> to <see cref="SlimDX.Vector4"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Vector4"/> to <see cref="SlimDX.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1565,7 +1532,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.Vector4"/> to <see cref="JJGECore.Vector4"/>.
+        /// Performs an implicit conversion from <see cref="SlimDX.Vector4"/> to <see cref="SlimMath.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1577,7 +1544,7 @@ namespace OrkCore.Mathematics
 
 #if WPFInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector4"/> to <see cref="System.Windows.Media.Media3D.Point4D"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Vector4"/> to <see cref="System.Windows.Media.Media3D.Point4D"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1587,7 +1554,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Windows.Media.Media3D.Point4D"/> to <see cref="JJGECore.Vector4"/>.
+        /// Performs an explicit conversion from <see cref="System.Windows.Media.Media3D.Point4D"/> to <see cref="SlimMath.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1599,7 +1566,7 @@ namespace OrkCore.Mathematics
 
 #if XnaInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Vector4"/> to <see cref="Microsoft.Xna.Framework.Vector4"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Vector4"/> to <see cref="Microsoft.Xna.Framework.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1609,7 +1576,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Vector4"/> to <see cref="JJGECore.Vector4"/>.
+        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Vector4"/> to <see cref="SlimMath.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>

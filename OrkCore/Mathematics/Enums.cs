@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /*
      * The enumerations defined in this file are in alphabetical order. When

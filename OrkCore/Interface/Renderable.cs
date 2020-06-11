@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenGL;
-using OrkCore.Component;
-using OrkCore.Component.OBJLoader;
-using Tex = OrkCore.Component.Texture;
+using OrkEngine.Component;
+using OrkEngine.Component.OBJLoader;
+using Tex = OrkEngine.Component.Texture;
 using Texture = OpenGL.Texture;
 
-namespace OrkCore.Interface
+namespace OrkEngine.Interface
 {
     public class Renderable
     {

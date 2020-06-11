@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a three dimensional line based on a point in space and a direction.
@@ -45,7 +45,7 @@ namespace OrkCore.Mathematics
         public Vector3 Direction;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Ray"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Ray"/> struct.
         /// </summary>
         /// <param name="position">The position in three dimensional space of the origin of the ray.</param>
         /// <param name="direction">The normalized direction of the ray.</param>
@@ -66,7 +66,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -77,11 +77,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Ray ray, out Vector3 point)
         {
@@ -89,7 +89,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -100,7 +100,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -112,11 +112,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Plane plane, out Vector3 point)
         {
@@ -157,7 +157,7 @@ namespace OrkCore.Mathematics
         /// <param name="vertex2">The second vertex of the triangle to test.</param>
         /// <param name="vertex3">The third vertex of the triangle to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Vector3 vertex1, ref Vector3 vertex2, ref Vector3 vertex3, out Vector3 point)
         {
@@ -165,7 +165,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -176,7 +176,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -188,11 +188,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref BoundingBox box, out Vector3 point)
         {
@@ -200,7 +200,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -211,7 +211,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -223,11 +223,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="global::OrkCore.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkCore.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref BoundingSphere sphere, out Vector3 point)
         {
@@ -318,11 +318,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="value">The <see cref="global::OrkCore.Vector4"/> to compare with this instance.</param>
+        /// <param name="value">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Ray value)
         {
@@ -349,7 +349,7 @@ namespace OrkCore.Mathematics
 
 #if SlimDX1xInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Ray"/> to <see cref="SlimDX.Ray"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Ray"/> to <see cref="SlimDX.Ray"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -359,7 +359,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="SlimDX.Ray"/> to <see cref="JJGECore.Ray"/>.
+        /// Performs an implicit conversion from <see cref="SlimDX.Ray"/> to <see cref="SlimMath.Ray"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -371,7 +371,7 @@ namespace OrkCore.Mathematics
 
 #if XnaInterop
         /// <summary>
-        /// Performs an implicit conversion from <see cref="JJGECore.Ray"/> to <see cref="Microsoft.Xna.Framework.Ray"/>.
+        /// Performs an implicit conversion from <see cref="SlimMath.Ray"/> to <see cref="Microsoft.Xna.Framework.Ray"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -381,7 +381,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Ray"/> to <see cref="JJGECore.Ray"/>.
+        /// Performs an implicit conversion from <see cref="Microsoft.Xna.Framework.Ray"/> to <see cref="SlimMath.Ray"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>

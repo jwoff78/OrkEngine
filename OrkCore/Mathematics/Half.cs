@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2007-2010 JJGECore Group
+* Copyright (c) 2007-2010 SlimMath Group
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// A half precision (16 bit) floating point value.
@@ -107,7 +107,7 @@ namespace OrkCore.Mathematics
         public static readonly Half PositiveInfinity = new Half(1.0f / 0.0f);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:JJGECore.Half"/> structure.
+        /// Initializes a new instance of the <see cref="T:SlimMath.Half"/> structure.
         /// </summary>
         /// <param name="value">The floating point value that should be stored in 16 bit format.</param>
         public Half(float value)
@@ -157,7 +157,7 @@ namespace OrkCore.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to negative or positive infinity.
         /// </summary>
-        /// <param name="half">The <see cref="global::OrkCore.Half"/> to check.</param>
+        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to positive or negative infinity; otherwise, <c>false</c>.</returns>
         public static bool IsInfinity(Half half)
         {
@@ -167,7 +167,7 @@ namespace OrkCore.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to NaN.
         /// </summary>
-        /// <param name="half">The <see cref="global::OrkCore.Half"/> to check.</param>
+        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to NaN; otherwise, <c>false</c>.</returns>
         public static bool IsNaN(Half half)
         {
@@ -177,7 +177,7 @@ namespace OrkCore.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to negative infinity.
         /// </summary>
-        /// <param name="half">The <see cref="global::OrkCore.Half"/> to check.</param>
+        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to negative infinity; otherwise, <c>false</c>.</returns>
         public static bool IsNegativeInfinity(Half half)
         {
@@ -187,7 +187,7 @@ namespace OrkCore.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to positive infinity.
         /// </summary>
-        /// <param name="half">The <see cref="global::OrkCore.Half"/> to check.</param>
+        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to positive infinity; otherwise, <c>false</c>.</returns>
         public static bool IsPositiveInfinity(Half half)
         {
@@ -195,8 +195,8 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="global::OrkCore.Half"/> value is
-        /// less than another specified <see cref="global::OrkCore.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
+        /// less than another specified <see cref="OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -207,8 +207,8 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="global::OrkCore.Half"/> value is
-        /// greater than another specified <see cref="global::OrkCore.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
+        /// greater than another specified <see cref="OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -219,8 +219,8 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="global::OrkCore.Half"/> value is
-        /// less than or equal to another specified <see cref="global::OrkCore.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
+        /// less than or equal to another specified <see cref="OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -231,8 +231,8 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="global::OrkCore.Half"/> value is
-        /// greater than or equal to another specified <see cref="global::OrkCore.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
+        /// greater than or equal to another specified <see cref="OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -267,7 +267,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="T:System.Single"/> to <see cref="T:JJGECore.Half"/>.
+        /// Performs an explicit conversion from <see cref="T:System.Single"/> to <see cref="T:SlimMath.Half"/>.
         /// </summary>
         /// <param name="value">The value to be converted.</param>
         /// <returns>The converted value.</returns>
@@ -277,7 +277,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="T:JJGECore.Half"/> to <see cref="T:System.Single"/>.
+        /// Performs an implicit conversion from <see cref="T:SlimMath.Half"/> to <see cref="T:System.Single"/>.
         /// </summary>
         /// <param name="value">The value to be converted.</param>
         /// <returns>The converted value.</returns>
@@ -394,7 +394,7 @@ namespace OrkCore.Mathematics
 
             if (!(value is Half))
             {
-                throw new ArgumentException("The argument value must be a JJGECore.Half.");
+                throw new ArgumentException("The argument value must be a SlimMath.Half.");
             }
 
             Half f = (Half)value;
@@ -466,7 +466,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Returns the <see cref="System.TypeCode"/> for value type <see cref="global::OrkCore.Half"/>.
+        /// Returns the <see cref="System.TypeCode"/> for value type <see cref="OrkEngine.Mathematics.Half"/>.
         /// </summary>
         /// <returns>The type code.</returns>
         public TypeCode GetTypeCode()
@@ -486,12 +486,12 @@ namespace OrkCore.Mathematics
 
         char IConvertible.ToChar(IFormatProvider provider)
         {
-            throw new InvalidCastException("Invalid cast from JJGECore.Half to System.Char.");
+            throw new InvalidCastException("Invalid cast from SlimMath.Half to System.Char.");
         }
 
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
-            throw new InvalidCastException("Invalid cast from JJGECore.Half to System.DateTime.");
+            throw new InvalidCastException("Invalid cast from SlimMath.Half to System.DateTime.");
         }
 
         decimal IConvertible.ToDecimal(IFormatProvider provider)

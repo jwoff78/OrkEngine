@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Represents a color in the form of argb.
@@ -55,7 +55,7 @@ namespace OrkCore.Mathematics
         public float Alpha;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Color4(float value)
@@ -64,7 +64,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="red">The red component of the color.</param>
         /// <param name="green">The green component of the color.</param>
@@ -78,7 +78,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="alpha">The alpha component of the color.</param>
         /// <param name="red">The red component of the color.</param>
@@ -93,7 +93,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="value">The red, green, blue, and alpha components of the color.</param>
         public Color4(Vector4 value)
@@ -105,7 +105,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="value">The red, green, and blue compoennts of the color.</param>
         /// <param name="alpha">The alpha component of the color.</param>
@@ -118,7 +118,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="argb">A packed integer containing all four color components.</param>
         public Color4(int argb)
@@ -130,7 +130,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="red">The red component of the color.</param>
         /// <param name="green">The green component of the color.</param>
@@ -144,7 +144,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="alpha">The alpha component of the color.</param>
         /// <param name="red">The red component of the color.</param>
@@ -159,7 +159,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="global::OrkCore.Color4"/> struct.
+        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color4"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the alpha, red, green, and blue components of the color. This must be an array with four elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -825,7 +825,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Color4"/> to <see cref="global::OrkCore.Color3"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Color4"/> to <see cref="OrkEngine.Mathematics.Color3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -835,7 +835,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Color4"/> to <see cref="global::OrkCore.Vector3"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Color4"/> to <see cref="OrkEngine.Mathematics.Vector3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -845,7 +845,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Color4"/> to <see cref="global::OrkCore.Vector4"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Color4"/> to <see cref="OrkEngine.Mathematics.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -855,7 +855,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector3"/> to <see cref="global::OrkCore.Color4"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector3"/> to <see cref="OrkEngine.Mathematics.Color4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -865,7 +865,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="global::OrkCore.Vector4"/> to <see cref="global::OrkCore.Color4"/>.
+        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector4"/> to <see cref="OrkEngine.Mathematics.Color4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -875,7 +875,7 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Int32"/> to <see cref="global::OrkCore.Color4"/>.
+        /// Performs an explicit conversion from <see cref="System.Int32"/> to <see cref="OrkEngine.Mathematics.Color4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -952,11 +952,11 @@ namespace OrkCore.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="global::OrkCore.Color4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Color4"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="global::OrkCore.Color4"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="OrkEngine.Mathematics.Color4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="global::OrkCore.Color4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Color4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Color4 other)
         {
@@ -980,5 +980,93 @@ namespace OrkCore.Mathematics
 
             return Equals((Color4)obj);
         }
+
+#if SlimDX1xInterop
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="SlimMath.Color4"/> to <see cref="SlimDX.Color4"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator SlimDX.Color4(Color4 value)
+        {
+            return new SlimDX.Color4(value.Alpha, value.Red, value.Green, value.Blue);
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="SlimDX.Color4"/> to <see cref="SlimMath.Color4"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator Color4(SlimDX.Color4 value)
+        {
+            return new Color4(value.Alpha, value.Red, value.Green, value.Blue);
+        }
+#endif
+
+#if WPFInterop
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="SlimMath.Color4"/> to <see cref="System.Windows.Media.Color"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static explicit operator System.Windows.Media.Color(Color4 value)
+        {
+            return new System.Windows.Media.Color()
+            {
+                A = (byte)(255f * value.Alpha),
+                R = (byte)(255f * value.Red),
+                G = (byte)(255f * value.Green),
+                B = (byte)(255f * value.Blue)
+            };
+        }
+
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="System.Windows.Media.Color"/> to <see cref="SlimMath.Color4"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static explicit operator Color4(System.Windows.Media.Color value)
+        {
+            return new Color4()
+            {
+                Alpha = (float)value.A / 255f,
+                Red = (float)value.R / 255f,
+                Green = (float)value.G / 255f,
+                Blue = (float)value.B / 255f
+            };
+        }
+#endif
+
+#if WinFormsInterop
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="SlimMath.Color4"/> to <see cref="System.Drawing.Color"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static explicit operator System.Drawing.Color(Color4 value)
+        {
+            return System.Drawing.Color.FromArgb(
+                (byte)(255f * value.Alpha),
+                (byte)(255f * value.Red),
+                (byte)(255f * value.Green),
+                (byte)(255f * value.Blue));
+        }
+
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="System.Drawing.Color"/> to <see cref="SlimMath.Color4"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static explicit operator Color4(System.Drawing.Color value)
+        {
+            return new Color4()
+            {
+                Alpha = (float)value.A / 255f,
+                Red = (float)value.R / 255f,
+                Green = (float)value.G / 255f,
+                Blue = (float)value.B / 255f
+            };
+        }
+#endif
     }
 }

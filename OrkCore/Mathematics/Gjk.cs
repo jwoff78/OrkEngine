@@ -1,5 +1,5 @@
 ﻿/*
-* Copyright (c) 2007-2010 JJGECore Group
+* Copyright (c) 2007-2010 SlimMath Group
 * 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Implements the Gilbert-Johnson-Keerthi algorithm for convex polyhedra collision detection.
@@ -232,7 +232,7 @@ namespace OrkCore.Mathematics
 
                 var w = supportFunction(-Direction);
                 var d = Vector3.Dot(Direction, w) / directionlength;
-                u = System.Math.Max(u, d);
+                u = Math.Max(u, d);
 
                 closeenough = directionlength - u <= epsilon;
 

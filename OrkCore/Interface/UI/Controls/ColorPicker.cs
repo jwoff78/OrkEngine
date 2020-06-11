@@ -2,9 +2,9 @@
 
 using OpenGL;
 using OpenGL.Platform;
-using OrkCore.Interface.UI.Core;
+using OrkEngine.Interface.UI.Core;
 
-namespace OrkCore.Interface.UI.Controls
+namespace OrkEngine.Interface.UI.Controls
 {
     public class ColorGradient : UIElement
     {

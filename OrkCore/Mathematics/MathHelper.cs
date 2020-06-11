@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace OrkCore.Mathematics
+namespace OrkEngine.Mathematics
 {
     /// <summary>
     /// Contains mathmeatical methods and constants that extend the System.Math class.

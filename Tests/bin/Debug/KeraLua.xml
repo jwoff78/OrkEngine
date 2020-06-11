@@ -87,6 +87,14 @@
             <param name="nsize"></param>
             <returns></returns>
         </member>
+        <member name="T:KeraLua.LuaWarnFunction">
+            <summary>
+            Type for warning functions
+            </summary>
+            <param name="ud"></param>
+            <param name="msg"></param>
+            <param name="tocont"></param>
+        </member>
         <member name="T:KeraLua.Lua">
             <summary>
             Lua state class, main interface to use Lua library.
@@ -259,6 +267,15 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:KeraLua.Lua.GarbageCollector(KeraLua.LuaGC,System.Int32,System.Int32)">
+            <summary>
+            Controls the garbage collector. 
+            </summary>
+            <param name="what"></param>
+            <param name="data">passed to lua_gc vargs</param>
+            <param name="data2">passed to lua_gc vargs</param>
+            <returns></returns>
+        </member>
         <member name="M:KeraLua.Lua.GetAllocFunction(System.IntPtr@)">
             <summary>
             Returns the memory-allocation function of a given state. If ud is not NULL, Lua stores in *ud the opaque pointer given when the memory-allocator function was set. 
@@ -374,12 +391,21 @@
             </summary>
             <returns>Returns the index of the top element in the stack.</returns>
         </member>
-        <member name="M:KeraLua.Lua.GetUserValue(System.Int32)">
+        <member name="M:KeraLua.Lua.GetIndexedUserValue(System.Int32,System.Int32)">
             <summary>
-            Pushes onto the stack the Lua value associated with the full userdata at the given index. 
+             Pushes onto the stack the n-th user value associated with the full userdata at the given index and returns the type of the pushed value.
+            If the userdata does not have that value, pushes nil and returns LUA_TNONE.
             </summary>
             <param name="index"></param>
+            <param name="nth"></param>
             <returns>Returns the type of the pushed value. </returns>
+        </member>
+        <member name="M:KeraLua.Lua.GetUserValue(System.Int32)">
+            <summary>
+            Compatibility GetIndexedUserValue with constant 1
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
         </member>
         <member name="M:KeraLua.Lua.GetUpValue(System.Int32,System.Int32)">
             <summary>
@@ -544,9 +570,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:KeraLua.Lua.NewIndexedUserData(System.Int32,System.Int32)">
+            <summary>
+             This function creates and pushes on the stack a new full userdata, with nuvalue associated Lua values, called user values, plus an associated block of raw memory with size bytes. (The user values can be set and read with the functions lua_setiuservalue and lua_getiuservalue.)
+             The function returns the address of the block of memory.
+            </summary>
+            <param name="size"></param>
+            <param name="uv"></param>
+            <returns></returns>
+        </member>
         <member name="M:KeraLua.Lua.NewUserData(System.Int32)">
             <summary>
-            This function allocates a new block of memory with the given size, pushes onto the stack a new full userdata with the block address, and returns this address. The host program can freely use this memory
+            Compatibility NewIndexedUserData with constant parameter
             </summary>
             <param name="size"></param>
             <returns></returns>
@@ -787,22 +822,30 @@
             </summary>
             <param name="index"></param>
         </member>
-        <member name="M:KeraLua.Lua.Resume(KeraLua.Lua,System.Int32)">
+        <member name="M:KeraLua.Lua.Resume(KeraLua.Lua,System.Int32,System.Int32@)">
             <summary>
-             To start a coroutine, you push onto the thread stack the main function plus any arguments; then you call lua_resume,
-             with nargs being the number of arguments. This call returns when the coroutine suspends or finishes its execution. 
-             When it returns, the stack contains all values passed to lua_yield, or all values returned by the body function. 
-             lua_resume returns LUA_YIELD if the coroutine yields, LUA_OK if the coroutine finishes its execution without errors, 
-             or an error code in case of errors (see lua_pcall).
-             In case of errors, the stack is not unwound, so you can use the debug API over it. 
-             The error object is on the top of the stack.
-             To resume a coroutine, you remove any results from the last lua_yield, put on its stack only the values to be passed as results from yield,
-             and then call lua_resume.
-             The parameter from represents the coroutine that is resuming L. 
-             If there is no such coroutine, this parameter can be NULL. 
+            Starts and resumes a coroutine in the given thread L.
+            To start a coroutine, you push onto the thread stack the main function plus any arguments; then you call lua_resume, with nargs being the number of arguments.This call returns when the coroutine suspends or finishes its execution. When it returns, * nresults is updated and the top of the stack contains the* nresults values passed to lua_yield or returned by the body function. lua_resume returns LUA_YIELD if the coroutine yields, LUA_OK if the coroutine finishes its execution without errors, or an error code in case of errors (see lua_pcall). In case of errors, the error object is on the top of the stack.
+            To resume a coroutine, you clear its stack, push only the values to be passed as results from yield, and then call lua_resume.
+            The parameter from represents the coroutine that is resuming L. If there is no such coroutine, this parameter can be NULL.  
             </summary>
             <param name="from"></param>
             <param name="arguments"></param>
+            <param name="results"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KeraLua.Lua.Resume(KeraLua.Lua,System.Int32)">
+            <summary>
+            Compatibility Resume without results.
+            </summary>
+            <param name="from"></param>
+            <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KeraLua.Lua.ResetThread">
+            <summary>
+            Resets a thread, cleaning its call stack and closing all pending to-be-closed variables. Returns a status code: LUA_OK for no errors in closing methods, or an error status otherwise. In case of error, leaves the error object on the top of the stack, 
+            </summary>
             <returns></returns>
         </member>
         <member name="M:KeraLua.Lua.Rotate(System.Int32,System.Int32)">
@@ -891,9 +934,23 @@
             <param name="n"></param>
             <returns>Returns NULL (and pops nothing) when the index n is greater than the number of upvalues. </returns>
         </member>
+        <member name="M:KeraLua.Lua.SetWarningFunction(KeraLua.LuaWarnFunction,System.IntPtr)">
+            <summary>
+            Sets the warning function to be used by Lua to emit warnings (see lua_WarnFunction). The ud parameter sets the value ud passed to the warning function.
+            </summary>
+            <param name="function"></param>
+            <param name="userData"></param>
+        </member>
+        <member name="M:KeraLua.Lua.SetIndexedUserValue(System.Int32,System.Int32)">
+            <summary>
+             Pops a value from the stack and sets it as the new n-th user value associated to the full userdata at the given index. Returns 0 if the userdata does not have that value. 
+            </summary>
+            <param name="index"></param>
+            <param name="nth"></param>
+        </member>
         <member name="M:KeraLua.Lua.SetUserValue(System.Int32)">
             <summary>
-             Pops a value from the stack and sets it as the new value associated to the full userdata at the given index.
+            Compatibility SetIndexedUserValue with constant 1
             </summary>
             <param name="index"></param>
         </member>
@@ -923,6 +980,14 @@
             </summary>
             <param name="index"></param>
             <returns></returns>
+        </member>
+        <member name="M:KeraLua.Lua.ToClose(System.Int32)">
+            <summary>
+             Marks the given index in the stack as a to-be-closed "variable" (see §3.3.8). Like a to-be-closed variable in Lua, the value at that index in the stack will be closed when it goes out of scope. Here, in the context of a C function, to go out of scope means that the running function returns to Lua, there is an error, or the index is removed from the stack through lua_settop or lua_pop. An index marked as to-be-closed should not be removed from the stack by any other function in the API except lua_settop or lua_pop.
+            This function should not be called for an index that is equal to or below an already marked to-be-closed index.
+            This function can raise an out-of-memory error. In that case, the value in the given index is immediately closed, as if it was already marked. 
+            </summary>
+            <param name="index"></param>
         </member>
         <member name="M:KeraLua.Lua.ToInteger(System.Int32)">
             <summary>
@@ -1055,7 +1120,7 @@
         </member>
         <member name="M:KeraLua.Lua.Version">
             <summary>
-            Return the version of Lua (e.g 503)
+            Return the version of Lua (e.g 504)
             </summary>
             <returns></returns>
         </member>
@@ -1432,6 +1497,13 @@
             <param name="tableIndex"></param>
             <param name="reference"></param>
         </member>
+        <member name="M:KeraLua.Lua.Warning(System.String,System.Boolean)">
+            <summary>
+            Emits a warning with the given message. A message in a call with tocont true should be continued in another call to this function. 
+            </summary>
+            <param name="message"></param>
+            <param name="toContinue"></param>
+        </member>
         <member name="M:KeraLua.Lua.Where(System.Int32)">
             <summary>
             Pushes onto the stack a string identifying the current position of the control at level lvl in the call stack
@@ -1500,6 +1572,11 @@
             </summary>
             
         </member>
+        <member name="P:KeraLua.LuaDebug.SourceLength">
+            <summary>
+            The length of the string source
+            </summary>
+        </member>
         <member name="F:KeraLua.LuaDebug.CurrentLine">
             <summary>
              the current line where the given function is executing. When no line information is available, currentline is set to -1
@@ -1533,6 +1610,16 @@
         <member name="F:KeraLua.LuaDebug.IsTailCall">
             <summary>
              true if this function invocation was called by a tail call. In this case, the caller of this level is not in the stack.
+            </summary>
+        </member>
+        <member name="F:KeraLua.LuaDebug.IndexFirstValue">
+            <summary>
+            The index on the stack of the first value being "transferred", that is, parameters in a call or return values in a return. (The other values are in consecutive indices.) Using this index, you can access and modify these values through lua_getlocal and lua_setlocal. This field is only meaningful during a call hook, denoting the first parameter, or a return hook, denoting the first value being returned. (For call hooks, this value is always 1.) 
+            </summary>
+        </member>
+        <member name="F:KeraLua.LuaDebug.NumberTransferredValues">
+            <summary>
+            The number of values being transferred (see previous item). (For calls of Lua functions, this value is always equal to nparams.) 
             </summary>
         </member>
         <member name="P:KeraLua.LuaDebug.ShortSource">
@@ -1577,17 +1664,27 @@
         </member>
         <member name="F:KeraLua.LuaGC.SetPause">
             <summary>
-            Sets data as the new value for the pause of the collector (see §2.5) and returns the previous value
+            The options LUA_GCSETPAUSE and LUA_GCSETSTEPMUL of the function lua_gc are deprecated. You should use the new option LUA_GCINC to set them. 
             </summary>
         </member>
         <member name="F:KeraLua.LuaGC.SetStepMultiplier">
             <summary>
-            sets data as the new value for the step multiplier of the collector
+            The options LUA_GCSETPAUSE and LUA_GCSETSTEPMUL of the function lua_gc are deprecated. You should use the new option LUA_GCINC to set them. 
             </summary>
         </member>
         <member name="F:KeraLua.LuaGC.IsRunning">
             <summary>
              returns a boolean that tells whether the collector is running
+            </summary>
+        </member>
+        <member name="F:KeraLua.LuaGC.Generational">
+            <summary>
+             Changes the collector to generational mode with the given parameters (see §2.5.2). Returns the previous mode (LUA_GCGEN or LUA_GCINC). 
+            </summary>
+        </member>
+        <member name="F:KeraLua.LuaGC.Incremental">
+            <summary>
+            Changes the collector to incremental mode with the given parameters (see §2.5.1). Returns the previous mode (LUA_GCGEN or LUA_GCINC). 
             </summary>
         </member>
         <member name="T:KeraLua.LuaHookEvent">
@@ -1763,11 +1860,6 @@
         <member name="F:KeraLua.LuaStatus.ErrMem">
             <summary>
              memory allocation error. For such errors, Lua does not call the message handler. 
-            </summary>
-        </member>
-        <member name="F:KeraLua.LuaStatus.ErrGCMM">
-            <summary>
-             error while running a __gc metamethod. For such errors, Lua does not call the message handler
             </summary>
         </member>
         <member name="F:KeraLua.LuaStatus.ErrErr">
