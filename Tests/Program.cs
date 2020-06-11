@@ -15,6 +15,7 @@ namespace Tests
     class Program
     {
         Window render;
+        Renderable obj;
 
         public static void Main(string[] args)
         {
@@ -37,7 +38,17 @@ namespace Tests
             rend.rotation = new Vector3(1,2,3);
             rend.position = new Vector3(0, 2, 0);
 
+            obj = Renderable.LoadFromFile("vroooomcube2.obj", "objcube");
+
+            obj.texture = new Texture("Cube9_auv.png");
+
+            obj.position = new Vector3(0,0,5);
+
+            Console.WriteLine("VertVals: " + obj.vertices.Length);
+            Console.WriteLine("Elements: " + obj.indices.Length);
+
             render.AddToRenderQueue(rend);
+            render.AddToRenderQueue(obj);
 
             Console.WriteLine("Start");
             return null;
@@ -58,6 +69,8 @@ namespace Tests
                 render.camera.Yaw -= 1;
             if (render.KeyDown(Key.Right))
                 render.camera.Yaw += 1;
+
+            obj.rotation += new Vector3(0.01f, 0.015f, 0);
 
             return null;
         }

@@ -167,6 +167,7 @@ namespace OrkEngine.Graphics
                 _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
 
                 GL.DrawElements(PrimitiveType.Triangles, rend.indices.Length, DrawElementsType.UnsignedInt, 0);
+                GL.BindVertexArray(0);
             }
 
             SwapBuffers();
@@ -197,6 +198,8 @@ namespace OrkEngine.Graphics
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, rend.elementBufferObject);
 
             Objects.Add(rend);
+            Console.WriteLine("Added: " + rend.name);
+            Console.WriteLine(rend.vertices.Length);
         }
 
         public void RemoveFromRenderQueue(Renderable rend)
