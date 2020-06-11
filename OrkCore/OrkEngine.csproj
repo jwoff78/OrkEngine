@@ -34,13 +34,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -162,32 +162,41 @@
     <Compile Include="IOrkCore.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
-    <Compile Include="OrkCore.cs" />
+    <Compile Include="Mathematics\BoundingBox.cs" />
+    <Compile Include="Mathematics\BoundingFrustum.cs" />
+    <Compile Include="Mathematics\BoundingSphere.cs" />
+    <Compile Include="Mathematics\Collision.cs" />
+    <Compile Include="Mathematics\Color3.cs" />
+    <Compile Include="Mathematics\Color4.cs" />
+    <Compile Include="Mathematics\Design\BaseConverter.cs" />
+    <Compile Include="Mathematics\Design\FieldPropertyDescriptor.cs" />
+    <Compile Include="Mathematics\Design\Half2Converter.cs" />
+    <Compile Include="Mathematics\Design\Half3Converter.cs" />
+    <Compile Include="Mathematics\Design\Half4Converter.cs" />
+    <Compile Include="Mathematics\Design\HalfConverter.cs" />
+    <Compile Include="Mathematics\Design\MatrixConverter.cs" />
+    <Compile Include="Mathematics\Design\QuaternionConverter.cs" />
+    <Compile Include="Mathematics\Design\Vector2Converter.cs" />
+    <Compile Include="Mathematics\Design\Vector3Converter.cs" />
+    <Compile Include="Mathematics\Design\Vector4Converter.cs" />
+    <Compile Include="Mathematics\Enums.cs" />
+    <Compile Include="Mathematics\Gjk.cs" />
+    <Compile Include="Mathematics\Half.cs" />
+    <Compile Include="Mathematics\Half2.cs" />
+    <Compile Include="Mathematics\Half3.cs" />
+    <Compile Include="Mathematics\Half4.cs" />
+    <Compile Include="Mathematics\HalfUtilities.cs" />
     <Compile Include="Mathematics\MathHelper.cs" />
+    <Compile Include="Mathematics\Matrix.cs" />
+    <Compile Include="Mathematics\Plane.cs" />
     <Compile Include="Mathematics\Quaternion.cs" />
+    <Compile Include="Mathematics\Ray.cs" />
+    <Compile Include="Mathematics\Utilities.cs" />
     <Compile Include="Mathematics\Vector2.cs" />
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />
+    <Compile Include="OrkCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mathematics\BezierCurve.cs" />
-    <Compile Include="Mathematics\BezierCurveCubic.cs" />
-    <Compile Include="Mathematics\BezierCurveQuadric.cs" />
-    <Compile Include="Mathematics\Box2.cs" />
-    <Compile Include="Mathematics\Functions.cs" />
-    <Compile Include="Mathematics\Half.cs" />
-    <Compile Include="Mathematics\Matrix3d.cs" />
-    <Compile Include="Mathematics\Matrix4.cs" />
-    <Compile Include="Mathematics\Matrix4d.cs" />
-    <Compile Include="Mathematics\Point.cs" />
-    <Compile Include="Mathematics\Quaterniond.cs" />
-    <Compile Include="Mathematics\Rectangle.cs" />
-    <Compile Include="Mathematics\Size.cs" />
-    <Compile Include="Mathematics\Vector2d.cs" />
-    <Compile Include="Mathematics\Vector2h.cs" />
-    <Compile Include="Mathematics\Vector3d.cs" />
-    <Compile Include="Mathematics\Vector3h.cs" />
-    <Compile Include="Mathematics\Vector4d.cs" />
-    <Compile Include="Mathematics\Vector4h.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
