@@ -12,17 +12,27 @@ namespace Tests
 {
     class Program
     {
+        Window render;
 
         public static void Main(string[] args)
         {
-            // This line creates a new instance, and wraps the instance in a using statement so it's automatically disposed once we've exited the block.
-            using (Game game = new Game(800, 600, "OrkEngine"))
-            {
-                //Run takes a double, which is how many frames per second it should strive to reach.
-                //You can leave that out and it'll just update as fast as the hardware will allow it.
-                game.Run(60.0);
-            }
+            new Program();
         }
 
+        public Program() {
+            render = new Window(1600, 900, "OrkEngine", Start, Update);
+            render.Run(60.0);
+            render.Dispose();
+        }
+
+        public object Start()
+        {
+
+            return null;
+        }
+        public object Update()
+        {
+            return null;
+        }
     }
 }
