@@ -7,6 +7,7 @@ using System.IO;
 using OpenTK;
 using OpenTK.Graphics;
 using OrkEngine.Graphics;
+using OrkEngine.Graphics.Common;
 using OpenTK.Input;
 
 namespace Tests
@@ -30,6 +31,12 @@ namespace Tests
         {
             Console.WriteLine("Start");
 
+            Renderable rend = Renderable.Cube;
+            rend.texture = new Texture("vroooom.png");
+
+            render.AddToRenderQueue(rend);
+
+            Console.WriteLine("Start");
             return null;
         }
         public object Update()

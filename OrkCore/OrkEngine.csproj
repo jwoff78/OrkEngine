@@ -206,7 +206,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
-    <Compile Include="Interface\Renderable.cs" />
+    <Compile Include="Graphics\Renderable.cs" />
     <None Include="Common.ruleset" />
     <None Include="Graphics\Shaders\shader.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
