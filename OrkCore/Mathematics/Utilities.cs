@@ -84,5 +84,12 @@ namespace OrkEngine.Mathematics
 
             return result;
         }
+
+
+        public static double RadToDeg = Math.PI / 180;
+        public static double DegToRad(float deg)
+        {
+            return deg * (Math.PI / 180);
+        }
     }
 }
