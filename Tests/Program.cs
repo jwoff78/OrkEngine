@@ -7,6 +7,7 @@ using System.IO;
 using OpenTK;
 using OpenTK.Graphics;
 using OrkEngine.Graphics;
+using OpenTK.Input;
 
 namespace Tests
 {
@@ -27,11 +28,27 @@ namespace Tests
 
         public object Start()
         {
+            Console.WriteLine("Start");
 
             return null;
         }
         public object Update()
         {
+            if (render.KeyDown(Key.Escape))
+                render.Exit();
+            if (render.KeyDown(Key.W))
+                render.camera.Position += render.camera.Front * (float)render.deltaTime * 2;
+            if (render.KeyDown(Key.A))
+                render.camera.Position -= render.camera.Right * (float)render.deltaTime * 2;
+            if (render.KeyDown(Key.S))
+                render.camera.Position -= render.camera.Front * (float)render.deltaTime * 2;
+            if (render.KeyDown(Key.D))
+                render.camera.Position += render.camera.Right * (float)render.deltaTime * 2;
+            if (render.KeyDown(Key.Left))
+                render.camera.Yaw -= 1;
+            if (render.KeyDown(Key.Right))
+                render.camera.Yaw += 1;
+
             return null;
         }
     }

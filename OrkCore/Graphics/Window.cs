@@ -68,7 +68,7 @@ namespace OrkEngine.Graphics
 
         private Texture _texture;
 
-        public Camera _camera;
+        public Camera camera;
 
         private bool _firstMove = true;
 
@@ -78,6 +78,8 @@ namespace OrkEngine.Graphics
 
         Func<object> Start;
         Func<object> Update;
+
+        public double deltaTime = 0;
 
         public Window(int width, int height, string title, Func<object> start, Func<object> update)
             : base(width, height, GraphicsMode.Default, title)
@@ -122,7 +124,7 @@ namespace OrkEngine.Graphics
             GL.EnableVertexAttribArray(texCoordLocation);
             GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
 
-            _camera = new Camera(Vector3.UnitZ * 3, Width / (float)Height);
+            camera = new Camera(Vector3.UnitZ * 3, Width / (float)Height);
 
             CursorVisible = false;
 
@@ -144,8 +146,8 @@ namespace OrkEngine.Graphics
 
             var model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(_time * 4)) * Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(_time * 2));
             _shader.SetMatrix4("model", model);
-            _shader.SetMatrix4("view", _camera.GetViewMatrix());
-            _shader.SetMatrix4("projection", _camera.GetProjectionMatrix());
+            _shader.SetMatrix4("view", camera.GetViewMatrix());
+            _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
 
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
 
@@ -174,75 +176,21 @@ namespace OrkEngine.Graphics
 
             var input = Keyboard.GetState();
 
-            if (input.IsKeyDown(Key.Escape))
-            {
-                Exit();
-            }
-
             const float cameraSpeed = 1.5f;
             const float sensitivity = 0.2f;
 
-            if (input.IsKeyDown(Key.W))
-            {
-                _camera.Position += _camera.Front * cameraSpeed * (float)e.Time; // Forward
-            }
-
-            if (input.IsKeyDown(Key.S))
-            {
-                _camera.Position -= _camera.Front * cameraSpeed * (float)e.Time; // Backwards
-            }
-            if (input.IsKeyDown(Key.A))
-            {
-                _camera.Position -= _camera.Right * cameraSpeed * (float)e.Time; // Left
-            }
-            if (input.IsKeyDown(Key.D))
-            {
-                _camera.Position += _camera.Right * cameraSpeed * (float)e.Time; // Right
-            }
-            if (input.IsKeyDown(Key.Space))
-            {
-                _camera.Position += _camera.Up * cameraSpeed * (float)e.Time; // Up
-            }
-            if (input.IsKeyDown(Key.LShift))
-            {
-                _camera.Position -= _camera.Up * cameraSpeed * (float)e.Time; // Down
-            }
+            deltaTime = e.Time;
 
             var mouse = Mouse.GetState();
-
-            if (_firstMove)
-            {
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-                _firstMove = false;
-            }
-            else
-            {
-                var deltaX = mouse.X - _lastPos.X;
-                var deltaY = mouse.Y - _lastPos.Y;
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-
-                _camera.Yaw += deltaX * sensitivity;
-                _camera.Pitch -= deltaY * sensitivity;
-            }
 
             Update();
 
             base.OnUpdateFrame(e);
         }
 
-        protected override void OnMouseMove(MouseMoveEventArgs e)
-        {
-            if (Focused) // check to see if the window is focused
-            {
-                //Mouse.SetPosition(X + Width / 2f, Y + Height / 2f);
-            }
-
-            base.OnMouseMove(e);
-        }
-
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            _camera.Fov -= e.DeltaPrecise;
+            camera.Fov -= e.DeltaPrecise;
             base.OnMouseWheel(e);
         }
 
@@ -250,7 +198,7 @@ namespace OrkEngine.Graphics
         {
             GL.Viewport(0, 0, Width, Height);
 
-            _camera.AspectRatio = Width / (float)Height;
+            camera.AspectRatio = Width / (float)Height;
             base.OnResize(e);
         }
 
