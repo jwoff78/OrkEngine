@@ -9,13 +9,16 @@ using OpenTK.Graphics;
 using OrkEngine.Graphics;
 using OrkEngine.Graphics.Common;
 using OpenTK.Input;
+using OrkEngine.Interface.UI.Core;
+using System.Runtime.ConstrainedExecution;
 
 namespace Tests
 {
     class Program
     {
         Window render;
-        Renderable obj;
+        Renderable car;
+        Vector3 carpos = new Vector3(0,0,0);
 
         public static void Main(string[] args)
         {
@@ -35,20 +38,25 @@ namespace Tests
             Renderable rend = Renderable.Cube;
             rend.texture = new Texture("gentleman.png");
 
-            rend.rotation = new Vector3(1,2,3);
             rend.position = new Vector3(0, 2, 0);
 
-            obj = Renderable.LoadFromFile("vroooomcube2.obj", "objcube");
+            car = Renderable.LoadFromFile("Chevrolet_Camaro_SS_Low.obj", "car");
 
-            obj.texture = new Texture("Cube9_auv.png");
+            car.texture = new Texture("vroooom.png");
 
-            obj.position = new Vector3(0,0,5);
+            car.renderMode = Renderable.RenderMode.Lines;
 
-            Console.WriteLine("VertVals: " + obj.vertices.Length);
-            Console.WriteLine("Elements: " + obj.indices.Length);
+            car.position = new Vector3(0,0,5);
 
+            Renderable ground = Renderable.LoadFromFile("plane.obj", "ground");
+            ground.texture = new Texture("Cube1_auv.png");
+            ground.position = new Vector3(0, -2, 0);
+
+            render.AddToRenderQueue(ground);
             render.AddToRenderQueue(rend);
-            render.AddToRenderQueue(obj);
+            render.AddToRenderQueue(car);
+
+            render.camera.LookAtMode = true;
 
             Console.WriteLine("Start");
             return null;
@@ -58,19 +66,22 @@ namespace Tests
             if (render.KeyDown(Key.Escape))
                 render.Exit();
             if (render.KeyDown(Key.W))
-                render.camera.Position += render.camera.Front * (float)render.deltaTime * 2;
+                carpos -= car.forward * (float)render.deltaTime * 4;
             if (render.KeyDown(Key.A))
-                render.camera.Position -= render.camera.Right * (float)render.deltaTime * 2;
+            {
+                car.rot.Y += 0.01f;
+            }
             if (render.KeyDown(Key.S))
-                render.camera.Position -= render.camera.Front * (float)render.deltaTime * 2;
+                carpos += car.forward * (float)render.deltaTime * 4;
             if (render.KeyDown(Key.D))
-                render.camera.Position += render.camera.Right * (float)render.deltaTime * 2;
-            if (render.KeyDown(Key.Left))
-                render.camera.Yaw -= 1;
-            if (render.KeyDown(Key.Right))
-                render.camera.Yaw += 1;
+            {
+                car.rot.Y -= 0.01f;
+            }
 
-            obj.rotation += new Vector3(0.01f, 0.015f, 0);
+            car.position = carpos;
+            //render.camera.Position = carpos + new Vector3(0,1,0);
+            //render.camera.LookTarget = carpos;
+            //obj.rotation += new Vector3(0.00f, 0.015f, 0);
 
             return null;
         }

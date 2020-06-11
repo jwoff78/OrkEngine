@@ -10,6 +10,7 @@ using OrkEngine.Component;
 using OrkEngine.Component.OBJLoader;
 using Tex = OrkEngine.Component.Texture;
 using Texture = OrkEngine.Graphics.Common.Texture;
+using OpenTK.Graphics.OpenGL4;
 
 namespace OrkEngine.Graphics
 {
@@ -21,13 +22,27 @@ namespace OrkEngine.Graphics
         public Vector3[] normals;
         public Texture texture;
         public Vector3 position = new Vector3(0,0,0);
-        public Vector3 rotation = new Vector3(0,0,0);
+        public Vector3 rotation => rot.Xyz;
+        public RenderMode renderMode = RenderMode.Triangles;
+        public Quaternion rot = new Quaternion(0,0,0);
 
         public string randID = GetRandomString();
 
         public int elementBufferObject;
         public int vertexBufferObject;
         public int vertexArrayObject;
+
+        public Vector3 _front = -Vector3.UnitZ;
+        public Vector3 _up = Vector3.UnitY;
+        public Vector3 _right = Vector3.UnitX;
+
+        public Vector3 forward
+        {
+            get
+            {
+                return rot.Normalized() * _front;
+            }
+        }
 
         public Renderable(string Name)
         {
@@ -40,6 +55,13 @@ namespace OrkEngine.Graphics
             indices = Indices;
             normals = Normals;
             texture = Tex;
+        }
+
+        public enum RenderMode
+        {
+            Triangles = PrimitiveType.Triangles,
+            Quads = PrimitiveType.Quads,
+            Lines = PrimitiveType.Lines
         }
 
         static string GetRandomString()

@@ -46,6 +46,10 @@ namespace OrkEngine.Graphics.Common
 
         public Vector3 Right => _right;
 
+        public bool LookAtMode = false;
+
+        public Vector3 LookTarget = new Vector3(0,0,0);
+
         // We convert from degrees to radians as soon as the property is set to improve performance
         public float Pitch
         {
@@ -88,7 +92,13 @@ namespace OrkEngine.Graphics.Common
         // Get the view matrix using the amazing LookAt function described more in depth on the web tutorials
         public Matrix4 GetViewMatrix()
         {
-            return Matrix4.LookAt(Position, Position + _front, _up);
+            if (!LookAtMode) {
+                return Matrix4.LookAt(Position, Position + _front, _up);
+            }
+            else
+            {
+                return Matrix4.LookAt(Position, LookTarget, _up);
+            }
         }
 
         // Get the projection matrix using the same method we have used up until this point

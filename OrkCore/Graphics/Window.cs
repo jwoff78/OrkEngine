@@ -93,7 +93,7 @@ namespace OrkEngine.Graphics
 
         protected override void OnLoad(EventArgs e)
         {
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.ClearColor(0f, 0f, 0.05f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
 
@@ -166,7 +166,7 @@ namespace OrkEngine.Graphics
                 _shader.SetMatrix4("view", camera.GetViewMatrix());
                 _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
 
-                GL.DrawElements(PrimitiveType.Triangles, rend.indices.Length, DrawElementsType.UnsignedInt, 0);
+                GL.DrawElements((PrimitiveType)rend.renderMode, rend.indices.Length, DrawElementsType.UnsignedInt, 0);
                 GL.BindVertexArray(0);
             }
 
