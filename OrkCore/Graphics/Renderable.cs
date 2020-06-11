@@ -19,6 +19,8 @@ namespace OrkEngine.Graphics
         public Vector3 position = new Vector3(0,0,0);
         public Vector3 rotation = new Vector3(0,0,0);
 
+        public string randID = GetRandomString();
+
         public int elementBufferObject;
         public int vertexBufferObject;
         public int vertexArrayObject;
@@ -34,6 +36,13 @@ namespace OrkEngine.Graphics
             indices = Indices;
             normals = Normals;
             texture = Tex;
+        }
+
+        static string GetRandomString()
+        {
+            string path = Path.GetRandomFileName();
+            path = path.Replace(".", ""); // Remove period.
+            return path;
         }
 
         public static Renderable Cube

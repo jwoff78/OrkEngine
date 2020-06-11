@@ -32,7 +32,10 @@ namespace Tests
             Console.WriteLine("Start");
 
             Renderable rend = Renderable.Cube;
-            rend.texture = new Texture("vroooom.png");
+            rend.texture = new Texture("gentleman.png");
+
+            rend.rotation = new Vector3(1,2,3);
+            rend.position = new Vector3(0, 2, 0);
 
             render.AddToRenderQueue(rend);
 
