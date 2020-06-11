@@ -3,38 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OrkEngine.Interface;
 using System.IO;
-using OpenGL;
+using OpenTK;
+using OpenTK.Graphics;
+using OrkEngine.Graphics;
 
 namespace Tests
 {
     class Program
     {
-        Renderable vcube;
-        Renderable r;
 
-        bool mode = true;
-        float[] limits = {-1.5f, 1.5f};
-        int[] counter = {0, 10};
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Hello, world");
-            new Program();
+            // This line creates a new instance, and wraps the instance in a using statement so it's automatically disposed once we've exited the block.
+            using (Game game = new Game(800, 600, "OrkEngine"))
+            {
+                //Run takes a double, which is how many frames per second it should strive to reach.
+                //You can leave that out and it'll just update as fast as the hardware will allow it.
+                game.Run(60.0);
+            }
         }
-        public Program()
-        {
-            GameWindow g = new GameWindow(Start, Update);
-        }
-        public object Start()
-        {
-            Console.WriteLine("Start");
 
-            return null;
-        }
-        public object Update()
-        {
-            return null;
-        }
     }
 }
