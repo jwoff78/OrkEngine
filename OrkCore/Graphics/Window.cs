@@ -105,7 +105,7 @@ namespace OrkEngine.Graphics
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
             GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
 
-            _shader = new Shader(@"C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\Graphics\Shaders\shader.vert", @"C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\Graphics\Shaders\shader.frag");
+            _shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
             _shader.Use();
 
             _texture = new Texture("vroooom.png");

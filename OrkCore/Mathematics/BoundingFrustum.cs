@@ -44,18 +44,18 @@ namespace OrkEngine.Mathematics
         Gjk gjk = new Gjk();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.BoundingFrustum"/> class.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.BoundingFrustum"/> class.
         /// </summary>
-        /// <param name="value">The <see cref="OrkEngine.Mathematics.Matrix"/> to extract the planes from.</param>
+        /// <param name="value">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to extract the planes from.</param>
         public BoundingFrustum(Matrix value)
         {
             SetMatrix(ref value);
         }
 
         /// <summary>
-        /// Sets the matrix that represents this instance of <see cref="OrkEngine.Mathematics.BoundingFrustum"/>.
+        /// Sets the matrix that represents this instance of <see cref="global::OrkEngine.Mathematics.BoundingFrustum"/>.
         /// </summary>
-        /// <param name="value">The <see cref="OrkEngine.Mathematics.Matrix"/> to extract the planes from.</param>
+        /// <param name="value">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to extract the planes from.</param>
         public void SetMatrix(ref Matrix value)
         {
             this.matrix = value;

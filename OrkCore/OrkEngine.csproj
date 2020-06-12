@@ -62,14 +62,6 @@
     <Reference Include="NLua, Version=1.4.32.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.4.32\lib\net45\NLua.dll</HintPath>
     </Reference>
-    <Reference Include="OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\OpenGL.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenGL.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\OpenGL.Platform.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK, Version=3.2.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.2\lib\net20\OpenTK.dll</HintPath>
     </Reference>
@@ -98,7 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\Normal.cs" />
+    <Compile Include="Graphics\Common\Normal.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
@@ -141,29 +133,13 @@
     <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
     <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
     <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
-    <Compile Include="Component\Texture.cs" />
-    <Compile Include="Component\Vertex.cs" />
+    <Compile Include="Graphics\Common\Vertex.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Graphics\Common\Camera.cs" />
     <Compile Include="Graphics\Common\Shader.cs" />
     <Compile Include="Graphics\Common\Texture.cs" />
     <Compile Include="Graphics\Window.cs" />
-    <Compile Include="Interface\UI\Controls\Button.cs" />
-    <Compile Include="Interface\UI\Controls\CheckBox.cs" />
-    <Compile Include="Interface\UI\Controls\ColorPicker.cs" />
-    <Compile Include="Interface\UI\Controls\Console.cs" />
-    <Compile Include="Interface\UI\Controls\Font.cs" />
-    <Compile Include="Interface\UI\Controls\ListBox.cs" />
-    <Compile Include="Interface\UI\Controls\Slider.cs" />
-    <Compile Include="Interface\UI\Controls\Text.cs" />
-    <Compile Include="Interface\UI\Controls\TextBox.cs" />
-    <Compile Include="Interface\UI\Controls\TextInput.cs" />
-    <Compile Include="Interface\UI\Core\Shader.cs" />
-    <Compile Include="Interface\UI\Core\UIContainer.cs" />
-    <Compile Include="Interface\UI\Core\UIElement.cs" />
-    <Compile Include="Interface\UI\Core\UserInterface.cs" />
-    <Compile Include="IOrkCore.cs" />
-    <Compile Include="Interface\GameWindow.cs" />
+    <Compile Include="IOrkEngine.cs" />
     <Compile Include="Jarception.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
     <Compile Include="Mathematics\BoundingFrustum.cs" />
@@ -198,7 +174,6 @@
     <Compile Include="Mathematics\Vector2.cs" />
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />
-    <Compile Include="OrkCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

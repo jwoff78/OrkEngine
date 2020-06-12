@@ -34,21 +34,21 @@ namespace OrkEngine.Mathematics
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    [TypeConverter(typeof(OrkEngine.Mathematics.Design.MatrixConverter))]
+    [TypeConverter(typeof(global::OrkEngine.Mathematics.Design.MatrixConverter))]
     public struct Matrix : IEquatable<Matrix>, IFormattable
     {
         /// <summary>
-        /// The size of the <see cref="OrkEngine.Mathematics.Matrix"/> type, in bytes.
+        /// The size of the <see cref="global::OrkEngine.Mathematics.Matrix"/> type, in bytes.
         /// </summary>
         public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Matrix));
 
         /// <summary>
-        /// A <see cref="OrkEngine.Mathematics.Matrix"/> with all of its components set to zero.
+        /// A <see cref="global::OrkEngine.Mathematics.Matrix"/> with all of its components set to zero.
         /// </summary>
         public static readonly Matrix Zero = new Matrix();
 
         /// <summary>
-        /// The identity <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// The identity <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         public static readonly Matrix Identity = new Matrix() { M11 = 1.0f, M22 = 1.0f, M33 = 1.0f, M44 = 1.0f };
 
@@ -133,7 +133,7 @@ namespace OrkEngine.Mathematics
         public float M44;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Matrix(float value)
@@ -145,7 +145,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="M11">The value to assign at row 1 column 1 of the matrix.</param>
         /// <param name="M12">The value to assign at row 1 column 2 of the matrix.</param>
@@ -175,7 +175,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Matrix"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Matrix"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the components of the matrix. This must be an array with sixteen elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -3007,11 +3007,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Matrix"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Matrix other)
         {
@@ -3037,12 +3037,12 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Matrix"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to compare with this instance.</param>
         /// <param name="epsilon">The amount of error allowed.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Matrix"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Matrix other, float epsilon)
         {
