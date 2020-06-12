@@ -19,13 +19,19 @@ namespace OrkEngine.Graphics.Common
 
         private Vector3 _right = Vector3.UnitX;
 
-        // Rotation around the X axis (radians)
+        /// <summary>
+        /// Rotation around the X axis (radians)
+        /// </summary>
         private float _pitch;
 
-        // Rotation around the Y axis (radians)
+        /// <summary>
+        /// Rotation around the Y axis (radians)
+        /// </summary>
         private float _yaw = -MathHelper.PiOver2; // Without this you would be started rotated 90 degrees right
 
-        // The field of view of the camera (radians)
+        /// <summary>
+        /// The field of view of the camera (radians)
+        /// </summary>
         private float _fov = MathHelper.PiOver2;
 
         public Camera(Vector3 position, float aspectRatio)
@@ -89,7 +95,10 @@ namespace OrkEngine.Graphics.Common
             }
         }
 
-        // Get the view matrix using the amazing LookAt function described more in depth on the web tutorials
+        /// <summary>
+        /// Get the view matrix using the amazing LookAt function described more in depth on the web tutorials
+        /// </summary>
+        /// <returns>returns View matrix of camera</returns>
         public Matrix4 GetViewMatrix()
         {
             if (!LookAtMode) {
@@ -101,13 +110,18 @@ namespace OrkEngine.Graphics.Common
             }
         }
 
-        // Get the projection matrix using the same method we have used up until this point
+        /// <summary>
+        /// Get the projection matrix using the same method we have used up until this point
+        /// </summary>
+        /// <returns>Returns the projection matrix of camera</returns>
         public Matrix4 GetProjectionMatrix()
         {
             return Matrix4.CreatePerspectiveFieldOfView(_fov, AspectRatio, 0.01f, 100f);
         }
 
-        // This function is going to update the direction vertices using some of the math learned in the web tutorials
+        /// <summary>
+        /// This function is going to update the direction vertices using some of the math learned in the web tutorials
+        /// </summary>
         private void UpdateVectors()
         {
             // First the front matrix is calculated using some basic trigonometry

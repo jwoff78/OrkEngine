@@ -32,36 +32,36 @@ namespace OrkEngine.Mathematics
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
-    [TypeConverter(typeof(OrkEngine.Mathematics.Design.Vector3Converter))]
+    [TypeConverter(typeof(global::OrkEngine.Mathematics.Design.Vector3Converter))]
     public struct Vector3 : IEquatable<Vector3>, IFormattable
     {
         /// <summary>
-        /// The size of the <see cref="OrkEngine.Mathematics.Vector3"/> type, in bytes.
+        /// The size of the <see cref="global::OrkEngine.Mathematics.Vector3"/> type, in bytes.
         /// </summary>
         public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Vector3));
 
         /// <summary>
-        /// A <see cref="OrkEngine.Mathematics.Vector3"/> with all of its components set to zero.
+        /// A <see cref="global::OrkEngine.Mathematics.Vector3"/> with all of its components set to zero.
         /// </summary>
         public static readonly Vector3 Zero = new Vector3();
 
         /// <summary>
-        /// The X unit <see cref="OrkEngine.Mathematics.Vector3"/> (1, 0, 0).
+        /// The X unit <see cref="global::OrkEngine.Mathematics.Vector3"/> (1, 0, 0).
         /// </summary>
         public static readonly Vector3 UnitX = new Vector3(1.0f, 0.0f, 0.0f);
 
         /// <summary>
-        /// The Y unit <see cref="OrkEngine.Mathematics.Vector3"/> (0, 1, 0).
+        /// The Y unit <see cref="global::OrkEngine.Mathematics.Vector3"/> (0, 1, 0).
         /// </summary>
         public static readonly Vector3 UnitY = new Vector3(0.0f, 1.0f, 0.0f);
 
         /// <summary>
-        /// The Z unit <see cref="OrkEngine.Mathematics.Vector3"/> (0, 0, 1).
+        /// The Z unit <see cref="global::OrkEngine.Mathematics.Vector3"/> (0, 0, 1).
         /// </summary>
         public static readonly Vector3 UnitZ = new Vector3(0.0f, 0.0f, 1.0f);
 
         /// <summary>
-        /// A <see cref="OrkEngine.Mathematics.Vector3"/> with all of its components set to one.
+        /// A <see cref="global::OrkEngine.Mathematics.Vector3"/> with all of its components set to one.
         /// </summary>
         public static readonly Vector3 One = new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -81,7 +81,7 @@ namespace OrkEngine.Mathematics
         public float Z;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Vector3"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Vector3(float value)
@@ -92,7 +92,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Vector3"/> struct.
         /// </summary>
         /// <param name="x">Initial value for the X component of the vector.</param>
         /// <param name="y">Initial value for the Y component of the vector.</param>
@@ -105,7 +105,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Vector3"/> struct.
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X and Y components.</param>
         /// <param name="z">Initial value for the Z component of the vector.</param>
@@ -117,7 +117,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Vector3"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the X, Y, and Z components of the vector. This must be an array with three elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -146,7 +146,7 @@ namespace OrkEngine.Mathematics
         /// Calculates the length of the vector.
         /// </summary>
         /// <remarks>
-        /// <see cref="OrkEngine.Mathematics.Vector3.LengthSquared"/> may be preferred when only the relative length is needed
+        /// <see cref="global::OrkEngine.Mathematics.Vector3.LengthSquared"/> may be preferred when only the relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public float Length
@@ -158,7 +158,7 @@ namespace OrkEngine.Mathematics
         /// Calculates the squared length of the vector.
         /// </summary>
         /// <remarks>
-        /// This property may be preferred to <see cref="OrkEngine.Mathematics.Vector3.Length"/> when only a relative length is needed
+        /// This property may be preferred to <see cref="global::OrkEngine.Mathematics.Vector3.Length"/> when only a relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public float LengthSquared
@@ -581,11 +581,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
+        /// Returns a <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
         /// <param name="result">When the method completes, contains the 3D Cartesian coordinates of the specified point.</param>
@@ -597,14 +597,14 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
+        /// Returns a <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
-        /// <returns>A new <see cref="OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of the specified point.</returns>
+        /// <returns>A new <see cref="global::OrkEngine.Mathematics.Vector3"/> containing the 3D Cartesian coordinates of the specified point.</returns>
         public static Vector3 Barycentric(Vector3 value1, Vector3 value2, Vector3 value3, float amount1, float amount2)
         {
             Vector3 result;
@@ -712,7 +712,7 @@ namespace OrkEngine.Mathematics
         /// <param name="value2">The second vector.</param>
         /// <param name="result">When the method completes, contains the distance between the two vectors.</param>
         /// <remarks>
-        /// <see cref="OrkEngine.Mathematics.Vector3.DistanceSquared(ref Vector3, ref Vector3, out float)"/> may be preferred when only the relative distance is needed
+        /// <see cref="global::OrkEngine.Mathematics.Vector3.DistanceSquared(ref Vector3, ref Vector3, out float)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
         public static void Distance(ref Vector3 value1, ref Vector3 value2, out float result)
@@ -731,7 +731,7 @@ namespace OrkEngine.Mathematics
         /// <param name="value2">The second vector.</param>
         /// <returns>The distance between the two vectors.</returns>
         /// <remarks>
-        /// <see cref="OrkEngine.Mathematics.Vector3.DistanceSquared(Vector3, Vector3)"/> may be preferred when only the relative distance is needed
+        /// <see cref="global::OrkEngine.Mathematics.Vector3.DistanceSquared(Vector3, Vector3)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
         public static float Distance(Vector3 value1, Vector3 value2)
@@ -1282,11 +1282,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 3D vector by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
+        /// Transforms a 3D vector by the given <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</param>
+        /// <param name="rotation">The <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkEngine.Mathematics.Vector4"/>.</param>
         public static void Transform(ref Vector3 vector, ref Quaternion rotation, out Vector3 result)
         {
             float x = rotation.X + rotation.X;
@@ -1319,11 +1319,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 3D vector by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
+        /// Transforms a 3D vector by the given <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="vector">The vector to rotate.</param>
-        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
-        /// <returns>The transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</returns>
+        /// <param name="rotation">The <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
+        /// <returns>The transformed <see cref="global::OrkEngine.Mathematics.Vector4"/>.</returns>
         public static Vector3 Transform(Vector3 vector, Quaternion rotation)
         {
             Vector3 result;
@@ -1332,10 +1332,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms an array of vectors by the given <see cref="OrkEngine.Mathematics.Quaternion"/> rotation.
+        /// Transforms an array of vectors by the given <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation.
         /// </summary>
         /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="rotation">The <see cref="OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
+        /// <param name="rotation">The <see cref="global::OrkEngine.Mathematics.Quaternion"/> rotation to apply.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
@@ -1382,11 +1382,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 3D vector by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Transforms a 3D vector by the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkEngine.Mathematics.Vector4"/>.</param>
         public static void Transform(ref Vector3 vector, ref Matrix transform, out Vector4 result)
         {
             result = new Vector4(
@@ -1397,11 +1397,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms a 3D vector by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Transforms a 3D vector by the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="vector">The source vector.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
-        /// <returns>The transformed <see cref="OrkEngine.Mathematics.Vector4"/>.</returns>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <returns>The transformed <see cref="global::OrkEngine.Mathematics.Vector4"/>.</returns>
         public static Vector4 Transform(Vector3 vector, Matrix transform)
         {
             Vector4 result;
@@ -1410,10 +1410,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Transforms an array of 3D vectors by the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Transforms an array of 3D vectors by the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="source">The array of vectors to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
@@ -1433,10 +1433,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a coordinate transformation using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a coordinate transformation using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="coordinate">The coordinate vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="result">When the method completes, contains the transformed coordinates.</param>
         /// <remarks>
         /// A coordinate transform performs the transformation with the assumption that the w component
@@ -1457,10 +1457,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a coordinate transformation using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a coordinate transformation using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="coordinate">The coordinate vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <returns>The transformed coordinates.</returns>
         /// <remarks>
         /// A coordinate transform performs the transformation with the assumption that the w component
@@ -1477,10 +1477,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a coordinate transformation on an array of vectors using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a coordinate transformation on an array of vectors using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="source">The array of coordinate vectors to trasnform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
@@ -1508,10 +1508,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a normal transformation using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a normal transformation using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="normal">The normal vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="result">When the method completes, contains the transformed normal.</param>
         /// <remarks>
         /// A normal transform performs the transformation with the assumption that the w component
@@ -1529,10 +1529,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a normal transformation using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a normal transformation using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="normal">The normal vector to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <returns>The transformed normal.</returns>
         /// <remarks>
         /// A normal transform performs the transformation with the assumption that the w component
@@ -1549,10 +1549,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs a normal transformation on an array of vectors using the given <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Performs a normal transformation on an array of vectors using the given <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
         /// <param name="source">The array of normal vectors to transform.</param>
-        /// <param name="transform">The transformation <see cref="OrkEngine.Mathematics.Matrix"/>.</param>
+        /// <param name="transform">The transformation <see cref="global::OrkEngine.Mathematics.Matrix"/>.</param>
         /// <param name="destination">The array for which the transformed vectors are stored.
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
@@ -1677,7 +1677,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector3"/> to <see cref="OrkEngine.Mathematics.Vector2"/>.
+        /// Performs an explicit conversion from <see cref="global::OrkEngine.Mathematics.Vector3"/> to <see cref="global::OrkEngine.Mathematics.Vector2"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1687,7 +1687,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector3"/> to <see cref="OrkEngine.Mathematics.Vector4"/>.
+        /// Performs an explicit conversion from <see cref="global::OrkEngine.Mathematics.Vector3"/> to <see cref="global::OrkEngine.Mathematics.Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -1764,11 +1764,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector3"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Vector3"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OrkEngine.Mathematics.Vector3"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="global::OrkEngine.Mathematics.Vector3"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Vector3 other)
         {
@@ -1776,12 +1776,12 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector3"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Vector3"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OrkEngine.Mathematics.Vector3"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="global::OrkEngine.Mathematics.Vector3"/> to compare with this instance.</param>
         /// <param name="epsilon">The amount of error allowed.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Vector3"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Vector3 other, float epsilon)
         {

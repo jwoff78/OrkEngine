@@ -88,7 +88,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Half2"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Half2"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the X and Y components of the vector. This must be an array with two elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>

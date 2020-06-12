@@ -98,7 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\Normal.cs" />
+    <Compile Include="Graphics\Common\Normal.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
     <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
     <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
-    <Compile Include="Component\Vertex.cs" />
+    <Compile Include="Graphics\Common\Vertex.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Graphics\Common\Camera.cs" />
     <Compile Include="Graphics\Common\Shader.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="Interface\UI\Core\UIContainer.cs" />
     <Compile Include="Interface\UI\Core\UIElement.cs" />
     <Compile Include="Interface\UI\Core\UserInterface.cs" />
-    <Compile Include="IOrkCore.cs" />
+    <Compile Include="IOrkEngine.cs" />
     <Compile Include="Interface\GameWindow.cs" />
     <Compile Include="Jarception.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
@@ -197,7 +197,6 @@
     <Compile Include="Mathematics\Vector2.cs" />
     <Compile Include="Mathematics\Vector3.cs" />
     <Compile Include="Mathematics\Vector4.cs" />
-    <Compile Include="OrkCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

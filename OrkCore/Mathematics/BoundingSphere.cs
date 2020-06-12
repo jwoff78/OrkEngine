@@ -45,7 +45,7 @@ namespace OrkEngine.Mathematics
         public float Radius;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.BoundingBox"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.BoundingBox"/> struct.
         /// </summary>
         /// <param name="center">The center of the sphere.</param>
         /// <param name="radius">The radius of the sphere.</param>
@@ -56,7 +56,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.BoundingBox"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.BoundingBox"/> struct.
         /// </summary>
         /// <param name="centerX">The x-coordinate for the center of the sphere.</param>
         /// <param name="centerY">The y-coordinate for the center of the sphere.</param>
@@ -69,7 +69,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -80,7 +80,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="distance">When the method completes, contains the distance of the intersection,
@@ -92,11 +92,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Ray"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.Ray"/>.
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="point">When the method completes, contains the point of intersection,
-        /// or <see cref="OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
+        /// or <see cref="global::OrkEngine.Mathematics.Vector3.Zero"/> if there was no intersection.</param>
         /// <returns>Whether the two objects intersected.</returns>
         public bool Intersects(ref Ray ray, out Vector3 point)
         {
@@ -104,7 +104,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.Plane"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.Plane"/>.
         /// </summary>
         /// <param name="plane">The plane to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -126,7 +126,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -136,7 +136,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines if there is an intersection between the current object and a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
+        /// Determines if there is an intersection between the current object and a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>Whether the two objects intersected.</returns>
@@ -168,7 +168,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the current objects contains a <see cref="OrkEngine.Mathematics.BoundingBox"/>.
+        /// Determines whether the current objects contains a <see cref="global::OrkEngine.Mathematics.BoundingBox"/>.
         /// </summary>
         /// <param name="box">The box to test.</param>
         /// <returns>The type of containment the two objects have.</returns>
@@ -178,7 +178,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the current objects contains a <see cref="OrkEngine.Mathematics.BoundingSphere"/>.
+        /// Determines whether the current objects contains a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/>.
         /// </summary>
         /// <param name="sphere">The sphere to test.</param>
         /// <returns>The type of containment the two objects have.</returns>
@@ -188,10 +188,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Translates and scales this instance by a <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Translates and scales this instance by a <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
-        /// <param name="matrix">The <see cref="OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
-        /// <param name="result">When the method completes, contains the transformed <see cref="OrkEngine.Mathematics.BoundingSphere"/>.</param>
+        /// <param name="matrix">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
+        /// <param name="result">When the method completes, contains the transformed <see cref="global::OrkEngine.Mathematics.BoundingSphere"/>.</param>
         /// <remarks>
         /// The result of this operation is undefined if the matrix contains any transformations other than
         /// translation, rotation, and uniform scaling.
@@ -210,10 +210,10 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Translates and scales this instance by a <see cref="OrkEngine.Mathematics.Matrix"/>.
+        /// Translates and scales this instance by a <see cref="global::OrkEngine.Mathematics.Matrix"/>.
         /// </summary>
-        /// <param name="matrix">The <see cref="OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
-        /// <returns>The transformed <see cref="OrkEngine.Mathematics.BoundingSphere"/>.</returns>
+        /// <param name="matrix">The <see cref="global::OrkEngine.Mathematics.Matrix"/> to transform this instance by.</param>
+        /// <returns>The transformed <see cref="global::OrkEngine.Mathematics.BoundingSphere"/>.</returns>
         /// <remarks>
         /// The result of this operation is undefined if the matrix contains any transformations other than
         /// translation, rotation, and uniform scaling.
@@ -248,7 +248,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
         /// </summary>
         /// <param name="points">The points that will be contained by the sphere.</param>
         /// <param name="result">When the method completes, contains the newly constructed bounding sphere.</param>
@@ -286,7 +286,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> that fully contains the given points.
         /// </summary>
         /// <param name="points">The points that will be contained by the sphere.</param>
         /// <returns>The newly constructed bounding sphere.</returns>
@@ -298,7 +298,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> from a given box.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> from a given box.
         /// </summary>
         /// <param name="box">The box that will designate the extents of the sphere.</param>
         /// <param name="result">When the method completes, the newly constructed bounding sphere.</param>
@@ -315,7 +315,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> from a given box.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> from a given box.
         /// </summary>
         /// <param name="box">The box that will designate the extents of the sphere.</param>
         /// <returns>The newly constructed bounding sphere.</returns>
@@ -327,7 +327,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
         /// </summary>
         /// <param name="value1">The first sphere to merge.</param>
         /// <param name="value2">The second sphere to merge.</param>
@@ -364,7 +364,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Constructs a <see cref="OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
+        /// Constructs a <see cref="global::OrkEngine.Mathematics.BoundingSphere"/> that is the as large as the total combined area of the two specified spheres.
         /// </summary>
         /// <param name="value1">The first sphere to merge.</param>
         /// <param name="value2">The second sphere to merge.</param>
@@ -466,11 +466,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Vector4"/> is equal to this instance.
         /// </summary>
-        /// <param name="value">The <see cref="OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
+        /// <param name="value">The <see cref="global::OrkEngine.Mathematics.Vector4"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Vector4"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(BoundingSphere value)
         {
