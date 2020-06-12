@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK.Graphics.OpenGL4;
 using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
@@ -6,9 +7,12 @@ using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
 namespace OrkEngine.Graphics.Common
 {
     // A helper class, much like Shader, meant to simplify loading textures.
-    public class Texture
+    public class Texture : IEquatable<Texture>
     {
         public readonly int Handle;
+
+        public float X { get; private set; }
+        public float Y { get; private set; }
 
         // Create texture from path.
         public Texture(string path)
@@ -82,6 +86,12 @@ namespace OrkEngine.Graphics.Common
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
         }
 
+        public Texture(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
         // Activate texture
         // Multiple textures can be bound, if your shader needs more than just one.
         // If you want to do that, use GL.ActiveTexture to set which slot GL.BindTexture binds to.
@@ -90,6 +100,40 @@ namespace OrkEngine.Graphics.Common
         {
             GL.ActiveTexture(unit);
             GL.BindTexture(TextureTarget.Texture2D, Handle);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Texture texture))
+                return false;
+
+            return this.X == texture.X &&
+                   this.Y == texture.Y;
+        }
+
+        public bool Equals(Texture other)
+        {
+
+            if (!(other is Texture texture))
+                return false;
+
+            return this.X == texture.X &&
+                   this.Y == texture.Y;
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() + Y.GetHashCode();
+        }
+
+        public static bool operator ==(Texture left, Texture right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Texture left, Texture right)
+        {
+            return !(left == right);
         }
     }
 }

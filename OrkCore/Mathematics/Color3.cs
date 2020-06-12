@@ -50,7 +50,7 @@ namespace OrkEngine.Mathematics
         public float Blue;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Color3"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
         public Color3(float value)
@@ -59,7 +59,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Color3"/> struct.
         /// </summary>
         /// <param name="red">The red component of the color.</param>
         /// <param name="green">The green component of the color.</param>
@@ -72,7 +72,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Color3"/> struct.
         /// </summary>
         /// <param name="value">The red, green, and blue components of the color.</param>
         public Color3(Vector3 value)
@@ -83,7 +83,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Color3"/> struct.
         /// </summary>
         /// <param name="rgb">A packed integer containing all three color components.
         /// The alpha component is ignored.</param>
@@ -95,7 +95,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrkEngine.Mathematics.Color3"/> struct.
+        /// Initializes a new instance of the <see cref="global::OrkEngine.Mathematics.Color3"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the red, green, and blue components of the color. This must be an array with three elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
@@ -707,7 +707,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Color3"/> to <see cref="OrkEngine.Mathematics.Color4"/>.
+        /// Performs an explicit conversion from <see cref="global::OrkEngine.Mathematics.Color3"/> to <see cref="global::OrkEngine.Mathematics.Color4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -717,7 +717,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Color3"/> to <see cref="OrkEngine.Mathematics.Vector3"/>.
+        /// Performs an explicit conversion from <see cref="global::OrkEngine.Mathematics.Color3"/> to <see cref="global::OrkEngine.Mathematics.Vector3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -727,7 +727,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OrkEngine.Mathematics.Vector3"/> to <see cref="OrkEngine.Mathematics.Color3"/>.
+        /// Performs an explicit conversion from <see cref="global::OrkEngine.Mathematics.Vector3"/> to <see cref="global::OrkEngine.Mathematics.Color3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -737,7 +737,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Int32"/> to <see cref="OrkEngine.Mathematics.Color3"/>.
+        /// Performs an explicit conversion from <see cref="System.Int32"/> to <see cref="global::OrkEngine.Mathematics.Color3"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -814,11 +814,11 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="OrkEngine.Mathematics.Color3"/> is equal to this instance.
+        /// Determines whether the specified <see cref="global::OrkEngine.Mathematics.Color3"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OrkEngine.Mathematics.Color3"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="global::OrkEngine.Mathematics.Color3"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="OrkEngine.Mathematics.Color3"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="global::OrkEngine.Mathematics.Color3"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(Color3 other)
         {

@@ -157,7 +157,7 @@ namespace OrkEngine.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to negative or positive infinity.
         /// </summary>
-        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
+        /// <param name="half">The <see cref="global::OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to positive or negative infinity; otherwise, <c>false</c>.</returns>
         public static bool IsInfinity(Half half)
         {
@@ -167,7 +167,7 @@ namespace OrkEngine.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to NaN.
         /// </summary>
-        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
+        /// <param name="half">The <see cref="global::OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to NaN; otherwise, <c>false</c>.</returns>
         public static bool IsNaN(Half half)
         {
@@ -177,7 +177,7 @@ namespace OrkEngine.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to negative infinity.
         /// </summary>
-        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
+        /// <param name="half">The <see cref="global::OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to negative infinity; otherwise, <c>false</c>.</returns>
         public static bool IsNegativeInfinity(Half half)
         {
@@ -187,7 +187,7 @@ namespace OrkEngine.Mathematics
         /// <summary>
         /// Returns a value indicating whether the specified number evaluates to positive infinity.
         /// </summary>
-        /// <param name="half">The <see cref="OrkEngine.Mathematics.Half"/> to check.</param>
+        /// <param name="half">The <see cref="global::OrkEngine.Mathematics.Half"/> to check.</param>
         /// <returns><c>true</c> if <paramref name="half"/> evaluates to positive infinity; otherwise, <c>false</c>.</returns>
         public static bool IsPositiveInfinity(Half half)
         {
@@ -195,8 +195,8 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
-        /// less than another specified <see cref="OrkEngine.Mathematics.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="global::OrkEngine.Mathematics.Half"/> value is
+        /// less than another specified <see cref="global::OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -207,8 +207,8 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
-        /// greater than another specified <see cref="OrkEngine.Mathematics.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="global::OrkEngine.Mathematics.Half"/> value is
+        /// greater than another specified <see cref="global::OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -219,8 +219,8 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
-        /// less than or equal to another specified <see cref="OrkEngine.Mathematics.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="global::OrkEngine.Mathematics.Half"/> value is
+        /// less than or equal to another specified <see cref="global::OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -231,8 +231,8 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns a value that indicates whether a specified <see cref="OrkEngine.Mathematics.Half"/> value is
-        /// greater than or equal to another specified <see cref="OrkEngine.Mathematics.Half"/> value.
+        /// Returns a value that indicates whether a specified <see cref="global::OrkEngine.Mathematics.Half"/> value is
+        /// greater than or equal to another specified <see cref="global::OrkEngine.Mathematics.Half"/> value.
         /// </summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
@@ -466,7 +466,7 @@ namespace OrkEngine.Mathematics
         }
 
         /// <summary>
-        /// Returns the <see cref="System.TypeCode"/> for value type <see cref="OrkEngine.Mathematics.Half"/>.
+        /// Returns the <see cref="System.TypeCode"/> for value type <see cref="global::OrkEngine.Mathematics.Half"/>.
         /// </summary>
         /// <returns>The type code.</returns>
         public TypeCode GetTypeCode()
