@@ -141,7 +141,6 @@
     <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
     <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
     <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
-    <Compile Include="Component\Texture.cs" />
     <Compile Include="Component\Vertex.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Graphics\Common\Camera.cs" />

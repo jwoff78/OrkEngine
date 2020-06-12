@@ -142,3 +142,7 @@ C:\Users\djlw7\Source\Repos\OrkEngine6\OrkCore\obj\Debug\OrkEngine.csproj.CoreCo
 C:\Users\djlw7\Source\Repos\OrkEngine6\OrkCore\obj\Debug\OrkEngine.csproj.CopyComplete
 C:\Users\djlw7\Source\Repos\OrkEngine6\OrkCore\obj\Debug\OrkEngine.dll
 C:\Users\djlw7\Source\Repos\OrkEngine6\OrkCore\obj\Debug\OrkEngine.pdb
+C:\Users\djlw7\Source\Repos\OrkEngine7\OrkCore\obj\Debug\OrkEngine.csprojAssemblyReference.cache
+C:\Users\djlw7\Source\Repos\OrkEngine7\OrkCore\obj\Debug\OrkEngine.csproj.CoreCompileInputs.cache
+C:\Users\djlw7\Source\Repos\OrkEngine7\OrkCore\obj\Debug\OrkEngine.dll
+C:\Users\djlw7\Source\Repos\OrkEngine7\OrkCore\obj\Debug\OrkEngine.pdb

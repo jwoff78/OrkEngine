@@ -8,8 +8,6 @@ using OpenTK;
 using OrkEngine.Graphics.Common;
 using OrkEngine.Component;
 using OrkEngine.Component.OBJLoader;
-using Tex = OrkEngine.Component.Texture;
-using Texture = OrkEngine.Graphics.Common.Texture;
 using OpenTK.Graphics.OpenGL4;
 
 namespace OrkEngine.Graphics
@@ -157,7 +155,7 @@ namespace OrkEngine.Graphics
             {
                 normals.Add(new Vector3(n.X, n.Y, n.Z));
             }
-            foreach (Tex t in result.Textures)
+            foreach (Texture t in result.Textures)
             {
                 rawuvs.Add(new Vector2(t.X, t.Y));
             }
