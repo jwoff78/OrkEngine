@@ -28,6 +28,12 @@ namespace ScriptEngine.JSEngine
 
         public void DoFiles(string[] files)
         {
+            
+        }
+
+        [Obsolete("Don't fucking use", true)]
+        public void ThinkScript(string script, bool fish)
+        {
 
         }
     }
