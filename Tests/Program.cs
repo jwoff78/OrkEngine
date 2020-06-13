@@ -9,7 +9,6 @@ using OpenTK.Graphics;
 using OrkEngine.Graphics;
 using OrkEngine.Graphics.Common;
 using OpenTK.Input;
-using OrkEngine.Interface.UI.Core;
 using System.Runtime.ConstrainedExecution;
 using OrkEngine;
 
@@ -17,18 +16,9 @@ namespace Tests
 {
     public class Program : IOrkEngine
     {
+        public Program() => OnLoad();
         
-       
+        public static void Main(string[] args) => new Program(); 
 
-        public static void Main(string[] args)
-        {
-            new Program();
-        }
-
-        public Program() {
-            Init();
-        }
-
-     
     }
 }

@@ -26,16 +26,12 @@ namespace OrkEngine
             //bool isTrue = 10 > 5;
         }
 
-        public void Init()
-        {
-            engine.Initializer();
-        }
-
         /// <summary>
         /// Run's first thing before anything else is called, OnStart, OnUpdate, Etc...
         /// </summary>
         public void OnLoad()
         {
+            engine.Load();
         }
 
         /// <summary>
@@ -95,7 +91,7 @@ namespace OrkEngine
         private Renderable car;
         private Vector3 carpos = new Vector3(0, 0, 0);
 
-        public void Initializer()
+        public void Load()
         {
             render = new Window(1600, 900, "OrkEngine", Start, Update);
             render.Run(60.0);
