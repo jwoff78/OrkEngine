@@ -34,6 +34,7 @@ void main()
                                                     //wether it was normalized for us or not.
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
+    //vec3 diffuse = texture(material.diffuse, TexCoords).xyz;
 
     // specular
     vec3 viewDir = normalize(viewPos);

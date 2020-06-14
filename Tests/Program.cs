@@ -39,8 +39,8 @@ namespace Tests
         {
             vobj = new GameObject("vroooom", Model.LoadModelFromFile("vroooomcube2.obj"));
             vobj.ActiveModel.texture = new Texture("Cube9_auv.png");
+            vobj.ActiveModel.renderMode = Model.RenderMode.Triangles;
             window.AddToRenderQueue(vobj);
-            vobj.scale = new Vector3(1.5f,1.5f,1.5f);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];

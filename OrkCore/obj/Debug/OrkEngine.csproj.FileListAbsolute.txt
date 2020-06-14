@@ -206,3 +206,7 @@ C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\bin\Debug\System.Runtime.Compiler
 C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\obj\Debug\OrkEngine.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Default\default.png
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Shaders\lighting.frag
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.Content.Pipeline.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.dll
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.Content.Pipeline.xml

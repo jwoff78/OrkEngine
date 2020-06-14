@@ -25,10 +25,9 @@ namespace OrkEngine.Graphics
         public int vertexArrayObject;
 
         public Model() { }
-        public Model(string Name, float[] Verts, uint[] Indices, Vector3[] Normals, Texture Tex)
+        public Model(string Name, float[] Verts, Vector3[] Normals, Texture Tex)
         {
             vertices = Verts;
-            indices = Indices;
             normals = Normals;
             texture = Tex;
         }
@@ -38,6 +37,11 @@ namespace OrkEngine.Graphics
             Triangles = PrimitiveType.Triangles,
             Quads = PrimitiveType.Quads,
             Lines = PrimitiveType.Lines
+        }
+
+        public struct Material
+        {
+
         }
 
         public static Model Cube
@@ -86,17 +90,8 @@ namespace OrkEngine.Graphics
                      0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
                     -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
                     -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
-};
-                cube.normals = new Vector3[] {
-                    new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0),
-                    new Vector3(0, -1, 0), new Vector3(0, -1, 0), new Vector3(0, -1, 0), new Vector3(0, -1, 0),
-                    new Vector3(0, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 1),
-                    new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1),
-                    new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), new Vector3(-1, 0, 0), new Vector3(-1, 0, 0),
-                    new Vector3(1, 0, 0), new Vector3(1, 0, 0), new Vector3(1, 0, 0), new Vector3(1, 0, 0) };
-                cube.indices = new uint[]{
-                    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35
-        };
+                };
+                //Console.WriteLine(cube.vertices.Length);
                 return cube;
             }
         }
@@ -152,11 +147,6 @@ namespace OrkEngine.Graphics
                             verts.Add(rawnormals[i.NormalIndex - 1].Y);
                             verts.Add(rawnormals[i.NormalIndex - 1].Z);
                         }
-                        else
-                        {
-                            verts.Add(0);
-                            verts.Add(0);
-                        }
 
                         if (rawuvs.Count > 0) {
                             verts.Add(rawuvs[i.TextureIndex - 1].X);
@@ -168,6 +158,7 @@ namespace OrkEngine.Graphics
                             verts.Add(0);
                         }
                     }
+
 
             rend.vertices = verts.ToArray();
             rend.indices = elements.ToArray();

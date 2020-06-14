@@ -11,66 +11,6 @@ namespace OrkEngine.Graphics
 {
     public class Window : GameWindow
     {
-        private readonly float[] _vertices =
-        {
-            // Positions          Normals              Texture coords
-            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-             0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-
-            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
-
-            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-             0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-
-            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
-        };
-
-        private readonly Vector3[] _cubePositions =
-        {
-            new Vector3(0.0f, 0.0f, 0.0f),
-            new Vector3(2.0f, 5.0f, -15.0f),
-            new Vector3(-1.5f, -2.2f, -2.5f),
-            new Vector3(-3.8f, -2.0f, -12.3f),
-            new Vector3(2.4f, -0.4f, -3.5f),
-            new Vector3(-1.7f, 3.0f, -7.5f),
-            new Vector3(1.3f, -2.0f, -2.5f),
-            new Vector3(1.5f, 2.0f, -2.5f),
-            new Vector3(1.5f, 0.2f, -1.5f),
-            new Vector3(-1.3f, 1.0f, -1.5f)
-        };
-
         List<GameObject> Objects = new List<GameObject>();
 
         private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
@@ -109,19 +49,10 @@ namespace OrkEngine.Graphics
 
             GL.Enable(EnableCap.DepthTest);
 
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
-
             _lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
             _lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
-            _diffuseMap = new Texture("Graphics/Default/default.png");
-            _specularMap = new Texture("auxzilco.png");
-
-            _vaoModel = GL.GenVertexArray();
-            GL.BindVertexArray(_vaoModel);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
+            _diffuseMap = new Texture("Textures/Diffuse_2K.png");
+            _specularMap = new Texture("Textures/Bump_2K.png");
 
             var positionLocation = _lightingShader.GetAttribLocation("aPos");
             GL.EnableVertexAttribArray(positionLocation);
@@ -157,45 +88,46 @@ namespace OrkEngine.Graphics
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.BindVertexArray(_vaoModel);
-
-            _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
-            _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
-
-            _lightingShader.SetVector3("viewPos", camera.Position);
-
-            _lightingShader.SetInt("material.diffuse", 0);
-            _lightingShader.SetInt("material.specular", 1);
-            _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
-            _lightingShader.SetFloat("material.shininess", 100.0f);
-
-            _lightingShader.SetVector3("light.direction", new Vector3(-0.2f, -1.0f, -0.3f));
-            _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
-            _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
-            _lightingShader.SetVector3("light.specular", new Vector3(1.0f));
-
             foreach (GameObject obj in Objects)
             {
                 Model m = new Model();
 
                 if (obj.modelIndex > obj.models.Count - 1)
                 {
-                    m = Model.Cube;
+                    m = obj.models[0];
                     Console.WriteLine("[!] Model Index {0} was out of bounds. GameObject: {1}", obj.modelIndex, obj.name);
                 }
                 else
-                    m = obj.models[obj.modelIndex];
+                    m = obj.ActiveModel;
 
                 GL.BindVertexArray(m.vertexArrayObject);
 
-                m.texture.Use();
+                _diffuseMap.Use();
                 _specularMap.Use(TextureUnit.Texture1);
                 _lightingShader.Use();
+
+                _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
+                _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
+
+                _lightingShader.SetVector3("viewPos", camera.Position);
+
+                //material settings -> will be set by the model later
+                _lightingShader.SetInt("material.diffuse", 0);
+                _lightingShader.SetInt("material.specular", 1);
+                _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
+                _lightingShader.SetFloat("material.shininess", 100.0f);
+
+                //light setting -> why are they here? idk I put them here but I probably should put them outside the loop
+                _lightingShader.SetVector3("light.direction", new Vector3(-0.2f, -1.0f, -0.3f));
+                _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
+                _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
+                _lightingShader.SetVector3("light.specular", new Vector3(1.0f));
 
                 Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX(obj.rotation.X) * Matrix4.CreateRotationY(obj.rotation.Y) * Matrix4.CreateRotationZ(obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
                 _lightingShader.SetMatrix4("model", model);
 
-                GL.DrawArrays((PrimitiveType)m.renderMode, 0, m.vertices.Length / 8);
+                GL.DrawElements((PrimitiveType)m.renderMode, m.indices.Length, DrawElementsType.UnsignedInt, 0);
+                GL.BindVertexArray(0);
             }
 
             SwapBuffers();
