@@ -26,16 +26,12 @@ namespace OrkEngine
             //bool isTrue = 10 > 5;
         }
 
-        public void Init()
-        {
-            engine.Initializer();
-        }
-
         /// <summary>
         /// Run's first thing before anything else is called, OnStart, OnUpdate, Etc...
         /// </summary>
         public void OnLoad()
         {
+            engine.Load();
         }
 
         /// <summary>
@@ -94,7 +90,7 @@ namespace OrkEngine
         //moved stuff back to program.cs because this code is supposed to be used by the user
         // - Red
 
-        public void Initializer()
+        public void Load()
         {
             
         }

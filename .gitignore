@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/OrkEngine Core/v16/Browse.VC.opendb
+/.vs/OrkEngine Core/v16/Browse.VC.db-wal
+/.vs/OrkEngine Core/v16/Browse.VC.db-shm
