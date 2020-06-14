@@ -45,47 +45,47 @@ namespace OrkEngine.Graphics
             get{
                 Model cube = new Model();
                 cube.vertices = new float[]{
-                    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-                     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-                     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-                    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+                    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+                     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+                     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+                     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+                    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+                    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
 
-                    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-                     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-                    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-                    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+                    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
+                     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 0.0f,
+                     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+                     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+                    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 1.0f,
+                    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
 
-                    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+                    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+                    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+                    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+                    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+                    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-                     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+                     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+                     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+                     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+                     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+                     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+                     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-                    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-                     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-                     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-                    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-                    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+                    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+                     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+                     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+                     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+                    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+                    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
 
-                    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-                     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-                     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-                    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-                    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+                    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+                     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+                     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+                     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+                    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+                    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 };
                 cube.normals = new Vector3[] {
                     new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0), new Vector3(0, 1, 0),
@@ -112,11 +112,11 @@ namespace OrkEngine.Graphics
 
             List<Vector3> rawverts = new List<Vector3>();
             List<Vector2> rawuvs = new List<Vector2>();
+            List<Vector3> rawnormals = new List<Vector3>();
 
 
             List<float> verts = new List<float>();
             List<uint> elements = new List<uint>();
-            List<Vector3> normals = new List<Vector3>();
 
             foreach (Vertex v in result.Vertices)
             {
@@ -124,11 +124,11 @@ namespace OrkEngine.Graphics
             }
             foreach (Normal n in result.Normals)
             {
-                normals.Add(new Vector3(n.X, n.Y, n.Z));
+                rawnormals.Add(new Vector3(n.X, n.Y, n.Z));
             }
             foreach (Texture t in result.Textures)
             {
-                rawuvs.Add(new Vector2(t.X, t.Y));
+                rawuvs.Add(new Vector2(t.X,t.Y));
             }
 
             Console.WriteLine(rawverts.Count);
@@ -145,6 +145,19 @@ namespace OrkEngine.Graphics
                         verts.Add(rawverts[i.VertexIndex-1].X);
                         verts.Add(rawverts[i.VertexIndex-1].Y);
                         verts.Add(rawverts[i.VertexIndex-1].Z);
+
+                        if (rawnormals.Count > 0)
+                        {
+                            verts.Add(rawnormals[i.NormalIndex - 1].X);
+                            verts.Add(rawnormals[i.NormalIndex - 1].Y);
+                            verts.Add(rawnormals[i.NormalIndex - 1].Z);
+                        }
+                        else
+                        {
+                            verts.Add(0);
+                            verts.Add(0);
+                        }
+
                         if (rawuvs.Count > 0) {
                             verts.Add(rawuvs[i.TextureIndex - 1].X);
                             verts.Add(rawuvs[i.TextureIndex - 1].Y);

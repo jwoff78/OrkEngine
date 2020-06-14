@@ -37,7 +37,8 @@ namespace Tests
 
         public object Start()
         {
-            vobj = new GameObject("vroooom", Model.Cube);
+            vobj = new GameObject("vroooom", Model.LoadModelFromFile("vroooomcube2.obj"));
+            vobj.ActiveModel.texture = new Texture("Cube9_auv.png");
             window.AddToRenderQueue(vobj);
             vobj.scale = new Vector3(1.5f,1.5f,1.5f);
 
@@ -46,7 +47,7 @@ namespace Tests
 
             for (int i = 0; i < tex.Length; i++)
             {
-                textures[i] = new Texture(tex[i]);
+                //textures[i] = new Texture(tex[i]);
             }
 
             return null;
@@ -60,7 +61,7 @@ namespace Tests
             {
                 framecount = 0;
 
-                vobj.models[0].texture = textures[texcount];
+                //vobj.models[0].texture = textures[texcount];
 
                 texcount++;
                 if (texcount >= textures.Length)

@@ -30,5 +30,13 @@ namespace OrkEngine.Graphics
             name = _name;
             models.Add(model);
         }
+
+        public Model ActiveModel
+        {
+            get
+            {
+                return models[modelIndex];
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
@@ -11,18 +11,85 @@ namespace OrkEngine.Graphics
 {
     public class Window : GameWindow
     {
+        private readonly float[] _vertices =
+        {
+            // Positions          Normals              Texture coords
+            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+             0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+             0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+             0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+            -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+
+            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
+             0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 0.0f,
+             0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+             0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 1.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
+
+            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+            -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+            -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+            -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+             0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+             0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+             0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+             0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+             0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+             0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+             0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+             0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+             0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+
+            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+             0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+             0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+             0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+            -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
+        };
+
+        private readonly Vector3[] _cubePositions =
+        {
+            new Vector3(0.0f, 0.0f, 0.0f),
+            new Vector3(2.0f, 5.0f, -15.0f),
+            new Vector3(-1.5f, -2.2f, -2.5f),
+            new Vector3(-3.8f, -2.0f, -12.3f),
+            new Vector3(2.4f, -0.4f, -3.5f),
+            new Vector3(-1.7f, 3.0f, -7.5f),
+            new Vector3(1.3f, -2.0f, -2.5f),
+            new Vector3(1.5f, 2.0f, -2.5f),
+            new Vector3(1.5f, 0.2f, -1.5f),
+            new Vector3(-1.3f, 1.0f, -1.5f)
+        };
 
         List<GameObject> Objects = new List<GameObject>();
 
-        private Shader _shader;
+        private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
+
+        private int _vertexBufferObject;
+
+        private int _vaoModel;
+
+        private int _vaoLamp;
+
+        private Shader _lampShader;
+
+        private Shader _lightingShader;
+
+        private Texture _diffuseMap;
+
+        private Texture _specularMap;
 
         public Camera camera;
-
-        private bool _firstMove = true;
-
-        private Vector2 _lastPos;
-
-        private double _time;
 
         Func<object> Start;
         Func<object> Update;
@@ -38,22 +105,44 @@ namespace OrkEngine.Graphics
 
         protected override void OnLoad(EventArgs e)
         {
-            GL.ClearColor(0f, 0f, 0.05f, 1.0f);
+            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
 
-            _shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
-            _shader.Use();
+            _vertexBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
+            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
 
-            _shader.SetInt("texture0", 0);
+            _lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
+            _lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
+            _diffuseMap = new Texture("Graphics/Default/default.png");
+            _specularMap = new Texture("auxzilco.png");
 
-            var vertexLocation = _shader.GetAttribLocation("aPosition");
-            GL.EnableVertexAttribArray(vertexLocation);
-            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+            _vaoModel = GL.GenVertexArray();
+            GL.BindVertexArray(_vaoModel);
 
-            var texCoordLocation = _shader.GetAttribLocation("aTexCoord");
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
+
+            var positionLocation = _lightingShader.GetAttribLocation("aPos");
+            GL.EnableVertexAttribArray(positionLocation);
+            GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
+
+            var normalLocation = _lightingShader.GetAttribLocation("aNormal");
+            GL.EnableVertexAttribArray(normalLocation);
+            GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
+
+            var texCoordLocation = _lightingShader.GetAttribLocation("aTexCoords");
             GL.EnableVertexAttribArray(texCoordLocation);
-            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
+            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
+
+            _vaoLamp = GL.GenVertexArray();
+            GL.BindVertexArray(_vaoLamp);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
+
+            positionLocation = _lampShader.GetAttribLocation("aPos");
+            GL.EnableVertexAttribArray(positionLocation);
+            GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
 
             camera = new Camera(Vector3.UnitZ * 3, Width / (float)Height);
 
@@ -66,12 +155,24 @@ namespace OrkEngine.Graphics
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            _time += 4.0 * e.Time;
-
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            _shader.SetMatrix4("view", camera.GetViewMatrix());
-                _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
+            GL.BindVertexArray(_vaoModel);
+
+            _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
+            _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
+
+            _lightingShader.SetVector3("viewPos", camera.Position);
+
+            _lightingShader.SetInt("material.diffuse", 0);
+            _lightingShader.SetInt("material.specular", 1);
+            _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
+            _lightingShader.SetFloat("material.shininess", 100.0f);
+
+            _lightingShader.SetVector3("light.direction", new Vector3(-0.2f, -1.0f, -0.3f));
+            _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
+            _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
+            _lightingShader.SetVector3("light.specular", new Vector3(1.0f));
 
             foreach (GameObject obj in Objects)
             {
@@ -88,70 +189,18 @@ namespace OrkEngine.Graphics
                 GL.BindVertexArray(m.vertexArrayObject);
 
                 m.texture.Use();
-                _shader.Use();
+                _specularMap.Use(TextureUnit.Texture1);
+                _lightingShader.Use();
 
                 Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX(obj.rotation.X) * Matrix4.CreateRotationY(obj.rotation.Y) * Matrix4.CreateRotationZ(obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
-                _shader.SetMatrix4("model", model);
+                _lightingShader.SetMatrix4("model", model);
 
-                GL.DrawElements((PrimitiveType)m.renderMode, m.indices.Length, DrawElementsType.UnsignedInt, 0);
-                GL.BindVertexArray(0);
+                GL.DrawArrays((PrimitiveType)m.renderMode, 0, m.vertices.Length / 8);
             }
 
             SwapBuffers();
 
             base.OnRenderFrame(e);
-        }
-
-        public void AddToRenderQueue(GameObject obj)
-        {
-            foreach (Model m in obj.models) {
-                m.vertexBufferObject = GL.GenBuffer();
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
-                GL.BufferData(BufferTarget.ArrayBuffer, m.vertices.Length * sizeof(float), m.vertices, BufferUsageHint.StaticDraw);
-
-                m.elementBufferObject = GL.GenBuffer();
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
-                GL.BufferData(BufferTarget.ElementArrayBuffer, m.indices.Length * sizeof(uint), m.indices, BufferUsageHint.StaticDraw);
-
-                m.vertexArrayObject = GL.GenVertexArray();
-                GL.BindVertexArray(m.vertexArrayObject);
-
-                GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
-                GL.EnableVertexAttribArray(0);
-
-                GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
-                GL.EnableVertexAttribArray(1);
-
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
-            }
-
-            Objects.Add(obj);
-            Console.WriteLine("Added: " + obj.name);
-        }
-
-        public void RemoveFromRenderQueue(Model rend)
-        {
-            /*List<Model> delete = Objects.FindAll(r => r.randID == rend.randID);
-            foreach (Model del in delete)
-            {
-                GL.DeleteBuffer(del.vertexBufferObject);
-                GL.DeleteVertexArray(del.vertexArrayObject);
-                GL.DeleteTexture(del.texture.Handle);
-                Objects.Remove(del);
-            }*/
-        }
-
-        public void ClearRenderQueue()
-        {
-            foreach (GameObject obj in Objects)
-            {
-                foreach (Model m in obj.models) {
-                    GL.DeleteBuffer(m.vertexBufferObject);
-                    GL.DeleteVertexArray(m.vertexArrayObject);
-                    GL.DeleteTexture(m.texture.Handle);
-                }
-            }
         }
 
         public bool KeyDown(Key key)
@@ -179,9 +228,62 @@ namespace OrkEngine.Graphics
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
-
             camera.AspectRatio = Width / (float)Height;
             base.OnResize(e);
+        }
+
+        public void AddToRenderQueue(GameObject obj)
+        {
+            foreach (Model m in obj.models)
+            {
+                m.vertexBufferObject = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                GL.BufferData(BufferTarget.ArrayBuffer, m.vertices.Length * sizeof(float), m.vertices, BufferUsageHint.StaticDraw);
+
+                m.elementBufferObject = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
+                GL.BufferData(BufferTarget.ElementArrayBuffer, m.indices.Length * sizeof(uint), m.indices, BufferUsageHint.StaticDraw);
+
+                m.vertexArrayObject = GL.GenVertexArray();
+                GL.BindVertexArray(m.vertexArrayObject);
+
+                GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
+                GL.EnableVertexAttribArray(0);
+
+                GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
+                GL.EnableVertexAttribArray(1);
+
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
+            }
+
+            Objects.Add(obj);
+            Console.WriteLine("Added: " + obj.name);
+        }
+
+        public void RemoveFromRenderQueue(Model rend)
+        {
+            /*List<Model> delete = Objects.FindAll(r => r.randID == rend.randID);
+            foreach (Model del in delete)
+            {
+                GL.DeleteBuffer(del.vertexBufferObject);
+                GL.DeleteVertexArray(del.vertexArrayObject);
+                GL.DeleteTexture(del.texture.Handle);
+                Objects.Remove(del);
+            }*/
+        }
+
+        public void ClearRenderQueue()
+        {
+            foreach (GameObject obj in Objects)
+            {
+                foreach (Model m in obj.models)
+                {
+                    GL.DeleteBuffer(m.vertexBufferObject);
+                    GL.DeleteVertexArray(m.vertexArrayObject);
+                    GL.DeleteTexture(m.texture.Handle);
+                }
+            }
         }
 
         protected override void OnUnload(EventArgs e)
@@ -190,9 +292,12 @@ namespace OrkEngine.Graphics
             GL.BindVertexArray(0);
             GL.UseProgram(0);
 
-            ClearRenderQueue();
+            GL.DeleteBuffer(_vertexBufferObject);
+            GL.DeleteVertexArray(_vaoModel);
+            GL.DeleteVertexArray(_vaoLamp);
 
-            GL.DeleteProgram(_shader.Handle);
+            GL.DeleteProgram(_lampShader.Handle);
+            GL.DeleteProgram(_lightingShader.Handle);
 
             base.OnUnload(e);
         }
