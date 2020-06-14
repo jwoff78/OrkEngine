@@ -12,43 +12,21 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace OrkEngine.Graphics
 {
-    public class Renderable
+    public class Model
     {
-        public string name = "OBJECT";
         public float[] vertices;
         public uint[] indices;
         public Vector3[] normals;
-        public Texture texture;
-        public Vector3 position = new Vector3(0,0,0);
-        public Vector3 rotation => rot.Xyz;
+        public Texture texture = new Texture("Graphics/Default/default.png");
         public RenderMode renderMode = RenderMode.Triangles;
-        public Quaternion rot = new Quaternion(0,0,0);
-
-        public string randID = GetRandomString();
 
         public int elementBufferObject;
         public int vertexBufferObject;
         public int vertexArrayObject;
 
-        public Vector3 _front = -Vector3.UnitZ;
-        public Vector3 _up = Vector3.UnitY;
-        public Vector3 _right = Vector3.UnitX;
-
-        public Vector3 forward
+        public Model() { }
+        public Model(string Name, float[] Verts, uint[] Indices, Vector3[] Normals, Texture Tex)
         {
-            get
-            {
-                return rot.Normalized() * _front;
-            }
-        }
-
-        public Renderable(string Name)
-        {
-            name = Name;
-        }
-        public Renderable(string Name, float[] Verts, uint[] Indices, Vector3[] Normals, Texture Tex)
-        {
-            name = Name;
             vertices = Verts;
             indices = Indices;
             normals = Normals;
@@ -62,17 +40,10 @@ namespace OrkEngine.Graphics
             Lines = PrimitiveType.Lines
         }
 
-        static string GetRandomString()
-        {
-            string path = Path.GetRandomFileName();
-            path = path.Replace(".", ""); // Remove period.
-            return path;
-        }
-
-        public static Renderable Cube
+        public static Model Cube
         {
             get{
-                Renderable cube = new Renderable("Cube");
+                Model cube = new Model();
                 cube.vertices = new float[]{
                     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
                      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -130,9 +101,9 @@ namespace OrkEngine.Graphics
             }
         }
 
-        public static Renderable LoadFromFile(string path, string name)
+        public static Model LoadModelFromFile(string path)
         {
-            Renderable rend = Renderable.Cube;
+            Model rend = new Model();
 
             var objLoaderFactory = new ObjLoaderFactory();
             var objLoader = objLoaderFactory.Create();
@@ -192,5 +163,64 @@ namespace OrkEngine.Graphics
 
             return rend;
         }
+
+        /*public static Model[] LoadModelsFromFile(string path)
+        {
+            Model rend = new Model();
+
+            var objLoaderFactory = new ObjLoaderFactory();
+            var objLoader = objLoaderFactory.Create();
+            var fileStream = new FileStream(path, FileMode.Open);
+            var result = objLoader.Load(fileStream);
+
+            List<Vector3> rawverts = new List<Vector3>();
+            List<Vector2> rawuvs = new List<Vector2>();
+
+
+            List<float> verts = new List<float>();
+            List<uint> elements = new List<uint>();
+
+            foreach (Vertex v in result.Vertices)
+            {
+                rawverts.Add(new Vector3(v.X, v.Y, v.Z));
+            }
+            foreach (Texture t in result.Textures)
+            {
+                rawuvs.Add(new Vector2(t.X, t.Y));
+            }
+
+            Console.WriteLine(rawverts.Count);
+            Console.WriteLine(rawuvs.Count);
+
+            uint c = 0;
+            foreach (Group g in result.Groups)
+                foreach (Face f in g.Faces)
+                    foreach (FaceVertex i in f._vertices)
+                    {
+                        elements.Add(c);
+                        c++;
+
+                        verts.Add(rawverts[i.VertexIndex - 1].X);
+                        verts.Add(rawverts[i.VertexIndex - 1].Y);
+                        verts.Add(rawverts[i.VertexIndex - 1].Z);
+                        if (rawuvs.Count > 0)
+                        {
+                            verts.Add(rawuvs[i.TextureIndex - 1].X);
+                            verts.Add(rawuvs[i.TextureIndex - 1].Y);
+                        }
+                        else
+                        {
+                            verts.Add(0);
+                            verts.Add(0);
+                        }
+                    }
+
+            rend.vertices = verts.ToArray();
+            rend.indices = elements.ToArray();
+
+            Console.WriteLine(verts.Count);
+
+            return rend;
+        }*/
     }
 }

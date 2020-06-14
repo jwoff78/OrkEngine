@@ -204,3 +204,5 @@ C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\bin\Debug\OpenTK.GLControl.xml
 C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\djlw7\Source\Repos\OrkEngine9\OrkCore\obj\Debug\OrkEngine.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Default\default.png
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Shaders\lighting.frag

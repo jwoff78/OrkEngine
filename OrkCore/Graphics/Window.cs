@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
@@ -10,66 +11,10 @@ namespace OrkEngine.Graphics
 {
     public class Window : GameWindow
     {
-        float[] _vertices = {
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-};
-
-        private readonly uint[] _indices =
-        {
-            0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35
-        };
-
-        List<Renderable> Objects = new List<Renderable>();
-
-        private int _elementBufferObject;
-
-        private int _vertexBufferObject;
-
-        private int _vertexArrayObject;
+        List<GameObject> Objects = new List<GameObject>();
 
         private Shader _shader;
-
-        private Texture _texture;
 
         public Camera camera;
 
@@ -97,27 +42,10 @@ namespace OrkEngine.Graphics
 
             GL.Enable(EnableCap.DepthTest);
 
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
-
-            _elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
-
             _shader = new Shader(@"Shaders\shader.vert", @"Shaders\shader.frag");
             _shader.Use();
 
-            _texture = new Texture("vroooom.png");
-            _texture.Use();
-
             _shader.SetInt("texture0", 0);
-
-            _vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(_vertexArrayObject);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexArrayObject);
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
 
             var vertexLocation = _shader.GetAttribLocation("aPosition");
             GL.EnableVertexAttribArray(vertexLocation);
@@ -142,31 +70,30 @@ namespace OrkEngine.Graphics
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.BindVertexArray(_vertexArrayObject);
-
-            _texture.Use();
-            _shader.Use();
-
-            var model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(_time * 4)) * Matrix4.CreateRotationY((float)MathHelper.DegreesToRadians(_time * 2));
-            _shader.SetMatrix4("model", model);
             _shader.SetMatrix4("view", camera.GetViewMatrix());
-            _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
-
-            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
-
-            foreach (Renderable rend in Objects)
-            {
-                GL.BindVertexArray(rend.vertexArrayObject);
-
-                rend.texture.Use();
-                _shader.Use();
-
-                model = Matrix4.Identity * Matrix4.CreateRotationX(rend.rotation.X) * Matrix4.CreateRotationY(rend.rotation.Y) * Matrix4.CreateRotationZ(rend.rotation.Z) * Matrix4.CreateTranslation(rend.position.X,rend.position.Y,rend.position.Z);
-                _shader.SetMatrix4("model", model);
-                _shader.SetMatrix4("view", camera.GetViewMatrix());
                 _shader.SetMatrix4("projection", camera.GetProjectionMatrix());
 
-                GL.DrawElements((PrimitiveType)rend.renderMode, rend.indices.Length, DrawElementsType.UnsignedInt, 0);
+            foreach (GameObject obj in Objects)
+            {
+                Model m = new Model();
+
+                if (obj.modelIndex > obj.models.Count - 1)
+                {
+                    m = Model.Cube;
+                    Console.WriteLine("[!] Model Index {0} was out of bounds. GameObject: {1}", obj.modelIndex, obj.name);
+                }
+                else
+                    m = obj.models[obj.modelIndex];
+
+                GL.BindVertexArray(m.vertexArrayObject);
+
+                m.texture.Use();
+                _shader.Use();
+
+                Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX(obj.rotation.X) * Matrix4.CreateRotationY(obj.rotation.Y) * Matrix4.CreateRotationZ(obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
+                _shader.SetMatrix4("model", model);
+
+                GL.DrawElements((PrimitiveType)m.renderMode, m.indices.Length, DrawElementsType.UnsignedInt, 0);
                 GL.BindVertexArray(0);
             }
 
@@ -175,52 +102,55 @@ namespace OrkEngine.Graphics
             base.OnRenderFrame(e);
         }
 
-        public void AddToRenderQueue(Renderable rend)
+        public void AddToRenderQueue(GameObject obj)
         {
-            rend.vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, rend.vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, rend.vertices.Length * sizeof(float), rend.vertices, BufferUsageHint.StaticDraw);
+            foreach (Model m in obj.models) {
+                m.vertexBufferObject = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                GL.BufferData(BufferTarget.ArrayBuffer, m.vertices.Length * sizeof(float), m.vertices, BufferUsageHint.StaticDraw);
 
-            rend.elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, rend.elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, rend.indices.Length * sizeof(uint), rend.indices, BufferUsageHint.StaticDraw);
+                m.elementBufferObject = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
+                GL.BufferData(BufferTarget.ElementArrayBuffer, m.indices.Length * sizeof(uint), m.indices, BufferUsageHint.StaticDraw);
 
-            rend.vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(rend.vertexArrayObject);
+                m.vertexArrayObject = GL.GenVertexArray();
+                GL.BindVertexArray(m.vertexArrayObject);
 
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
+                GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+                GL.EnableVertexAttribArray(0);
 
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
-            GL.EnableVertexAttribArray(1);
+                GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
+                GL.EnableVertexAttribArray(1);
 
-            GL.BindBuffer(BufferTarget.ArrayBuffer, rend.vertexBufferObject);
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, rend.elementBufferObject);
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m.elementBufferObject);
+            }
 
-            Objects.Add(rend);
-            Console.WriteLine("Added: " + rend.name);
-            Console.WriteLine(rend.vertices.Length);
+            Objects.Add(obj);
+            Console.WriteLine("Added: " + obj.name);
         }
 
-        public void RemoveFromRenderQueue(Renderable rend)
+        public void RemoveFromRenderQueue(Model rend)
         {
-            List<Renderable> delete = Objects.FindAll(r => r.randID == rend.randID);
-            foreach (Renderable del in delete)
+            /*List<Model> delete = Objects.FindAll(r => r.randID == rend.randID);
+            foreach (Model del in delete)
             {
                 GL.DeleteBuffer(del.vertexBufferObject);
                 GL.DeleteVertexArray(del.vertexArrayObject);
                 GL.DeleteTexture(del.texture.Handle);
                 Objects.Remove(del);
-            }
+            }*/
         }
 
         public void ClearRenderQueue()
         {
-            foreach (Renderable rend in Objects)
+            foreach (GameObject obj in Objects)
             {
-                GL.DeleteBuffer(rend.vertexBufferObject);
-                GL.DeleteVertexArray(rend.vertexArrayObject);
-                GL.DeleteTexture(rend.texture.Handle);
+                foreach (Model m in obj.models) {
+                    GL.DeleteBuffer(m.vertexBufferObject);
+                    GL.DeleteVertexArray(m.vertexArrayObject);
+                    GL.DeleteTexture(m.texture.Handle);
+                }
             }
         }
 
@@ -260,13 +190,9 @@ namespace OrkEngine.Graphics
             GL.BindVertexArray(0);
             GL.UseProgram(0);
 
-            GL.DeleteBuffer(_vertexBufferObject);
-            GL.DeleteVertexArray(_vertexArrayObject);
-
             ClearRenderQueue();
 
             GL.DeleteProgram(_shader.Handle);
-            GL.DeleteTexture(_texture.Handle);
 
             base.OnUnload(e);
         }
