@@ -97,6 +97,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\Native\NativeUnsafe.cs" />
     <Compile Include="Graphics\Common\Normal.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
