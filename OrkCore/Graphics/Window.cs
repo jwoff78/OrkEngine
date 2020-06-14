@@ -102,7 +102,7 @@ namespace OrkEngine.Graphics
 
                 GL.BindVertexArray(m.vertexArrayObject);
 
-                _diffuseMap.Use();
+                m.texture.Use();
                 _specularMap.Use(TextureUnit.Texture1);
                 _lightingShader.Use();
 
