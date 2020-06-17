@@ -117,9 +117,9 @@ namespace OrkEngine.Graphics
 
             GL.BindVertexArray(cube.vertexArrayObject);
 
-            cube.texture.Use();
-            _specularMap.Use(TextureUnit.Texture1);
-            _lightingShader.Use();
+                _diffuseMap.Use();
+                _specularMap.Use(TextureUnit.Texture1);
+                _lightingShader.Use();
 
             _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
             _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
