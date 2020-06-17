@@ -37,20 +37,28 @@ namespace Tests
 
         public object Start()
         {
-            vobj = new GameObject("earth", Model.LoadModelFromFile("Earth 2K.obj"));
-            vobj.ActiveModel.material = new Material(new Texture("Textures/Diffuse_2K.png"), new Texture("Graphics/Default/blank.png"));
-            vobj.ActiveModel.material.shininess = 100;
-            vobj.ActiveModel.renderMode = Model.RenderMode.Quads;
+            vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
 
-            GameObject orkQ = new GameObject("OrkQuad", Model.LoadModelFromFile("orkquadintris.obj"));
-            orkQ.ActiveModel.material = new Material(new Texture("Cube1_auv.png"), new Texture("Graphics/Default/blank.png"));
+            vobj.models[0].meshes[0].material.shininess = 1000;
+            vobj.scale = new Vector3(0.1f,0.1f,0.1f);
 
-            orkQ.rotation = new Vector3(180, 250, 0);
-            orkQ.scale = new Vector3(-2,2,2);
-            orkQ.position = new Vector3(-2,0,2);
+            GameObject ground = new GameObject("ground", Model.Plane);
+
+            ground.models[0].meshes[0].material.diffuseMap = new Texture("Maps/snd1.jpg");
+            ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
+            //ground.models[0].meshes[0].material.shininess = 1000f;
+            ground.scale = new Vector3(50, 50, 50);
+            ground.rotation.X = 180;
+
+            GameObject water = new GameObject("water", Model.Plane);
+            water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
+            water.scale = new Vector3(50, 50, 50);
+            water.rotation.X = 180;
+            water.position = new Vector3(0,0.08f,0);
 
             window.AddToRenderQueue(vobj);
-            window.AddToRenderQueue(orkQ);
+            window.AddToRenderQueue(water);
+            window.AddToRenderQueue(ground);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];
@@ -65,6 +73,8 @@ namespace Tests
 
         public object Update()
         {
+            float dt = (float)window.deltaTime * 2;
+
             framecount++;
 
             if (framecount > 2)
@@ -78,22 +88,28 @@ namespace Tests
                     texcount = 0;
             }
 
-            vobj.rotation += new Vector3(0.5f, 1, 0);
+            //vobj.rotation += new Vector3(0.5f, 1, 0);
 
+            if (window.KeyDown(Key.ControlLeft))
+                dt *= 3;
             if (window.KeyDown(Key.Escape))
                 window.Exit();
             if (window.KeyDown(Key.W))
-                window.camera.Position += window.camera.Front * (float)window.deltaTime * 2;
+                window.camera.Position += window.camera.Front * dt;
             if (window.KeyDown(Key.A))
-                window.camera.Position -= window.camera.Right * (float)window.deltaTime * 2;
+                window.camera.Position -= window.camera.Right * dt;
             if (window.KeyDown(Key.S))
-                window.camera.Position -= window.camera.Front * (float)window.deltaTime * 2;
+                window.camera.Position -= window.camera.Front * dt;
             if (window.KeyDown(Key.D))
-                window.camera.Position += window.camera.Right * (float)window.deltaTime * 2;
+                window.camera.Position += window.camera.Right * dt;
             if (window.KeyDown(Key.Left))
                 window.camera.Yaw -= 1;
             if (window.KeyDown(Key.Right))
                 window.camera.Yaw += 1;
+            if (window.KeyDown(Key.Space))
+                window.camera.Position += window.camera.Up * dt;
+            if (window.KeyDown(Key.LShift))
+                window.camera.Position -= window.camera.Up * dt;
 
             return null;
         }
