@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
@@ -7,30 +9,15 @@ using OrkEngine.Graphics.Common;
 
 namespace OrkEngine.Graphics
 {
-    // This tutorial is split up into multiple different bits, one for each type of light.
-
-    // The following is the code for the directional light, a light that has a direction but no position.
     public class Window : GameWindow
     {
-        // We draw multiple different cubes and it helps to store all
-        // their positions in an array for later when we want to draw them
-        private readonly Vector3[] _cubePositions =
-        {
-            new Vector3(0.0f, 0.0f, 0.0f),
-            new Vector3(2.0f, 5.0f, -15.0f),
-            new Vector3(-1.5f, -2.2f, -2.5f),
-            new Vector3(-3.8f, -2.0f, -12.3f),
-            new Vector3(2.4f, -0.4f, -3.5f),
-            new Vector3(-1.7f, 3.0f, -7.5f),
-            new Vector3(1.3f, -2.0f, -2.5f),
-            new Vector3(1.5f, 2.0f, -2.5f),
-            new Vector3(1.5f, 0.2f, -1.5f),
-            new Vector3(-1.3f, 1.0f, -1.5f)
-        };
+        List<GameObject> Objects = new List<GameObject>();
 
         private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
 
-        public Model cube;
+        private int _vertexBufferObject;
+
+        private int _vaoModel;
 
         private int _vaoLamp;
 
@@ -38,69 +25,35 @@ namespace OrkEngine.Graphics
 
         private Shader _lightingShader;
 
-        //private Texture _diffuseMap;
+        private Texture _diffuseMap;
 
         private Texture _specularMap;
 
         public Camera camera;
 
-        public double deltaTime;
+        Func<object> Start;
+        Func<object> Update;
 
-        private bool _firstMove = true;
-
-        private Vector2 _lastPos;
-
-        Func<object> Start, Update;
+        public double deltaTime = 0;
 
         public Window(int width, int height, string title, Func<object> start, Func<object> update)
             : base(width, height, GraphicsMode.Default, title)
         {
-            Start = start; Update = update;
+            Start = start;
+            Update = update;
         }
 
         protected override void OnLoad(EventArgs e)
         {
-            cube = Model.LoadModelFromFile("Earth 2K.obj");
-            cube.texture = new Texture("Textures/Diffuse_2K.png");
-
             GL.ClearColor(0.05f, 0.05f, 0.07f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
-
-            cube.vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, cube.vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, cube.vertices.Length * sizeof(float), cube.vertices, BufferUsageHint.StaticDraw);
+            GL.Enable(EnableCap.CullFace);
 
             _lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
             _lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
-            //_diffuseMap = new Texture("Graphics/Default/default.png");
-            _specularMap = new Texture("C:/Users/User/Desktop/blank.png");
-
-            cube.vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(cube.vertexArrayObject);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, cube.vertexBufferObject);
-
-            var positionLocation = _lightingShader.GetAttribLocation("aPos");
-            GL.EnableVertexAttribArray(positionLocation);
-            GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
-
-            var normalLocation = _lightingShader.GetAttribLocation("aNormal");
-            GL.EnableVertexAttribArray(normalLocation);
-            GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
-
-            var texCoordLocation = _lightingShader.GetAttribLocation("aTexCoords");
-            GL.EnableVertexAttribArray(texCoordLocation);
-            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
-
-            _vaoLamp = GL.GenVertexArray();
-            GL.BindVertexArray(_vaoLamp);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, cube.vertexBufferObject);
-
-            positionLocation = _lampShader.GetAttribLocation("aPos");
-            GL.EnableVertexAttribArray(positionLocation);
-            GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
+            _diffuseMap = new Texture("Textures/Diffuse_2K.png");
+            _specularMap = new Texture("Textures/Bump_2K.png");
 
             camera = new Camera(Vector3.UnitZ * 3, Width / (float)Height);
 
@@ -115,67 +68,50 @@ namespace OrkEngine.Graphics
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.BindVertexArray(cube.vertexArrayObject);
-
-                _diffuseMap.Use();
-                _specularMap.Use(TextureUnit.Texture1);
-                _lightingShader.Use();
-
-            _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
-            _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
-
-            _lightingShader.SetVector3("viewPos", camera.Position);
-
-            _lightingShader.SetInt("material.diffuse", 0);
-            _lightingShader.SetInt("material.specular", 1);
-            _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
-            _lightingShader.SetFloat("material.shininess", 32);
-
-            // Directional light needs a direction, in this example we just use (-0.2, -1.0, -0.3f) as the lights direction
             _lightingShader.SetVector3("light.direction", new Vector3(-0.2f, -1.0f, -0.3f));
             _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
             _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
             _lightingShader.SetVector3("light.specular", new Vector3(1.0f));
 
-            // We want to draw all the cubes at their respective positions
-            for (int i = 0; i < _cubePositions.Length; i++)
+            foreach (GameObject obj in Objects)
             {
-                // First we create a model from an identity matrix
-                Matrix4 model = Matrix4.Identity;
-                // Then we translate said matrix by the cube position
-                model *= Matrix4.CreateTranslation(_cubePositions[i]);
-                // We then calculate the angle and rotate the model around an axis
-                float angle = 20.0f * i;
-                model *= Matrix4.CreateFromAxisAngle(new Vector3(1.0f, 0.3f, 0.5f), angle);
-                model *= Matrix4.CreateScale(0.5f);
-                // Remember to set the model at last so it can be used by opentk
+                Model m = new Model();
+
+                if (obj.modelIndex > obj.models.Count - 1)
+                {
+                    m = obj.models[0];
+                    Console.WriteLine("[!] Model Index {0} was out of bounds. GameObject: {1}", obj.modelIndex, obj.name);
+                }
+                else
+                    m = obj.ActiveModel;
+
+                GL.BindVertexArray(m.vertexArrayObject);
+
+                m.texture.Use();
+                _specularMap.Use(TextureUnit.Texture1);
+                _lightingShader.Use();
+
+                _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
+                _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
+
+                _lightingShader.SetVector3("viewPos", camera.Position);
+
+                //material settings -> will be set by the model later
+                _lightingShader.SetInt("material.diffuse", 0);
+                _lightingShader.SetInt("material.specular", 1);
+                _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
+                _lightingShader.SetFloat("material.shininess", 100.0f);
+
+                Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX(obj.rotation.X) * Matrix4.CreateRotationY(obj.rotation.Y) * Matrix4.CreateRotationZ(obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
                 _lightingShader.SetMatrix4("model", model);
 
-                // At last we draw all our cubes
-                GL.DrawArrays(PrimitiveType.Quads, 0, cube.vertices.Length / 8);
+                GL.DrawArrays((PrimitiveType)m.renderMode, 0, m.vertices.Length / 8);
+                GL.BindVertexArray(0);
             }
 
             SwapBuffers();
 
             base.OnRenderFrame(e);
-        }
-
-        public void AddToRenderQueue(Model m)
-        {
-
-        }
-
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
-            if (!Focused)
-            {
-                return;
-            }
-
-            deltaTime = e.Time;
-            Update();
-
-            base.OnUpdateFrame(e);
         }
 
         public bool KeyDown(Key key)
@@ -189,11 +125,77 @@ namespace OrkEngine.Graphics
             return false;
         }
 
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+            var input = Keyboard.GetState();
+
+            deltaTime = e.Time;
+
+            Update();
+
+            base.OnUpdateFrame(e);
+        }
+
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
             camera.AspectRatio = Width / (float)Height;
             base.OnResize(e);
+        }
+
+        public void AddToRenderQueue(GameObject obj)
+        {
+            foreach (Model m in obj.models)
+            {
+                m.vertexBufferObject = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                GL.BufferData(BufferTarget.ArrayBuffer, m.vertices.Length * sizeof(float), m.vertices, BufferUsageHint.StaticDraw);
+
+                m.vertexArrayObject = GL.GenVertexArray();
+                GL.BindVertexArray(m.vertexArrayObject);
+
+                GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+
+                var positionLocation = _lightingShader.GetAttribLocation("aPos");
+                GL.EnableVertexAttribArray(positionLocation);
+                GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
+
+                var normalLocation = _lightingShader.GetAttribLocation("aNormal");
+                GL.EnableVertexAttribArray(normalLocation);
+                GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
+
+                var texCoordLocation = _lightingShader.GetAttribLocation("aTexCoords");
+                GL.EnableVertexAttribArray(texCoordLocation);
+                GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
+            }
+
+            Objects.Add(obj);
+            Console.WriteLine("Added: " + obj.name);
+        }
+
+        public void RemoveFromRenderQueue(Model rend)
+        {
+            /*List<Model> delete = Objects.FindAll(r => r.randID == rend.randID);
+            foreach (Model del in delete)
+            {
+                GL.DeleteBuffer(del.vertexBufferObject);
+                GL.DeleteVertexArray(del.vertexArrayObject);
+                GL.DeleteTexture(del.texture.Handle);
+                Objects.Remove(del);
+            }*/
+        }
+
+        public void ClearRenderQueue()
+        {
+            foreach (GameObject obj in Objects)
+            {
+                foreach (Model m in obj.models)
+                {
+                    GL.DeleteBuffer(m.vertexBufferObject);
+                    GL.DeleteVertexArray(m.vertexArrayObject);
+                    GL.DeleteTexture(m.texture.Handle);
+                }
+            }
         }
 
         protected override void OnUnload(EventArgs e)
@@ -202,8 +204,8 @@ namespace OrkEngine.Graphics
             GL.BindVertexArray(0);
             GL.UseProgram(0);
 
-            GL.DeleteBuffer(cube.vertexBufferObject);
-            GL.DeleteVertexArray(cube.vertexArrayObject);
+            GL.DeleteBuffer(_vertexBufferObject);
+            GL.DeleteVertexArray(_vaoModel);
             GL.DeleteVertexArray(_vaoLamp);
 
             GL.DeleteProgram(_lampShader.Handle);

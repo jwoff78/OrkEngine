@@ -37,10 +37,11 @@ namespace Tests
 
         public object Start()
         {
-            vobj = new GameObject("vroooom", Model.Cube);
-            vobj.ActiveModel.texture = new Texture("Cube9_auv.png");
-            vobj.ActiveModel.renderMode = Model.RenderMode.Triangles;
-            //window.AddToRenderQueue(vobj);
+            vobj = new GameObject("earth", Model.LoadModelFromFile("Earth 2K.obj"));
+            vobj.ActiveModel.texture = new Texture("Textures/Diffuse_2K.png");
+            vobj.ActiveModel.renderMode = Model.RenderMode.Quads;
+
+            window.AddToRenderQueue(vobj);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];
@@ -50,7 +51,7 @@ namespace Tests
                 //textures[i] = new Texture(tex[i]);
             }
 
-                return null;
+            return null;
         }
 
         public object Update()
