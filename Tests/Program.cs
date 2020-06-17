@@ -41,7 +41,15 @@ namespace Tests
             vobj.ActiveModel.texture = new Texture("Textures/Diffuse_2K.png");
             vobj.ActiveModel.renderMode = Model.RenderMode.Quads;
 
+            GameObject orkQ = new GameObject("OrkQuad", Model.LoadModelFromFile("orkquadintris.obj"));
+            orkQ.ActiveModel.texture = new Texture("Cube1_auv.png");
+
+            orkQ.rotation = new Vector3(180, 250, 0);
+            orkQ.scale = new Vector3(-2,2,2);
+            orkQ.position = new Vector3(-2,0,2);
+
             window.AddToRenderQueue(vobj);
+            window.AddToRenderQueue(orkQ);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];
@@ -69,7 +77,7 @@ namespace Tests
                     texcount = 0;
             }
 
-            vobj.rotation += new Vector3(0.005f, 0.01f, 0);
+            vobj.rotation += new Vector3(0.5f, 1, 0);
 
             if (window.KeyDown(Key.Escape))
                 window.Exit();

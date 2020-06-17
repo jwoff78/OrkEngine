@@ -48,7 +48,9 @@ namespace OrkEngine.Graphics
             GL.ClearColor(0.05f, 0.05f, 0.07f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.CullFace);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            //GL.Enable(EnableCap.CullFace);
 
             _lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
             _lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
@@ -102,7 +104,7 @@ namespace OrkEngine.Graphics
                 _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
                 _lightingShader.SetFloat("material.shininess", 100.0f);
 
-                Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX(obj.rotation.X) * Matrix4.CreateRotationY(obj.rotation.Y) * Matrix4.CreateRotationZ(obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
+                Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)Math.PI / 180 * obj.rotation.X) * Matrix4.CreateRotationY((float)Math.PI / 180 * obj.rotation.Y) * Matrix4.CreateRotationZ((float)Math.PI / 180 * obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
                 _lightingShader.SetMatrix4("model", model);
 
                 GL.DrawArrays((PrimitiveType)m.renderMode, 0, m.vertices.Length / 8);
