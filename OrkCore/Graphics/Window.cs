@@ -70,7 +70,7 @@ namespace OrkEngine.Graphics
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            _lightingShader.SetVector3("light.direction", new Vector3(-0.2f, -1.0f, -0.3f));
+            _lightingShader.SetVector3("light.direction", new Vector3(0.5f, -0.3f, -0.5f));
             _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
             _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
             _lightingShader.SetVector3("light.specular", new Vector3(1.0f));
@@ -89,8 +89,8 @@ namespace OrkEngine.Graphics
 
                 GL.BindVertexArray(m.vertexArrayObject);
 
-                m.texture.Use();
-                _specularMap.Use(TextureUnit.Texture1);
+                m.material.diffuseMap.Use();
+                m.material.specularMap.Use(TextureUnit.Texture1);
                 _lightingShader.Use();
 
                 _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
@@ -101,8 +101,8 @@ namespace OrkEngine.Graphics
                 //material settings -> will be set by the model later
                 _lightingShader.SetInt("material.diffuse", 0);
                 _lightingShader.SetInt("material.specular", 1);
-                _lightingShader.SetVector3("material.specular", new Vector3(0.5f, 0.5f, 0.5f));
-                _lightingShader.SetFloat("material.shininess", 100.0f);
+                _lightingShader.SetVector3("material.specular", m.material.specular);
+                _lightingShader.SetFloat("material.shininess", m.material.shininess);
 
                 Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)Math.PI / 180 * obj.rotation.X) * Matrix4.CreateRotationY((float)Math.PI / 180 * obj.rotation.Y) * Matrix4.CreateRotationZ((float)Math.PI / 180 * obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
                 _lightingShader.SetMatrix4("model", model);
@@ -195,7 +195,7 @@ namespace OrkEngine.Graphics
                 {
                     GL.DeleteBuffer(m.vertexBufferObject);
                     GL.DeleteVertexArray(m.vertexArrayObject);
-                    GL.DeleteTexture(m.texture.Handle);
+                    GL.DeleteTexture(m.material.diffuseMap.Handle);
                 }
             }
         }

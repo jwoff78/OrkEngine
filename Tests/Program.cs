@@ -38,11 +38,12 @@ namespace Tests
         public object Start()
         {
             vobj = new GameObject("earth", Model.LoadModelFromFile("Earth 2K.obj"));
-            vobj.ActiveModel.texture = new Texture("Textures/Diffuse_2K.png");
+            vobj.ActiveModel.material = new Material(new Texture("Textures/Diffuse_2K.png"), new Texture("Graphics/Default/blank.png"));
+            vobj.ActiveModel.material.shininess = 100;
             vobj.ActiveModel.renderMode = Model.RenderMode.Quads;
 
             GameObject orkQ = new GameObject("OrkQuad", Model.LoadModelFromFile("orkquadintris.obj"));
-            orkQ.ActiveModel.texture = new Texture("Cube1_auv.png");
+            orkQ.ActiveModel.material = new Material(new Texture("Cube1_auv.png"), new Texture("Graphics/Default/blank.png"));
 
             orkQ.rotation = new Vector3(180, 250, 0);
             orkQ.scale = new Vector3(-2,2,2);

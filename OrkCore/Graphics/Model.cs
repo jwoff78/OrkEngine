@@ -15,9 +15,8 @@ namespace OrkEngine.Graphics
     public class Model
     {
         public float[] vertices;
-        public uint[] indices;
         public Vector3[] normals;
-        public Texture texture = new Texture("Graphics/Default/default.png");
+        public Material material = new Material();
         public RenderMode renderMode = RenderMode.Triangles;
 
         public int elementBufferObject;
@@ -25,11 +24,11 @@ namespace OrkEngine.Graphics
         public int vertexArrayObject;
 
         public Model() { }
-        public Model(string Name, float[] Verts, Vector3[] Normals, Texture Tex)
+        public Model(string Name, float[] Verts, Vector3[] Normals, Material Mat)
         {
             vertices = Verts;
             normals = Normals;
-            texture = Tex;
+            material = Mat;
         }
 
         public enum RenderMode
@@ -37,11 +36,6 @@ namespace OrkEngine.Graphics
             Triangles = PrimitiveType.Triangles,
             Quads = PrimitiveType.Quads,
             Lines = PrimitiveType.Lines
-        }
-
-        public struct Material
-        {
-
         }
 
         public static Model Cube
@@ -111,7 +105,6 @@ namespace OrkEngine.Graphics
 
 
             List<float> verts = new List<float>();
-            List<uint> elements = new List<uint>();
 
             foreach (Vertex v in result.Vertices)
             {
@@ -129,13 +122,10 @@ namespace OrkEngine.Graphics
             Console.WriteLine(rawverts.Count);
             Console.WriteLine(rawuvs.Count);
 
-            uint c = 0;
             foreach (Group g in result.Groups)
                 foreach (Face f in g.Faces)
                     foreach (FaceVertex i in f._vertices)
                     {
-                        elements.Add(c);
-                        c++;
 
                         verts.Add(rawverts[i.VertexIndex-1].X);
                         verts.Add(rawverts[i.VertexIndex-1].Y);
@@ -161,7 +151,6 @@ namespace OrkEngine.Graphics
 
 
             rend.vertices = verts.ToArray();
-            rend.indices = elements.ToArray();
 
             Console.WriteLine(verts.Count);
 

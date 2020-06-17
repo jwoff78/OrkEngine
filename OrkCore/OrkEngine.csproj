@@ -146,6 +146,7 @@
     <Compile Include="Graphics\Common\Shader.cs" />
     <Compile Include="Graphics\Common\Texture.cs" />
     <Compile Include="Graphics\GameObject.cs" />
+    <Compile Include="Graphics\Material.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="IOrkEngine.cs" />
     <Compile Include="Jarception.cs" />
@@ -218,6 +219,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Graphics\Default\blank.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Graphics\Default\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

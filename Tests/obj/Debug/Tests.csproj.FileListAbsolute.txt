@@ -214,3 +214,4 @@ C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.exe
 C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\default.png
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Shaders\lighting.frag
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\blank.png

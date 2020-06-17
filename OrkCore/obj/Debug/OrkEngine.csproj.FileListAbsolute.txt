@@ -210,3 +210,4 @@ C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.Co
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.dll
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.xml
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.Content.Pipeline.xml
+C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Default\blank.png
