@@ -116,7 +116,7 @@ namespace OrkEngine.Graphics.Common
         /// <returns>Returns the projection matrix of camera</returns>
         public Matrix4 GetProjectionMatrix()
         {
-            return Matrix4.CreatePerspectiveFieldOfView(_fov, AspectRatio, 0.01f, 100f);
+            return Matrix4.CreatePerspectiveFieldOfView(_fov, AspectRatio, 0.1f, 100);
         }
 
         /// <summary>
