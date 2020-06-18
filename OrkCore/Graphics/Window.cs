@@ -105,7 +105,7 @@ namespace OrkEngine.Graphics
                     _lightingShader.SetVector3("material.specular", m.material.specular);
                     _lightingShader.SetFloat("material.shininess", m.material.shininess);
 
-                    Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)Math.PI / 180 * obj.rotation.X) * Matrix4.CreateRotationY((float)Math.PI / 180 * obj.rotation.Y) * Matrix4.CreateRotationZ((float)Math.PI / 180 * obj.rotation.Z) * Matrix4.CreateTranslation(obj.position) * Matrix4.CreateScale(obj.scale);
+                    Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)Math.PI / 180 * (obj.rotation.X + obj.offset.rot.X)) * Matrix4.CreateRotationY((float)Math.PI / 180 * (obj.rotation.Y + obj.offset.rot.Y)) * Matrix4.CreateRotationZ((float)Math.PI / 180 * (obj.rotation.Z + obj.offset.rot.Z)) * Matrix4.CreateTranslation(obj.position + obj.offset.pos) * Matrix4.CreateScale(obj.scale * obj.offset.scl);
                     _lightingShader.SetMatrix4("model", model);
 
                     GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.vertices.Length / 8);

@@ -41,7 +41,7 @@ namespace OrkEngine.Graphics
             {
                 Model c = new Model();
                 c.meshes = new Mesh[] { Mesh.Cube };
-                c.meshes[0].material = new Material();
+                c.meshes[0].material = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
                 return c;
             }
         }

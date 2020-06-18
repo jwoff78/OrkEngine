@@ -20,6 +20,7 @@ namespace Tests
     {
         private Window window;
         GameObject vobj;
+        GameObject o1;
         Texture[] textures;
         int texcount = 0;
         int framecount = 0;
@@ -37,7 +38,7 @@ namespace Tests
 
         public object Start()
         {
-            vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
+            /*vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
 
             vobj.models[0].meshes[0].material.shininess = 1000;
             vobj.scale = new Vector3(0.1f,0.1f,0.1f);
@@ -48,17 +49,25 @@ namespace Tests
             ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
             //ground.models[0].meshes[0].material.shininess = 1000f;
             ground.scale = new Vector3(50, 50, 50);
-            ground.rotation.X = 180;
+            ground.rotation = new Vector3(180, 0, 0);
 
             GameObject water = new GameObject("water", Model.Plane);
             water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
             water.scale = new Vector3(50, 50, 50);
-            water.rotation.X = 180;
+            water.rotation = new Vector3(180,0,0);
             water.position = new Vector3(0,0.08f,0);
 
             window.AddToRenderQueue(vobj);
             window.AddToRenderQueue(water);
-            window.AddToRenderQueue(ground);
+            window.AddToRenderQueue(ground);*/
+
+            o1 = new GameObject("cube1", Model.Cube);
+            GameObject o2 = new GameObject("cube2", Model.Cube);
+            o2.position = new Vector3(3,0,3);
+            o1.Children.Add(o2);
+
+            window.AddToRenderQueue(o1);
+            window.AddToRenderQueue(o2);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];
@@ -89,6 +98,7 @@ namespace Tests
             }
 
             //vobj.rotation += new Vector3(0.5f, 1, 0);
+            o1.rotation += new Vector3(0, 0.5f, 0);
 
             if (window.KeyDown(Key.ControlLeft))
                 dt *= 3;
