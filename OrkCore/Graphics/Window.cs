@@ -29,7 +29,7 @@ namespace OrkEngine.Graphics
 
         private Texture _specularMap;
 
-        public Camera camera;
+        public GameObject camera;
 
         Func<object> Start;
         Func<object> Update;
@@ -57,7 +57,7 @@ namespace OrkEngine.Graphics
             _diffuseMap = new Texture("Textures/Diffuse_2K.png");
             _specularMap = new Texture("Textures/Bump_2K.png");
 
-            camera = new Camera(Vector3.UnitZ * 3, Width / (float)Height);
+            camera = GameObject.camera(Width / (float)Height);
 
             CursorVisible = false;
 
@@ -95,10 +95,10 @@ namespace OrkEngine.Graphics
                     m.material.specularMap.Use(TextureUnit.Texture1);
                     _lightingShader.Use();
 
-                    _lightingShader.SetMatrix4("view", camera.GetViewMatrix());
-                    _lightingShader.SetMatrix4("projection", camera.GetProjectionMatrix());
+                    _lightingShader.SetMatrix4("view", (Matrix4)camera.callAction("viewMatrix", ""));
+                    _lightingShader.SetMatrix4("projection", (Matrix4)camera.callAction("projectionMatrix", ""));
 
-                    _lightingShader.SetVector3("viewPos", camera.Position);
+                    _lightingShader.SetVector3("viewPos", camera.position);
 
                     _lightingShader.SetInt("material.diffuse", 0);
                     _lightingShader.SetInt("material.specular", 1);
@@ -107,12 +107,13 @@ namespace OrkEngine.Graphics
 
                     Matrix4 model = Matrix4.Identity;
 
-                    model *= rotate(obj.rotation); // rotate object by its rotation vector3
-                    model *= translate(obj.position - obj.offset.pos); // translate to set the radius
-                    model *= rotate(obj.offset.rot); // add the parents rotation with the offset
-                    model *= translate(obj.offset.pos); // translate to parents position
+                    model *= rotate(obj.rotation.Xyz); // obj rotation
+                    model *= translate(obj.position); // object position
+                    model *= Matrix4.CreateScale(obj.scale); // object scale
 
-                    model *= Matrix4.CreateScale(obj.scale * obj.offset.scl); //set the scale
+                    model *= rotate(obj.offset.rot); // parent rotation
+                    model *= translate(obj.offset.pos); // parent position
+                    model *= Matrix4.CreateScale(obj.offset.scl); // parent scale
 
                     _lightingShader.SetMatrix4("model", model);
 
@@ -160,7 +161,7 @@ namespace OrkEngine.Graphics
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
-            camera.AspectRatio = Width / (float)Height;
+            camera.actionData["ASPECT"] = Width / (float)Height;
             base.OnResize(e);
         }
 

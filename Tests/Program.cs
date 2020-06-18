@@ -23,6 +23,7 @@ namespace Tests
         GameObject o1;
         GameObject o2;
         Texture[] textures;
+        Vector3 rot;
         int texcount = 0;
         int framecount = 0;
 
@@ -39,7 +40,7 @@ namespace Tests
 
         public object Start()
         {
-            /*vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
+            vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
 
             vobj.models[0].meshes[0].material.shininess = 1000;
             vobj.scale = new Vector3(0.1f,0.1f,0.1f);
@@ -50,22 +51,22 @@ namespace Tests
             ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
             //ground.models[0].meshes[0].material.shininess = 1000f;
             ground.scale = new Vector3(50, 50, 50);
-            ground.rotation = new Vector3(180, 0, 0);
+            ground.rotation = new Quaternion(180, 0, 0);
 
             GameObject water = new GameObject("water", Model.Plane);
             water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
             water.scale = new Vector3(50, 50, 50);
-            water.rotation = new Vector3(180,0,0);
+            water.rotation = new Quaternion(180,0,0);
             water.position = new Vector3(0,0.08f,0);
 
             window.AddToRenderQueue(vobj);
             window.AddToRenderQueue(water);
-            window.AddToRenderQueue(ground);*/
+            window.AddToRenderQueue(ground);
 
             o1 = new GameObject("cube1", Model.Cube);
             o2 = new GameObject("cube2", Model.Cube);
             o2.position = new Vector3(3,0,0);
-            o1.Children.Add(o2);
+            o1.Children.Add(window.camera);
 
             window.AddToRenderQueue(o1);
             window.AddToRenderQueue(o2);
@@ -98,31 +99,33 @@ namespace Tests
                     texcount = 0;
             }
 
-            //vobj.rotation += new Vector3(0.5f, 1, 0);
-            o1.rotation += new Vector3(0, 0.5f, 0);
-            o2.rotation += new Vector3(0.5f, -2, 0);
-            o1.position += new Vector3(0.1f,0, 0);
+            //vobj.rotateY(0.5f);
 
             if (window.KeyDown(Key.ControlLeft))
                 dt *= 3;
             if (window.KeyDown(Key.Escape))
                 window.Exit();
             if (window.KeyDown(Key.W))
-                window.camera.Position += window.camera.Front * dt;
+                window.camera.position += window.camera.forward * dt;
             if (window.KeyDown(Key.A))
-                window.camera.Position -= window.camera.Right * dt;
+                window.camera.position -= window.camera.right * dt;
             if (window.KeyDown(Key.S))
-                window.camera.Position -= window.camera.Front * dt;
+                window.camera.position -= window.camera.forward * dt;
             if (window.KeyDown(Key.D))
-                window.camera.Position += window.camera.Right * dt;
+                window.camera.position += window.camera.right * dt;
             if (window.KeyDown(Key.Left))
-                window.camera.Yaw -= 1;
+                rot.Y +=  0.05f;
             if (window.KeyDown(Key.Right))
-                window.camera.Yaw += 1;
+                rot.Y += -0.05f;
             if (window.KeyDown(Key.Space))
-                window.camera.Position += window.camera.Up * dt;
+                window.camera.position += window.camera.up * dt;
             if (window.KeyDown(Key.LShift))
-                window.camera.Position -= window.camera.Up * dt;
+                window.camera.position -= window.camera.up * dt;
+
+            //window.camera.rotation = Quaternion.FromEulerAngles(rot);
+
+            o1.rotation = Quaternion.FromEulerAngles(rot);
+            Console.WriteLine(o1.forward);
 
             return null;
         }
