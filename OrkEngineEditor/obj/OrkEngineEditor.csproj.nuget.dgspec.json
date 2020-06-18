@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine12\\OrkEngineEditor\\OrkEngineEditor.csproj": {}
+    "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine15\\OrkEngineEditor\\OrkEngineEditor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine12\\OrkEngineEditor\\OrkEngineEditor.csproj": {
+    "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine15\\OrkEngineEditor\\OrkEngineEditor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine12\\OrkEngineEditor\\OrkEngineEditor.csproj",
+        "projectUniqueName": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine15\\OrkEngineEditor\\OrkEngineEditor.csproj",
         "projectName": "OrkEngineEditor",
-        "projectPath": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine12\\OrkEngineEditor\\OrkEngineEditor.csproj",
+        "projectPath": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine15\\OrkEngineEditor\\OrkEngineEditor.csproj",
         "packagesPath": "C:\\Users\\djlw7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine12\\OrkEngineEditor\\obj\\",
+        "outputPath": "C:\\Users\\djlw7\\Source\\Repos\\OrkEngine15\\OrkEngineEditor\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -26,6 +26,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
+          "https://dotnet.myget.org/F/roslyn/api/v3/index.json": {},
           "https://packages.stride3d.net/nuget": {}
         },
         "frameworks": {
