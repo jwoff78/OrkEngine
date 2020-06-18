@@ -73,7 +73,6 @@ C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tests.exe
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Tests.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\KeraLua.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\NLua.dll
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\KeraLua.xml
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.csprojAssemblyReference.cache
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.csproj.CoreCompileInputs.cache
@@ -81,7 +80,6 @@ C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.csproj.CopyComple
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.exe
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\obj\Debug\Tests.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.dll
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OpenGL.Platform.dll
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.dll.config
 C:\Users\djlw7\Source\Repos\OrkEngine2\Tests\bin\Debug\lua53.dll
@@ -214,3 +212,6 @@ C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.csproj.CoreCompileI
 C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.csproj.CopyComplete
 C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.exe
 C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.pdb
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\default.png
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Shaders\lighting.frag
+C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\blank.png

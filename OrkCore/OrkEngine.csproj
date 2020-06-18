@@ -142,10 +142,12 @@
     <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
     <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
     <Compile Include="Graphics\Common\Vertex.cs" />
-    <Compile Include="GameObject.cs" />
     <Compile Include="Graphics\Common\Camera.cs" />
     <Compile Include="Graphics\Common\Shader.cs" />
     <Compile Include="Graphics\Common\Texture.cs" />
+    <Compile Include="Graphics\GameObject.cs" />
+    <Compile Include="Graphics\Material.cs" />
+    <Compile Include="Graphics\Model.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="IOrkEngine.cs" />
     <Compile Include="Jarception.cs" />
@@ -190,8 +192,11 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
-    <Compile Include="Graphics\Renderable.cs" />
+    <Compile Include="Graphics\Mesh.cs" />
     <None Include="Common.ruleset" />
+    <None Include="Graphics\Shaders\lighting.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Graphics\Shaders\shader.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -214,6 +219,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Graphics\Default\blank.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphics\Default\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KeraLua.1.2.3\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.2.3\build\net45\KeraLua.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
