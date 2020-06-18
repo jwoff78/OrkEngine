@@ -73,12 +73,16 @@ namespace OrkEngine.Graphics
         {
             name = _name;
             offset.scl = new Vector3(1);
+            offset.pos = new Vector3(0);
+            offset.rot = new Vector3(0);
         }
         public GameObject(string _name, Model model)
         {
             name = _name;
             models.Add(model);
             offset.scl = new Vector3(1);
+            offset.pos = new Vector3(0);
+            offset.rot = new Vector3(0);
         }
 
         public Model ActiveModel

@@ -105,7 +105,15 @@ namespace OrkEngine.Graphics
                     _lightingShader.SetVector3("material.specular", m.material.specular);
                     _lightingShader.SetFloat("material.shininess", m.material.shininess);
 
-                    Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)Math.PI / 180 * (obj.rotation.X + obj.offset.rot.X)) * Matrix4.CreateRotationY((float)Math.PI / 180 * (obj.rotation.Y + obj.offset.rot.Y)) * Matrix4.CreateRotationZ((float)Math.PI / 180 * (obj.rotation.Z + obj.offset.rot.Z)) * Matrix4.CreateTranslation(obj.position + obj.offset.pos) * Matrix4.CreateScale(obj.scale * obj.offset.scl);
+                    Matrix4 model = Matrix4.Identity;
+
+                    model *= rotate(obj.rotation); // rotate object by its rotation vector3
+                    model *= translate(obj.position - obj.offset.pos); // translate to set the radius
+                    model *= rotate(obj.offset.rot); // add the parents rotation with the offset
+                    model *= translate(obj.offset.pos); // translate to parents position
+
+                    model *= Matrix4.CreateScale(obj.scale * obj.offset.scl); //set the scale
+
                     _lightingShader.SetMatrix4("model", model);
 
                     GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.vertices.Length / 8);
@@ -116,6 +124,15 @@ namespace OrkEngine.Graphics
             SwapBuffers();
 
             base.OnRenderFrame(e);
+        }
+
+        public Matrix4 rotate(Vector3 rot)
+        {
+            return Matrix4.CreateRotationX((float)Math.PI / 180 * (rot.X)) * Matrix4.CreateRotationY((float)Math.PI / 180 * (rot.Y)) * Matrix4.CreateRotationZ((float)Math.PI / 180 * (rot.Z));
+        }
+        public Matrix4 translate(Vector3 pos)
+        {
+            return Matrix4.CreateTranslation(pos);
         }
 
         public bool KeyDown(Key key)

@@ -21,6 +21,7 @@ namespace Tests
         private Window window;
         GameObject vobj;
         GameObject o1;
+        GameObject o2;
         Texture[] textures;
         int texcount = 0;
         int framecount = 0;
@@ -62,8 +63,8 @@ namespace Tests
             window.AddToRenderQueue(ground);*/
 
             o1 = new GameObject("cube1", Model.Cube);
-            GameObject o2 = new GameObject("cube2", Model.Cube);
-            o2.position = new Vector3(3,0,3);
+            o2 = new GameObject("cube2", Model.Cube);
+            o2.position = new Vector3(3,0,0);
             o1.Children.Add(o2);
 
             window.AddToRenderQueue(o1);
@@ -99,6 +100,8 @@ namespace Tests
 
             //vobj.rotation += new Vector3(0.5f, 1, 0);
             o1.rotation += new Vector3(0, 0.5f, 0);
+            o2.rotation += new Vector3(0.5f, -2, 0);
+            o1.position += new Vector3(0.1f,0, 0);
 
             if (window.KeyDown(Key.ControlLeft))
                 dt *= 3;
