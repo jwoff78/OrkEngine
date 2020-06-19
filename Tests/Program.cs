@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using OpenTK;
-using OpenTK.Graphics;
 using OrkEngine.Graphics;
 using OrkEngine.Graphics.Common;
 using OpenTK.Input;
-using System.Runtime.ConstrainedExecution;
 using OrkEngine;
-using System.Security.Cryptography;
-using OpenTK.Graphics.ES20;
+using BEPUphysics.Entities.Prefabs;
+using numVec3 = System.Numerics.Vector3;
+using BEPUphysics.BroadPhaseEntries;
 
 namespace Tests
 {
@@ -43,33 +39,22 @@ namespace Tests
             vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
 
             vobj.models[0].meshes[0].material.shininess = 1000;
-            vobj.scale = new Vector3(0.1f,0.1f,0.1f);
+            vobj.scale = new Vector3(0.05f,0.05f,0.05f);
+            vobj.EntityOrStatic = true;
 
             GameObject ground = new GameObject("ground", Model.Plane);
-
             ground.models[0].meshes[0].material.diffuseMap = new Texture("Maps/snd1.jpg");
             ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
-            //ground.models[0].meshes[0].material.shininess = 1000f;
             ground.scale = new Vector3(50, 50, 50);
-            ground.rotation = new Vector3(180, 0, 0);
 
             GameObject water = new GameObject("water", Model.Plane);
             water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
             water.scale = new Vector3(50, 50, 50);
-            water.rotation = new Vector3(180,0,0);
-            water.position = new Vector3(0,0.08f,0);
+            water.position = new Vector3(0,0.025f,0);
 
             window.AddToRenderQueue(vobj);
-            window.AddToRenderQueue(water);
             window.AddToRenderQueue(ground);
-
-            o1 = new GameObject("cube1", Model.Cube);
-            o2 = new GameObject("cube2", Model.Cube);
-            o2.position = new Vector3(3,0,0);
-            o1.Children.Add(window.camera);
-
-            window.AddToRenderQueue(o1);
-            window.AddToRenderQueue(o2);
+            window.AddToRenderQueue(water, false);
 
             string[] tex = Directory.GetFiles(@"Textures\VeryMuchVroooom");
             textures = new Texture[tex.Length];
@@ -79,6 +64,23 @@ namespace Tests
                 //textures[i] = new Texture(tex[i]);
             }
 
+            /*GameObject g = new GameObject("ground", Model.Cube);
+            g.scale = new Vector3(10,0.5f,10);
+            g.models[0].meshes[0].material.diffuseMap = new Texture("Maps/snd1.jpg");
+            g.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
+            g.entity = new Box(numVec3.Zero, g.scale.X, g.scale.Y, g.scale.Z);
+            g.entity.Position = new numVec3(0,-1,0);*/
+
+            GameObject cube = new GameObject("cube", Model.Cube);
+            //.scale = new Vector3(01f, 0.1f, 0.1f);
+            cube.entity = new Box(numVec3.Zero, cube.scale.X, cube.scale.Y * 2, cube.scale.Z, 1);
+            cube.entity.Position = new numVec3(0, 20, 0);
+
+            //window.AddToRenderQueue(g);
+            window.AddToRenderQueue(cube);
+
+            //window.space.Add(window.camera.entity);
+
             return null;
         }
 
@@ -86,7 +88,7 @@ namespace Tests
         {
             float dt = (float)window.deltaTime * 2;
 
-            framecount++;
+            /*framecount++;
 
             if (framecount > 2)
             {
@@ -99,30 +101,39 @@ namespace Tests
                     texcount = 0;
             }
 
-            //vobj.rotateY(0.5f);
+            //vobj.rotateY(0.5f);*/
+
+            Vector3 cf = window.camera.forward;
+            numVec3 camForward = new numVec3(cf.X, cf.Y, cf.Z);
+
+            Vector3 cr = window.camera.right;
+            numVec3 camRight = new numVec3(cr.X, cr.Y, cr.Z);
+
+            Vector3 cu = window.camera.up;
+            numVec3 camUp = new numVec3(cu.X, cu.Y, cu.Z);
 
             if (window.KeyDown(Key.ControlLeft))
                 dt *= 3;
             if (window.KeyDown(Key.Escape))
                 window.Exit();
             if (window.KeyDown(Key.W))
-                window.camera.position += window.camera.forward * dt;
+                window.camera.entity.Position += camForward * dt;
             if (window.KeyDown(Key.A))
-                window.camera.position -= window.camera.right * dt;
+                window.camera.entity.Position -= camRight * dt;
             if (window.KeyDown(Key.S))
-                window.camera.position -= window.camera.forward * dt;
+                window.camera.entity.Position -= camForward * dt;
             if (window.KeyDown(Key.D))
-                window.camera.position += window.camera.right * dt;
+                window.camera.entity.Position += camRight * dt;
             if (window.KeyDown(Key.Left))
                 window.camera.rotation += new Vector3(0, 0.1f, 0);
             if (window.KeyDown(Key.Right))
                 window.camera.rotation += new Vector3(0,-0.1f, 0);
             if (window.KeyDown(Key.Space))
-                window.camera.position += window.camera.up * dt;
+                window.camera.entity.Position += camUp * dt;
             if (window.KeyDown(Key.LShift))
-                window.camera.position -= window.camera.up * dt;
+                window.camera.entity.Position -= camUp * dt;
 
-            o1.rotation += new Vector3(0,0.1f,0);
+            //o1.rotation += new Vector3(0,0.1f,0);
 
             return null;
         }

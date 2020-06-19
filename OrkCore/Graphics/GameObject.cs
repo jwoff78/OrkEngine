@@ -7,6 +7,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
+using BEPUphysics;
+using BEPUutilities;
+using BEPUphysics.Entities;
+using BEPUphysics.Entities.Prefabs;
+using numVec3 = System.Numerics.Vector3;
+using BEPUphysics.BroadPhaseEntries;
 
 namespace OrkEngine.Graphics
 {
@@ -17,6 +23,32 @@ namespace OrkEngine.Graphics
         public Vector3 rot = new Vector3(0,0,0);
         private Vector3 scl    = new Vector3(1,1,1);
         public TransformOffset offset = new TransformOffset();
+
+        public Entity entity;
+        public StaticMesh staticMesh;
+
+        private bool eos = false;
+
+        public bool EntityOrStatic
+        {
+            get
+            {
+                return eos;
+            }
+            set
+            {
+                eos = value;
+
+                if (value)
+                {
+                    try
+                    {
+                        //staticMesh = Model.ConvertToStaticMesh(ActiveModel);
+                    }
+                    catch{}
+                }
+            }
+        }
 
         public List<Model> models = new List<Model>();
         public int modelIndex = 0;
@@ -32,10 +64,7 @@ namespace OrkEngine.Graphics
             set
             {
                 pos = value;
-                foreach (GameObject g in Children)
-                {
-                    g.offset.pos = pos;
-                }
+                entity.Position = new numVec3(value.X, value.Y, value.Z);
             }
         }
         public Vector3 rotation
@@ -44,10 +73,8 @@ namespace OrkEngine.Graphics
             set
             {
                 rot = value;
-                foreach (GameObject g in Children)
-                {
-                    g.offset.rot = value;
-                }
+                Quaternion q = new Quaternion(value);
+                entity.Orientation = new System.Numerics.Quaternion(q.X, q.Y, q.Z,q.W);
             }
         }
         public Vector3 scale
@@ -67,21 +94,21 @@ namespace OrkEngine.Graphics
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * -Vector3.UnitZ;
+                return (convertToActuallGoodQuaternion(entity.Orientation)).Normalized() * -Vector3.UnitZ;
             }
         }
         public Vector3 up
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitY;
+                return (convertToActuallGoodQuaternion(entity.Orientation)).Normalized() * Vector3.UnitY;
             }
         }
         public Vector3 right
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitX;
+                return (convertToActuallGoodQuaternion(entity.Orientation)).Normalized() * Vector3.UnitX;
             }
         }
 
@@ -94,13 +121,14 @@ namespace OrkEngine.Graphics
         }
         public bool visible = true;
 
-        public GameObject() { offset.scl = new Vector3(1); }
+        public GameObject() { offset.scl = new Vector3(1); entity = new Box(numVec3.Zero ,scale.X, scale.Y, scale.Z); }
         public GameObject(string _name)
         {
             name = _name;
             offset.scl = new Vector3(1);
             offset.pos = new Vector3(0);
             offset.rot = new Vector3(0);
+            entity = new Box(numVec3.Zero, scale.X, scale.Y, scale.Z);
         }
         public GameObject(string _name, Model model)
         {
@@ -109,6 +137,7 @@ namespace OrkEngine.Graphics
             offset.scl = new Vector3(1);
             offset.pos = new Vector3(0);
             offset.rot = new Vector3(0);
+            entity = new Box(numVec3.Zero, scale.X, scale.Y, scale.Z);
         }
 
         public Model ActiveModel
@@ -157,14 +186,24 @@ namespace OrkEngine.Graphics
 
             dict.Add(extraval, value);
 
-            dict.Add("POSITION", position + offset.pos + rotateAroundParent());
-            dict.Add("ROTATION", rotation); //+ offset.rot);
-            dict.Add("SCALE", scale * offset.scl);
+            dict.Add("POSITION", new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z));
+            dict.Add("ROTATION", entity.Orientation); //+ offset.rot);
+            dict.Add("SCALE", scale);
 
             dict.Add("POS_UP", up);
-            dict.Add("POS_FORWARD", localForward);
+            dict.Add("POS_FORWARD", forward);
 
             return action(dict);
+        }
+
+        public static Quaternion convertToActuallGoodQuaternion(System.Numerics.Quaternion qek)
+        {
+            Quaternion q = new Quaternion();
+            q.X = qek.X;
+            q.Y = qek.Y;
+            q.Z = qek.Z;
+            q.W = qek.W;
+            return q;
         }
 
         //Physical versions of non physical objects (like cameras or lights)
@@ -174,8 +213,10 @@ namespace OrkEngine.Graphics
             GameObject cam = new GameObject("camera");
 
             cam.action = camAction;
-            cam.actionData.Add("FOV", MathHelper.PiOver2);
+            cam.actionData.Add("FOV", OpenTK.MathHelper.PiOver2);
             cam.actionData.Add("ASPECT", aspectRatio);
+
+            cam.entity = new Box(numVec3.Zero, 2,2,2,1);
 
             return cam;
         }

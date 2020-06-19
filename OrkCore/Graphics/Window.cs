@@ -6,6 +6,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
 using OrkEngine.Graphics.Common;
+using BEPUphysics;
 
 namespace OrkEngine.Graphics
 {
@@ -31,6 +32,8 @@ namespace OrkEngine.Graphics
 
         public GameObject camera;
 
+        public Space space;
+
         Func<object> Start;
         Func<object> Update;
 
@@ -41,6 +44,8 @@ namespace OrkEngine.Graphics
         {
             Start = start;
             Update = update;
+            space = new Space();
+            space.ForceUpdater.Gravity = new System.Numerics.Vector3(0, -9.81f, 0);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -107,13 +112,16 @@ namespace OrkEngine.Graphics
 
                     Matrix4 model = Matrix4.Identity;
 
-                    model *= rotate(obj.rotation); // obj rotation
-                    model *= translate(obj.position); // object position
-                    model *= Matrix4.CreateScale(obj.scale); // object scale
+                    Quaternion q = new Quaternion();
+                    q.X = obj.entity.Orientation.X;
+                    q.Y = obj.entity.Orientation.Y;
+                    q.Z = obj.entity.Orientation.Z;
+                    q.W = obj.entity.Orientation.W;
+                    Vector3 pos = new Vector3(obj.entity.Position.X, obj.entity.Position.Y, obj.entity.Position.Z);
 
-                    model *= rotate(obj.offset.rot); // parent rotation
-                    model *= translate(obj.offset.pos); // parent position
-                    model *= Matrix4.CreateScale(obj.offset.scl); // parent scale
+                    model *= Matrix4.CreateFromQuaternion(q); // obj rotation
+                    model *= translate(pos); // object position
+                    model *= Matrix4.CreateScale(obj.scale); // object scale
 
                     _lightingShader.SetMatrix4("model", model);
 
@@ -153,6 +161,7 @@ namespace OrkEngine.Graphics
 
             deltaTime = e.Time;
 
+            space.Update();
             Update();
 
             base.OnUpdateFrame(e);
@@ -192,7 +201,47 @@ namespace OrkEngine.Graphics
                     GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
                 }
             }
+            if (obj.EntityOrStatic)
+                space.Add(obj.staticMesh);
+            else
+                space.Add(obj.entity);
+            Objects.Add(obj);
+            Console.WriteLine("Added: " + obj.name);
+        }
+        public void AddToRenderQueue(GameObject obj, bool addToSpace)
+        {
+            foreach (Model mod in obj.models)
+            {
+                foreach (Mesh m in mod.meshes)
+                {
+                    m.vertexBufferObject = GL.GenBuffer();
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+                    GL.BufferData(BufferTarget.ArrayBuffer, m.vertices.Length * sizeof(float), m.vertices, BufferUsageHint.StaticDraw);
 
+                    m.vertexArrayObject = GL.GenVertexArray();
+                    GL.BindVertexArray(m.vertexArrayObject);
+
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
+
+                    var positionLocation = _lightingShader.GetAttribLocation("aPos");
+                    GL.EnableVertexAttribArray(positionLocation);
+                    GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
+
+                    var normalLocation = _lightingShader.GetAttribLocation("aNormal");
+                    GL.EnableVertexAttribArray(normalLocation);
+                    GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
+
+                    var texCoordLocation = _lightingShader.GetAttribLocation("aTexCoords");
+                    GL.EnableVertexAttribArray(texCoordLocation);
+                    GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
+                }
+            }
+            if (addToSpace) {
+                if (obj.EntityOrStatic)
+                    space.Add(obj.staticMesh);
+                else
+                    space.Add(obj.entity);
+            }
             Objects.Add(obj);
             Console.WriteLine("Added: " + obj.name);
         }

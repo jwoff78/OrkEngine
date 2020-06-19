@@ -9,6 +9,9 @@ using OrkEngine.Graphics.Common;
 using OrkEngine.Component;
 using OrkEngine.Component.OBJLoader;
 using OpenTK.Graphics.OpenGL4;
+using BEPUphysics;
+using BEPUphysics.BroadPhaseEntries;
+using numVec3 = System.Numerics.Vector3;
 
 namespace OrkEngine.Graphics
 {
@@ -163,6 +166,20 @@ namespace OrkEngine.Graphics
             Console.WriteLine(verts.Count);
 
             return rend;
+        }
+
+        public static StaticMesh ConvertToStaticMesh(Mesh m)
+        {
+            List<numVec3> verts = new List<numVec3>();
+            List<int> indices = new List<int>();
+
+            for (int i = 0; i < m.vertices.Length / 8; i++)
+            {
+                verts.Add(new numVec3(m.vertices[i], m.vertices[i + 1], m.vertices[i + 2]));
+                indices.Add(i);
+            }
+
+            return new StaticMesh(verts.ToArray(), indices.ToArray());
         }
     }
 }
