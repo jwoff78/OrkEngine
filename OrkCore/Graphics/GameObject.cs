@@ -1,4 +1,5 @@
 ﻿using OpenTK;
+using OpenTK.Graphics.ES30;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace OrkEngine.Graphics
     {
         public string name = "OBJECT";
         private Vector3 pos = new Vector3(0,0,0);
-        public Quaternion rot = new Quaternion(0,0,0);
+        public Vector3 rot = new Vector3(0,0,0);
         private Vector3 scl    = new Vector3(1,1,1);
         public TransformOffset offset = new TransformOffset();
 
@@ -37,24 +38,12 @@ namespace OrkEngine.Graphics
                 }
             }
         }
-        public Quaternion rotation
+        public Vector3 rotation
         {
             get { return rot; }
             set
             {
                 rot = value;
-                foreach (GameObject g in Children)
-                {
-                    g.offset.rot = value.Xyz;
-                }
-            }
-        }
-        public Vector3 rotationVector
-        {
-            get { return rot.Xyz; }
-            set
-            {
-                rot = new Quaternion(value);
                 foreach (GameObject g in Children)
                 {
                     g.offset.rot = value;
@@ -78,24 +67,31 @@ namespace OrkEngine.Graphics
         {
             get
             {
-                return (rot + new Quaternion(offset.rot)).Normalized() * -Vector3.UnitZ;
+                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * -Vector3.UnitZ;
             }
         }
         public Vector3 up
         {
             get
             {
-                return (rot + new Quaternion(offset.rot)).Normalized() * Vector3.UnitY;
+                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitY;
             }
         }
         public Vector3 right
         {
             get
             {
-                return (rot + new Quaternion(offset.rot)).Normalized() * Vector3.UnitX;
+                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitX;
             }
         }
 
+        public Vector3 localForward
+        {
+            get
+            {
+                return (Quaternion.FromEulerAngles(rot)).Normalized() * -Vector3.UnitZ;
+            }
+        }
         public bool visible = true;
 
         public GameObject() { offset.scl = new Vector3(1); }
@@ -130,17 +126,24 @@ namespace OrkEngine.Graphics
             public Vector3 scl;
         }
 
-        public void rotateY(float amount)
+        public Vector3 rotateAroundParent()
         {
-            rotation = new Quaternion(rotation.Xyz + new Vector3(0,amount,0));
+            float distance = Vector3.Distance(position, offset.pos);
+            Vector3 rotationInRads = new Vector3((float)Math.PI / 180 * offset.rot.X, (float)Math.PI / 180 * offset.rot.Y, (float)Math.PI / 180 * offset.rot.Z);
+            Vector3 v3 = new Vector3(
+                (float)(distance * Math.Cos(rotationInRads.X) * Math.Cos(rotationInRads.Y)),
+                (float)(distance * Math.Cos(rotationInRads.X) * Math.Sin(rotationInRads.Y)),
+                (float)(distance * Math.Sin(rotationInRads.Y))
+                );
+            return v3;
         }
 
         public object callAction()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>(actionData);
 
-            dict.Add("POSITION", position + offset.pos);
-            dict.Add("ROTATION", rotation + new Quaternion(offset.rot));
+            dict.Add("POSITION", position + offset.pos + rotateAroundParent());
+            dict.Add("ROTATION", rotation); //+ offset.rot);
             dict.Add("SCALE", scale * offset.scl);
 
             dict.Add("POS_UP", up);
@@ -154,12 +157,12 @@ namespace OrkEngine.Graphics
 
             dict.Add(extraval, value);
 
-            dict.Add("POSITION", position + offset.pos);
-            dict.Add("ROTATION", rotation + new Quaternion(offset.rot));
+            dict.Add("POSITION", position + offset.pos + rotateAroundParent());
+            dict.Add("ROTATION", rotation); //+ offset.rot);
             dict.Add("SCALE", scale * offset.scl);
 
             dict.Add("POS_UP", up);
-            dict.Add("POS_FORWARD", forward);
+            dict.Add("POS_FORWARD", localForward);
 
             return action(dict);
         }

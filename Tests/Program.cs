@@ -51,12 +51,12 @@ namespace Tests
             ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
             //ground.models[0].meshes[0].material.shininess = 1000f;
             ground.scale = new Vector3(50, 50, 50);
-            ground.rotation = new Quaternion(180, 0, 0);
+            ground.rotation = new Vector3(180, 0, 0);
 
             GameObject water = new GameObject("water", Model.Plane);
             water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
             water.scale = new Vector3(50, 50, 50);
-            water.rotation = new Quaternion(180,0,0);
+            water.rotation = new Vector3(180,0,0);
             water.position = new Vector3(0,0.08f,0);
 
             window.AddToRenderQueue(vobj);
@@ -114,18 +114,15 @@ namespace Tests
             if (window.KeyDown(Key.D))
                 window.camera.position += window.camera.right * dt;
             if (window.KeyDown(Key.Left))
-                rot.Y +=  0.05f;
+                window.camera.rotation += new Vector3(0, 0.1f, 0);
             if (window.KeyDown(Key.Right))
-                rot.Y += -0.05f;
+                window.camera.rotation += new Vector3(0,-0.1f, 0);
             if (window.KeyDown(Key.Space))
                 window.camera.position += window.camera.up * dt;
             if (window.KeyDown(Key.LShift))
                 window.camera.position -= window.camera.up * dt;
 
-            //window.camera.rotation = Quaternion.FromEulerAngles(rot);
-
-            o1.rotation = Quaternion.FromEulerAngles(rot);
-            Console.WriteLine(o1.forward);
+            o1.rotation += new Vector3(0,0.1f,0);
 
             return null;
         }

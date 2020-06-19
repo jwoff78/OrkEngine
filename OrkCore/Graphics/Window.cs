@@ -107,7 +107,7 @@ namespace OrkEngine.Graphics
 
                     Matrix4 model = Matrix4.Identity;
 
-                    model *= rotate(obj.rotation.Xyz); // obj rotation
+                    model *= rotate(obj.rotation); // obj rotation
                     model *= translate(obj.position); // object position
                     model *= Matrix4.CreateScale(obj.scale); // object scale
 
