@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkEngine.Component.OBJLoader
+namespace OrkEngine.OBJLoader
 {
     public class MaterialLibraryLoader : LoaderBase, IMaterialLibraryLoader
     {
