@@ -215,9 +215,3 @@ C:\Users\djlw7\Source\Repos\OrkEngine7\Tests\obj\Debug\Tests.pdb
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\default.png
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Shaders\lighting.frag
 C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\Graphics\Default\blank.png
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUphysics.dll
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUutilities.dll
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUphysics.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUphysics.dll.config
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUutilities.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\Tests\bin\Debug\OrkEngine.BEPUutilities.dll.config

@@ -57,7 +57,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,14 +80,6 @@
     <ProjectReference Include="..\OrkCore\OrkEngine.csproj">
       <Project>{3bb4734d-41ca-4d8c-be8a-4cfb281ddfe1}</Project>
       <Name>OrkEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OrkEngine.BEPUphysics\OrkEngine.BEPUphysics.csproj">
-      <Project>{ab28ec68-8dde-4f71-a289-72a7e523b90d}</Project>
-      <Name>OrkEngine.BEPUphysics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OrkEngine.BEPUutilities\OrkEngine.BEPUutilities.csproj">
-      <Project>{65117528-83b9-4d9b-8f45-1b8b045c932e}</Project>
-      <Name>OrkEngine.BEPUutilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

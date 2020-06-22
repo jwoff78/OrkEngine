@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkEngine
+namespace OrkEngine.Component
 {
     public struct Vertex : IEquatable<Vertex>
     {

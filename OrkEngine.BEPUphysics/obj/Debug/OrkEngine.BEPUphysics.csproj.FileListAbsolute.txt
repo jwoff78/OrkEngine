@@ -11,16 +11,3 @@ C:\Users\djlw7\Source\Repos\OrkEngine20\OrkEngine.BEPUphysics\bin\Debug\System.N
 C:\Users\djlw7\Source\Repos\OrkEngine20\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.csproj.CopyComplete
 C:\Users\djlw7\Source\Repos\OrkEngine20\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.dll
 C:\Users\djlw7\Source\Repos\OrkEngine20\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUphysics.dll.config
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUphysics.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUphysics.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUutilities.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUutilities.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\OrkEngine.BEPUutilities.dll.config
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.csprojAssemblyReference.cache
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.csproj.CoreCompileInputs.cache
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.csproj.CopyComplete
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkEngine.BEPUphysics\obj\Debug\OrkEngine.BEPUphysics.pdb

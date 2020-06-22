@@ -17,23 +17,14 @@ namespace OrkEngine.Graphics
 
         public Material()
         {
-            Material dm = defaultMat;
-            diffuseMap = dm.diffuseMap;
-            specularMap = dm.specularMap;
+            //diffuseMap = new Texture("Graphics/Default/default.png");
+            //specularMap = new Texture("Graphics/Default/blank.png");
         }
         public Material(Texture diffuse, Texture spec)
         {
             diffuseMap = diffuse;
             specularMap = spec;
             //specularMap = new Texture("Graphics/Default/blank.png");
-        }
-        public static Material defaultMat
-        {
-            get
-            {
-                Material m = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
-                return m;
-            }
         }
     }
 }

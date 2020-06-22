@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace OrkEngine.OBJLoader
+namespace OrkEngine.Component.OBJLoader
 {
     public static class StringExtensions
     {

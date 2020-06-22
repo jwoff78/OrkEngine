@@ -9,9 +9,6 @@ using OrkEngine.Component;
 using OrkEngine.Graphics.Common;
 using System.IO;
 using OpenTK.Graphics.ES11;
-using BEPUphysics;
-using BEPUphysics.BroadPhaseEntries;
-using numVec3 = System.Numerics.Vector3;
 
 namespace OrkEngine.Graphics
 {
@@ -147,45 +144,6 @@ namespace OrkEngine.Graphics
             Model mod = new Model(meshlist.ToArray());
 
             return mod;
-        }
-        public static StaticMesh ConvertToStaticMesh(Model mod)
-        {
-            StaticMesh sm;
-            List<numVec3> verts = new List<numVec3>();
-            List<int> indices = new List<int>();
-
-            int count = 0;
-            foreach (Mesh m in mod.meshes) 
-            {
-                count++;
-                for (int i = 0; i < m.vertices.Length / 8; i++)
-                {
-                    verts.Add(new numVec3(m.vertices[i], m.vertices[i + 1], m.vertices[i + 2]));
-                    indices.Add(i);
-                }
-                Console.WriteLine("Translated Mesh {0} / {1}", count, mod.meshes.Length);
-            }
-            numVec3[] v = verts.ToArray();
-            int[] ii = indices.ToArray();
-            sm = new StaticMesh(v,ii);
-            Console.WriteLine("Done");
-
-            return sm;
-        }
-        public static numVec3[] getPoints(Model mod)
-        {
-            List<numVec3> verts = new List<numVec3>();
-
-            foreach (Mesh m in mod.meshes)
-            {
-                for (int i = 0; i < m.vertices.Length / 8; i++)
-                {
-                    verts.Add(new numVec3(m.vertices[i], m.vertices[i + 1], m.vertices[i + 2]));
-                }
-            }
-            numVec3[] v = verts.ToArray();
-
-            return v;
         }
     }
 }

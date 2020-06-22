@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkEngine.OBJLoader
+namespace OrkEngine.Component.OBJLoader
 {
     public class TextureParser : TypeParserBase, ITextureParser
     {

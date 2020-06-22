@@ -211,9 +211,3 @@ C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.dl
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.xml
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\MonoGame.Framework.Content.Pipeline.xml
 C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\Graphics\Default\blank.png
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUphysics.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUutilities.dll
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUphysics.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUphysics.dll.config
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUutilities.pdb
-C:\Users\User\Documents\GitHub\OrkEngine\OrkCore\bin\Debug\OrkEngine.BEPUutilities.dll.config
