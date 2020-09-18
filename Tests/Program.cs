@@ -16,7 +16,7 @@ using OpenTK.Graphics.ES20;
 
 namespace Tests
 {
-    public class Program : IOrkEngine
+    public class Program : OrkGame
     {
         private Window window;
         GameObject vobj;

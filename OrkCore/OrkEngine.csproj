@@ -149,7 +149,7 @@
     <Compile Include="Graphics\Material.cs" />
     <Compile Include="Graphics\Model.cs" />
     <Compile Include="Graphics\Window.cs" />
-    <Compile Include="IOrkEngine.cs" />
+    <Compile Include="OrkGame.cs" />
     <Compile Include="Jarception.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
     <Compile Include="Mathematics\BoundingFrustum.cs" />

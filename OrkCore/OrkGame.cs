@@ -6,14 +6,14 @@ using System;
 
 namespace OrkEngine
 {
-    public class IOrkEngine : IDisposable
+    public class OrkGame : IDisposable
     {
-        private EngineCore engine = new EngineCore();
+       
 
         /// <summary>
         /// Calls all of the private methods for an initilization.
         /// </summary>
-        public IOrkEngine()
+        public OrkGame()
         {
             SignatureCheck();
         }
@@ -31,7 +31,7 @@ namespace OrkEngine
         /// </summary>
         public void OnLoad()
         {
-            engine.Load();
+           
         }
 
         /// <summary>
@@ -80,19 +80,6 @@ namespace OrkEngine
         private void Dump()
         {
 
-        }
-    }
-
-    internal sealed class EngineCore
-    {
-        public EngineCore() { /* don't call init */ }
-
-        //moved stuff back to program.cs because this code is supposed to be used by the user
-        // - Red
-
-        public void Load()
-        {
-            
         }
     }
 }
