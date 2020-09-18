@@ -9,7 +9,6 @@ namespace OrkEngine
     public class OrkGame : IDisposable
     {
        
-
         /// <summary>
         /// Calls all of the private methods for an initilization.
         /// </summary>
@@ -69,7 +68,7 @@ namespace OrkEngine
             GC.SuppressFinalize(this);
         }
 
-        public void Dispose(bool dumping)
+        private void Dispose(bool dumping)
         {
             if (dumping) Dump();
         }
