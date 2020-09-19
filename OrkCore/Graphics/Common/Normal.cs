@@ -24,9 +24,9 @@ namespace OrkEngine.Component
             if (!(obj is Normal normal))
                 return false;
 
-            return this.X == normal.X &&
-                   this.Y == normal.Y &&
-                   this.Z == normal.Z;
+            return X == normal.X &&
+                   Y == normal.Y &&
+                   Z == normal.Z;
                    
         }
 
@@ -51,9 +51,9 @@ namespace OrkEngine.Component
             if (!(other is Normal normal))
                 return false;
 
-            return this.X == normal.X &&
-                   this.Y == normal.Y &&
-                   this.Z == normal.Z;
+            return X == normal.X &&
+                   Y == normal.Y &&
+                   Z == normal.Z;
         }
     }
 }
