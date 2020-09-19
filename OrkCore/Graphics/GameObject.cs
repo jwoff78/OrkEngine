@@ -169,7 +169,7 @@ namespace OrkEngine.Graphics
 
         //Physical versions of non physical objects (like cameras or lights)
 
-        public static GameObject camera(float aspectRatio)
+        public static GameObject Camera(float aspectRatio)
         {
             GameObject cam = new GameObject("camera");
 
