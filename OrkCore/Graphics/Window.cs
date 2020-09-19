@@ -11,38 +11,54 @@ namespace OrkEngine.Graphics
 {
     public class Window : GameWindow
     {
-        List<GameObject> Objects = new List<GameObject>();
+        internal List<GameObject> Objects = new List<GameObject>();
 
-        private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
+        // private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
 
-        private int _vertexBufferObject;
+        #region Private Fields
+        private int m_vertexBufferObject;
 
-        private int _vaoModel;
+        private int m_vaoModel;
 
-        private int _vaoLamp;
+        private int m_vaoLamp;
 
-        private Shader _lampShader;
+        private Shader m_lampShader;
 
-        private Shader _lightingShader;
+        private Shader m_lightingShader;
 
         private Texture _diffuseMap;
 
         private Texture _specularMap;
 
-        public GameObject camera;
+        private GameObject m_camera;
+        #endregion
 
-        Func<object> Start;
-        Func<object> Update;
+        #region Public Properties
+        /// <summary>
+        /// Gets the time from the last update.
+        /// </summary>
+        public double DeltaTime { get; private set; }
+        #endregion
 
-        public double deltaTime = 0;
+        #region OrkWindow Events
+        internal Action OnStart { get; set; }
 
-        public Window(int width, int height, string title, Func<object> start, Func<object> update)
-            : base(width, height, GraphicsMode.Default, title)
+        internal Action<double> OnUpdate { get; set; }
+        #endregion
+
+        #region Helpers
+        public Matrix4 Rotate(Vector3 rot)
         {
-            Start = start;
-            Update = update;
+            return Matrix4.CreateRotationX((float)Math.PI / 180 * (rot.X)) * Matrix4.CreateRotationY((float)Math.PI / 180 * (rot.Y)) * Matrix4.CreateRotationZ((float)Math.PI / 180 * (rot.Z));
         }
 
+        public Matrix4 Translate(Vector3 pos)
+        {
+            return Matrix4.CreateTranslation(pos);
+        }
+        #endregion
+
+        #region Events
         protected override void OnLoad(EventArgs e)
         {
             GL.ClearColor(139 / 255f, 182 / 255f, 201 / 255f, 1.0f);
@@ -52,17 +68,15 @@ namespace OrkEngine.Graphics
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             //GL.Enable(EnableCap.CullFace);
 
-            _lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
-            _lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
+            m_lightingShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/lighting.frag");
+            m_lampShader = new Shader("Graphics/Shaders/shader.vert", "Graphics/Shaders/shader.frag");
             _diffuseMap = new Texture("Textures/Diffuse_2K.png");
             _specularMap = new Texture("Textures/Bump_2K.png");
 
-            camera = GameObject.camera(Width / (float)Height);
-
             CursorVisible = false;
 
-            Start();
-
+            if (OnStart is object)
+                OnStart();
             base.OnLoad(e);
         }
 
@@ -70,10 +84,10 @@ namespace OrkEngine.Graphics
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            _lightingShader.SetVector3("light.direction", new Vector3(0.5f, -0.3f, -0.5f));
-            _lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
-            _lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
-            _lightingShader.SetVector3("light.specular", new Vector3(0.0f));
+            m_lightingShader.SetVector3("light.direction", new Vector3(0.5f, -0.3f, -0.5f));
+            m_lightingShader.SetVector3("light.ambient", new Vector3(0.2f));
+            m_lightingShader.SetVector3("light.diffuse", new Vector3(0.5f));
+            m_lightingShader.SetVector3("light.specular", new Vector3(0.0f));
 
             foreach (GameObject obj in Objects)
             {
@@ -93,29 +107,29 @@ namespace OrkEngine.Graphics
 
                     m.material.diffuseMap.Use();
                     m.material.specularMap.Use(TextureUnit.Texture1);
-                    _lightingShader.Use();
+                    m_lightingShader.Use();
 
-                    _lightingShader.SetMatrix4("view", (Matrix4)camera.callAction("viewMatrix", ""));
-                    _lightingShader.SetMatrix4("projection", (Matrix4)camera.callAction("projectionMatrix", ""));
+                    m_lightingShader.SetMatrix4("view", (Matrix4)m_camera.callAction("viewMatrix", ""));
+                    m_lightingShader.SetMatrix4("projection", (Matrix4)m_camera.callAction("projectionMatrix", ""));
 
-                    _lightingShader.SetVector3("viewPos", camera.position);
+                    m_lightingShader.SetVector3("viewPos", m_camera.position);
 
-                    _lightingShader.SetInt("material.diffuse", 0);
-                    _lightingShader.SetInt("material.specular", 1);
-                    _lightingShader.SetVector3("material.specular", m.material.specular);
-                    _lightingShader.SetFloat("material.shininess", m.material.shininess);
+                    m_lightingShader.SetInt("material.diffuse", 0);
+                    m_lightingShader.SetInt("material.specular", 1);
+                    m_lightingShader.SetVector3("material.specular", m.material.specular);
+                    m_lightingShader.SetFloat("material.shininess", m.material.shininess);
 
                     Matrix4 model = Matrix4.Identity;
 
-                    model *= rotate(obj.rotation); // obj rotation
-                    model *= translate(obj.position); // object position
+                    model *= Rotate(obj.rotation); // obj rotation
+                    model *= Translate(obj.position); // object position
                     model *= Matrix4.CreateScale(obj.scale); // object scale
 
-                    model *= rotate(obj.offset.rot); // parent rotation
-                    model *= translate(obj.offset.pos); // parent position
+                    model *= Rotate(obj.offset.rot); // parent rotation
+                    model *= Translate(obj.offset.pos); // parent position
                     model *= Matrix4.CreateScale(obj.offset.scl); // parent scale
 
-                    _lightingShader.SetMatrix4("model", model);
+                    m_lightingShader.SetMatrix4("model", model);
 
                     GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.vertices.Length / 8);
                     GL.BindVertexArray(0);
@@ -127,44 +141,38 @@ namespace OrkEngine.Graphics
             base.OnRenderFrame(e);
         }
 
-        public Matrix4 rotate(Vector3 rot)
-        {
-            return Matrix4.CreateRotationX((float)Math.PI / 180 * (rot.X)) * Matrix4.CreateRotationY((float)Math.PI / 180 * (rot.Y)) * Matrix4.CreateRotationZ((float)Math.PI / 180 * (rot.Z));
-        }
-        public Matrix4 translate(Vector3 pos)
-        {
-            return Matrix4.CreateTranslation(pos);
-        }
-
-        public bool KeyDown(Key key)
-        {
-            var input = Keyboard.GetState();
-
-            if (input.IsKeyDown(key))
-            {
-                return true;
-            }
-            return false;
-        }
-
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            var input = Keyboard.GetState();
-
-            deltaTime = e.Time;
-
-            Update();
-
+            if (OnUpdate is object)
+                OnUpdate(e.Time);
             base.OnUpdateFrame(e);
         }
 
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
-            camera.actionData["ASPECT"] = Width / (float)Height;
+            m_camera.actionData["ASPECT"] = Width / (float)Height;
             base.OnResize(e);
         }
 
+        protected override void OnUnload(EventArgs e)
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.BindVertexArray(0);
+            GL.UseProgram(0);
+
+            GL.DeleteBuffer(m_vertexBufferObject);
+            GL.DeleteVertexArray(m_vaoModel);
+            GL.DeleteVertexArray(m_vaoLamp);
+
+            GL.DeleteProgram(m_lampShader.Handle);
+            GL.DeleteProgram(m_lightingShader.Handle);
+
+            base.OnUnload(e);
+        }
+        #endregion
+
+        #region Public Functions
         public void AddToRenderQueue(GameObject obj)
         {
             foreach (Model mod in obj.models) {
@@ -179,15 +187,15 @@ namespace OrkEngine.Graphics
 
                     GL.BindBuffer(BufferTarget.ArrayBuffer, m.vertexBufferObject);
 
-                    var positionLocation = _lightingShader.GetAttribLocation("aPos");
+                    var positionLocation = m_lightingShader.GetAttribLocation("aPos");
                     GL.EnableVertexAttribArray(positionLocation);
                     GL.VertexAttribPointer(positionLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
 
-                    var normalLocation = _lightingShader.GetAttribLocation("aNormal");
+                    var normalLocation = m_lightingShader.GetAttribLocation("aNormal");
                     GL.EnableVertexAttribArray(normalLocation);
                     GL.VertexAttribPointer(normalLocation, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
 
-                    var texCoordLocation = _lightingShader.GetAttribLocation("aTexCoords");
+                    var texCoordLocation = m_lightingShader.GetAttribLocation("aTexCoords");
                     GL.EnableVertexAttribArray(texCoordLocation);
                     GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
                 }
@@ -220,21 +228,10 @@ namespace OrkEngine.Graphics
                         GL.DeleteTexture(m.material.diffuseMap.Handle);
                     }
         }
+        #endregion
 
-        protected override void OnUnload(EventArgs e)
-        {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.BindVertexArray(0);
-            GL.UseProgram(0);
-
-            GL.DeleteBuffer(_vertexBufferObject);
-            GL.DeleteVertexArray(_vaoModel);
-            GL.DeleteVertexArray(_vaoLamp);
-
-            GL.DeleteProgram(_lampShader.Handle);
-            GL.DeleteProgram(_lightingShader.Handle);
-
-            base.OnUnload(e);
-        }
+        internal Window(string title, int width, int height, GameObject camera) 
+            : base(width, height, GraphicsMode.Default, title) 
+           => m_camera = camera;
     }
 }
