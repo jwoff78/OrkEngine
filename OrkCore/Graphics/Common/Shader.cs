@@ -12,7 +12,7 @@ namespace OrkEngine.Graphics.Common
     {
         public readonly int Handle;
 
-        private readonly Dictionary<string, int> _uniformLocations;
+        private readonly Dictionary<string, int> m_uniformLocations;
 
         // This is how you create a simple shader.
         // Shaders are written in GLSL, which is a language very similar to C in its semantics.
@@ -71,7 +71,7 @@ namespace OrkEngine.Graphics.Common
             GL.GetProgram(Handle, GetProgramParameterName.ActiveUniforms, out var numberOfUniforms);
 
             // Next, allocate the dictionary to hold the locations.
-            _uniformLocations = new Dictionary<string, int>();
+            m_uniformLocations = new Dictionary<string, int>();
 
             // Loop over all the uniforms,
             for (var i = 0; i < numberOfUniforms; i++)
@@ -83,7 +83,7 @@ namespace OrkEngine.Graphics.Common
                 var location = GL.GetUniformLocation(Handle, key);
 
                 // and then add it to the dictionary.
-                _uniformLocations.Add(key, location);
+                m_uniformLocations.Add(key, location);
             }
         }
 
@@ -155,7 +155,7 @@ namespace OrkEngine.Graphics.Common
         public void SetInt(string name, int data)
         {
             GL.UseProgram(Handle);
-            GL.Uniform1(_uniformLocations[name], data);
+            GL.Uniform1(m_uniformLocations[name], data);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace OrkEngine.Graphics.Common
         public void SetFloat(string name, float data)
         {
             GL.UseProgram(Handle);
-            GL.Uniform1(_uniformLocations[name], data);
+            GL.Uniform1(m_uniformLocations[name], data);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace OrkEngine.Graphics.Common
         public void SetMatrix4(string name, Matrix4 data)
         {
             GL.UseProgram(Handle);
-            GL.UniformMatrix4(_uniformLocations[name], true, ref data);
+            GL.UniformMatrix4(m_uniformLocations[name], true, ref data);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace OrkEngine.Graphics.Common
         public void SetVector3(string name, Vector3 data)
         {
             GL.UseProgram(Handle);
-            GL.Uniform3(_uniformLocations[name], data);
+            GL.Uniform3(m_uniformLocations[name], data);
         }
     }
 }

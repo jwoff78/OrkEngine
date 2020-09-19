@@ -10,10 +10,10 @@ namespace OrkEngine.Graphics
 {
     public class Material
     {
-        public Texture diffuseMap;
-        public Texture specularMap;
-        public Vector3 specular = new Vector3(0,0,0);
-        public float shininess = 32f;
+        public Texture DiffuseMap;
+        public Texture SpecularMap;
+        public Vector3 Specular = new Vector3(0,0,0);
+        public float Shininess = 32f;
 
         public Material()
         {
@@ -22,8 +22,8 @@ namespace OrkEngine.Graphics
         }
         public Material(Texture diffuse, Texture spec)
         {
-            diffuseMap = diffuse;
-            specularMap = spec;
+            DiffuseMap = diffuse;
+            SpecularMap = spec;
             //specularMap = new Texture("Graphics/Default/blank.png");
         }
     }

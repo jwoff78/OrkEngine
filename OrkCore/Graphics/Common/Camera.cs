@@ -5,17 +5,17 @@ namespace OrkEngine.Graphics.Common
 {
     public class Camera
     {
-        private Vector3 _front = -Vector3.UnitZ;
+        private Vector3 m_front = -Vector3.UnitZ;
 
-        private Vector3 _up = Vector3.UnitY;
+        private Vector3 m_up = Vector3.UnitY;
 
-        private Vector3 _right = Vector3.UnitX;
+        private Vector3 m_right = Vector3.UnitX;
 
-        private float _pitch;
+        private float m_pitch;
 
-        private float _yaw = -MathHelper.PiOver2;
+        private float m_yaw = -MathHelper.PiOver2;
 
-        private float _fov = MathHelper.PiOver2;
+        private float m_fov = MathHelper.PiOver2;
 
         public Camera(Vector3 position, float aspectRatio)
         {
@@ -26,11 +26,11 @@ namespace OrkEngine.Graphics.Common
 
         public float AspectRatio { private get; set; }
 
-        public Vector3 Front => _front;
+        public Vector3 Front => m_front;
 
-        public Vector3 Up => _up;
+        public Vector3 Up => m_up;
 
-        public Vector3 Right => _right;
+        public Vector3 Right => m_right;
 
         public bool LookAtMode = false;
 
@@ -38,60 +38,60 @@ namespace OrkEngine.Graphics.Common
 
         public float Pitch
         {
-            get => MathHelper.RadiansToDegrees(_pitch);
+            get => MathHelper.RadiansToDegrees(m_pitch);
             set
             {
                 var angle = MathHelper.Clamp(value, -89f, 89f);
-                _pitch = MathHelper.DegreesToRadians(angle);
+                m_pitch = MathHelper.DegreesToRadians(angle);
                 UpdateVectors();
             }
         }
 
         public float Yaw
         {
-            get => MathHelper.RadiansToDegrees(_yaw);
+            get => MathHelper.RadiansToDegrees(m_yaw);
             set
             {
-                _yaw = MathHelper.DegreesToRadians(value);
+                m_yaw = MathHelper.DegreesToRadians(value);
                 UpdateVectors();
             }
         }
 
         public float Fov
         {
-            get => MathHelper.RadiansToDegrees(_fov);
+            get => MathHelper.RadiansToDegrees(m_fov);
             set
             {
                 var angle = MathHelper.Clamp(value, 1f, 45f);
-                _fov = MathHelper.DegreesToRadians(angle);
+                m_fov = MathHelper.DegreesToRadians(angle);
             }
         }
 
         public Matrix4 GetViewMatrix()
         {
             if (!LookAtMode) {
-                return Matrix4.LookAt(Position, Position + _front, _up);
+                return Matrix4.LookAt(Position, Position + m_front, m_up);
             }
             else
             {
-                return Matrix4.LookAt(Position, LookTarget, _up);
+                return Matrix4.LookAt(Position, LookTarget, m_up);
             }
         }
         public Matrix4 GetProjectionMatrix()
         {
-            return Matrix4.CreatePerspectiveFieldOfView(_fov, AspectRatio, 0.1f, 100);
+            return Matrix4.CreatePerspectiveFieldOfView(m_fov, AspectRatio, 0.1f, 100);
         }
 
         private void UpdateVectors()
         {
-            _front.X = (float)Math.Cos(_pitch) * (float)Math.Cos(_yaw);
-            _front.Y = (float)Math.Sin(_pitch);
-            _front.Z = (float)Math.Cos(_pitch) * (float)Math.Sin(_yaw);
+            m_front.X = (float)Math.Cos(m_pitch) * (float)Math.Cos(m_yaw);
+            m_front.Y = (float)Math.Sin(m_pitch);
+            m_front.Z = (float)Math.Cos(m_pitch) * (float)Math.Sin(m_yaw);
 
-            _front = Vector3.Normalize(_front);
+            m_front = Vector3.Normalize(m_front);
 
-            _right = Vector3.Normalize(Vector3.Cross(_front, Vector3.UnitY));
-            _up = Vector3.Normalize(Vector3.Cross(_right, _front));
+            m_right = Vector3.Normalize(Vector3.Cross(m_front, Vector3.UnitY));
+            m_up = Vector3.Normalize(Vector3.Cross(m_right, m_front));
         }
     }
 }

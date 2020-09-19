@@ -14,25 +14,25 @@ namespace OrkEngine.Graphics
 {
     public class Mesh
     {
-        public float[] vertices;
-        public Material material = new Material();
+        public float[] Vertices;
+        public Material Material = new Material();
 
-        public int elementBufferObject;
-        public int vertexBufferObject;
-        public int vertexArrayObject;
+        public int ElementBufferObject;
+        public int VertexBufferObject;
+        public int VertexArrayObject;
 
         public Mesh() { }
-        public Mesh(string Name, float[] Verts, Material Mat)
+        public Mesh(string name, float[] verts, Material mat)
         {
-            vertices = Verts;
-            material = Mat;
+            Vertices = verts;
+            Material = mat;
         }
 
         public static Mesh Cube
         {
             get{
                 Mesh cube = new Mesh();
-                cube.vertices = new float[]{
+                cube.Vertices = new float[]{
                     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
                      0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
                      0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
@@ -85,7 +85,7 @@ namespace OrkEngine.Graphics
             get
             {
                 Mesh cube = new Mesh();
-                cube.vertices = new float[]{
+                cube.Vertices = new float[]{
                     -1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
                      1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
                      1.0f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
@@ -158,7 +158,7 @@ namespace OrkEngine.Graphics
                     }
 
 
-            rend.vertices = verts.ToArray();
+            rend.Vertices = verts.ToArray();
 
             Console.WriteLine(verts.Count);
 
