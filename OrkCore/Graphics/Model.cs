@@ -41,7 +41,7 @@ namespace OrkEngine.Graphics
             {
                 Model c = new Model();
                 c.meshes = new Mesh[] { Mesh.Cube };
-                c.meshes[0].material = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
+                c.meshes[0].Material = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
                 return c;
             }
         }
@@ -51,7 +51,7 @@ namespace OrkEngine.Graphics
             {
                 Model c = new Model();
                 c.meshes = new Mesh[] { Mesh.Plane };
-                c.meshes[0].material = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
+                c.meshes[0].Material = new Material(new Texture("Graphics/Default/default.png"), new Texture("Graphics/Default/blank.png"));
                 return c;
             }
         }
@@ -99,14 +99,14 @@ namespace OrkEngine.Graphics
                 Console.WriteLine("DIFF - '" + diffmap + "'  SPEC - '" + specmap + "'");
 
                 if (diffmap.IsNullOrEmpty())
-                    mm.diffuseMap = def;
+                    mm.DiffuseMap = def;
                 else
-                    mm.diffuseMap = new Texture(Directory.GetCurrentDirectory() + diffmap);
+                    mm.DiffuseMap = new Texture(Directory.GetCurrentDirectory() + diffmap);
 
                 if (specmap.IsNullOrEmpty())
-                    mm.specularMap = blank;
+                    mm.SpecularMap = blank;
                 else
-                    mm.specularMap = new Texture(Directory.GetCurrentDirectory() + specmap);
+                    mm.SpecularMap = new Texture(Directory.GetCurrentDirectory() + specmap);
 
                 List<float> VoxelData = new List<float>();
 
@@ -136,8 +136,8 @@ namespace OrkEngine.Graphics
                             VoxelData.Add(0);
                         }
                     }
-                m.material = mm;
-                m.vertices = VoxelData.ToArray();
+                m.Material = mm;
+                m.Vertices = VoxelData.ToArray();
                 meshlist.Add(m);
             }
 

@@ -42,22 +42,22 @@ namespace Tests
         {
             vobj = new GameObject("Island", Model.LoadModelFromFile("Small Tropical Island.obj"));
 
-            vobj.models[0].meshes[0].material.shininess = 1000;
-            vobj.scale = new Vector3(0.1f,0.1f,0.1f);
+            vobj.Models[0].meshes[0].Material.Shininess = 1000;
+            vobj.Scale = new Vector3(0.1f,0.1f,0.1f);
 
             GameObject ground = new GameObject("ground", Model.Plane);
 
-            ground.models[0].meshes[0].material.diffuseMap = new Texture("Maps/snd1.jpg");
-            ground.models[0].meshes[0].material.specularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
+            ground.Models[0].meshes[0].Material.DiffuseMap = new Texture("Maps/snd1.jpg");
+            ground.Models[0].meshes[0].Material.SpecularMap = new Texture("Maps/terrain_mtl1_bumpamt.jpg");
             //ground.models[0].meshes[0].material.shininess = 1000f;
-            ground.scale = new Vector3(50, 50, 50);
-            ground.rotation = new Vector3(180, 0, 0);
+            ground.Scale = new Vector3(50, 50, 50);
+            ground.Rotation = new Vector3(180, 0, 0);
 
             GameObject water = new GameObject("water", Model.Plane);
-            water.models[0].meshes[0].material.diffuseMap = new Texture("water.png");
-            water.scale = new Vector3(50, 50, 50);
-            water.rotation = new Vector3(180,0,0);
-            water.position = new Vector3(0,0.08f,0);
+            water.Models[0].meshes[0].Material.DiffuseMap = new Texture("water.png");
+            water.Scale = new Vector3(50, 50, 50);
+            water.Rotation = new Vector3(180,0,0);
+            water.Position = new Vector3(0,0.08f,0);
 
             window.AddToRenderQueue(vobj);
             window.AddToRenderQueue(water);
@@ -65,8 +65,8 @@ namespace Tests
 
             o1 = new GameObject("cube1", Model.Cube);
             o2 = new GameObject("cube2", Model.Cube);
-            o2.position = new Vector3(3,0,0);
-            o1.Children.Add(window.camera);
+            o2.Position = new Vector3(3,0,0);
+            o1.Children.Add(window.Camera);
 
             window.AddToRenderQueue(o1);
             window.AddToRenderQueue(o2);
@@ -84,7 +84,7 @@ namespace Tests
 
         public object Update()
         {
-            float dt = (float)window.deltaTime * 2;
+            float dt = (float)window.DeltaTime * 2;
 
             framecount++;
 
@@ -106,23 +106,23 @@ namespace Tests
             if (window.KeyDown(Key.Escape))
                 window.Exit();
             if (window.KeyDown(Key.W))
-                window.camera.position += window.camera.forward * dt;
+                window.Camera.Position += window.Camera.Forward * dt;
             if (window.KeyDown(Key.A))
-                window.camera.position -= window.camera.right * dt;
+                window.Camera.Position -= window.Camera.Right * dt;
             if (window.KeyDown(Key.S))
-                window.camera.position -= window.camera.forward * dt;
+                window.Camera.Position -= window.Camera.Forward * dt;
             if (window.KeyDown(Key.D))
-                window.camera.position += window.camera.right * dt;
+                window.Camera.Position += window.Camera.Right * dt;
             if (window.KeyDown(Key.Left))
-                window.camera.rotation += new Vector3(0, 0.1f, 0);
+                window.Camera.Rotation += new Vector3(0, 0.1f, 0);
             if (window.KeyDown(Key.Right))
-                window.camera.rotation += new Vector3(0,-0.1f, 0);
+                window.Camera.Rotation += new Vector3(0,-0.1f, 0);
             if (window.KeyDown(Key.Space))
-                window.camera.position += window.camera.up * dt;
+                window.Camera.Position += window.Camera.Up * dt;
             if (window.KeyDown(Key.LShift))
-                window.camera.position -= window.camera.up * dt;
+                window.Camera.Position -= window.Camera.Up * dt;
 
-            o1.rotation += new Vector3(0,0.1f,0);
+            o1.Rotation += new Vector3(0,0.1f,0);
 
             return null;
         }

@@ -12,124 +12,124 @@ namespace OrkEngine.Graphics
 {
     public class GameObject
     {
-        public string name = "OBJECT";
-        private Vector3 pos = new Vector3(0,0,0);
-        public Vector3 rot = new Vector3(0,0,0);
-        private Vector3 scl    = new Vector3(1,1,1);
-        public TransformOffset offset = new TransformOffset();
+        public string Name = "OBJECT";
+        public TransformOffset Offset = new TransformOffset();
+        private Vector3 m_pos = new Vector3(0,0,0);
+        private Vector3 m_rotation = new Vector3(0,0,0);
+        private Vector3 m_scale    = new Vector3(1,1,1);
 
-        public List<Model> models = new List<Model>();
-        public int modelIndex = 0;
+        public List<Model> Models = new List<Model>();
+        public int ModelIndex = 0;
 
         public List<GameObject> Children = new List<GameObject>();
 
-        public Func<Dictionary<string, object>, object> action;
-        public Dictionary<string, object> actionData = new Dictionary<string, object>();
+        public Func<Dictionary<string, object>, object> Action;
+        public Dictionary<string, object> ActionData = new Dictionary<string, object>();
 
-        public Vector3 position
+        public Vector3 Position
         {
-            get { return pos; }
+            get { return m_pos; }
             set
             {
-                pos = value;
+                m_pos = value;
                 foreach (GameObject g in Children)
                 {
-                    g.offset.pos = pos;
+                    g.Offset.Position = m_pos;
                 }
             }
         }
-        public Vector3 rotation
+        public Vector3 Rotation
         {
-            get { return rot; }
+            get { return m_rotation; }
             set
             {
-                rot = value;
+                m_rotation = value;
                 foreach (GameObject g in Children)
                 {
-                    g.offset.rot = value;
+                    g.Offset.Rotation = value;
                 }
             }
         }
-        public Vector3 scale
+        public Vector3 Scale
         {
-            get { return scl; }
+            get { return m_scale; }
             set
             {
-                scl = value;
+                m_scale = value;
                 foreach (GameObject g in Children)
                 {
-                    g.offset.scl = scl;
-                    g.offset.pos *= scl;
+                    g.Offset.Scale = m_scale;
+                    g.Offset.Position *= m_scale;
                 }
             }
         }
-        public Vector3 forward
+        public Vector3 Forward
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * -Vector3.UnitZ;
+                return (Quaternion.FromEulerAngles(m_rotation) + Quaternion.FromEulerAngles(Offset.Rotation)).Normalized() * -Vector3.UnitZ;
             }
         }
-        public Vector3 up
+        public Vector3 Up
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitY;
+                return (Quaternion.FromEulerAngles(m_rotation) + Quaternion.FromEulerAngles(Offset.Rotation)).Normalized() * Vector3.UnitY;
             }
         }
-        public Vector3 right
+        public Vector3 Right
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot) + Quaternion.FromEulerAngles(offset.rot)).Normalized() * Vector3.UnitX;
+                return (Quaternion.FromEulerAngles(m_rotation) + Quaternion.FromEulerAngles(Offset.Rotation)).Normalized() * Vector3.UnitX;
             }
         }
 
-        public Vector3 localForward
+        public Vector3 LocalForward
         {
             get
             {
-                return (Quaternion.FromEulerAngles(rot)).Normalized() * -Vector3.UnitZ;
+                return (Quaternion.FromEulerAngles(m_rotation)).Normalized() * -Vector3.UnitZ;
             }
         }
         public bool visible = true;
 
-        public GameObject() { offset.scl = new Vector3(1); }
+        public GameObject() { Offset.Scale = new Vector3(1); }
         public GameObject(string _name)
         {
-            name = _name;
-            offset.scl = new Vector3(1);
-            offset.pos = new Vector3(0);
-            offset.rot = new Vector3(0);
+            Name = _name;
+            Offset.Scale = new Vector3(1);
+            Offset.Position = new Vector3(0);
+            Offset.Rotation = new Vector3(0);
         }
         public GameObject(string _name, Model model)
         {
-            name = _name;
-            models.Add(model);
-            offset.scl = new Vector3(1);
-            offset.pos = new Vector3(0);
-            offset.rot = new Vector3(0);
+            Name = _name;
+            Models.Add(model);
+            Offset.Scale = new Vector3(1);
+            Offset.Position = new Vector3(0);
+            Offset.Rotation = new Vector3(0);
         }
 
         public Model ActiveModel
         {
             get
             {
-                return models[modelIndex];
+                return Models[ModelIndex];
             }
         }
 
         public struct TransformOffset
         {
-            public Vector3 pos;
-            public Vector3 rot;
-            public Vector3 scl;
+            public Vector3 Position;
+            public Vector3 Rotation;
+            public Vector3 Scale;
         }
 
-        public Vector3 rotateAroundParent()
+        public Vector3 RotateAroundParent()
         {
-            float distance = Vector3.Distance(position, offset.pos);
-            Vector3 rotationInRads = new Vector3((float)Math.PI / 180 * offset.rot.X, (float)Math.PI / 180 * offset.rot.Y, (float)Math.PI / 180 * offset.rot.Z);
+            float distance = Vector3.Distance(Position, Offset.Position);
+            Vector3 rotationInRads = new Vector3((float)Math.PI / 180 * Offset.Rotation.X, (float)Math.PI / 180 * Offset.Rotation.Y, (float)Math.PI / 180 * Offset.Rotation.Z);
             Vector3 v3 = new Vector3(
                 (float)(distance * Math.Cos(rotationInRads.X) * Math.Cos(rotationInRads.Y)),
                 (float)(distance * Math.Cos(rotationInRads.X) * Math.Sin(rotationInRads.Y)),
@@ -138,49 +138,49 @@ namespace OrkEngine.Graphics
             return v3;
         }
 
-        public object callAction()
+        public object CallAction()
         {
-            Dictionary<string, object> dict = new Dictionary<string, object>(actionData);
+            Dictionary<string, object> dict = new Dictionary<string, object>(ActionData);
 
-            dict.Add("POSITION", position + offset.pos + rotateAroundParent());
-            dict.Add("ROTATION", rotation); //+ offset.rot);
-            dict.Add("SCALE", scale * offset.scl);
+            dict.Add("POSITION", Position + Offset.Position + RotateAroundParent());
+            dict.Add("ROTATION", Rotation); //+ offset.rot);
+            dict.Add("SCALE", Scale * Offset.Scale);
 
-            dict.Add("POS_UP", up);
-            dict.Add("POS_FORWARD", forward);
+            dict.Add("POS_UP", Up);
+            dict.Add("POS_FORWARD", Forward);
 
-            return action(dict);
+            return Action(dict);
         }
-        public object callAction(string extraval, object value)
+        public object CallAction(string extraval, object value)
         {
-            Dictionary<string, object> dict = new Dictionary<string, object>(actionData);
+            Dictionary<string, object> dictionary = new Dictionary<string, object>(ActionData);
 
-            dict.Add(extraval, value);
+            dictionary.Add(extraval, value);
 
-            dict.Add("POSITION", position + offset.pos + rotateAroundParent());
-            dict.Add("ROTATION", rotation); //+ offset.rot);
-            dict.Add("SCALE", scale * offset.scl);
+            dictionary.Add("POSITION", Position + Offset.Position + RotateAroundParent());
+            dictionary.Add("ROTATION", Rotation); //+ offset.rot);
+            dictionary.Add("SCALE", Scale * Offset.Scale);
 
-            dict.Add("POS_UP", up);
-            dict.Add("POS_FORWARD", localForward);
+            dictionary.Add("POS_UP", Up);
+            dictionary.Add("POS_FORWARD", LocalForward);
 
-            return action(dict);
+            return Action(dictionary);
         }
 
         //Physical versions of non physical objects (like cameras or lights)
 
-        public static GameObject camera(float aspectRatio)
+        public static GameObject Camera(float aspectRatio)
         {
-            GameObject cam = new GameObject("camera");
+            GameObject camera = new GameObject("camera");
 
-            cam.action = camAction;
-            cam.actionData.Add("FOV", MathHelper.PiOver2);
-            cam.actionData.Add("ASPECT", aspectRatio);
+            camera.Action = CameraAction;
+            camera.ActionData.Add("FOV", MathHelper.PiOver2);
+            camera.ActionData.Add("ASPECT", aspectRatio);
 
-            return cam;
+            return camera;
         }
 
-        static object camAction(Dictionary<string, object> data)
+        static object CameraAction(Dictionary<string, object> data)
         {
             if (data.ContainsKey("viewMatrix"))
             {
