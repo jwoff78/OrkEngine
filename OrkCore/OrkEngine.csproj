@@ -100,6 +100,7 @@
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />
+    <Compile Include="Common\UI\Text\TextRender.cs" />
     <Compile Include="Components\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
     <Compile Include="Components\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
