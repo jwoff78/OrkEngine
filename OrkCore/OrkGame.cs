@@ -170,46 +170,49 @@ namespace OrkEngine
             {
                 Model mod = new Model();
 
-                if (obj.ModelIndex > obj.Models.Count - 1)
+                if (obj.Models.Count > 0)
                 {
-                    mod = obj.Models[0];
-                    Console.WriteLine("[!] Model Index {0} was out of bounds. GameObject: {1}", obj.ModelIndex, obj.Name);
-                }
-                else
-                    mod = obj.ActiveModel;
+                    if (obj.ModelIndex > obj.Models.Count - 1)
+                    {
+                        mod = obj.Models[0];
+                        Console.WriteLine("[!] Model Index {0} was out of bounds. GameObject: {1}", obj.ModelIndex, obj.Name);
+                    }
+                    else
+                        mod = obj.ActiveModel;
 
-                foreach (Mesh m in mod.meshes)
-                {
-                    GL.BindVertexArray(m.VertexArrayObject);
+                    foreach (Mesh m in mod.meshes)
+                    {
+                        GL.BindVertexArray(m.VertexArrayObject);
 
-                    m.Material.DiffuseMap.Use();
-                    m.Material.SpecularMap.Use(TextureUnit.Texture1);
-                    m_lightingShader.Use();
+                        m.Material.DiffuseMap.Use();
+                        m.Material.SpecularMap.Use(TextureUnit.Texture1);
+                        m_lightingShader.Use();
 
-                    m_lightingShader.SetMatrix4("view", (Matrix4)m_camera.CallAction("viewMatrix", ""));
-                    m_lightingShader.SetMatrix4("projection", (Matrix4)m_camera.CallAction("projectionMatrix", ""));
+                        m_lightingShader.SetMatrix4("view", (Matrix4)m_camera.CallAction("viewMatrix", ""));
+                        m_lightingShader.SetMatrix4("projection", (Matrix4)m_camera.CallAction("projectionMatrix", ""));
 
-                    m_lightingShader.SetVector3("viewPos", m_camera.Position);
+                        m_lightingShader.SetVector3("viewPos", m_camera.Position);
 
-                    m_lightingShader.SetInt("material.diffuse", 0);
-                    m_lightingShader.SetInt("material.specular", 1);
-                    m_lightingShader.SetVector3("material.specular", m.Material.Specular);
-                    m_lightingShader.SetFloat("material.shininess", m.Material.Shininess);
+                        m_lightingShader.SetInt("material.diffuse", 0);
+                        m_lightingShader.SetInt("material.specular", 1);
+                        m_lightingShader.SetVector3("material.specular", m.Material.Specular);
+                        m_lightingShader.SetFloat("material.shininess", m.Material.Shininess);
 
-                    Matrix4 model = Matrix4.Identity;
+                        Matrix4 model = Matrix4.Identity;
 
-                    model *= Rotate(obj.Rotation); // obj rotation
-                    model *= Translate(obj.Position); // object position
-                    model *= Matrix4.CreateScale(obj.Scale); // object scale
+                        model *= Rotate(obj.Rotation); // obj rotation
+                        model *= Translate(obj.Position); // object position
+                        model *= Matrix4.CreateScale(obj.Scale); // object scale
 
-                    model *= Rotate(obj.Offset.Rotation); // parent rotation
-                    model *= Translate(obj.Offset.Position); // parent position
-                    model *= Matrix4.CreateScale(obj.Offset.Scale); // parent scale
+                        model *= Rotate(obj.Offset.Rotation); // parent rotation
+                        model *= Translate(obj.Offset.Position); // parent position
+                        model *= Matrix4.CreateScale(obj.Offset.Scale); // parent scale
 
-                    m_lightingShader.SetMatrix4("model", model);
+                        m_lightingShader.SetMatrix4("model", model);
 
-                    GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.Vertices.Length / 8);
-                    GL.BindVertexArray(0);
+                        GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.Vertices.Length / 8);
+                        GL.BindVertexArray(0);
+                    }
                 }
             }
 

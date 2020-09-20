@@ -39,7 +39,7 @@ namespace OrkEngine
         /// Gets called after every update, before rendering.
         /// </summary>
         /// <param name="deltaTime">Time elapsed since the last call to update.</param>
-        protected internal void OnUpdate(double deltaTime) { }
+        protected internal virtual void OnUpdate(double deltaTime) { }
         #endregion
     }
 }
