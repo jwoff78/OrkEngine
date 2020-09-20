@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OrkEngine.Component;
-using OrkEngine.Component.OBJLoader;
+using OrkEngine.Components;
+using OrkEngine.Components.OBJLoader;
 using OpenTK.Graphics.OpenGL4;
 
 namespace OrkEngine

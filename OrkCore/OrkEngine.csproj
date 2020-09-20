@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Transform.cs" />
+    <Compile Include="Common\Component.cs" />
+    <Compile Include="Common\IComponent.cs" />
     <Compile Include="Component\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />

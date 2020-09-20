@@ -10,7 +10,6 @@ namespace OrkEngine
 {
     public class Transform
     {
-
         public List<GameObject> Children = new List<GameObject>();
         public TransformOffset Offset = new TransformOffset();
         private Vector3 m_pos = new Vector3(0,0,0);
