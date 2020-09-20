@@ -22,6 +22,7 @@ namespace OrkEngine
             Position = position;
             AspectRatio = aspectRatio;
         }
+
         public Vector3 Position { get; set; }
 
         public float AspectRatio { private get; set; }
