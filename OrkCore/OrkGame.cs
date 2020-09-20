@@ -106,8 +106,11 @@ namespace OrkEngine
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-           //TODO FIX if (OnUpdate is object)
-                OnUpdate(e.Time);
+            // First the game update.
+            OnUpdate(e.Time);
+            // Then update every game object.
+            foreach (var obj in Objects)
+                obj.OnUpdate(e.Time);
             base.OnUpdateFrame(e);
         }
 
@@ -234,7 +237,7 @@ namespace OrkEngine
             OnDisable();
         }
 
-        public void AddToRenderQueue(GameObject obj)
+        public void CreateGlObject(GameObject obj)
         {
             foreach (Model mod in obj.Models)
             {
@@ -262,12 +265,9 @@ namespace OrkEngine
                     GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 6 * sizeof(float));
                 }
             }
-
-            m_objects.Add(obj);
-            Console.WriteLine("Added: " + obj.Name);
         }
 
-        public void RemoveFromRenderQueue(Mesh rend)
+        public void RemoveGlObject(Mesh rend)
         {
             /*List<Model> delete = Objects.FindAll(r => r.randID == rend.randID);
             foreach (Model del in delete)
@@ -279,7 +279,7 @@ namespace OrkEngine
             }*/
         }
 
-        public void ClearRenderQueue()
+        public void ClearGlObjects()
         {
             foreach (GameObject obj in Objects)
                 foreach (Model mod in obj.Models)
@@ -294,23 +294,68 @@ namespace OrkEngine
         #endregion
 
         #region Other Logic
-        public void AddObject(GameObject gameObject)
-        {
-            if (gameObject is object)
-               AddToRenderQueue(gameObject);
-        }
-
         public bool KeyDown(Key key) => Keyboard.GetState().IsKeyDown(key);
         #endregion
 
+        #region GameObject Handlers
+        /// <summary>
+        /// Adds an object to the list of GameObjects.
+        /// </summary>
+        /// <param name="gameObject">GameObject to be added into the game.</param>
+        public void AddObject(GameObject gameObject) 
+        {
+            if (gameObject is object)
+            {
+                CreateGlObject(gameObject);
+                gameObject.Game = this;
+                gameObject.OnStart();
+                m_objects.Add(gameObject);
+                Console.WriteLine("GameObject added: " + gameObject.Name);
+            }
+        }
+
+        /// <summary>
+        /// Destroys an instance of GameObject.
+        /// </summary>
+        /// <param name="gameObject">Instance of GameObject attached to this Game.</param>
+        public void DestroyObject(GameObject gameObject)
+        {
+            if (gameObject is object && m_objects.Remove(gameObject))
+            {
+                gameObject.OnDestroy();
+                gameObject.Game = null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a GameObject by its name, separate names by ':' to recursively search within child objects.
+        /// </summary>
+        /// <param name="name">Name of the object to look up.</param>
+        /// <returns>Instance of GameObject, or null if no object with the given name is found.</returns>
+        public GameObject GetObject(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
+            var names = name.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            GameObject obj = m_objects.FirstOrDefault(_ => _.Name.Equals(names[0], StringComparison.Ordinal));
+            if (obj is object && names.Length > 1)
+                for (int i = 1; obj is object && i < names.Length; i++)
+                    obj = obj.Children.FirstOrDefault(_ => _.Name.Equals(names[i], StringComparison.Ordinal));
+            
+            // Return either null or the object if it exists inside a child object.
+            return obj;
+        }
+        #endregion
+
         #region Implementation of IDisposable
-        public void Dispose()
+        public override void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        private void Dispose(bool dumping)
+        protected override void Dispose(bool dumping)
         {
             if (dumping) Dump();
         }
@@ -318,10 +363,8 @@ namespace OrkEngine
         /// <summary>
         /// Deletes all of the object holders.
         /// </summary>
-        private void Dump()
-        {
-
-        }
+        /// TODO: Dispose of more stuff when needed.
+        private void Dump() => base.Dispose(true);
         #endregion
 
         #region Constructors

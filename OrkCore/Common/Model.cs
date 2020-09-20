@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OrkEngine.Component.OBJLoader;
-using OrkEngine.Component;
+using OrkEngine.Components.OBJLoader;
+using OrkEngine.Components;
 using System.IO;
 using OpenTK.Graphics.ES11;
 
