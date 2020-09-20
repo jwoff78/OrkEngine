@@ -18,7 +18,7 @@ namespace OrkEngine
         // Shaders are written in GLSL, which is a language very similar to C in its semantics.
         // The GLSL source is compiled *at runtime*, so it can optimize itself for the graphics card it's currently being used on.
         // A commented example of GLSL can be found in shader.vert
-        public Shader(string vertPath, string fragPath)
+        public Shader(string vertexPath, string fragmentPath)
         {
             // There are several different types of shaders, but the only two you need for basic rendering are the vertex and fragment shaders.
             // The vertex shader is responsible for moving around vertices, and uploading that data to the fragment shader.
@@ -28,7 +28,7 @@ namespace OrkEngine
 
             // Load vertex shader and compile
             // LoadSource is a simple function that just loads all text from the file whose path is given.
-            var shaderSource = LoadSource(vertPath);
+            var shaderSource = LoadSource(vertexPath);
 
             // GL.CreateShader will create an empty shader (obviously). The ShaderType enum denotes which type of shader will be created.
             var vertexShader = GL.CreateShader(ShaderType.VertexShader);
@@ -40,7 +40,7 @@ namespace OrkEngine
             CompileShader(vertexShader);
 
             // We do the same for the fragment shader
-            shaderSource = LoadSource(fragPath);
+            shaderSource = LoadSource(fragmentPath);
             var fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(fragmentShader, shaderSource);
             CompileShader(fragmentShader);
