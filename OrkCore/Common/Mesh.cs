@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OrkEngine.Graphics.Common;
 using OrkEngine.Component;
 using OrkEngine.Component.OBJLoader;
 using OpenTK.Graphics.OpenGL4;
 
-namespace OrkEngine.Graphics
+namespace OrkEngine
 {
     public class Mesh
     {

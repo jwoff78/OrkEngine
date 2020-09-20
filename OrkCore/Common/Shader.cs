@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
 
-namespace OrkEngine.Graphics.Common
+namespace OrkEngine
 {
     // A simple class meant to help create shaders.
     public class Shader

@@ -97,8 +97,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Transform.cs" />
     <Compile Include="Component\Native\NativeUnsafe.cs" />
-    <Compile Include="Graphics\Common\Normal.cs" />
+    <Compile Include="Common\Normal.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
     <Compile Include="Component\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
@@ -141,13 +142,13 @@
     <Compile Include="Component\OBJLoader\Type\TypeParserBase.cs" />
     <Compile Include="Component\OBJLoader\Type\UseMaterialParser.cs" />
     <Compile Include="Component\OBJLoader\Type\VertexParser.cs" />
-    <Compile Include="Graphics\Common\Vertex.cs" />
-    <Compile Include="Graphics\Common\Camera.cs" />
-    <Compile Include="Graphics\Common\Shader.cs" />
-    <Compile Include="Graphics\Common\Texture.cs" />
-    <Compile Include="Graphics\GameObject.cs" />
-    <Compile Include="Graphics\Material.cs" />
-    <Compile Include="Graphics\Model.cs" />
+    <Compile Include="Common\Vertex.cs" />
+    <Compile Include="Common\Camera.cs" />
+    <Compile Include="Common\Shader.cs" />
+    <Compile Include="Common\Texture.cs" />
+    <Compile Include="Common\GameObject.cs" />
+    <Compile Include="Common\Material.cs" />
+    <Compile Include="Common\Model.cs" />
     <Compile Include="OrkGame.cs" />
     <Compile Include="Jarception.cs" />
     <Compile Include="Mathematics\BoundingBox.cs" />
@@ -191,7 +192,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
-    <Compile Include="Graphics\Mesh.cs" />
+    <Compile Include="Common\Mesh.cs" />
     <None Include="Common.ruleset" />
     <None Include="Graphics\Shaders\lighting.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

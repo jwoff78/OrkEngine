@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using OpenTK;
 using OrkEngine.Component.OBJLoader;
 using OrkEngine.Component;
-using OrkEngine.Graphics.Common;
 using System.IO;
 using OpenTK.Graphics.ES11;
 
-namespace OrkEngine.Graphics
+namespace OrkEngine
 {
     public class Model
     {

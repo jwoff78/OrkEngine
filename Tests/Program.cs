@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.IO;
 using OpenTK;
 using OpenTK.Graphics;
-using OrkEngine.Graphics;
-using OrkEngine.Graphics.Common;
 using OpenTK.Input;
 using System.Runtime.ConstrainedExecution;
 using OrkEngine;
@@ -18,6 +16,7 @@ namespace Tests
 {
     public class Program : OrkGame
     {
+        /*
         GameObject vobj, o1, o2;
         Texture[] textures;
         int texcount = 0, framecount = 0;
@@ -114,5 +113,6 @@ namespace Tests
 
             o1.rotation += new Vector3(0, 0.1f, 0);
         }
+        */
     }
 }

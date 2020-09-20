@@ -5,8 +5,6 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
-using OrkEngine.Graphics;
-using OrkEngine.Graphics.Common;
 
 namespace OrkEngine
 {

@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using OpenTK.Graphics.OpenGL4;
 using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
 
-namespace OrkEngine.Graphics.Common
+namespace OrkEngine
 {
     // A helper class, much like Shader, meant to simplify loading textures.
     public class Texture : IEquatable<Texture>

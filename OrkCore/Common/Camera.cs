@@ -1,7 +1,7 @@
 using System;
 using OpenTK;
 
-namespace OrkEngine.Graphics.Common
+namespace OrkEngine
 {
     public class Camera
     {
