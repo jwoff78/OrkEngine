@@ -210,7 +210,7 @@ namespace OrkEngine
 
                         m_lightingShader.SetMatrix4("model", model);
 
-                        GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.Vertices.Length / 8);
+                        GL.DrawArrays((PrimitiveType)mod.renderMode, 0, m.m_vertices.Length / 8);
                         GL.BindVertexArray(0);
                     }
                 }
@@ -248,7 +248,7 @@ namespace OrkEngine
                 {
                     m.VertexBufferObject = GL.GenBuffer();
                     GL.BindBuffer(BufferTarget.ArrayBuffer, m.VertexBufferObject);
-                    GL.BufferData(BufferTarget.ArrayBuffer, m.Vertices.Length * sizeof(float), m.Vertices, BufferUsageHint.StaticDraw);
+                    GL.BufferData(BufferTarget.ArrayBuffer, m.m_vertices.Length * sizeof(float), m.m_vertices, BufferUsageHint.StaticDraw);
 
                     m.VertexArrayObject = GL.GenVertexArray();
                     GL.BindVertexArray(m.VertexArrayObject);

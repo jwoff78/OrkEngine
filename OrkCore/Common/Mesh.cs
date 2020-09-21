@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using OpenTK.Graphics;
 using OrkEngine.Components;
 using OrkEngine.Components.OBJLoader;
 using OpenTK.Graphics.OpenGL4;
@@ -13,7 +14,7 @@ namespace OrkEngine
 {
     public class Mesh
     {
-        public float[] Vertices;
+        public float[] m_vertices;
         public Material Material = new Material();
 
         public int ElementBufferObject;
@@ -23,7 +24,7 @@ namespace OrkEngine
         public Mesh() { }
         public Mesh(string name, float[] verts, Material mat)
         {
-            Vertices = verts;
+            m_vertices = verts;
             Material = mat;
         }
 
@@ -31,7 +32,7 @@ namespace OrkEngine
         {
             get{
                 Mesh cube = new Mesh();
-                cube.Vertices = new float[]{
+                cube.m_vertices = new float[]{
                     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
                      0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
                      0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
@@ -84,7 +85,7 @@ namespace OrkEngine
             get
             {
                 Mesh cube = new Mesh();
-                cube.Vertices = new float[]{
+                cube.m_vertices = new float[]{
                     -1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
                      1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
                      1.0f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
@@ -157,11 +158,27 @@ namespace OrkEngine
                     }
 
 
-            rend.Vertices = verts.ToArray();
+            rend.m_vertices = verts.ToArray();
 
             Console.WriteLine(verts.Count);
 
             return rend;
         }
+
+        public Vector3[] Vertices
+        {
+            get; set;
+        }
+
+        public Vector3[] Normals
+        {
+            get; set;
+        }
+
+        public Vector2[] UV
+        {
+            get; set;
+        }
+
     }
 }

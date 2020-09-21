@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-
 namespace OrkEngine
 {
     public class Material
@@ -12,9 +11,6 @@ namespace OrkEngine
         protected Texture m_diffuseMap;
         protected Texture m_specularMap;
         protected float m_shininess = 32f;
-
-       // public Vector3 Diffuse = new Vector3(0, 0, 0);
-       // public Vector3 Specular = new Vector3(0, 0, 0);
 
         public Texture DiffuseMap
         { 
@@ -55,14 +51,12 @@ namespace OrkEngine
 
         public Vector3 Diffuse
         {
-
             get; set;
 
         } = new Vector3(0, 0, 0);
 
         public Vector3 Specular
         {
-
             get; set;
 
         } = new Vector3(0, 0, 0);
@@ -72,6 +66,7 @@ namespace OrkEngine
             //diffuseMap = new Texture("Graphics/Default/default.png");
             //specularMap = new Texture("Graphics/Default/blank.png");
         }
+
         public Material(Texture diffuse, Texture specular)
         {
             DiffuseMap = diffuse;

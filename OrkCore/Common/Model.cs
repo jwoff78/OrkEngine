@@ -136,7 +136,7 @@ namespace OrkEngine
                         }
                     }
                 m.Material = mm;
-                m.Vertices = VoxelData.ToArray();
+                m.m_vertices = VoxelData.ToArray();
                 meshlist.Add(m);
             }
 
