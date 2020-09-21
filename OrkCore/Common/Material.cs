@@ -11,11 +11,10 @@ namespace OrkEngine
     {
         protected Texture m_diffuseMap;
         protected Texture m_specularMap;
+        protected float m_shininess = 32f;
 
-
-        public Vector3 Diffuse = new Vector3(0, 0, 0);
-        public Vector3 Specular = new Vector3(0, 0, 0);
-        public float Shininess = 32f;
+       // public Vector3 Diffuse = new Vector3(0, 0, 0);
+       // public Vector3 Specular = new Vector3(0, 0, 0);
 
         public Texture DiffuseMap
         { 
@@ -40,6 +39,33 @@ namespace OrkEngine
                 m_specularMap = value;
             }
         }
+
+        public float Shininess
+        {
+            get
+            {
+                return m_shininess;
+            }
+
+            set
+            {
+                m_shininess = value;
+            }
+        }
+
+        public Vector3 Diffuse
+        {
+
+            get; set;
+
+        } = new Vector3(0, 0, 0);
+
+        public Vector3 Specular
+        {
+
+            get; set;
+
+        } = new Vector3(0, 0, 0);
 
         public Material()
         {
