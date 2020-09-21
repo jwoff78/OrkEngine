@@ -109,6 +109,10 @@
     <Compile Include="Common\Box2f.cs" />
     <Compile Include="Common\Box2i.cs" />
     <Compile Include="Common\Box2l.cs" />
+    <Compile Include="Common\IProjectionMatrixSource.cs" />
+    <Compile Include="Common\IViewMatrixSource.cs" />
+    <Compile Include="Common\LookAt.cs" />
+    <Compile Include="Common\Ray.cs" />
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />

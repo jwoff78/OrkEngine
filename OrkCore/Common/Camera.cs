@@ -1,8 +1,122 @@
-using System;
 using OpenTK;
+using OpenTK.Graphics.OpenGL4;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace OrkEngine
 {
+    public abstract class Camera
+    {
+        private static Vector3 m_up = Vector3.UnitY;
+        private static float m_maxZ;
+        private static float m_minZ;
+
+
+
+        /// <summary>
+		/// Gets the cameras view matrix.
+		/// </summary>
+		public abstract Matrix4 ViewMatrix { get; }
+
+        /// <summary>
+        /// Gets the cameras projection matrix.
+        /// </summary>
+        public abstract Matrix4 ProjectionMatrix { get; }
+
+        public float MaxZ
+        {
+            get
+            {
+                return m_maxZ;
+            }
+            set
+            {
+                m_maxZ = value;
+            }
+        }
+
+        public float MinZ
+        {
+            get
+            {
+                return m_minZ;
+            }
+            set
+            {
+                m_minZ = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the screen area the camera renders to.
+        /// </summary>
+        public Box2 Area
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets the up direction all cameras share.
+        /// </summary>
+        public static Vector3 Up
+        {
+            get
+            {
+                return Camera.m_up;
+            }
+            set
+            {
+                Camera.m_up = value;
+            }
+        }
+
+        /// <summary>
+		/// Gets the camera viewport.
+		/// </summary>
+        public Box2 GetViewport()
+        {
+            Box2 area = Area;
+
+            if (area.Width < 1.0f || area.Height < 1.0f)
+            {
+                //TODO engine width and height for last 2 zeros
+                area = new Box2(0, 0, 0, 0);
+            }
+
+            return area;
+        }
+
+        /// <summary>
+		/// Constructs a ray from a screen position.
+		/// </summary>
+		/// <param name="x">X coordinate</param>
+		/// <param name="y">Y coordinate</param>
+		/// <returns>Constructed ray.</returns>
+        public Ray CreateRay(int x, int y)
+        {
+            Box2 viewport = GetViewport();
+
+            //pain in my ass
+            float fx = 2.0f * (x - viewport.Left) / viewport.Width - 1.0f;
+            float fy = 1.0f - 2.0f * (y - viewport.Top) / viewport.Height;
+
+            //might be unstable
+            Vector3 from = Unproject(new Vector3(fx, fy, 0.0f));
+            Vector3 to = Unproject(new Vector3(fx, fy, 1.0f));
+            //Vector3.Unproject()
+            return new Ray(from, to - from);
+
+        }
+
+        public Vector3 Unproject(Vector3 worldCoord)
+        {
+            //TODO might need fixed
+            return Vector3.Unproject(worldCoord, worldCoord.X, worldCoord.Y, Area.Height, Area.Width, MinZ, MaxZ, ProjectionMatrix);
+        }
+    }
+    /*
     public class Camera
     {
         private Vector3 m_front = -Vector3.UnitZ;
@@ -95,4 +209,5 @@ namespace OrkEngine
             m_up = Vector3.Normalize(Vector3.Cross(m_right, m_front));
         }
     }
+    */
 }
