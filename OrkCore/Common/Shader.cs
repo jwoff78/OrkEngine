@@ -14,6 +14,9 @@ namespace OrkEngine
 
         private readonly Dictionary<string, int> m_uniformLocations;
 
+        protected string m_vertexPath;
+        protected string m_fragmentPath;
+
         // This is how you create a simple shader.
         // Shaders are written in GLSL, which is a language very similar to C in its semantics.
         // The GLSL source is compiled *at runtime*, so it can optimize itself for the graphics card it's currently being used on.
@@ -135,6 +138,40 @@ namespace OrkEngine
             using (var sr = new StreamReader(path, Encoding.UTF8))
             {
                 return sr.ReadToEnd();
+            }
+        }
+
+        public Shader GetShader()
+        {
+            return new Shader(VertexPath, FragmentPath);
+        }
+
+        public Shader CreateShader(string vertexPath, string fragmentPath)
+        {
+            return new Shader(vertexPath, fragmentPath);
+        }
+
+        public string VertexPath
+        {
+            get
+            {
+                return m_vertexPath;
+            }
+            set
+            {
+                m_vertexPath = value;
+            }
+        }
+
+        public string FragmentPath
+        {
+            get
+            {
+                return m_fragmentPath;
+            }
+            set
+            {
+                m_fragmentPath = value;
             }
         }
 
