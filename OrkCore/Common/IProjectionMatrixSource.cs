@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrkEngine.Common
+namespace OrkEngine
 {
     /// <summary>
     /// Provides a projection matrix

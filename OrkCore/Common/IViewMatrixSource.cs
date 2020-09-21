@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace OrkEngine.Common
+namespace OrkEngine
 {
     /// <summary>
 	/// Provides a view matrix.
