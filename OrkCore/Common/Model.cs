@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OrkEngine.Components.OBJLoader;
-using OrkEngine.Components;
 using System.IO;
 using OpenTK.Graphics.ES11;
 
 namespace OrkEngine
 {
+    
     public class Model
     {
         public Mesh[] meshes;
@@ -57,6 +56,7 @@ namespace OrkEngine
 
         public static Model LoadModelFromFile(string obj)
         {
+            /*
             var objLoaderFactory = new ObjLoaderFactory();
             var objLoader = objLoaderFactory.Create();
             var fileStream = new FileStream(obj, FileMode.Open);
@@ -139,10 +139,11 @@ namespace OrkEngine
                 m.m_vertices = VoxelData.ToArray();
                 meshlist.Add(m);
             }
-
-            Model mod = new Model(meshlist.ToArray());
+            */
+            Model mod = new Model();//meshlist.ToArray()
 
             return mod;
+            
         }
     }
 }

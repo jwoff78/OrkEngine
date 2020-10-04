@@ -240,6 +240,7 @@ namespace OrkEngine
             OnDisable();
         }
 
+        
         public void CreateGlObject(GameObject obj)
         {
             foreach (Model mod in obj.Models)
@@ -293,7 +294,7 @@ namespace OrkEngine
                         GL.DeleteTexture(m.Material.DiffuseMap.Handle);
                     }
         }
-
+        
         #endregion
 
         #region Other Logic

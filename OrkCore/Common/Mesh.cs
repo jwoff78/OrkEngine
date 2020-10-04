@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OpenTK.Graphics;
-using OrkEngine.Components;
-using OrkEngine.Components.OBJLoader;
 using OpenTK.Graphics.OpenGL4;
 
 namespace OrkEngine
 {
+    
     public class Mesh
     {
         public float[] m_vertices;
@@ -97,7 +95,7 @@ namespace OrkEngine
                 return cube;
             }
         }
-
+        /*
         public static Mesh LoadMeshFromFile(string path)
         {
             Mesh rend = new Mesh();
@@ -163,7 +161,7 @@ namespace OrkEngine
             Console.WriteLine(verts.Count);
 
             return rend;
-        }
+        }*/
 
         public Vector3[] Vertices
         {

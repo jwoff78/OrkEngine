@@ -10,6 +10,7 @@ using System.Windows.Markup;
 
 namespace OrkEngine
 {
+    
     public class GameObject : Transform
     {
         #region Private Fields

@@ -119,48 +119,6 @@
     <Compile Include="Common\UI\Text\TextRender.cs" />
     <Compile Include="Components\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\IMaterialLibraryLoader.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\IMaterialLibraryLoaderFacade.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\IMaterialStreamProvider.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\IObjLoader.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\IObjLoaderFactory.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\LoaderBase.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\LoadResult.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\MaterialLibraryLoader.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\MaterialLibraryLoaderFacade.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\MaterialNullStreamProvider.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\MaterialStreamProvider.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\ObjLoader.cs" />
-    <Compile Include="Components\OBJLoader\Loaders\ObjLoaderFactory.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\DataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IDataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IElementGroup.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IFaceGroup.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IGroupDataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IMaterialLibrary.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\INormalDataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\ITextureDataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\DataStore\IVertexDataStore.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\Elements\Face.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\Elements\Group.cs" />
-    <Compile Include="Components\OBJLoader\OBJData\Material.cs" />
-    <Compile Include="Components\OBJLoader\StringExtensions.cs" />
-    <Compile Include="Components\OBJLoader\Type\FaceParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\GroupParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\IFaceParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\IGroupParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\IMaterialLibraryParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\INormalParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\ITextureParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\ITypeParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\IUseMaterialParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\Interface\IVertexParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\MaterialLibraryParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\NormalParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\TextureParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\TypeParserBase.cs" />
-    <Compile Include="Components\OBJLoader\Type\UseMaterialParser.cs" />
-    <Compile Include="Components\OBJLoader\Type\VertexParser.cs" />
     <Compile Include="Common\Vertex.cs" />
     <Compile Include="Common\Camera.cs" />
     <Compile Include="Common\Shader.cs" />
@@ -204,9 +162,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mathematics\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Graphics\Default\blank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
