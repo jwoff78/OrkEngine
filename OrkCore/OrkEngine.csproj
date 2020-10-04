@@ -78,6 +78,11 @@
       <HintPath>..\packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Linq" />
@@ -115,16 +120,17 @@
     <Compile Include="Common\Math\Vector2f.cs" />
     <Compile Include="Common\Math\Vector3f.cs" />
     <Compile Include="Common\Ray.cs" />
+    <Compile Include="Common\Renderer\OBJ\IndexedModel.cs" />
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />
     <Compile Include="Common\UI\Text\TextRender.cs" />
     <Compile Include="Components\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
-    <Compile Include="Common\Vertex.cs" />
+    <Compile Include="Common\Renderer\Vertex.cs" />
     <Compile Include="Common\Camera.cs" />
     <Compile Include="Common\Shader.cs" />
-    <Compile Include="Common\Texture.cs" />
+    <Compile Include="Common\Renderer\Texture.cs" />
     <Compile Include="Common\GameObject.cs" />
     <Compile Include="Common\Material.cs" />
     <Compile Include="Common\Model.cs" />
