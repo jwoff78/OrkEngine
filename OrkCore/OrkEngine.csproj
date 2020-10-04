@@ -112,6 +112,7 @@
     <Compile Include="Common\IProjectionMatrixSource.cs" />
     <Compile Include="Common\IViewMatrixSource.cs" />
     <Compile Include="Common\LookAt.cs" />
+    <Compile Include="Common\Math\Vector2f.cs" />
     <Compile Include="Common\Math\Vector3f.cs" />
     <Compile Include="Common\Ray.cs" />
     <Compile Include="Common\Transform.cs" />

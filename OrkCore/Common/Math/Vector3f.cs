@@ -216,6 +216,19 @@ namespace OrkEngine
             return new Vector3f(Math.Abs(m_x), Math.Abs(m_y), Math.Abs(m_z));
         }
 
+        public Vector3f Set(float x, float y, float z) 
+        {
+            m_x = x;
+            m_y = y;
+            m_z = z; 
+            return this; 
+        }
+
+        public Vector3f Set(Vector3f r) {
+            Set(r.X, r.Y, r.Z); 
+            return this; 
+        }
+
         public override string ToString()
         {
             return "(" + m_x + " " + m_y + " " + m_z + ")";
