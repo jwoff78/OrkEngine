@@ -10,7 +10,7 @@ namespace OrkEngine
     class Time
     {
 
-        public const long SECOND = 1_000_000_000L;
+        public const long SECOND = 1000000000L;
 
         public static double GetTime()
         {
