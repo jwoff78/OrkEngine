@@ -1,5 +1,4 @@
-﻿using OpenTK;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +7,157 @@ using static OrkEngine.GameObject;
 
 namespace OrkEngine
 {
+    public class Transform
+    {
+        private Transform m_parent;
+        private Matrix4f   m_parentMatrix;
+
+        private Vector3f   m_position;
+        private Quaternion m_rotation;
+        private Vector3f   m_scale;
+
+        private Vector3f   m_oldPosition;
+        private Quaternion m_oldRotation;
+        private Vector3f   m_oldScale;
+
+        public Transform()
+        {
+            m_position = new Vector3f(0, 0, 0);
+            m_rotation = new Quaternion(0, 0, 0, 1);
+            m_scale = new Vector3f(1, 1, 1);
+
+            m_parentMatrix = new Matrix4f().InitIdentity();
+        }
+
+        public void Update()
+        {
+            if (m_oldPosition != null)
+            {
+                m_oldPosition.Set(m_position);
+                m_oldRotation.Set(m_rotation);
+                m_oldScale.Set(m_scale);
+            }
+            else
+            {
+                m_oldPosition = new Vector3f(0, 0, 0).Set(m_position).Add(1.0f);
+                m_oldRotation = new Quaternion(0, 0, 0, 0).Set(m_rotation).Mul(0.5f);
+                m_oldScale = new Vector3f(0, 0, 0).Set(m_scale).Add(1.0f);
+            }
+        }
+
+        public void Rotate(Vector3f axis, float angle)
+        {
+            m_rotation = new Quaternion(axis, angle).Mul(m_rotation).Normalized();
+        }
+
+        public void LookAt(Vector3f point, Vector3f up)
+        {
+            m_rotation = GetLookAtRotation(point, up);
+        }
+
+        public Quaternion GetLookAtRotation(Vector3f point, Vector3f up)
+        {
+            return new Quaternion(new Matrix4f().InitRotation(point.Sub(m_position).Normalized(), up));
+        }
+
+        public bool HasChanged()
+        {
+            if (m_parent != null && m_parent.HasChanged())
+                return true;
+
+            if (!m_position.Equals(m_oldPosition))
+                return true;
+
+            if (!m_rotation.Equals(m_oldRotation))
+                return true;
+
+            if (!m_scale.Equals(m_oldScale))
+                return true;
+
+            return false;
+        }
+
+        public Matrix4f GetTransformation()
+        {
+            Matrix4f translationMatrix = new Matrix4f().InitTranslation(m_position.X, m_position.Y, m_position.Z);
+            Matrix4f rotationMatrix = m_rotation.ToRotationMatrix();
+            Matrix4f scaleMatrix = new Matrix4f().InitScale(m_scale.X, m_scale.Y, m_scale.Z);
+
+            return GetParentMatrix().Mul(translationMatrix.Mul(rotationMatrix.Mul(scaleMatrix)));
+        }
+
+
+        private Matrix4f GetParentMatrix()
+        {
+            if (m_parent != null && m_parent.HasChanged())
+                m_parentMatrix = m_parent.GetTransformation();
+
+            return m_parentMatrix;
+        }
+
+        public void SetParent(Transform parent)
+        {
+            m_parent = parent;
+        }
+
+        public Vector3f GetTransformedPos()
+        {
+            return GetParentMatrix().Transform(m_position);
+        }
+
+        public Quaternion GetTransformedRot()
+        {
+            Quaternion parentRotation = new Quaternion(0,0,0,1);
+
+            if (m_parent != null)
+                parentRotation = m_parent.GetTransformedRot();
+
+            return parentRotation.Mul(m_rotation);
+        }
+
+        public Vector3f Position
+        {
+            get
+            {
+                return m_position;
+            }
+
+            set
+            {
+                m_position = value;
+            }
+        }
+
+        public Quaternion Rotation
+        {
+            get
+            {
+                return m_rotation;
+            }
+
+            set
+            {
+                m_rotation = value;
+            }
+        }
+
+        public Vector3f Scale
+        {
+            get
+            {
+                return m_scale;
+            }
+
+            set
+            {
+                m_scale = value;
+            }
+        }
+
+
+    }
+
+    /*
     public class Transform
     {
         public List<GameObject> Children = new List<GameObject>();
@@ -107,4 +257,5 @@ namespace OrkEngine
             return v3;
         }
     }
+    */
 }

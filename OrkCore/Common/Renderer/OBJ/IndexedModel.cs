@@ -26,7 +26,7 @@ namespace OrkEngine.Common.Renderer.OBJ
 
         public void CalculateNormals()
         {
-
+            
         }
 
         public void CalculateTangents()
