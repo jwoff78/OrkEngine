@@ -188,10 +188,10 @@ namespace OrkEngine
                         m.Material.SpecularMap.Use(TextureUnit.Texture1);
                         m_lightingShader.Use();
 
-                        m_lightingShader.SetMatrix4("view", (Matrix4)m_camera.CallAction("viewMatrix", ""));
-                        m_lightingShader.SetMatrix4("projection", (Matrix4)m_camera.CallAction("projectionMatrix", ""));
+                       // m_lightingShader.SetMatrix4("view", (Matrix4)m_camera.CallAction("viewMatrix", ""));
+                      //  m_lightingShader.SetMatrix4("projection", (Matrix4)m_camera.CallAction("projectionMatrix", ""));
 
-                        m_lightingShader.SetVector3("viewPos", m_camera.Position);
+                       // m_lightingShader.SetVector3("viewPos", m_camera.Position);
 
                         m_lightingShader.SetInt("material.diffuse", 0);
                         m_lightingShader.SetInt("material.specular", 1);
@@ -200,13 +200,13 @@ namespace OrkEngine
 
                         Matrix4 model = Matrix4.Identity;
 
-                        model *= Rotate(obj.Rotation); // obj rotation
-                        model *= Translate(obj.Position); // object position
-                        model *= Matrix4.CreateScale(obj.Scale); // object scale
+                       // model *= Rotate(obj.Rotation); // obj rotation
+                      //  model *= Translate(obj.Position); // object position
+                      //  model *= Matrix4.CreateScale(obj.Scale); // object scale
 
-                        model *= Rotate(obj.Offset.Rotation); // parent rotation
-                        model *= Translate(obj.Offset.Position); // parent position
-                        model *= Matrix4.CreateScale(obj.Offset.Scale); // parent scale
+                      //  model *= Rotate(obj.Offset.Rotation); // parent rotation
+                       // model *= Translate(obj.Offset.Position); // parent position
+                       // model *= Matrix4.CreateScale(obj.Offset.Scale); // parent scale
 
                         m_lightingShader.SetMatrix4("model", model);
 
@@ -343,9 +343,9 @@ namespace OrkEngine
 
             var names = name.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             GameObject obj = m_objects.FirstOrDefault(_ => _.Name.Equals(names[0], StringComparison.Ordinal));
-            if (obj is object && names.Length > 1)
-                for (int i = 1; obj is object && i < names.Length; i++)
-                    obj = obj.Children.FirstOrDefault(_ => _.Name.Equals(names[i], StringComparison.Ordinal));
+           // if (obj is object && names.Length > 1)
+          //      for (int i = 1; obj is object && i < names.Length; i++)
+           //         obj = obj.Children.FirstOrDefault(_ => _.Name.Equals(names[i], StringComparison.Ordinal));
             
             // Return either null or the object if it exists inside a child object.
             return obj;

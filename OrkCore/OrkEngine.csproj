@@ -108,6 +108,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Tao.FreeGlut.dll</HintPath>
     </Reference>
+    <Reference Include="XrwOtk, Version=1.0.7024.13442, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\XrwOtk.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Math\Box2d.cs" />
@@ -126,7 +130,6 @@
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />
-    <Compile Include="Common\UI\Text\TextRender.cs" />
     <Compile Include="Components\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
     <Compile Include="Common\Renderer\Vertex.cs" />
@@ -136,6 +139,7 @@
     <Compile Include="Common\GameObject.cs" />
     <Compile Include="Common\Material.cs" />
     <Compile Include="Common\Model.cs" />
+    <Compile Include="Graphics\UIWrappers\DisplayLogo.cs" />
     <Compile Include="OrkGame.cs" />
     <Compile Include="Jarception.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

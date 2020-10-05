@@ -98,8 +98,8 @@ namespace OrkEngine
             foreach (var component in m_components.Values)
                 component?.OnStart();
 
-            foreach (var children in Children)
-                children?.OnStart();
+         //   foreach (var children in Children)
+         //       children?.OnStart();
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace OrkEngine
             foreach (var component in m_components.Values)
                 component?.OnUpdate(deltaTime);
 
-            foreach (var children in Children)
-                children?.OnUpdate(deltaTime);
+           // foreach (var children in Children)
+           //     children?.OnUpdate(deltaTime);
         }
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace OrkEngine
         /// </summary>
         internal void OnDestroy()
         {
-            foreach (var children in Children)
-                children?.OnDestroy();
+         //   foreach (var children in Children)
+          //      children?.OnDestroy();
 
             foreach (var component in m_components.Values)
                 component?.OnDestroy();
@@ -129,6 +129,7 @@ namespace OrkEngine
         #endregion
 
         #region CallAction
+        /*
         public object CallAction()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>(ActionData);
@@ -157,7 +158,7 @@ namespace OrkEngine
             dictionary.Add("POS_FORWARD", LocalForward);
 
             return Action(dictionary);
-        }
+        }*/
         #endregion
 
         #region Physical versions of non-physical objects (e.g.: cameras or lights)
@@ -235,9 +236,9 @@ namespace OrkEngine
 
             Name = name;
 
-            Offset.Position = position;
-            Offset.Rotation = rotation;
-            Offset.Scale = scale;
+           // Offset.Position = position;
+          //  Offset.Rotation = rotation;
+          //  Offset.Scale = scale;
 
             if (model is object)
                 Models.Add(model);

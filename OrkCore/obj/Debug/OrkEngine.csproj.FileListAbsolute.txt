@@ -291,3 +291,6 @@ C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\OpenTK.GLControl.
 C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\obj\Debug\OrkEngine.csproj.CopyComplete
+C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\OpenFW.dll
+C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\X11Wrapper.dll
+C:\Users\djlw7\Source\Repos\OrkEngine1042020\OrkCore\bin\Debug\X11Wrapper.xml
