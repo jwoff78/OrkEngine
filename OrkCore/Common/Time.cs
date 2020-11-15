@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OrkEngine
 {
-    class Time
+    public class Time
     {
-        /*
+        
         public const long SECOND = 1000000000L;
 
         public static double GetTime()
@@ -24,6 +24,7 @@ namespace OrkEngine
             nano /= TimeSpan.TicksPerMillisecond;
             nano *= 100L;
             return nano;
-        }*/
+            
+        }
     }
 }

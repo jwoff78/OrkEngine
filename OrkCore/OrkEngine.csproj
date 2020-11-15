@@ -108,10 +108,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Tao.FreeGlut.dll</HintPath>
     </Reference>
-    <Reference Include="XrwOtk, Version=1.0.7024.13442, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\XrwOtk.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Attenuation.cs" />
@@ -119,6 +115,7 @@
     <Compile Include="Common\Component\DirectionalLight.cs" />
     <Compile Include="Common\Component\GameComponent.cs" />
     <Compile Include="Common\Component\PointLight.cs" />
+    <Compile Include="Common\Input.cs" />
     <Compile Include="Common\Math\Box2d.cs" />
     <Compile Include="Common\Math\Box2f.cs" />
     <Compile Include="Common\Math\Box2i.cs" />
@@ -130,8 +127,12 @@
     <Compile Include="Common\Math\Quaternion.cs" />
     <Compile Include="Common\Math\Vector2f.cs" />
     <Compile Include="Common\Math\Vector3f.cs" />
+    <Compile Include="Common\Mesh\IndexedModel.cs" />
+    <Compile Include="Common\Mesh\OBJIndex.cs" />
+    <Compile Include="Common\Mesh\OBJModel.cs" />
     <Compile Include="Common\Ray.cs" />
     <Compile Include="Common\Renderer\OBJ\IndexedModel.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />
@@ -147,7 +148,7 @@
     <Compile Include="Graphics\UIWrappers\DisplayLogo.cs" />
     <Compile Include="OrkGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Time.cs" />
+    <Compile Include="Common\Time.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
