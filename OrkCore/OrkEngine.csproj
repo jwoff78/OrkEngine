@@ -131,11 +131,12 @@
     <Compile Include="Common\Mesh\OBJIndex.cs" />
     <Compile Include="Common\Mesh\OBJModel.cs" />
     <Compile Include="Common\Ray.cs" />
-    <Compile Include="Common\Renderer\OBJ\IndexedModel.cs" />
-    <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="Common\ResourceManagement\MappedValues.cs" />
+    <Compile Include="Common\Extensions\StringExtensions.cs" />
     <Compile Include="Common\Transform.cs" />
     <Compile Include="Common\Component.cs" />
     <Compile Include="Common\IComponent.cs" />
+    <Compile Include="Common\Util.cs" />
     <Compile Include="Components\Native\NativeUnsafe.cs" />
     <Compile Include="Common\Normal.cs" />
     <Compile Include="Common\Renderer\Vertex.cs" />
@@ -191,6 +192,12 @@
     <Content Include="Graphics\Default\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NestExtensions\NestExtensions.csproj">
+      <Project>{b648613c-54de-42f8-9575-9f252d246c9a}</Project>
+      <Name>NestExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
