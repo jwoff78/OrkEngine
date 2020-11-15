@@ -107,8 +107,8 @@ namespace OrkEngine
             if (!(obj is Texture texture))
                 return false;
 
-            return this.X == texture.X &&
-                   this.Y == texture.Y;
+            return X == texture.X &&
+                   Y == texture.Y;
         }
 
         public bool Equals(Texture other)
@@ -117,8 +117,8 @@ namespace OrkEngine
             if (!(other is Texture texture))
                 return false;
 
-            return this.X == texture.X &&
-                   this.Y == texture.Y;
+            return X == texture.X &&
+                   Y == texture.Y;
         }
 
         public override int GetHashCode()

@@ -114,6 +114,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Attenuation.cs" />
+    <Compile Include="Common\Component\BaseLight.cs" />
+    <Compile Include="Common\Component\DirectionalLight.cs" />
+    <Compile Include="Common\Component\GameComponent.cs" />
+    <Compile Include="Common\Component\PointLight.cs" />
     <Compile Include="Common\Math\Box2d.cs" />
     <Compile Include="Common\Math\Box2f.cs" />
     <Compile Include="Common\Math\Box2i.cs" />
@@ -141,7 +146,6 @@
     <Compile Include="Common\Model.cs" />
     <Compile Include="Graphics\UIWrappers\DisplayLogo.cs" />
     <Compile Include="OrkGame.cs" />
-    <Compile Include="Jarception.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Time.cs" />
   </ItemGroup>
@@ -176,7 +180,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\Native\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Graphics\Default\blank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
