@@ -6,3 +6,4 @@ OrkEngine3D An MMORPG/RPG game engine, used for creating great RPG's community d
 ![OrkEngineLogo](https://github.com/jwoff78/OrkEngine/blob/master/ork%20engine.png)
 
 OrkEngine is going to be suffering a small refactor.
+*To be archieved soon*
